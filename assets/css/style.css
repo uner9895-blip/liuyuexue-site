@@ -40,19 +40,16 @@ body {
   min-height: 100vh;
   background-color: var(--color-paper);
   background-image:
-    /* 四周温润纸张暖色暗角 */
-    radial-gradient(circle at 50% 50%, transparent 35%, rgba(138, 114, 91, 0.042) 95%),
-    /* 中心亮区突出正文内容 */
-    radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.65) 0%, transparent 68%),
-    /* 模拟宣纸帘纹纵横编织纤维 */
-    linear-gradient(90deg, rgba(138, 114, 91, 0.007) 1px, transparent 1px),
-    linear-gradient(0deg, rgba(138, 114, 91, 0.007) 1px, transparent 1px),
-    /* 纸页微妙晕染点缀 */
-    radial-gradient(circle at 15% 20%, rgba(216, 189, 130, 0.12), transparent 30%),
-    radial-gradient(circle at 85% 15%, rgba(47, 85, 91, 0.08), transparent 35%),
-    /* 宣纸高频微细纤维噪点 */
-    url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.78' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.032'/%3E%3C/svg%3E");
-  background-size: auto, auto, 24px 100%, 100% 24px, auto, auto, auto;
+    /* 页面边缘的抽象黛青烟霭暗角 */
+    radial-gradient(circle at 50% 50%, transparent 40%, rgba(47, 85, 91, 0.028) 98%),
+    /* 首页中心留白高亮，确保文字清晰 */
+    radial-gradient(circle at 50% 35%, rgba(255, 255, 255, 0.85) 0%, transparent 70%),
+    /* 极其稀薄的底色渲染 */
+    radial-gradient(circle at 20% 15%, rgba(47, 85, 91, 0.06), transparent 30%),
+    radial-gradient(circle at 80% 85%, rgba(32, 33, 31, 0.03), transparent 35%),
+    /* 极其微妙的底噪，仅作宣纸颗粒承载感 */
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.022'/%3E%3C/svg%3E");
+  background-size: auto;
   color: var(--color-ink-dark);
   font-family: var(--font-body);
   line-height: 1.85;
@@ -81,45 +78,73 @@ svg {
   overflow: hidden;
 }
 
+/* 动态水墨意境：底部的朦胧山峦/云雾效果 */
+.ink-wash-bg::before {
+  content: "";
+  position: absolute;
+  bottom: -5%;
+  left: -10%;
+  width: 120%;
+  height: 42vh;
+  /* 黛青与水墨交融的抽象低空雾霭 */
+  background: radial-gradient(ellipse at 50% 100%, rgba(47, 85, 91, 0.035) 0%, rgba(32, 33, 31, 0.012) 55%, transparent 80%);
+  filter: blur(80px);
+  transform: scaleY(0.75);
+  pointer-events: none;
+}
+
+/* 动态水墨意境：左上角托底的云烟雾效，烘托标题和印章 */
+.ink-wash-bg::after {
+  content: "";
+  position: absolute;
+  top: -15%;
+  left: -8%;
+  width: min(72vw, 800px);
+  height: min(72vw, 800px);
+  background: radial-gradient(circle, rgba(32, 33, 31, 0.025) 0%, rgba(32, 33, 31, 0.008) 60%, transparent 80%);
+  filter: blur(95px);
+  pointer-events: none;
+}
+
 .ink-wash-1,
 .ink-wash-2 {
   position: absolute;
   border-radius: 50%;
-  filter: blur(72px); /* 加大模糊，洇开效果更自然 */
+  filter: blur(90px); /* 进一步虚化 */
   animation: inkFade 1.2s ease both;
   pointer-events: none;
 }
 
 .ink-wash-1 {
-  top: -20%;
-  right: -12%;
-  width: min(80vw, 920px);
-  height: min(80vw, 920px);
-  /* 极其微弱的黑灰墨晕 */
-  background: radial-gradient(circle, rgba(32, 33, 31, 0.038) 0%, rgba(32, 33, 31, 0.01) 58%, transparent 75%);
+  bottom: 8%;
+  right: -10%;
+  width: min(82vw, 920px);
+  height: min(82vw, 920px);
+  /* 右侧的极淡云烟过度层 */
+  background: radial-gradient(circle, rgba(32, 33, 31, 0.022) 0%, rgba(47, 85, 91, 0.01) 50%, transparent 75%);
 }
 
 .ink-wash-2 {
-  bottom: -16%;
-  left: -20%;
-  width: min(72vw, 800px);
-  height: min(72vw, 800px);
-  /* 极其微弱的黛青墨晕 */
-  background: radial-gradient(circle, rgba(47, 85, 91, 0.042) 0%, rgba(47, 85, 91, 0.01) 55%, transparent 72%);
+  bottom: -12%;
+  left: 8%;
+  width: min(75vw, 820px);
+  height: min(75vw, 820px);
+  background: radial-gradient(circle, rgba(47, 85, 91, 0.028) 0%, rgba(47, 85, 91, 0.008) 60%, transparent 78%);
   animation-delay: 150ms;
 }
 
 .ink-silhouette {
   position: fixed;
-  right: clamp(0.2rem, 4vw, 3.5rem);
-  bottom: -12px;
-  width: min(25vw, 270px);
+  right: clamp(-1rem, 3.2vw, 2.5rem);
+  bottom: -15px;
+  width: min(26vw, 280px);
   color: var(--color-daiqing);
-  filter: grayscale(0.6) opacity(0.35); /* 降低浓度，偏向淡墨灰 */
-  opacity: 0.035;
-  z-index: -1;
+  /* 重点：对竹子应用高斯模糊和低对比度，使其化为淡墨竹影，彻底融入背景云烟 */
+  filter: blur(2.6px) grayscale(0.8) contrast(0.85);
+  opacity: 0.016; /* 极其淡雅 */
+  z-index: -2; /* 与背景同级，避免像贴图贴在文字上 */
   pointer-events: none;
-  transform: rotate(1deg);
+  transform: rotate(2deg) scale(0.96);
   transform-origin: bottom right;
   transition: opacity 0.5s ease;
 }
@@ -970,10 +995,11 @@ textarea.form-control {
   }
 
   .ink-silhouette {
-    width: 38vw;
-    right: -6vw;
-    bottom: -15px;
-    opacity: 0.015;
+    width: 35vw;
+    right: -8vw;
+    bottom: -20px;
+    filter: blur(3.5px) grayscale(0.9) contrast(0.8);
+    opacity: 0.008;
   }
 }
 
