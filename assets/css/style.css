@@ -962,33 +962,38 @@ textarea.form-control {
 
 @media (max-width: 520px) {
   :root {
-    --spacing-md: 1.2rem;
+    --spacing-md: 0.95rem;
     --spacing-lg: 2.2rem;
   }
 
   .seal {
-    width: 34px;
-    height: 34px;
-    font-size: 12px;
+    width: 32px;
+    height: 32px;
+    font-size: 11px;
   }
 
   .seal-yinke {
-    width: 44px;
-    height: 44px;
+    width: 42px;
+    height: 42px;
   }
 
   .hero-copy {
     text-align: left;
   }
 
+  .hero-title {
+    font-size: clamp(2rem, 8vw, 2.9rem);
+  }
+
   .hero-desc {
-    font-size: 0.98rem;
-    line-height: 1.9;
+    font-size: 0.96rem;
+    line-height: 1.85;
   }
 
   .hero-actions {
     width: 100%;
     flex-direction: column;
+    gap: 0.65rem;
   }
 
   .btn-ink {
@@ -996,21 +1001,51 @@ textarea.form-control {
   }
 
   .brief-row {
-    grid-template-columns: 4rem 1fr;
-    gap: 0.75rem;
+    grid-template-columns: 3.5rem 1fr;
+    gap: 0.65rem;
+    font-size: 0.94rem;
   }
 
   .card-grid {
     grid-template-columns: 1fr;
+    gap: 1.15rem;
   }
 
   .card,
   .contact-form-wrapper {
-    padding: 1.15rem;
+    padding: 1.15rem 1rem;
   }
 
   .footer-text {
     font-size: 0.82rem;
+  }
+
+  .skills-list {
+    gap: 0.5rem;
+  }
+
+  .skill-tag {
+    padding: 0.35rem 0.75rem;
+    font-size: 0.86rem;
+  }
+}
+
+@media (max-width: 390px) {
+  :root {
+    --spacing-md: 0.8rem;
+    --spacing-lg: 1.8rem;
+  }
+  .hero-title {
+    font-size: 1.95rem;
+  }
+  .brief-row {
+    font-size: 0.88rem;
+  }
+  .timeline {
+    padding-left: 1.25rem;
+  }
+  .timeline-marker {
+    left: -1.25rem;
   }
 }
 
