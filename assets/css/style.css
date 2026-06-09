@@ -40,10 +40,19 @@ body {
   min-height: 100vh;
   background-color: var(--color-paper);
   background-image:
-    linear-gradient(115deg, rgba(255,255,255,0.46), rgba(244,239,228,0.18)),
-    radial-gradient(circle at 12% 18%, rgba(216,189,130,0.16), transparent 28%),
-    radial-gradient(circle at 88% 10%, rgba(47,85,91,0.11), transparent 34%),
-    url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.028'/%3E%3C/svg%3E");
+    /* 四周温润纸张暖色暗角 */
+    radial-gradient(circle at 50% 50%, transparent 35%, rgba(138, 114, 91, 0.042) 95%),
+    /* 中心亮区突出正文内容 */
+    radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.65) 0%, transparent 68%),
+    /* 模拟宣纸帘纹纵横编织纤维 */
+    linear-gradient(90deg, rgba(138, 114, 91, 0.007) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(138, 114, 91, 0.007) 1px, transparent 1px),
+    /* 纸页微妙晕染点缀 */
+    radial-gradient(circle at 15% 20%, rgba(216, 189, 130, 0.12), transparent 30%),
+    radial-gradient(circle at 85% 15%, rgba(47, 85, 91, 0.08), transparent 35%),
+    /* 宣纸高频微细纤维噪点 */
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.78' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.032'/%3E%3C/svg%3E");
+  background-size: auto, auto, 24px 100%, 100% 24px, auto, auto, auto;
   color: var(--color-ink-dark);
   font-family: var(--font-body);
   line-height: 1.85;
@@ -76,36 +85,43 @@ svg {
 .ink-wash-2 {
   position: absolute;
   border-radius: 50%;
-  filter: blur(48px);
-  animation: inkFade 900ms ease both;
+  filter: blur(72px); /* 加大模糊，洇开效果更自然 */
+  animation: inkFade 1.2s ease both;
+  pointer-events: none;
 }
 
 .ink-wash-1 {
-  top: -18%;
-  right: -10%;
-  width: min(74vw, 880px);
-  height: min(74vw, 880px);
-  background: radial-gradient(circle, rgba(32,33,31,0.065), rgba(32,33,31,0.018) 58%, transparent 72%);
+  top: -20%;
+  right: -12%;
+  width: min(80vw, 920px);
+  height: min(80vw, 920px);
+  /* 极其微弱的黑灰墨晕 */
+  background: radial-gradient(circle, rgba(32, 33, 31, 0.038) 0%, rgba(32, 33, 31, 0.01) 58%, transparent 75%);
 }
 
 .ink-wash-2 {
-  bottom: -14%;
-  left: -18%;
-  width: min(62vw, 720px);
-  height: min(62vw, 720px);
-  background: radial-gradient(circle, rgba(47,85,91,0.07), rgba(47,85,91,0.018) 55%, transparent 72%);
-  animation-delay: 120ms;
+  bottom: -16%;
+  left: -20%;
+  width: min(72vw, 800px);
+  height: min(72vw, 800px);
+  /* 极其微弱的黛青墨晕 */
+  background: radial-gradient(circle, rgba(47, 85, 91, 0.042) 0%, rgba(47, 85, 91, 0.01) 55%, transparent 72%);
+  animation-delay: 150ms;
 }
 
 .ink-silhouette {
   position: fixed;
-  right: clamp(0.5rem, 6vw, 5rem);
-  bottom: 0;
-  width: min(28vw, 300px);
+  right: clamp(0.2rem, 4vw, 3.5rem);
+  bottom: -12px;
+  width: min(25vw, 270px);
   color: var(--color-daiqing);
-  opacity: 0.075;
+  filter: grayscale(0.6) opacity(0.35); /* 降低浓度，偏向淡墨灰 */
+  opacity: 0.035;
   z-index: -1;
   pointer-events: none;
+  transform: rotate(1deg);
+  transform-origin: bottom right;
+  transition: opacity 0.5s ease;
 }
 
 @keyframes inkFade {
@@ -954,9 +970,10 @@ textarea.form-control {
   }
 
   .ink-silhouette {
-    width: 52vw;
-    right: -8vw;
-    opacity: 0.045;
+    width: 38vw;
+    right: -6vw;
+    bottom: -15px;
+    opacity: 0.015;
   }
 }
 
