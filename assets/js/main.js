@@ -177,6 +177,7 @@ function initInkParticles() {
   document.body.insertBefore(canvas, document.body.firstChild);
 
   const ctx = canvas.getContext('2d');
+  if (!ctx) return;
   let animationFrameId;
   let particles = [];
   const particleCount = 12;
@@ -274,7 +275,7 @@ function initSkillExplanations() {
     const explanation = SKILL_EXPLANATIONS[skillName];
     if (!explanation) return;
 
-    tag.addEventListener('click', (e) => {
+    const showExplanation = (e) => {
       e.stopPropagation();
 
       // 关闭其他提示气泡
@@ -299,6 +300,14 @@ function initSkillExplanations() {
       tag.tooltipTimeout = setTimeout(() => {
         tooltip.classList.remove('show');
       }, 3500);
+    };
+
+    tag.addEventListener('click', showExplanation);
+    tag.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        showExplanation(e);
+      }
     });
   });
 
