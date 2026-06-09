@@ -562,7 +562,19 @@ footer {
   border-radius: 999px;
   font-family: var(--font-title);
   font-size: 0.92rem;
+  cursor: pointer;
+  position: relative;
+  transition: all var(--transition-smooth);
 }
+
+.skill-tag:hover {
+  border-color: var(--color-cinnabar);
+  color: var(--color-cinnabar);
+  background-color: rgba(165, 53, 47, 0.055);
+  box-shadow: 0 0 10px rgba(165, 53, 47, 0.12);
+  transform: translateY(-1px);
+}
+
 
 .timeline {
   position: relative;
@@ -1002,10 +1014,199 @@ textarea.form-control {
   }
 }
 
+/* ==========================================================================
+   新增水墨风特效及叙事布局样式
+   ========================================================================== */
+
+/* 全屏/Hero 墨滴雪花 Canvas 背景 */
+#ink-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+}
+
+/* 滚动淡入动效 */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.85s cubic-bezier(0.215, 0.61, 0.355, 1), transform 0.85s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.scroll-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 技能标签悬浮弹出解释框 */
+.skill-tooltip {
+  position: absolute;
+  bottom: 130%;
+  left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  background-color: var(--color-paper-deep);
+  border: 1px solid var(--color-border);
+  border-top: 3px solid var(--color-cinnabar);
+  padding: 0.55rem 0.85rem;
+  border-radius: 4px;
+  font-size: 0.84rem;
+  color: var(--color-ink-dark);
+  box-shadow: var(--shadow-soft);
+  width: max-content;
+  max-width: 240px;
+  z-index: 99;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity var(--transition-smooth), transform var(--transition-smooth), visibility var(--transition-smooth);
+  line-height: 1.6;
+  text-align: left;
+  white-space: normal;
+  word-break: break-all;
+}
+
+.skill-tooltip.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+
+.skill-tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: var(--color-border) transparent transparent transparent;
+}
+
+/* 返回顶部按钮 */
+.back-to-top {
+  position: fixed;
+  right: clamp(1rem, 4vw, 2rem);
+  bottom: clamp(1rem, 4vw, 2rem);
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  background-color: rgba(251, 248, 241, 0.88);
+  backdrop-filter: blur(10px);
+  color: var(--color-ink-medium);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 99;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  transition: all var(--transition-smooth);
+  box-shadow: 0 4px 12px rgba(72, 57, 41, 0.05);
+}
+
+.back-to-top.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.back-to-top:hover {
+  border-color: var(--color-cinnabar);
+  color: var(--color-cinnabar);
+  background-color: rgba(165, 53, 47, 0.045);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(165, 53, 47, 0.12);
+}
+
+.back-to-top svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+}
+
+/* 首页四屏叙事段落与布局优化 */
+.home-section {
+  padding: var(--spacing-xl) 0;
+  border-bottom: 1px dashed var(--color-border);
+  position: relative;
+}
+
+.home-section:last-of-type {
+  border-bottom: none;
+  padding-bottom: var(--spacing-md);
+}
+
+.home-section-title {
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.home-section-title h2 {
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  color: var(--color-ink-dark);
+  margin-bottom: 0.45rem;
+  font-family: var(--font-title);
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.35rem;
+}
+
+.home-section-title h2::after {
+  content: "";
+  position: absolute;
+  left: 15%;
+  right: 15%;
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+}
+
+.home-section-subtitle {
+  color: var(--color-ink-light);
+  font-family: var(--font-title);
+  font-size: 0.94rem;
+}
+
+/* 改写 focus-visible 提升键盘可访问性 */
+*:focus-visible {
+  outline: 2px dashed var(--color-cinnabar) !important;
+  outline-offset: 3px !important;
+}
+
+/* 传统印章悬停微旋特效 */
+.seal {
+  transition: transform var(--transition-smooth);
+}
+
+.seal:hover {
+  transform: rotate(2deg) scale(1.03);
+}
+
+.logo .seal:hover {
+  transform: rotate(-5deg) scale(1.03);
+}
+
+.hero-stamp-wrapper .seal-yinke:hover {
+  transform: rotate(6deg) scale(1.03);
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 1ms !important;
     scroll-behavior: auto !important;
     transition-duration: 1ms !important;
   }
+  .scroll-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
 }
+

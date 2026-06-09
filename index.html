@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>六月雪 | 自由职业者</title>
-  <meta name="description" content="六月雪的静态个人主页。身份：自由职业者。个人简介、主要技能、作品、文章与联系方式均待补充。">
+  <title>六月雪 | 个人主页</title>
+  <meta name="description" content="六月雪的静态个人主页。身份：学生、前端学习者与个人网页创作者。展示了我的前端探索之路、主要技能积累、实践作品及学习笔记。">
   <meta name="author" content="六月雪">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#fbf8f1">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="六月雪">
-  <meta property="og:title" content="六月雪 | 自由职业者">
-  <meta property="og:description" content="六月雪的个人主页。当前内容暂定，后续可补充个人简介、技能、作品、文章与联系方式。">
+  <meta property="og:title" content="六月雪 | 个人主页">
+  <meta property="og:description" content="六月雪的静态个人主页。采用中式水墨宣纸美学设计，展示了我的前端探索之路、主要技能积累、实践作品及学习笔记。">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
@@ -49,49 +49,180 @@
         <li class="nav-item active"><a href="index.html" aria-current="page">首页</a></li>
         <li class="nav-item"><a href="about.html">关于我</a></li>
         <li class="nav-item"><a href="projects.html">作品</a></li>
-        <li class="nav-item"><a href="articles.html">文章</a></li>
+        <li class="nav-item"><a href="articles.html">学习记录</a></li>
         <li class="nav-item"><a href="contact.html">联系我</a></li>
       </ul>
     </nav>
   </header>
 
   <main class="page-fade">
+    <!-- 第一屏：见字如面 (Hero) -->
     <section class="hero-section" aria-labelledby="home-title">
       <div class="hero-layout">
-        <div class="hero-copy">
+        <div class="hero-copy scroll-reveal">
           <div class="hero-stamp-wrapper">
-            <span class="seal seal-yinke">自由<br>职业</span>
+            <span class="seal seal-yinke">六月<br>新印</span>
           </div>
-          <p class="hero-kicker">中式水墨个人主页</p>
+          <p class="hero-kicker">见字如面 · 岁在丙午</p>
           <h1 id="home-title" class="hero-title">六月雪</h1>
-          <p class="hero-subtitle">自由职业者</p>
+          <p class="hero-subtitle">学生 · 前端学习者 · 个人网页创作者</p>
           <p class="hero-desc">
-            个人简介：暂定。这里保留为后续可替换的介绍区域，可补充真实经历、服务方向、作品侧重或个人表达。
+            欢迎来到我的数字角落。我目前是一名学生和前端学习的摸索者。在此方宣纸般的网页中，我以代码为墨，练习结构与样式，记录下每一行属于自己的前端印记。网站无繁复之炫技，但求落笔真诚，清雅克制。
           </p>
           <div class="hero-actions">
-            <a href="about.html" class="btn-ink">关于我</a>
-            <a href="projects.html" class="btn-ink btn-secondary">查看作品</a>
+            <a href="projects.html" class="btn-ink">查看作品</a>
+            <a href="contact.html" class="btn-ink btn-secondary">与我联络</a>
           </div>
         </div>
 
-        <aside class="hero-brief" aria-label="信息占位">
+        <aside class="hero-brief scroll-reveal" style="transition-delay: 100ms;" aria-label="个人简报">
           <div class="brief-row">
             <span class="brief-label">身份</span>
-            <span class="brief-value">自由职业者</span>
+            <span class="brief-value">学生 / 前端探索者</span>
           </div>
           <div class="brief-row">
             <span class="brief-label">技能</span>
-            <span class="brief-value">暂定</span>
+            <span class="brief-value">HTML · CSS · JS · 响应式</span>
           </div>
           <div class="brief-row">
             <span class="brief-label">作品</span>
-            <span class="brief-value">待补充</span>
+            <span class="brief-value">中式水墨个人主页 等</span>
           </div>
           <div class="brief-row">
-            <span class="brief-label">联系</span>
-            <span class="brief-value">暂定</span>
+            <span class="brief-label">联络</span>
+            <span class="brief-value">uner9895@gmail.com</span>
           </div>
         </aside>
+      </div>
+    </section>
+
+    <!-- 第二屏：格物致知 (关于我与技能) -->
+    <section class="home-section scroll-reveal" aria-labelledby="about-section-title">
+      <div class="home-section-title">
+        <h2 id="about-section-title">格物致知</h2>
+        <p class="home-section-subtitle">关于我与技能积累</p>
+      </div>
+      
+      <div class="about-grid">
+        <div class="about-intro-section">
+          <div>
+            <h3 class="section-subheading">我是谁</h3>
+            <p class="concept-box">
+              一名正在前端海洋中漂流的求知者。相比于复杂的框架，我更着迷于原生 HTML 和 CSS 的艺术表现力，尤其是如何通过数字媒体去呈现传统中式美学的温度。
+            </p>
+          </div>
+          <div>
+            <h3 class="section-subheading">喜欢的设计</h3>
+            <p>
+              崇尚留白与克制。在墨分五色的变化中，黛青为雅，朱砂为骨，浅金为韵，不过度装饰，让页面拥有自然的浏览节奏与呼吸感。
+            </p>
+          </div>
+        </div>
+        
+        <div class="timeline-section">
+          <h3 class="section-subheading">技能树 (点击可查看详情)</h3>
+          <ul class="skills-list" style="margin-bottom: 2rem;">
+            <li class="skill-tag" tabindex="0">HTML</li>
+            <li class="skill-tag" tabindex="0">CSS</li>
+            <li class="skill-tag" tabindex="0">JavaScript</li>
+            <li class="skill-tag" tabindex="0">响应式布局</li>
+            <li class="skill-tag" tabindex="0">GitHub Pages</li>
+            <li class="skill-tag" tabindex="0">个人网页设计</li>
+          </ul>
+          
+          <h3 class="section-subheading">本站记录了什么</h3>
+          <p class="timeline-content">
+            这个网站本身就是我的第一个完整前端实践项目。我在这里记录学习笔记、探索传统色彩与排版在现代屏幕上的和谐呈现，并逐步堆叠自己的作品轨迹。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 第三屏：循迹前行 (精选作品) -->
+    <section class="home-section scroll-reveal" aria-labelledby="project-section-title">
+      <div class="home-section-title">
+        <h2 id="project-section-title">循迹前行</h2>
+        <p class="home-section-subtitle">前端实践与作品</p>
+      </div>
+
+      <div class="card-grid">
+        <article class="card">
+          <svg class="project-art" viewBox="0 0 350 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="中式水墨个人主页缩略图">
+            <circle cx="175" cy="90" r="60" fill="rgba(32,33,31,0.03)" filter="blur(10px)"/>
+            <circle cx="190" cy="80" r="40" fill="rgba(47,85,91,0.03)" filter="blur(8px)"/>
+            <path d="M 20 130 C 80 80, 120 110, 180 90 C 240 70, 290 120, 330 110 L 330 160 L 20 160 Z" fill="rgba(138,114,91,0.06)"/>
+            <path d="M 50 140 C 100 110, 160 130, 220 100 C 280 70, 310 130, 330 120 L 330 160 L 50 160 Z" fill="rgba(32,33,31,0.025)"/>
+            <rect x="290" y="20" width="30" height="30" fill="none" stroke="var(--color-cinnabar)" stroke-width="1.5" rx="1" transform="rotate(2 305 35)"/>
+            <text x="305" y="38" font-family="var(--font-title)" font-size="10" fill="var(--color-cinnabar)" font-weight="bold" text-anchor="middle" transform="rotate(2 305 35)">作品</text>
+            <text x="175" y="100" font-family="var(--font-title)" font-size="13" fill="var(--color-ink-medium)" text-anchor="middle" font-weight="bold">中式水墨个人主页</text>
+          </svg>
+          <span class="card-category">实践项目 · 静态网站</span>
+          <h3 class="card-title">中式水墨个人主页</h3>
+          <p class="card-desc">
+            使用 HTML、CSS 和 JavaScript 制作的静态个人网站，用于练习网页语义化结构、响应式弹性布局、视觉风格统一和 GitHub Pages 部署。
+          </p>
+          <div class="card-meta">
+            <span>2026年6月</span>
+            <a href="projects.html" class="card-link">查看作品 →</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <svg class="project-art" viewBox="0 0 350 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="墨意交互画板缩略图">
+            <circle cx="175" cy="90" r="50" fill="rgba(32,33,31,0.02)" filter="blur(12px)"/>
+            <path d="M 30 140 Q 110 90 180 120 T 320 100" fill="none" stroke="rgba(32,33,31,0.15)" stroke-width="2" stroke-dasharray="5 3"/>
+            <rect x="290" y="20" width="30" height="30" fill="none" stroke="var(--color-ink-light)" stroke-width="1" rx="1" transform="rotate(-3 305 35)"/>
+            <text x="305" y="38" font-family="var(--font-title)" font-size="9" fill="var(--color-ink-light)" text-anchor="middle" transform="rotate(-3 305 35)">规划</text>
+            <text x="175" y="100" font-family="var(--font-title)" font-size="13" fill="var(--color-ink-light)" text-anchor="middle">“墨意”Canvas 交互画板</text>
+          </svg>
+          <span class="card-category">规划中 · Canvas</span>
+          <h3 class="card-title">“墨意”Canvas 交互画板</h3>
+          <p class="card-desc">
+            计划使用 HTML5 Canvas 模拟国画水墨晕染和枯笔效果，支持笔触大小、浓淡调节，练习事件监听与像素级处理。
+          </p>
+          <div class="card-meta">
+            <span style="color: var(--color-ink-light);">规划中</span>
+            <span class="card-link muted-link">暂无链接</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 第四屏：落笔留痕 (联络引导与学习记录) -->
+    <section class="home-section scroll-reveal" aria-labelledby="contact-section-title">
+      <div class="home-section-title">
+        <h2 id="contact-section-title">落笔留痕</h2>
+        <p class="home-section-subtitle">学习记录与交流联络</p>
+      </div>
+
+      <div class="about-grid" style="align-items: center;">
+        <div>
+          <h3 class="section-subheading">最新记录</h3>
+          <div class="card" style="margin-bottom: 1rem; padding: 1.1rem 1.45rem;">
+            <span class="card-category">学习记录 · GitHub Pages</span>
+            <h4 class="card-title" style="font-size: 1.1rem; margin-top: 0.2rem; font-family: var(--font-title);">我如何搭建第一个 GitHub Pages 个人网站</h4>
+            <p class="card-desc" style="font-size: 0.9rem; line-height: 1.7; margin: 0.4rem 0 0.8rem;">
+              分享从注册、新建仓库、路径排雷到成功部署静态页面的完整心路历程。
+            </p>
+            <div class="card-meta" style="padding-top: 0.6rem;">
+              <span style="font-size: 0.82rem;">2026年6月5日</span>
+              <a href="articles.html" class="card-link" style="font-size: 0.85rem;">阅读全文 →</a>
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 1.5rem; justify-content: center; height: 100%;">
+          <div>
+            <h3 class="section-subheading" style="margin-bottom: 0.5rem;">与我联络</h3>
+            <p class="timeline-content" style="margin-bottom: 1rem;">
+              行至水穷处，坐看云起时。如果你在前端学习路径上同样感到迷茫，或是对我整理的项目设计有所共鸣，欢迎写信给我，一起探讨。
+            </p>
+          </div>
+          <div style="display: flex; gap: 0.85rem;">
+            <a href="mailto:uner9895@gmail.com" class="btn-ink">通过邮箱联系我</a>
+            <a href="contact.html" class="btn-ink btn-secondary">其他联络方式</a>
+          </div>
+        </div>
       </div>
     </section>
   </main>

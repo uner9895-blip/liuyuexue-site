@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>联系我 | 六月雪</title>
-  <meta name="description" content="六月雪的联系页。邮箱、社交链接与联系说明均暂定。">
+  <meta name="description" content="联系六月雪。提供我的真实电子邮箱与 GitHub 开源社区链接，欢迎与我交流探讨前端开发与网页设计。">
   <meta name="author" content="六月雪">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#fbf8f1">
@@ -12,7 +12,7 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="六月雪">
   <meta property="og:title" content="联系我 | 六月雪">
-  <meta property="og:description" content="六月雪的联系页。邮箱与社交链接暂定，后续可补充真实联系方式。">
+  <meta property="og:description" content="联系六月雪。提供我的真实电子邮箱与 GitHub 开源社区链接，欢迎与我交流探讨前端开发与网页设计。">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
@@ -49,60 +49,58 @@
         <li class="nav-item"><a href="index.html">首页</a></li>
         <li class="nav-item"><a href="about.html">关于我</a></li>
         <li class="nav-item"><a href="projects.html">作品</a></li>
-        <li class="nav-item"><a href="articles.html">文章</a></li>
+        <li class="nav-item"><a href="articles.html">学习记录</a></li>
         <li class="nav-item active"><a href="contact.html" aria-current="page">联系我</a></li>
       </ul>
     </nav>
   </header>
 
   <main class="page-fade">
-    <section class="page-title-section">
+    <section class="page-title-section scroll-reveal">
       <h1 class="page-title">联系我</h1>
-      <p class="page-subtitle">联系方式暂定</p>
+      <p class="page-subtitle">见字如面，顺颂时祺</p>
     </section>
-
+ 
     <div class="contact-container">
-      <section class="contact-info" aria-label="联系方式">
+      <section class="contact-info scroll-reveal" aria-label="联系方式">
         <div>
-          <h2 class="section-subheading">联系方式</h2>
-          <div class="contact-item">
+          <h2 class="section-subheading">联系渠道</h2>
+          <div class="contact-item" style="margin-bottom: 1.5rem;">
             <span class="contact-label">电子邮箱</span>
-            <span class="contact-value">暂定</span>
+            <a href="mailto:uner9895@gmail.com" class="contact-value" style="font-size: 1.15rem; color: var(--color-cinnabar);">uner9895@gmail.com</a>
           </div>
         </div>
-
-        <div class="contact-item">
-          <span class="contact-label">社交链接</span>
+ 
+        <div class="contact-item" style="margin-bottom: 1.5rem;">
+          <span class="contact-label">开源社区</span>
           <div class="social-links">
-            <span class="social-icon">社交链接一：暂定</span>
-            <span class="social-icon">社交链接二：暂定</span>
-            <span class="social-icon">社交链接三：暂定</span>
+            <a href="https://github.com/uner9895-blip" class="social-icon" target="_blank" rel="noopener noreferrer">访问我的 GitHub</a>
           </div>
         </div>
-
+ 
         <div class="placeholder-panel">
-          联系说明待补充。当前页面为 GitHub Pages 静态站，不包含后端、数据库或真实留言保存功能。
+          <strong>说明：</strong>本站为托管于 GitHub Pages 的纯静态个人主页，无后端数据库支撑。右侧“留言笺”表单仅用于静态交互和前端事件绑定演示，并不会真实发送您的留言。如需与我取得联络，请优先使用上方的邮箱直接写信，或在 GitHub 发起交流。
         </div>
       </section>
-
-      <section class="contact-form-wrapper" aria-label="留言表单占位">
-        <h2 class="section-subheading">留言笺</h2>
+ 
+      <section class="contact-form-wrapper scroll-reveal" style="transition-delay: 100ms;" aria-label="留言表单模拟">
+        <h2 class="section-subheading">留言笺 (交互演示)</h2>
         <form id="contact-form" autocomplete="off">
           <div class="form-group">
             <label for="form-name" class="form-label">称呼</label>
-            <input type="text" id="form-name" class="form-control" placeholder="待填写" required>
+            <input type="text" id="form-name" class="form-control" placeholder="如何称呼您" required>
           </div>
-
+ 
           <div class="form-group">
             <label for="form-email" class="form-label">电子邮箱</label>
-            <input type="email" id="form-email" class="form-control" placeholder="待填写" required>
+            <input type="email" id="form-email" class="form-control" placeholder="您的联络邮箱" required>
           </div>
-
+ 
           <div class="form-group">
             <label for="form-message" class="form-label">留言内容</label>
-            <textarea id="form-message" class="form-control" placeholder="待填写" required></textarea>
+            <textarea id="form-message" class="form-control" placeholder="在此写下您想对我说的话" required></textarea>
           </div>
-
+ 
           <button type="submit" class="btn-ink">模拟提交</button>
         </form>
       </section>
