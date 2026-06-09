@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>联系我 | 六月雪</title>
+  <meta name="description" content="六月雪的联系页。邮箱、社交链接与联系说明均暂定。">
+  <meta name="author" content="六月雪">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#fbf8f1">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="六月雪">
+  <meta property="og:title" content="联系我 | 六月雪">
+  <meta property="og:description" content="六月雪的联系页。邮箱与社交链接暂定，后续可补充真实联系方式。">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div class="ink-wash-bg" aria-hidden="true">
+    <div class="ink-wash-1"></div>
+    <div class="ink-wash-2"></div>
+  </div>
+
+  <svg class="ink-silhouette" viewBox="0 0 120 200" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M10,200 Q15,130 12,90 Q8,50 15,10 Q14,8 12,8 Q5,50 9,90 Q12,130 7,200 Z" opacity="0.6"/>
+    <path d="M15,110 Q40,90 60,95 Q40,102 15,110 Z" opacity="0.8"/>
+    <path d="M13,105 Q35,80 50,75 Q35,90 13,105 Z" opacity="0.8"/>
+    <path d="M15,50 Q45,45 70,55 Q45,55 15,50 Z" opacity="0.8"/>
+    <path d="M14,45 Q40,30 55,25 Q38,38 14,45 Z" opacity="0.8"/>
+    <path d="M15,10 Q35,15 50,8 Q35,20 15,10 Z" opacity="0.8"/>
+    <path d="M90,200 Q80,140 85,100 Q90,60 82,20 Q80,18 78,18 Q86,60 81,100 Q76,140 86,200 Z" opacity="0.4"/>
+    <path d="M85,120 Q110,110 120,115 Q105,125 85,120 Z" opacity="0.5"/>
+    <path d="M84,115 Q105,100 115,95 Q100,110 84,115 Z" opacity="0.5"/>
+    <path d="M83,60 Q105,65 118,80 Q100,75 83,60 Z" opacity="0.5"/>
+  </svg>
+
+  <header>
+    <nav class="nav-container" aria-label="主导航">
+      <a class="logo" href="index.html" aria-label="六月雪首页">
+        <span class="seal">六月<br>雪印</span>
+        <span class="logo-text">六月雪</span>
+      </a>
+      <button class="burger-btn" type="button" aria-label="打开导航菜单" aria-expanded="false" aria-controls="site-menu">
+        <span class="burger-line"></span>
+        <span class="burger-line"></span>
+        <span class="burger-line"></span>
+      </button>
+      <ul class="nav-menu" id="site-menu">
+        <li class="nav-item"><a href="index.html">首页</a></li>
+        <li class="nav-item"><a href="about.html">关于我</a></li>
+        <li class="nav-item"><a href="projects.html">作品</a></li>
+        <li class="nav-item"><a href="articles.html">文章</a></li>
+        <li class="nav-item active"><a href="contact.html" aria-current="page">联系我</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="page-fade">
+    <section class="page-title-section">
+      <h1 class="page-title">联系我</h1>
+      <p class="page-subtitle">联系方式暂定</p>
+    </section>
+
+    <div class="contact-container">
+      <section class="contact-info" aria-label="联系方式">
+        <div>
+          <h2 class="section-subheading">联系方式</h2>
+          <div class="contact-item">
+            <span class="contact-label">电子邮箱</span>
+            <span class="contact-value">暂定</span>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <span class="contact-label">社交链接</span>
+          <div class="social-links">
+            <span class="social-icon">社交链接一：暂定</span>
+            <span class="social-icon">社交链接二：暂定</span>
+            <span class="social-icon">社交链接三：暂定</span>
+          </div>
+        </div>
+
+        <div class="placeholder-panel">
+          联系说明待补充。当前页面为 GitHub Pages 静态站，不包含后端、数据库或真实留言保存功能。
+        </div>
+      </section>
+
+      <section class="contact-form-wrapper" aria-label="留言表单占位">
+        <h2 class="section-subheading">留言笺</h2>
+        <form id="contact-form" autocomplete="off">
+          <div class="form-group">
+            <label for="form-name" class="form-label">称呼</label>
+            <input type="text" id="form-name" class="form-control" placeholder="待填写" required>
+          </div>
+
+          <div class="form-group">
+            <label for="form-email" class="form-label">电子邮箱</label>
+            <input type="email" id="form-email" class="form-control" placeholder="待填写" required>
+          </div>
+
+          <div class="form-group">
+            <label for="form-message" class="form-label">留言内容</label>
+            <textarea id="form-message" class="form-control" placeholder="待填写" required></textarea>
+          </div>
+
+          <button type="submit" class="btn-ink">模拟提交</button>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <p class="footer-text">© 2026 六月雪. All Rights Reserved. 托管于 GitHub Pages</p>
+      <div class="footer-stamp">
+        <span class="seal">雪印</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

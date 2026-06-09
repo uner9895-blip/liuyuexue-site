@@ -1,0 +1,16 @@
+.DS_Store
+Thumbs.db
+desktop.ini
+
+*.tmp
+*.temp
+*.log
+*.bak
+*.swp
+~$*
+
+.cache/
+.tmp/
+tmp/
+temp/
+node_modules/
