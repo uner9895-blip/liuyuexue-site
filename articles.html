@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>学习记录 | 六月雪</title>
-  <meta name="description" content="六月雪的学习记录与开发随笔。包括 GitHub Pages 相对路径排雷、静态网页中的中式留白设计美学及原生 JS 轻量级交互实践。">
+  <title>雪笺 | 六月雪</title>
+  <meta name="description" content="六月雪的雪笺栏目，记录文章、随笔、学习分享和项目复盘。">
   <meta name="author" content="六月雪">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#fbf8f1">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="六月雪">
-  <meta property="og:title" content="学习记录 | 六月雪">
-  <meta property="og:description" content="六月雪的学习记录与开发随笔。包括 GitHub Pages 相对路径排雷、静态网页中的中式留白设计美学及原生 JS 轻量级交互实践。">
-  <link rel="stylesheet" href="assets/css/style.css?v=1.3.4">
+  <meta property="og:title" content="雪笺 | 六月雪">
+  <meta property="og:description" content="六月雪的雪笺栏目，记录文章、随笔、学习分享和项目复盘。">
+  <link rel="stylesheet" href="assets/css/style.css?v=1.3.7">
   <script>
     (function() {
       const theme = localStorage.getItem('theme') || 'light';
@@ -56,7 +56,8 @@
         <li class="nav-item"><a href="index.html">首页</a></li>
         <li class="nav-item"><a href="about.html">关于我</a></li>
         <li class="nav-item"><a href="projects.html">作品</a></li>
-        <li class="nav-item active"><a href="articles.html" aria-current="page">学习记录</a></li>
+        <li class="nav-item active"><a href="articles.html" aria-current="page">雪笺</a></li>
+        <li class="nav-item"><a href="index.html#learning-records">学习记录</a></li>
         <li class="nav-item"><a href="contact.html">联系我</a></li>
         <li class="nav-item"><a href="music.html">听雪</a></li>
         <li class="nav-item">
@@ -85,59 +86,24 @@
 
   <main class="page-fade">
     <section class="page-title-section scroll-reveal">
-      <h1 class="page-title">学习记录</h1>
-      <p class="page-subtitle">行至水穷处，坐看云起时</p>
+      <h1 class="page-title">雪笺</h1>
+      <p class="page-subtitle">把学习、风景和一些慢慢想明白的事写下来。</p>
     </section>
- 
-    <div class="card-grid">
-      <article class="card scroll-reveal">
-        <svg class="card-plum-branch" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-          <path d="M100,0 C80,20 60,15 40,40 C30,50 15,45 0,60" />
-          <circle cx="40" cy="40" r="3" fill="currentColor" />
-          <circle cx="60" cy="15" r="2" fill="currentColor" />
-          <circle cx="80" cy="20" r="3.5" fill="currentColor" />
-        </svg>
-        <span class="card-category">建站笔记 · 相对路径</span>
-        <h2 class="card-title">我如何搭建第一个 GitHub Pages 个人网站</h2>
-        <p class="card-desc">分享我从零注册 GitHub 账号、建立静态仓库到成功发布主页的自学流程。详细梳理了其中遇到的一些常见踩坑细节，如文件名大小写敏感导致 404、以及如何使用基于 `./` 的相对路径确保项目在自定义子目录下也能完美渲染。</p>
-        <div class="card-meta">
-          <span>发布时间：2026年6月</span>
-          <a href="projects.html" class="card-link">阅读全文 →</a>
-        </div>
-      </article>
- 
-      <article class="card scroll-reveal" style="transition-delay: 100ms;">
-        <svg class="card-plum-branch" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-          <path d="M100,0 C80,20 60,15 40,40 C30,50 15,45 0,60" />
-          <circle cx="40" cy="40" r="3" fill="currentColor" />
-          <circle cx="60" cy="15" r="2" fill="currentColor" />
-          <circle cx="80" cy="20" r="3.5" fill="currentColor" />
-        </svg>
-        <span class="card-category">设计美学 · 中式意境</span>
-        <h2 class="card-title">静态网页中的留白与视觉节奏</h2>
-        <p class="card-desc">探讨传统中式国画“墨分五色，留白为上”的核心审美在现代屏幕落地上的尝试。分析黛青、朱砂、竹绿等传统色彩在日夜模式下的取色定位，以及如何利用合理的内边距与字距，为用户营造一种安宁、呼吸感强的浏览节奏。</p>
-        <div class="card-meta">
-          <span>发布时间：2026年6月</span>
-          <a href="about.html" class="card-link">阅读全文 →</a>
-        </div>
-      </article>
- 
-      <article class="card scroll-reveal" style="transition-delay: 200ms;">
-        <svg class="card-plum-branch" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-          <path d="M100,0 C80,20 60,15 40,40 C30,50 15,45 0,60" />
-          <circle cx="40" cy="40" r="3" fill="currentColor" />
-          <circle cx="60" cy="15" r="2" fill="currentColor" />
-          <circle cx="80" cy="20" r="3.5" fill="currentColor" />
-        </svg>
-        <span class="card-category">原生开发 · 轻量动效</span>
-        <h2 class="card-title">原生 JavaScript 与 CSS 的轻量级交互实践</h2>
-        <p class="card-desc">为保证静态页面在不同终端下的流畅度，利用原生 JavaScript 实现各类动效的心得。主要探讨如何使用 Intersection Observer 接口触发滚动渐现、限制 Canvas 鼠标粒子以优化性能，并适配 prefers-reduced-motion 以兼顾系统无障碍体验。</p>
-        <div class="card-meta">
-          <span>发布时间：2026年6月</span>
-          <a href="index.html" class="card-link">阅读全文 →</a>
-        </div>
-      </article>
-    </div>
+
+    <section class="snow-letter-shell scroll-reveal" aria-label="雪笺文章列表">
+      <div class="snow-filter-bar" aria-label="文章分类筛选">
+        <button class="snow-filter-btn active" type="button" data-snow-filter="全部">全部</button>
+        <button class="snow-filter-btn" type="button" data-snow-filter="学习">学习</button>
+        <button class="snow-filter-btn" type="button" data-snow-filter="项目">项目</button>
+        <button class="snow-filter-btn" type="button" data-snow-filter="随笔">随笔</button>
+        <button class="snow-filter-btn" type="button" data-snow-filter="灵感">灵感</button>
+      </div>
+
+      <div class="snow-letter-layout">
+        <div class="snow-letter-list" id="snow-letter-list" aria-label="文章列表"></div>
+        <article class="snow-letter-detail" id="snow-letter-detail" aria-live="polite" aria-label="文章详情"></article>
+      </div>
+    </section>
   </main>
  
   <footer>
@@ -178,6 +144,6 @@
     </div>
   </div>
  
-  <script src="assets/js/main.js?v=1.3.4"></script>
+  <script src="assets/js/main.js?v=1.3.7"></script>
 </body>
 </html>

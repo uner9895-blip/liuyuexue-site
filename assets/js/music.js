@@ -2,40 +2,23 @@
  * 六月雪个人网页 - “听雪小筑”独立音乐页控制逻辑
  */
 
-const PLAYLIST = [
+const PLAYLIST = (window.musicTracks && window.musicTracks.length ? window.musicTracks : [
   {
-    id: 1,
-    title: '听雪',
-    artist: '林海',
-    src: 'assets/audio/tingxue.mp3',
-    tag: '入禅',
-    duration: '04:15'
-  },
-  {
-    id: 2,
-    title: '平沙落雁',
-    artist: '古琴',
-    src: 'assets/audio/pingshaluoyan.mp3',
-    tag: '抚琴',
-    duration: '06:30'
-  },
-  {
-    id: 3,
-    title: '寒山僧踪',
-    artist: '陈大伟',
-    src: 'assets/audio/hanshansengzong.mp3',
-    tag: '听雨',
-    duration: '05:08'
-  },
-  {
-    id: 4,
-    title: '梅花三弄',
-    artist: '古琴',
-    src: 'assets/audio/meihuasannong.mp3',
-    tag: '观雪',
-    duration: '07:22'
+    id: 'qingtian',
+    title: '晴天',
+    artist: '本地音乐',
+    src: 'assets/audio/qingtian.mp3',
+    tag: '晴音',
+    duration: '本地'
   }
-];
+]).map((song, index) => ({
+  id: song.id || index + 1,
+  title: song.title || '晴天',
+  artist: song.artist || '本地音乐',
+  src: song.src || 'assets/audio/qingtian.mp3',
+  tag: song.tag || '晴音',
+  duration: song.duration || '本地'
+}));
 
 let currentIndex = 0;
 let isPlaying = false;
@@ -64,6 +47,7 @@ function initAudioElement() {
   audio.addEventListener('error', (e) => {
     // 仅在尝试播放时，若加载失败才弹窗，防止一进页面因为 src 为空报错
     if (isPlaying && audio.src) {
+      console.log('音频文件未找到，请检查 ' + PLAYLIST[currentIndex].src, e);
       showAudioErrorDialog(PLAYLIST[currentIndex].src);
       pausePlayer();
     }
@@ -185,7 +169,7 @@ function playPlayer(event) {
   updatePlayButtonUI(true);
 
   audio.play().catch(err => {
-    console.log("音频播放失败，可能由于本地文件不存在或浏览器交互策略限制: ", err);
+    console.log('音频播放失败，请检查浏览器权限或文件路径 ' + PLAYLIST[currentIndex].src, err);
     showAudioErrorDialog(PLAYLIST[currentIndex].src);
     pausePlayer();
   });
@@ -384,4 +368,3 @@ function initDialogEvents() {
     }
   });
 }
-

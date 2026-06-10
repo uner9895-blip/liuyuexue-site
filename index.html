@@ -14,7 +14,7 @@
   <meta property="og:title" content="六月雪 | 中式水墨个人主页">
   <meta property="og:description" content="六月雪的个人主页，一个中式水墨风格的静态个人网站，用于记录前端学习、个人项目和网页设计实践。">
   <meta property="og:url" content="https://uner9895-blip.github.io/liuyuexue-site/">
-  <link rel="stylesheet" href="assets/css/style.css?v=1.3.4">
+  <link rel="stylesheet" href="assets/css/style.css?v=1.3.7">
   <script>
     (function() {
       const theme = localStorage.getItem('theme') || 'light';
@@ -57,7 +57,8 @@
         <li class="nav-item active"><a href="index.html" aria-current="page">首页</a></li>
         <li class="nav-item"><a href="about.html">关于我</a></li>
         <li class="nav-item"><a href="projects.html">作品</a></li>
-        <li class="nav-item"><a href="articles.html">学习记录</a></li>
+        <li class="nav-item"><a href="articles.html">雪笺</a></li>
+        <li class="nav-item"><a href="#learning-records">学习记录</a></li>
         <li class="nav-item"><a href="contact.html">联系我</a></li>
         <li class="nav-item"><a href="music.html">听雪</a></li>
         <li class="nav-item">
@@ -105,27 +106,49 @@
         </div>
 
         <aside class="hero-brief scroll-reveal" style="transition-delay: 100ms;" aria-label="个人简报">
-          <div class="brief-row">
-            <span class="brief-label">身份</span>
-            <span class="brief-value">学生 / 前端探索者</span>
+          <div class="brief-list">
+            <div class="brief-row">
+              <span class="brief-label">身份</span>
+              <span class="brief-value">学生 / 前端探索者</span>
+            </div>
+            <div class="brief-row">
+              <span class="brief-label">技能</span>
+              <span class="brief-value">HTML · CSS · JavaScript</span>
+            </div>
+            <div class="brief-row">
+              <span class="brief-label">作品</span>
+              <span class="brief-value">中式水墨个人主页 等</span>
+            </div>
+            <div class="brief-row">
+              <span class="brief-label">联络</span>
+              <span class="brief-value">uner9895@gmail.com</span>
+            </div>
           </div>
-          <div class="brief-row">
-            <span class="brief-label">技能</span>
-            <span class="brief-value">HTML · CSS · JavaScript</span>
-          </div>
-          <div class="brief-row">
-            <span class="brief-label">作品</span>
-            <span class="brief-value">中式水墨个人主页 等</span>
-          </div>
-          <div class="brief-row">
-            <span class="brief-label">联络</span>
-            <span class="brief-value">uner9895@gmail.com</span>
-          </div>
+
+          <article class="image-note-preview tilt-card" aria-label="影像小记预览">
+            <div class="image-note-preview-media" aria-hidden="true"></div>
+            <div class="image-note-preview-body">
+              <span class="card-category">影像小记</span>
+              <h2 class="image-note-preview-title">影像小记</h2>
+              <p class="image-note-preview-subtitle">把路过的风景，轻轻收好。</p>
+              <p class="image-note-preview-text">傍晚的云慢慢散开，今天也算好好结束了。</p>
+            </div>
+          </article>
         </aside>
       </div>
     </section>
 
-    <!-- 第二屏：格物致知 (关于我与技能) -->
+    <!-- 第二屏：最新雪笺 -->
+    <section class="home-section scroll-reveal" aria-labelledby="latest-snow-title">
+      <div class="home-section-title">
+        <h2 id="latest-snow-title">最新雪笺</h2>
+        <p class="home-section-subtitle">最近写下的几页小记。</p>
+      </div>
+
+      <div class="latest-snow-grid" id="latest-snow-list" aria-label="最新雪笺文章"></div>
+    </section>
+
+    <!-- 第三屏：格物致知 (关于我与技能) -->
     <section class="home-section scroll-reveal" aria-labelledby="about-section-title">
       <div class="home-section-title">
         <h2 id="about-section-title">格物致知</h2>
@@ -167,7 +190,7 @@
       </div>
     </section>
 
-    <!-- 第三屏：循迹前行 (精选作品) -->
+    <!-- 第四屏：循迹前行 (精选作品) -->
     <section class="home-section scroll-reveal" aria-labelledby="project-section-title">
       <div class="home-section-title">
         <h2 id="project-section-title">循迹前行</h2>
@@ -227,49 +250,88 @@
           </div>
         </article>
       </div>
+
+      <div class="section-action-row">
+        <a href="projects.html" class="btn-ink btn-secondary">进入作品页</a>
+      </div>
     </section>
 
-    <!-- 第四屏：落笔留痕 (联络引导与学习记录) -->
-    <section class="home-section scroll-reveal" aria-labelledby="contact-section-title">
+    <!-- 第五屏：影像小记 -->
+    <section class="home-section image-notes-section scroll-reveal" aria-labelledby="image-notes-title">
       <div class="home-section-title">
-        <h2 id="contact-section-title">落笔留痕</h2>
-        <p class="home-section-subtitle">学习记录与交流联络</p>
+        <h2 id="image-notes-title">影像小记</h2>
+        <p class="home-section-subtitle">几张路上的风景，和一些慢慢写下来的句子。</p>
       </div>
 
-      <div class="about-grid" style="align-items: center;">
-        <div>
-          <h3 class="section-subheading">最新记录</h3>
-          <div class="card" style="margin-bottom: 1rem; padding: 1.1rem 1.45rem;">
-            <svg class="card-plum-branch" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-              <path d="M100,0 C80,20 60,15 40,40 C30,50 15,45 0,60" />
-              <circle cx="40" cy="40" r="3" fill="currentColor" />
-              <circle cx="60" cy="15" r="2" fill="currentColor" />
-              <circle cx="80" cy="20" r="3.5" fill="currentColor" />
-            </svg>
-            <span class="card-category">学习记录 · GitHub Pages</span>
-            <h4 class="card-title" style="font-size: 1.1rem; margin-top: 0.2rem; font-family: var(--font-title);">我如何搭建第一个 GitHub Pages 个人网站</h4>
-            <p class="card-desc" style="font-size: 0.9rem; line-height: 1.7; margin: 0.4rem 0 0.8rem;">
-              分享我从零开始注册 GitHub、新建静态仓库、到相对路径排雷的自学要点，总结了容易踩坑的大小写敏感等细节。
-            </p>
-            <div class="card-meta" style="padding-top: 0.6rem;">
-              <span style="font-size: 0.82rem;">发布时间：2026年6月</span>
-              <a href="articles.html" class="card-link" style="font-size: 0.85rem;">查看笔记 →</a>
-            </div>
+      <div class="image-note-grid">
+        <article class="image-note-card tilt-card">
+          <div class="image-note-media image-note-media-rain" aria-hidden="true"></div>
+          <div class="image-note-content">
+            <h3>雨后街角</h3>
+            <p>路面还亮着，像刚刚被天空擦过。</p>
           </div>
-        </div>
- 
-        <div style="display: flex; flex-direction: column; gap: 1.5rem; justify-content: center; height: 100%;">
-          <div>
-            <h3 class="section-subheading" style="margin-bottom: 0.5rem;">与我联络</h3>
-            <p class="timeline-content" style="margin-bottom: 1rem;">
-              行至水穷处，坐看云起时。如果你在前端学习路径上同样感到迷茫，或是对我整理的项目设计有所共鸣，欢迎写信给我，一起探讨。
-            </p>
+        </article>
+        <article class="image-note-card tilt-card">
+          <div class="image-note-media image-note-media-cloud" aria-hidden="true"></div>
+          <div class="image-note-content">
+            <h3>傍晚的云</h3>
+            <p>云慢慢散开，今天也算好好结束了。</p>
           </div>
-          <div style="display: flex; gap: 0.85rem;">
+        </article>
+        <article class="image-note-card tilt-card">
+          <div class="image-note-media image-note-media-tree" aria-hidden="true"></div>
+          <div class="image-note-content">
+            <h3>校园树影</h3>
+            <p>树影落下来，像一页没有写完的笔记。</p>
+          </div>
+        </article>
+        <article class="image-note-card tilt-card">
+          <div class="image-note-media image-note-media-tea" aria-hidden="true"></div>
+          <div class="image-note-content">
+            <h3>一杯热茶</h3>
+            <p>热气升起来的时候，人会安静一点。</p>
+          </div>
+        </article>
+        <article class="image-note-card tilt-card">
+          <div class="image-note-media image-note-media-night" aria-hidden="true"></div>
+          <div class="image-note-content">
+            <h3>夜色窗边</h3>
+            <p>窗外很暗，屋里还有一点小小的光。</p>
+          </div>
+        </article>
+        <article class="image-note-card tilt-card">
+          <div class="image-note-media image-note-media-mountain" aria-hidden="true"></div>
+          <div class="image-note-content">
+            <h3>远处的山</h3>
+            <p>山在很远的地方，却让人觉得心里稳了一点。</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 第六屏：学习记录与联络入口 -->
+    <section class="home-section scroll-reveal" id="learning-records" aria-labelledby="contact-section-title">
+      <div class="home-section-title">
+        <h2 id="contact-section-title">学习记录</h2>
+        <p class="home-section-subtitle">一些踩坑、复盘和继续往前走的痕迹。</p>
+      </div>
+
+      <div class="blog-entry-grid">
+        <article class="blog-entry-card">
+          <span class="card-category">学习入口</span>
+          <h3>前端第一段路</h3>
+          <p>把 HTML、CSS、JavaScript 的零散练习整理成可回看的文章，慢慢看见自己是怎么走过来的。</p>
+          <a href="articles.html#first-road-of-front-end" class="card-link">读一页雪笺 →</a>
+        </article>
+        <article class="blog-entry-card">
+          <span class="card-category">交流入口</span>
+          <h3>落笔留痕</h3>
+          <p>如果你也在搭建自己的网页，或者想聊聊静态站、审美和学习节奏，欢迎写信给我。</p>
+          <div class="hero-actions" style="margin-top: 1rem;">
             <a href="mailto:uner9895@gmail.com" class="btn-ink">通过邮箱联系我</a>
             <a href="contact.html" class="btn-ink btn-secondary">其他联络方式</a>
           </div>
-        </div>
+        </article>
       </div>
     </section>
   </main>
@@ -312,6 +374,6 @@
     </div>
   </div>
  
-  <script src="assets/js/main.js?v=1.3.4"></script>
+  <script src="assets/js/main.js?v=1.3.7"></script>
 </body>
 </html>
