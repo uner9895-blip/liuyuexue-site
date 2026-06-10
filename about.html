@@ -13,9 +13,16 @@
   <meta property="og:site_name" content="六月雪">
   <meta property="og:title" content="关于我 | 六月雪">
   <meta property="og:description" content="关于六月雪。展示了我的前端求知之路、中式审美设计理念、自学前端技术积累以及个人成长时间轴。">
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/style.css?v=1.3.4">
+  <script>
+    (function() {
+      const theme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
 </head>
 <body>
+  <div class="plum-shadows" aria-hidden="true"></div>
   <div class="ink-wash-bg" aria-hidden="true">
     <div class="ink-wash-1"></div>
     <div class="ink-wash-2"></div>
@@ -51,6 +58,27 @@
         <li class="nav-item"><a href="projects.html">作品</a></li>
         <li class="nav-item"><a href="articles.html">学习记录</a></li>
         <li class="nav-item"><a href="contact.html">联系我</a></li>
+        <li class="nav-item"><a href="music.html">听雪</a></li>
+        <li class="nav-item">
+          <button class="theme-toggle-btn" type="button" aria-label="切换深色/浅色模式">
+            <!-- 太阳图标 -->
+            <svg class="theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+            <!-- 月亮图标 -->
+            <svg class="theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </button>
+        </li>
       </ul>
     </nav>
   </header>
@@ -116,8 +144,117 @@
         </div>
       </section>
     </div>
-  </main>
+ 
+    <!-- 影像小记 (花笺相册) -->
+    <section class="gallery-section scroll-reveal" aria-labelledby="gallery-title">
+      <div class="home-section-title">
+        <h2 id="gallery-title">影像小记</h2>
+        <p class="home-section-subtitle">生活与灵感 · 影像花笺</p>
+      </div>
+      <div class="gallery-grid">
+        <article class="gallery-card">
+          <div class="gallery-img-wrapper">
+            <div class="gallery-placeholder">
+              <!-- 淡梅水印 SVG -->
+              <svg class="gallery-watermark" viewBox="0 0 100 100" aria-hidden="true" style="position: absolute; width: 70px; height: 70px; right: 5px; bottom: 5px; opacity: 0.08; fill: var(--color-cinnabar); pointer-events: none;">
+                <circle cx="50" cy="50" r="14"/>
+                <circle cx="34" cy="40" r="12"/>
+                <circle cx="66" cy="40" r="12"/>
+                <circle cx="40" cy="64" r="12"/>
+                <circle cx="60" cy="64" r="12"/>
+                <circle cx="50" cy="50" r="4" fill="var(--color-paper)"/>
+              </svg>
+              <div class="gallery-date" style="font-size: 0.78rem; color: var(--color-cinnabar); font-family: var(--font-title); margin-bottom: 0.5rem; letter-spacing: 0.05em; border: 1px solid rgba(168, 46, 46, 0.2); padding: 1px 4px; border-radius: 1px;">丙午三月 · 庭前</div>
+              <div class="gallery-poem" style="font-family: var(--font-title); font-size: 1.05rem; line-height: 1.6; writing-mode: vertical-rl; text-orientation: mixed; margin: 0.5rem 0; height: 90px; color: var(--color-ink-dark); letter-spacing: 0.2em; font-weight: bold;">雨后初晴苔上绿</div>
+              <span style="font-size: 0.8rem; color: var(--color-ink-light); margin-top: auto; font-family: var(--font-title);">春日初融</span>
+            </div>
+            <img src="assets/images/gallery/spring_moss.jpg" alt="春日初融" style="display: none;" onerror="this.style.display='none'; this.previousElementSibling.style.display='flex';">
+          </div>
+          <div class="gallery-info">
+            <h3 class="gallery-title">春日初融</h3>
+            <span class="gallery-meta">2026年3月 · 庭前</span>
+            <p class="gallery-desc">记录春雨润湿青苔的微距画面，泥土里散发着新芽的生机。</p>
+          </div>
+        </article>
 
+        <article class="gallery-card">
+          <div class="gallery-img-wrapper">
+            <div class="gallery-placeholder">
+              <!-- 淡梅水印 SVG -->
+              <svg class="gallery-watermark" viewBox="0 0 100 100" aria-hidden="true" style="position: absolute; width: 70px; height: 70px; right: 5px; bottom: 5px; opacity: 0.08; fill: var(--color-cinnabar); pointer-events: none;">
+                <circle cx="50" cy="50" r="14"/>
+                <circle cx="34" cy="40" r="12"/>
+                <circle cx="66" cy="40" r="12"/>
+                <circle cx="40" cy="64" r="12"/>
+                <circle cx="60" cy="64" r="12"/>
+                <circle cx="50" cy="50" r="4" fill="var(--color-paper)"/>
+              </svg>
+              <div class="gallery-date" style="font-size: 0.78rem; color: var(--color-cinnabar); font-family: var(--font-title); margin-bottom: 0.5rem; letter-spacing: 0.05em; border: 1px solid rgba(168, 46, 46, 0.2); padding: 1px 4px; border-radius: 1px;">丙午四月 · 竹林</div>
+              <div class="gallery-poem" style="font-family: var(--font-title); font-size: 1.05rem; line-height: 1.6; writing-mode: vertical-rl; text-orientation: mixed; margin: 0.5rem 0; height: 90px; color: var(--color-ink-dark); letter-spacing: 0.2em; font-weight: bold;">清风弄竹影摇壁</div>
+              <span style="font-size: 0.8rem; color: var(--color-ink-light); margin-top: auto; font-family: var(--font-title);">林间竹影</span>
+            </div>
+            <img src="assets/images/gallery/bamboo_light.jpg" alt="林间竹影" style="display: none;" onerror="this.style.display='none'; this.previousElementSibling.style.display='flex';">
+          </div>
+          <div class="gallery-info">
+            <h3 class="gallery-title">林间竹影</h3>
+            <span class="gallery-meta">2026年4月 · 竹林</span>
+            <p class="gallery-desc">清晨斜射的晨光穿透竹叶，在宣纸般的地面落下的墨色光影。</p>
+          </div>
+        </article>
+
+        <article class="gallery-card">
+          <div class="gallery-img-wrapper">
+            <div class="gallery-placeholder">
+              <!-- 淡梅水印 SVG -->
+              <svg class="gallery-watermark" viewBox="0 0 100 100" aria-hidden="true" style="position: absolute; width: 70px; height: 70px; right: 5px; bottom: 5px; opacity: 0.08; fill: var(--color-cinnabar); pointer-events: none;">
+                <circle cx="50" cy="50" r="14"/>
+                <circle cx="34" cy="40" r="12"/>
+                <circle cx="66" cy="40" r="12"/>
+                <circle cx="40" cy="64" r="12"/>
+                <circle cx="60" cy="64" r="12"/>
+                <circle cx="50" cy="50" r="4" fill="var(--color-paper)"/>
+              </svg>
+              <div class="gallery-date" style="font-size: 0.78rem; color: var(--color-cinnabar); font-family: var(--font-title); margin-bottom: 0.5rem; letter-spacing: 0.05em; border: 1px solid rgba(168, 46, 46, 0.2); padding: 1px 4px; border-radius: 1px;">丙午五月 · 书案</div>
+              <div class="gallery-poem" style="font-family: var(--font-title); font-size: 1.05rem; line-height: 1.6; writing-mode: vertical-rl; text-orientation: mixed; margin: 0.5rem 0; height: 90px; color: var(--color-ink-dark); letter-spacing: 0.2em; font-weight: bold;">梅开一瓣春度山</div>
+              <span style="font-size: 0.8rem; color: var(--color-ink-light); margin-top: auto; font-family: var(--font-title);">手绘红梅</span>
+            </div>
+            <img src="assets/images/gallery/plum_sketch.jpg" alt="手绘红梅" style="display: none;" onerror="this.style.display='none'; this.previousElementSibling.style.display='flex';">
+          </div>
+          <div class="gallery-info">
+            <h3 class="gallery-title">手绘红梅</h3>
+            <span class="gallery-meta">2026年5月 · 书案</span>
+            <p class="gallery-desc">折扇上绘制的写意红梅，红英零星，在留白中感受风的吹拂。</p>
+          </div>
+        </article>
+
+        <article class="gallery-card">
+          <div class="gallery-img-wrapper">
+            <div class="gallery-placeholder">
+              <!-- 淡梅水印 SVG -->
+              <svg class="gallery-watermark" viewBox="0 0 100 100" aria-hidden="true" style="position: absolute; width: 70px; height: 70px; right: 5px; bottom: 5px; opacity: 0.08; fill: var(--color-cinnabar); pointer-events: none;">
+                <circle cx="50" cy="50" r="14"/>
+                <circle cx="34" cy="40" r="12"/>
+                <circle cx="66" cy="40" r="12"/>
+                <circle cx="40" cy="64" r="12"/>
+                <circle cx="60" cy="64" r="12"/>
+                <circle cx="50" cy="50" r="4" fill="var(--color-paper)"/>
+              </svg>
+              <div class="gallery-date" style="font-size: 0.78rem; color: var(--color-cinnabar); font-family: var(--font-title); margin-bottom: 0.5rem; letter-spacing: 0.05em; border: 1px solid rgba(168, 46, 46, 0.2); padding: 1px 4px; border-radius: 1px;">丙午六月 · 自室</div>
+              <div class="gallery-poem" style="font-family: var(--font-title); font-size: 1.05rem; line-height: 1.6; writing-mode: vertical-rl; text-orientation: mixed; margin: 0.5rem 0; height: 90px; color: var(--color-ink-dark); letter-spacing: 0.2em; font-weight: bold;">一案菖蒲静悟禅</div>
+              <span style="font-size: 0.8rem; color: var(--color-ink-light); margin-top: auto; font-family: var(--font-title);">案头清供</span>
+            </div>
+            <img src="assets/images/gallery/desk_life.jpg" alt="案头清供" style="display: none;" onerror="this.style.display='none'; this.previousElementSibling.style.display='flex';">
+          </div>
+          <div class="gallery-info">
+            <h3 class="gallery-title">案头清供</h3>
+            <span class="gallery-meta">2026年6月 · 自室</span>
+            <p class="gallery-desc">一小盆生机勃勃的菖蒲，旁边是一本翻开的自学前端代码卡片。</p>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+ 
   <footer>
     <div class="footer-content">
       <p class="footer-text">© 2026 六月雪. All Rights Reserved. 托管于 GitHub Pages</p>
@@ -126,7 +263,36 @@
       </div>
     </div>
   </footer>
-
-  <script src="assets/js/main.js"></script>
+ 
+  <!-- 听雪小筑音乐挂件 -->
+  <div class="music-widget" role="complementary" aria-label="听雪小筑音乐播放器">
+    <button class="music-pendant" aria-label="展开音乐播放器" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="6" r="3" />
+        <path d="M12 9v7" />
+        <path d="M9 16h6l-3 5z" />
+      </svg>
+    </button>
+    <div class="music-card">
+      <div class="music-info">
+        <span class="music-title">一曲清音</span>
+        <span class="music-subtitle">春风入梅枝 · 古琴清心调</span>
+      </div>
+      <div class="music-controls">
+        <button class="music-play-btn" aria-label="播放音乐">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+        <div class="music-volume">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+          </svg>
+          <input type="range" class="volume-slider" min="0" max="1" step="0.05" value="0.5" aria-label="音量调节">
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+  <script src="assets/js/main.js?v=1.3.4"></script>
 </body>
 </html>

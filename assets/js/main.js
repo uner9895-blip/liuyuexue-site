@@ -2,15 +2,24 @@
  * 六月雪个人网页 - 静态站基础交互与特效系统
  */
 
-document.addEventListener('DOMContentLoaded', () => {
+function initAll() {
   initMobileMenu();
   initContactForm();
   initActiveNavLink();
   initScrollReveal();
-  initInkParticles();
   initSkillExplanations();
   initBackToTop();
-});
+  initThemeToggle();
+  initMusicWidget();
+  initDomPlumTrail();
+  initInkRipples();
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initAll);
+} else {
+  initAll();
+}
 
 /**
  * 移动端导航交互
@@ -144,6 +153,13 @@ function initActiveNavLink() {
  * 滚动渐现观察器
  */
 function initScrollReveal() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('.scroll-reveal').forEach(el => {
+      el.classList.add('visible');
+    });
+    return;
+  }
+
   const revealElements = document.querySelectorAll('.scroll-reveal');
   if (revealElements.length === 0) return;
 
@@ -161,97 +177,6 @@ function initScrollReveal() {
 
   revealElements.forEach(el => {
     observer.observe(el);
-  });
-}
-
-/**
- * 克制的水墨微粒背景
- */
-function initInkParticles() {
-  // 检查 prefers-reduced-motion 系统级减弱动画偏好
-  const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-  if (motionQuery.matches) return;
-
-  const canvas = document.createElement('canvas');
-  canvas.id = 'ink-canvas';
-  document.body.insertBefore(canvas, document.body.firstChild);
-
-  const ctx = canvas.getContext('2d');
-  if (!ctx) return;
-  let animationFrameId;
-  let particles = [];
-  const particleCount = 12;
-
-  function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-
-  window.addEventListener('resize', resizeCanvas);
-  resizeCanvas();
-
-  class InkParticle {
-    constructor() {
-      this.reset();
-      this.y = Math.random() * canvas.height; // 随机初始化高度
-    }
-
-    reset() {
-      this.x = Math.random() * canvas.width;
-      this.y = -40;
-      this.size = Math.random() * 38 + 18; // 18px ~ 56px
-      this.speedY = Math.random() * 0.35 + 0.12; // 极其缓慢
-      this.speedX = Math.random() * 0.15 - 0.075;
-      this.opacity = Math.random() * 0.026 + 0.006; // 极低透明度，克制优雅
-      this.angle = Math.random() * Math.PI * 2;
-      this.swingSpeed = Math.random() * 0.004 + 0.002;
-    }
-
-    update() {
-      this.y += this.speedY;
-      this.angle += this.swingSpeed;
-      this.x += this.speedX + Math.sin(this.angle) * 0.15;
-
-      if (this.y - this.size > canvas.height || this.x < -this.size || this.x > canvas.width + this.size) {
-        this.reset();
-      }
-    }
-
-    draw() {
-      ctx.beginPath();
-      const grad = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size);
-      // 水墨晕染渐变，从中心向边缘淡出
-      grad.addColorStop(0, `rgba(32, 33, 31, ${this.opacity})`);
-      grad.addColorStop(0.5, `rgba(32, 33, 31, ${this.opacity * 0.4})`);
-      grad.addColorStop(1, 'rgba(32, 33, 31, 0)');
-      ctx.fillStyle = grad;
-      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-      ctx.fill();
-    }
-  }
-
-  for (let i = 0; i < particleCount; i++) {
-    particles.push(new InkParticle());
-  }
-
-  function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    particles.forEach(p => {
-      p.update();
-      p.draw();
-    });
-    animationFrameId = requestAnimationFrame(animate);
-  }
-
-  animate();
-
-  // 监听并动态卸载
-  motionQuery.addEventListener('change', (e) => {
-    if (e.matches) {
-      cancelAnimationFrame(animationFrameId);
-      canvas.remove();
-      window.removeEventListener('resize', resizeCanvas);
-    }
   });
 }
 
@@ -347,11 +272,281 @@ function initBackToTop() {
   };
 
   btn.addEventListener('click', scrollBack);
-  btn.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      scrollBack();
-    }
+}
+
+/**
+ * 1. 白天/夜晚模式切换状态控制
+ */
+function initThemeToggle() {
+  const toggleBtns = document.querySelectorAll('.theme-toggle-btn');
+  if (toggleBtns.length === 0) return;
+
+  const getTheme = () => {
+    return document.documentElement.getAttribute('data-theme') || document.documentElement.dataset.theme || 'light';
+  };
+
+  const setTheme = (theme) => {
+    document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.dataset.theme = theme;
+    localStorage.setItem('theme', theme);
+  };
+
+  toggleBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const nextTheme = getTheme() === 'dark' ? 'light' : 'dark';
+      setTheme(nextTheme);
+    });
   });
 }
 
+/**
+ * 2. 听雪小筑音乐挂件播放逻辑
+ */
+function initMusicWidget() {
+  const pendant = document.querySelector('.music-pendant');
+  const card = document.querySelector('.music-card');
+  const playBtn = document.querySelector('.music-play-btn');
+  const volume = document.querySelector('.volume-slider');
+
+  if (!pendant || !card || !playBtn) return;
+
+  pendant.addEventListener('click', (e) => {
+    e.stopPropagation();
+    card.classList.toggle('show');
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!card.contains(e.target) && !pendant.contains(e.target)) {
+      card.classList.remove('show');
+    }
+  });
+
+  let audio = document.getElementById('global-audio');
+  if (!audio) {
+    audio = document.createElement('audio');
+    audio.id = 'global-audio';
+    audio.loop = true;
+    audio.preload = 'none';
+    document.body.appendChild(audio);
+  }
+
+  const playIcon = `<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>`;
+  const pauseIcon = `<svg viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>`;
+
+  playBtn.addEventListener('click', () => {
+    if (!audio.src || audio.src.endsWith('/') || audio.src === '') {
+      audio.src = 'assets/audio/bgm.mp3';
+    }
+
+    if (audio.paused) {
+      audio.play().then(() => {
+        playBtn.innerHTML = pauseIcon;
+        pendant.classList.add('playing');
+        playBtn.setAttribute('aria-label', '暂停音乐');
+      }).catch(err => {
+        showToast("未检测到音频，可以在本地 assets/audio/ 部署 bgm.mp3 文件。");
+      });
+    } else {
+      audio.pause();
+      playBtn.innerHTML = playIcon;
+      pendant.classList.remove('playing');
+      playBtn.setAttribute('aria-label', '播放音乐');
+    }
+  });
+
+  if (volume) {
+    volume.addEventListener('input', (e) => {
+      audio.volume = e.target.value;
+    });
+  }
+}
+
+/**
+ * 3. DOM 文字花瓣鼠标轨迹 - 文字花瓣版（✿ ❀ ✽）
+ */
+
+function createPlumPetal(x, y, options) {
+  options = options || {};
+  var petal = document.createElement('span');
+  petal.className = 'plum-petal';
+
+  var flowers = ['❀', '✿', '❄'];
+  petal.textContent = flowers[Math.floor(Math.random() * flowers.length)];
+
+  var size = options.size || (24 + Math.random() * 12);
+
+  petal.style.left = x + 'px';
+  petal.style.top = y + 'px';
+  petal.style.fontSize = size + 'px';
+
+  document.body.appendChild(petal);
+
+  if (window.__plumTrailState) {
+    window.__plumTrailState.petalsCreated += 1;
+  }
+
+  console.log('Plum petal created:', {
+    className: petal.className,
+    text: petal.textContent,
+    left: petal.style.left,
+    top: petal.style.top,
+    count: document.querySelectorAll('.plum-petal').length
+  });
+
+  var removePetal = function () {
+    if (petal.parentNode) {
+      petal.remove();
+    }
+  };
+
+  petal.addEventListener('animationend', removePetal, { once: true });
+  window.setTimeout(removePetal, 2200);
+}
+
+function initDomPlumTrail() {
+  var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hasFinePointer = window.matchMedia('(pointer: fine)').matches;
+  var hasCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
+  var isPureTouch = hasCoarsePointer && !hasFinePointer;
+
+  var enabled = !prefersReducedMotion;
+
+  window.__plumTrailState = {
+    enabled: enabled,
+    prefersReducedMotion: prefersReducedMotion,
+    hasFinePointer: hasFinePointer,
+    hasCoarsePointer: hasCoarsePointer,
+    isPureTouch: isPureTouch,
+    viewportWidth: window.innerWidth,
+    lastEventType: null,
+    lastX: null,
+    lastY: null,
+    lastTime: null,
+    petalsCreated: 0
+  };
+
+  console.log('Plum trail state:', {
+    enabled: enabled,
+    prefersReducedMotion: prefersReducedMotion,
+    hasFinePointer: hasFinePointer,
+    hasCoarsePointer: hasCoarsePointer,
+    isPureTouch: isPureTouch,
+    viewportWidth: window.innerWidth
+  });
+
+  window.__testDomPetals = function () {
+    var centerX = window.innerWidth / 2;
+    var centerY = window.innerHeight / 2;
+    var total = 30;
+    console.log('__testDomPetals active! Spawning 30 visible text petals at center.');
+    for (var i = 0; i < 30; i++) {
+      (function (idx) {
+        setTimeout(function () {
+          createPlumPetal(
+            centerX + (Math.random() - 0.5) * 260,
+            centerY + (Math.random() - 0.5) * 150,
+            { size: 28 + Math.random() * 14 }
+          );
+        }, idx * 35);
+      })(i);
+    }
+    window.setTimeout(function () {
+      console.log('__testDomPetals spawned:', total);
+    }, total * 35 + 30);
+  };
+
+  // 右下角测试按钮
+  var testBtn = document.getElementById('test-petals-btn');
+  if (!testBtn) {
+    testBtn = document.createElement('button');
+    testBtn.id = 'test-petals-btn';
+    testBtn.textContent = '测试花瓣';
+    testBtn.style.cssText = [
+      'position:fixed',
+      'bottom:20px',
+      'right:90px',
+      'z-index:999999',
+      'padding:8px 16px',
+      'background:rgba(214,92,116,0.95)',
+      'color:#fff',
+      'border:none',
+      'border-radius:4px',
+      'cursor:pointer',
+      'font-size:13px',
+      'box-shadow:0 4px 12px rgba(214,92,116,0.3)',
+      'transition:background 0.2s'
+    ].join(';');
+    testBtn.addEventListener('mouseenter', function () {
+      testBtn.style.background = 'rgba(185,50,80,0.95)';
+    });
+    testBtn.addEventListener('mouseleave', function () {
+      testBtn.style.background = 'rgba(214,92,116,0.95)';
+    });
+    testBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      window.__testDomPetals();
+    });
+    document.body.appendChild(testBtn);
+  }
+
+  if (!enabled) {
+    return;
+  }
+
+  var lastSpawnTime = 0;
+
+  function handlePlumMove(event) {
+    var now = Date.now();
+    window.__plumTrailState.lastEventType = event.type;
+    window.__plumTrailState.lastX = event.clientX;
+    window.__plumTrailState.lastY = event.clientY;
+    window.__plumTrailState.lastTime = now;
+
+    if (now - lastSpawnTime < 55) return;
+    lastSpawnTime = now;
+
+    var count = 1 + Math.floor(Math.random() * 2);
+    for (var i = 0; i < count; i++) {
+      createPlumPetal(
+        event.clientX + (Math.random() - 0.5) * 28,
+        event.clientY + (Math.random() - 0.5) * 28
+      );
+    }
+  }
+
+  document.addEventListener('pointermove', handlePlumMove, { passive: true, capture: true });
+  document.addEventListener('mousemove', handlePlumMove, { passive: true, capture: true });
+
+  console.log('DOM plum trail initialized:', window.__plumTrailState);
+}
+
+/**
+ * 4. 按钮点击朱砂涟漪特效
+ */
+function initInkRipples() {
+  const handleClickRipple = (e) => {
+    const target = e.target.closest('a, button, .btn, .btn-ink, .nav-link, .card, .gallery-card, .music-card, .track-card, .theme-toggle, .theme-toggle-btn');
+    if (!target) return;
+
+    const ripple = document.createElement('span');
+    ripple.className = 'click-ripple';
+    
+    // 内联基础定位与样式，确保可靠展现
+    ripple.style.position = 'fixed';
+    ripple.style.left = `${e.clientX}px`;
+    ripple.style.top = `${e.clientY}px`;
+    ripple.style.zIndex = '10000';
+    ripple.style.pointerEvents = 'none';
+    
+    // 移除之前的涟漪，避免高频连点时元素堆叠
+    document.querySelectorAll('.click-ripple').forEach(item => item.remove());
+    
+    document.body.appendChild(ripple);
+    
+    ripple.addEventListener('animationend', () => {
+      ripple.remove();
+    });
+  };
+
+  document.addEventListener('click', handleClickRipple, true);
+}

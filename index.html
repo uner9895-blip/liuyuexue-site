@@ -3,19 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>六月雪 | 个人主页</title>
-  <meta name="description" content="六月雪的静态个人主页。身份：学生、前端学习者与个人网页创作者。展示了我的前端探索之路、主要技能积累、实践作品及学习笔记。">
+  <title>六月雪 | 中式水墨个人主页</title>
+  <meta name="description" content="六月雪的个人主页，一个中式水墨风格的静态个人网站，用于记录前端学习、个人项目和网页设计实践。">
   <meta name="author" content="六月雪">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#fbf8f1">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="六月雪">
-  <meta property="og:title" content="六月雪 | 个人主页">
-  <meta property="og:description" content="六月雪的静态个人主页。采用中式水墨宣纸美学设计，展示了我的前端探索之路、主要技能积累、实践作品及学习笔记。">
-  <link rel="stylesheet" href="assets/css/style.css">
+  <meta property="og:title" content="六月雪 | 中式水墨个人主页">
+  <meta property="og:description" content="六月雪的个人主页，一个中式水墨风格的静态个人网站，用于记录前端学习、个人项目和网页设计实践。">
+  <meta property="og:url" content="https://uner9895-blip.github.io/liuyuexue-site/">
+  <link rel="stylesheet" href="assets/css/style.css?v=1.3.4">
+  <script>
+    (function() {
+      const theme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
 </head>
 <body>
+  <div class="plum-shadows" aria-hidden="true"></div>
   <div class="ink-wash-bg" aria-hidden="true">
     <div class="ink-wash-1"></div>
     <div class="ink-wash-2"></div>
@@ -51,6 +59,27 @@
         <li class="nav-item"><a href="projects.html">作品</a></li>
         <li class="nav-item"><a href="articles.html">学习记录</a></li>
         <li class="nav-item"><a href="contact.html">联系我</a></li>
+        <li class="nav-item"><a href="music.html">听雪</a></li>
+        <li class="nav-item">
+          <button class="theme-toggle-btn" type="button" aria-label="切换深色/浅色模式">
+            <!-- 太阳图标 -->
+            <svg class="theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+            <!-- 月亮图标 -->
+            <svg class="theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </button>
+        </li>
       </ul>
     </nav>
   </header>
@@ -82,7 +111,7 @@
           </div>
           <div class="brief-row">
             <span class="brief-label">技能</span>
-            <span class="brief-value">HTML · CSS · JS · 响应式</span>
+            <span class="brief-value">HTML · CSS · JavaScript</span>
           </div>
           <div class="brief-row">
             <span class="brief-label">作品</span>
@@ -147,19 +176,31 @@
 
       <div class="card-grid">
         <article class="card">
-          <svg class="project-art" viewBox="0 0 350 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="中式水墨个人主页缩略图">
+          <svg class="card-plum-branch" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path d="M100,0 C80,20 60,15 40,40 C30,50 15,45 0,60" />
+            <circle cx="40" cy="40" r="3" fill="currentColor" />
+            <circle cx="60" cy="15" r="2" fill="currentColor" />
+            <circle cx="80" cy="20" r="3.5" fill="currentColor" />
+          </svg>
+          <svg class="project-art" viewBox="0 0 350 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="春日东方个人主页缩略图">
             <circle cx="175" cy="90" r="60" fill="rgba(32,33,31,0.03)" filter="blur(10px)"/>
             <circle cx="190" cy="80" r="40" fill="rgba(47,85,91,0.03)" filter="blur(8px)"/>
             <path d="M 20 130 C 80 80, 120 110, 180 90 C 240 70, 290 120, 330 110 L 330 160 L 20 160 Z" fill="rgba(138,114,91,0.06)"/>
             <path d="M 50 140 C 100 110, 160 130, 220 100 C 280 70, 310 130, 330 120 L 330 160 L 50 160 Z" fill="rgba(32,33,31,0.025)"/>
             <rect x="290" y="20" width="30" height="30" fill="none" stroke="var(--color-cinnabar)" stroke-width="1.5" rx="1" transform="rotate(2 305 35)"/>
             <text x="305" y="38" font-family="var(--font-title)" font-size="10" fill="var(--color-cinnabar)" font-weight="bold" text-anchor="middle" transform="rotate(2 305 35)">作品</text>
-            <text x="175" y="100" font-family="var(--font-title)" font-size="13" fill="var(--color-ink-medium)" text-anchor="middle" font-weight="bold">中式水墨个人主页</text>
+            <text x="175" y="100" font-family="var(--font-title)" font-size="13" fill="var(--color-ink-medium)" text-anchor="middle" font-weight="bold">春日东方个人主页</text>
           </svg>
           <span class="card-category">实践项目 · 静态网站</span>
-          <h3 class="card-title">中式水墨个人主页</h3>
+          <h3 class="card-title">春日东方个人主页</h3>
+          <div class="card-tech" aria-label="项目技术">
+            <span>HTML</span>
+            <span>CSS</span>
+            <span>JavaScript</span>
+            <span>GitHub Pages</span>
+          </div>
           <p class="card-desc">
-            使用 HTML、CSS 和 JavaScript 制作的静态个人网站，用于练习网页语义化结构、响应式弹性布局、视觉风格统一和 GitHub Pages 部署。
+            这是一个用于练习页面结构、响应式布局、视觉风格、轻量交互、鼠标动效和 GitHub Pages 部署的静态个人主页。
           </p>
           <div class="card-meta">
             <span>2026年6月</span>
@@ -199,18 +240,24 @@
         <div>
           <h3 class="section-subheading">最新记录</h3>
           <div class="card" style="margin-bottom: 1rem; padding: 1.1rem 1.45rem;">
+            <svg class="card-plum-branch" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path d="M100,0 C80,20 60,15 40,40 C30,50 15,45 0,60" />
+              <circle cx="40" cy="40" r="3" fill="currentColor" />
+              <circle cx="60" cy="15" r="2" fill="currentColor" />
+              <circle cx="80" cy="20" r="3.5" fill="currentColor" />
+            </svg>
             <span class="card-category">学习记录 · GitHub Pages</span>
             <h4 class="card-title" style="font-size: 1.1rem; margin-top: 0.2rem; font-family: var(--font-title);">我如何搭建第一个 GitHub Pages 个人网站</h4>
             <p class="card-desc" style="font-size: 0.9rem; line-height: 1.7; margin: 0.4rem 0 0.8rem;">
-              计划分享从零开始注册、新建仓库、直到相对路径排雷的完整自学过程。
+              分享我从零开始注册 GitHub、新建静态仓库、到相对路径排雷的自学要点，总结了容易踩坑的大小写敏感等细节。
             </p>
             <div class="card-meta" style="padding-top: 0.6rem;">
-              <span style="font-size: 0.82rem;">计划发布：2026年6月中旬</span>
-              <a href="articles.html" class="card-link" style="font-size: 0.85rem;">草稿整理中 →</a>
+              <span style="font-size: 0.82rem;">发布时间：2026年6月</span>
+              <a href="articles.html" class="card-link" style="font-size: 0.85rem;">查看笔记 →</a>
             </div>
           </div>
         </div>
-
+ 
         <div style="display: flex; flex-direction: column; gap: 1.5rem; justify-content: center; height: 100%;">
           <div>
             <h3 class="section-subheading" style="margin-bottom: 0.5rem;">与我联络</h3>
@@ -226,7 +273,7 @@
       </div>
     </section>
   </main>
-
+ 
   <footer>
     <div class="footer-content">
       <p class="footer-text">© 2026 六月雪. All Rights Reserved. 托管于 GitHub Pages</p>
@@ -235,7 +282,36 @@
       </div>
     </div>
   </footer>
-
-  <script src="assets/js/main.js"></script>
+ 
+  <!-- 听雪小筑音乐挂件 -->
+  <div class="music-widget" role="complementary" aria-label="听雪小筑音乐播放器">
+    <button class="music-pendant" aria-label="展开音乐播放器" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="6" r="3" />
+        <path d="M12 9v7" />
+        <path d="M9 16h6l-3 5z" />
+      </svg>
+    </button>
+    <div class="music-card">
+      <div class="music-info">
+        <span class="music-title">一曲清音</span>
+        <span class="music-subtitle">春风入梅枝 · 古琴清心调</span>
+      </div>
+      <div class="music-controls">
+        <button class="music-play-btn" aria-label="播放音乐">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+        <div class="music-volume">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+          </svg>
+          <input type="range" class="volume-slider" min="0" max="1" step="0.05" value="0.5" aria-label="音量调节">
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+  <script src="assets/js/main.js?v=1.3.4"></script>
 </body>
 </html>
