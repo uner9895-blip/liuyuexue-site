@@ -8,7 +8,8 @@
   <meta name="author" content="六月雪">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#fbf8f1">
-  <link rel="stylesheet" href="assets/css/style.css?v=1.5.0">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%23faf7ef'/%3E%3Ctext x='32' y='42' font-size='34' text-anchor='middle' fill='%23cc4343' font-family='serif'%3E雪%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="assets/css/style.css?v=1.7.0">
   <script>
     (function() {
       const theme = localStorage.getItem('theme') || 'light';
@@ -83,6 +84,11 @@
         <!-- 右侧：古典介绍与意境小品 -->
         <aside class="music-intro-panel scroll-reveal">
           <h2 class="section-subheading" style="margin-top: 0; font-size: 1.15rem; color: var(--color-cinnabar);">清听雅集</h2>
+          <div class="music-current-card" aria-live="polite">
+            <h3 class="music-current-title" id="music-current-title">Ecoute Cherie</h3>
+            <p class="music-current-meta" id="music-current-meta">Vendredi sur mer · 03:46</p>
+            <span class="music-current-status" id="music-current-status">等待播放</span>
+          </div>
           <p style="font-style: italic; line-height: 1.8; color: var(--color-ink-medium);">
             “独坐幽篁里，弹琴复长啸。<br>深林人不知，明月来相照。”
           </p>
@@ -157,8 +163,8 @@
   </div>
 
   <!-- 载入基础交互与粒子效果 -->
-  <script src="assets/js/main.js?v=1.5.0"></script>
+  <script src="assets/js/main.js?v=1.7.0"></script>
   <!-- 载入本页播放器逻辑 -->
-  <script src="assets/js/music.js?v=1.5.0"></script>
+  <script src="assets/js/music.js?v=1.7.0"></script>
 </body>
 </html>

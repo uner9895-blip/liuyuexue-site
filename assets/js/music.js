@@ -2,387 +2,305 @@
  * 六月雪个人网页 - “听雪小筑”独立音乐页控制逻辑
  */
 
-const PLAYLIST = (window.musicTracks && window.musicTracks.length ? window.musicTracks : [
-  {
-    id: 'ecoute-cherie',
-    title: 'Ecoute Cherie',
-    artist: '本地音乐',
-    src: 'assets/audio/ecoute-cherie.mp3',
-    tag: '雪音',
-    duration: '本地'
-  },
-  {
-    id: 'fallin-out',
-    title: 'Fallin Out',
-    artist: '本地音乐',
-    src: 'assets/audio/fallin-out.mp3',
-    tag: '风音',
-    duration: '本地'
-  },
-  {
-    id: 'hong-san-ke-zhan',
-    title: '红伞客栈',
-    artist: '本地音乐',
-    src: 'assets/audio/hong-san-ke-zhan.mp3',
-    tag: '伞音',
-    duration: '本地'
-  },
-  {
-    id: 'ji-mo-ji-mo-bu-hao',
-    title: '寂寞寂寞不好',
-    artist: '本地音乐',
-    src: 'assets/audio/ji-mo-ji-mo-bu-hao.mp3',
-    tag: '夜音',
-    duration: '本地'
-  },
-  {
-    id: 'lan-ting-xu',
-    title: '兰亭序',
-    artist: '本地音乐',
-    src: 'assets/audio/lan-ting-xu.mp3',
-    tag: '墨音',
-    duration: '本地'
-  },
-  {
-    id: 'lian-ren',
-    title: '恋人',
-    artist: '本地音乐',
-    src: 'assets/audio/lian-ren.mp3',
-    tag: '梅音',
-    duration: '本地'
-  },
-  {
-    id: 'yin-tian',
-    title: '阴天',
-    artist: '本地音乐',
-    src: 'assets/audio/yin-tian.mp3',
-    tag: '雨音',
-    duration: '本地'
-  }
-]).map((song, index) => ({
-  id: song.id || index + 1,
+const PLAYLIST = (window.musicTracks || []).map((song, index) => ({
+  id: song.id || 'track-' + (index + 1),
   title: song.title || '本地曲目',
   artist: song.artist || '本地音乐',
-  src: song.src || 'assets/audio/ecoute-cherie.mp3',
+  src: song.src,
   tag: song.tag || '雪音',
-  duration: song.duration || '本地'
-}));
+  duration: song.duration || '00:00'
+})).filter(song => song.src);
 
 let currentIndex = 0;
 let isPlaying = false;
-let audio = null;
+let isBuffering = false;
+let playToken = 0;
+let siteAudio = null;
 
 document.addEventListener('DOMContentLoaded', () => {
-  initAudioElement();
+  if (!PLAYLIST.length || typeof window.getSiteAudio !== 'function') return;
+
+  siteAudio = window.getSiteAudio();
+  siteAudio.preload = 'metadata';
+  siteAudio.playsInline = true;
+  siteAudio.loop = false;
+
   renderPlaylist();
   initPlayerControls();
   initDialogEvents();
+  bindAudioEvents();
+  updateNowPlaying('等待播放');
 });
 
-/**
- * 确保全局唯一的 Audio 标签
- */
-function initAudioElement() {
-  audio = document.getElementById('global-audio');
-  if (!audio) {
-    audio = document.createElement('audio');
-    audio.id = 'global-audio';
-    audio.preload = 'metadata';
-    document.body.appendChild(audio);
-  } else {
-    audio.preload = 'metadata';
-  }
-  
-  // 绑定原生错误监听，捕获媒体加载失败
-  audio.addEventListener('error', (e) => {
-    // 仅在尝试播放时，若加载失败才弹窗，防止一进页面因为 src 为空报错
-    if (isPlaying && audio.src) {
-      console.log('音频文件未找到，请检查 ' + PLAYLIST[currentIndex].src, e);
-      showAudioErrorDialog(PLAYLIST[currentIndex].src);
-      pausePlayer();
-    }
-  });
-
-  // 播放结束自动下一曲
-  audio.addEventListener('ended', () => {
-    nextSong();
-  });
-}
-
-/**
- * 渲染歌单卡片列表
- */
 function renderPlaylist() {
   const container = document.getElementById('playlist-container');
   if (!container) return;
 
   container.innerHTML = PLAYLIST.map((song, index) => {
-    // 白天/夜晚根据不同歌曲产生不同的中式首字，如“雪”、“雨”、“琴”、“禅”
-    const coverChar = song.tag[1] || '音';
+    const number = String(index + 1).padStart(2, '0');
     return `
-      <div class="song-card scroll-reveal" data-index="${index}" tabindex="0">
-        <div class="song-card-cover">${coverChar}</div>
+      <article class="song-card scroll-reveal" data-index="${index}" tabindex="0" aria-label="播放 ${song.title}">
+        <span class="song-card-number">${number}</span>
         <div class="song-card-info">
           <h3 class="song-card-title">${song.title}</h3>
-          <span class="song-card-artist">${song.artist}</span>
+          <div class="song-card-meta">
+            <span class="song-card-artist">${song.artist || '本地音乐'}</span>
+            <span class="song-card-state">待播放</span>
+          </div>
         </div>
-        <span class="song-card-tag">${song.tag}</span>
-        <div class="song-play-status">
-          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-        </div>
-      </div>
+        <span class="song-card-duration">${song.duration}</span>
+        <button class="song-play-status" type="button" aria-label="播放 ${song.title}">
+          ${playIcon()}
+        </button>
+      </article>
     `;
   }).join('');
 
-  // 绑定点击事件
-  const cards = container.querySelectorAll('.song-card');
-  cards.forEach(card => {
-    card.addEventListener('click', (e) => {
-      const idx = parseInt(card.getAttribute('data-index'));
-      selectAndPlay(idx, e);
+  container.querySelectorAll('.song-card').forEach(card => {
+    const idx = Number(card.getAttribute('data-index'));
+    card.addEventListener('click', event => {
+      if (event.target.closest('button') || event.currentTarget === card) {
+        toggleSong(idx);
+      }
     });
-
-    card.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        const idx = parseInt(card.getAttribute('data-index'));
-        selectAndPlay(idx, e);
+    card.addEventListener('keydown', event => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        toggleSong(idx);
       }
     });
   });
 
-  updateActiveCard();
+  updatePlaylistState();
 }
 
-/**
- * 更新歌单卡片激活高亮
- */
-function updateActiveCard() {
-  const cards = document.querySelectorAll('#playlist-container .song-card');
-  cards.forEach((card, idx) => {
-    if (idx === currentIndex) {
-      card.classList.add('active');
-    } else {
-      card.classList.remove('active');
-    }
-  });
-}
-
-/**
- * 选择并播放
- */
-function selectAndPlay(index, event) {
-  if (index === currentIndex && isPlaying) {
-    // 如果点击的是当前正在播放的，则暂停
-    pausePlayer();
-    return;
-  }
-  
-  currentIndex = index;
-  updateActiveCard();
-  loadCurrentSong();
-  playPlayer(event);
-}
-
-/**
- * 加载当前索引的歌曲
- */
-function loadCurrentSong() {
-  const song = PLAYLIST[currentIndex];
-  audio.src = song.src;
-  
-  // 更新播放栏 UI
-  const barTitle = document.getElementById('playbar-title');
-  const barArtist = document.getElementById('playbar-artist');
-  if (barTitle) barTitle.textContent = song.title;
-  if (barArtist) barArtist.textContent = song.artist;
-  
-  // 重置进度条
-  const progressBar = document.getElementById('playbar-progress');
-  const curTimeText = document.getElementById('playbar-current-time');
-  const totalTimeText = document.getElementById('playbar-total-time');
-  
-  if (progressBar) progressBar.value = 0;
-  if (curTimeText) curTimeText.textContent = '00:00';
-  if (totalTimeText) totalTimeText.textContent = song.duration;
-}
-
-/**
- * 播放
- */
-function playPlayer(event) {
-  if (!audio.src) {
-    loadCurrentSong();
-  }
-
-  isPlaying = true;
-  updatePlayButtonUI(true);
-
-  audio.play().catch(err => {
-    console.log('音频播放失败，请检查浏览器权限或文件路径 ' + PLAYLIST[currentIndex].src, err);
-    showAudioErrorDialog(PLAYLIST[currentIndex].src);
-    pausePlayer();
-  });
-}
-
-/**
- * 暂停
- */
-function pausePlayer() {
-  isPlaying = false;
-  audio.pause();
-  updatePlayButtonUI(false);
-}
-
-/**
- * 上一首
- */
-function prevSong() {
-  currentIndex = (currentIndex - 1 + PLAYLIST.length) % PLAYLIST.length;
-  updateActiveCard();
-  loadCurrentSong();
-  playPlayer();
-}
-
-/**
- * 下一首
- */
-function nextSong() {
-  currentIndex = (currentIndex + 1) % PLAYLIST.length;
-  updateActiveCard();
-  loadCurrentSong();
-  playPlayer();
-}
-
-/**
- * 更新播放/暂停按钮图标
- */
-function updatePlayButtonUI(playing) {
-  const playBtn = document.getElementById('playbar-play-btn');
-  if (!playBtn) return;
-
-  const playIcon = `<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>`;
-  const pauseIcon = `<svg viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>`;
-
-  if (playing) {
-    playBtn.innerHTML = pauseIcon;
-    playBtn.setAttribute('aria-label', '暂停');
-  } else {
-    playBtn.innerHTML = playIcon;
-    playBtn.setAttribute('aria-label', '播放');
-  }
-
-  // 同步更新列表中对应卡片的状态图标
-  const activeCard = document.querySelector('#playlist-container .song-card.active');
-  if (activeCard) {
-    const statusIcon = activeCard.querySelector('.song-play-status');
-    if (statusIcon) {
-      statusIcon.innerHTML = playing ? pauseIcon : playIcon;
-    }
-  }
-
-  // 重置其他非 active 卡片的状态图标为播放图标
-  const inactiveCards = document.querySelectorAll('#playlist-container .song-card:not(.active)');
-  inactiveCards.forEach(card => {
-    const statusIcon = card.querySelector('.song-play-status');
-    if (statusIcon) {
-      statusIcon.innerHTML = playIcon;
-    }
-  });
-}
-
-/**
- * 播放器控制栏交互逻辑
- */
 function initPlayerControls() {
   const playBtn = document.getElementById('playbar-play-btn');
   const prevBtn = document.getElementById('playbar-prev-btn');
   const nextBtn = document.getElementById('playbar-next-btn');
   const progressBar = document.getElementById('playbar-progress');
   const volumeSlider = document.getElementById('playbar-volume');
-  
+
+  if (playBtn) {
+    playBtn.addEventListener('click', () => {
+      toggleSong(currentIndex);
+    });
+  }
+
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      switchSong((currentIndex - 1 + PLAYLIST.length) % PLAYLIST.length, true);
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      switchSong((currentIndex + 1) % PLAYLIST.length, true);
+    });
+  }
+
+  if (progressBar) {
+    progressBar.addEventListener('input', event => {
+      if (!Number.isFinite(siteAudio.duration) || siteAudio.duration <= 0) return;
+      siteAudio.currentTime = (Number(event.target.value) / 100) * siteAudio.duration;
+    });
+  }
+
+  if (volumeSlider) {
+    siteAudio.volume = Number(volumeSlider.value || 0.6);
+    volumeSlider.addEventListener('input', event => {
+      siteAudio.volume = Number(event.target.value);
+    });
+  }
+}
+
+function bindAudioEvents() {
+  siteAudio.addEventListener('loadedmetadata', () => {
+    const song = PLAYLIST[currentIndex];
+    if (Number.isFinite(siteAudio.duration)) {
+      song.duration = formatTime(siteAudio.duration);
+    }
+    updateProgress();
+    updateNowPlaying(isPlaying ? '正在播放' : '已就绪');
+  });
+
+  siteAudio.addEventListener('canplay', () => {
+    isBuffering = false;
+    updateNowPlaying(isPlaying ? '正在播放' : '已就绪');
+  });
+
+  siteAudio.addEventListener('playing', () => {
+    isPlaying = true;
+    isBuffering = false;
+    updateNowPlaying('正在播放');
+  });
+
+  siteAudio.addEventListener('pause', () => {
+    isPlaying = false;
+    isBuffering = false;
+    updateNowPlaying('已暂停');
+  });
+
+  siteAudio.addEventListener('waiting', () => {
+    isBuffering = true;
+    updateNowPlaying('缓冲中');
+  });
+
+  siteAudio.addEventListener('stalled', () => {
+    isBuffering = true;
+    updateNowPlaying('加载停滞');
+  });
+
+  siteAudio.addEventListener('ended', () => {
+    switchSong((currentIndex + 1) % PLAYLIST.length, true);
+  });
+
+  siteAudio.addEventListener('error', () => {
+    console.error('Audio load failed:', {
+      src: siteAudio.currentSrc || siteAudio.src,
+      errorCode: siteAudio.error?.code
+    });
+    isPlaying = false;
+    isBuffering = false;
+    updateNowPlaying('加载失败');
+    showAudioErrorDialog(PLAYLIST[currentIndex].src);
+  });
+
+  siteAudio.addEventListener('timeupdate', updateProgress);
+}
+
+function toggleSong(index) {
+  if (index === currentIndex && isPlaying) {
+    siteAudio.pause();
+    return;
+  }
+
+  switchSong(index, true);
+}
+
+function switchSong(index, shouldPlay) {
+  currentIndex = index;
+  ensureSongSource();
+  updateProgress(true);
+  updateNowPlaying(shouldPlay ? '准备播放' : '等待播放');
+
+  if (shouldPlay) {
+    playCurrent();
+  }
+}
+
+function ensureSongSource() {
+  const song = PLAYLIST[currentIndex];
+  const targetSrc = new URL(song.src, window.location.href).href;
+
+  if (siteAudio.src !== targetSrc) {
+    siteAudio.src = song.src;
+    siteAudio.load();
+  }
+}
+
+function playCurrent() {
+  ensureSongSource();
+
+  const token = ++playToken;
+  isBuffering = true;
+  updateNowPlaying('缓冲中');
+
+  siteAudio.play().then(() => {
+    if (token !== playToken) return;
+    isPlaying = true;
+    isBuffering = false;
+    updateNowPlaying('正在播放');
+  }).catch(error => {
+    if (token !== playToken) return;
+    isPlaying = false;
+    isBuffering = false;
+    console.error('Audio play failed:', error);
+    updateNowPlaying('播放失败');
+    showAudioErrorDialog(PLAYLIST[currentIndex].src);
+  });
+}
+
+function updateNowPlaying(statusText) {
+  const song = PLAYLIST[currentIndex];
+  const title = document.getElementById('playbar-title');
+  const artist = document.getElementById('playbar-artist');
+  const totalTime = document.getElementById('playbar-total-time');
+  const introTitle = document.getElementById('music-current-title');
+  const introMeta = document.getElementById('music-current-meta');
+  const introStatus = document.getElementById('music-current-status');
+
+  if (title) title.textContent = song.title;
+  if (artist) artist.textContent = song.artist || '本地音乐';
+  if (totalTime) totalTime.textContent = song.duration;
+  if (introTitle) introTitle.textContent = song.title;
+  if (introMeta) introMeta.textContent = (song.artist || '本地音乐') + ' · ' + song.duration;
+  if (introStatus) introStatus.textContent = statusText;
+
+  updatePlayButtonUI(isPlaying || isBuffering);
+  updatePlaylistState(statusText);
+}
+
+function updatePlaylistState(statusText) {
+  const cards = document.querySelectorAll('#playlist-container .song-card');
+  cards.forEach((card, idx) => {
+    const active = idx === currentIndex;
+    const state = card.querySelector('.song-card-state');
+    const statusBtn = card.querySelector('.song-play-status');
+    const song = PLAYLIST[idx];
+
+    card.classList.toggle('active', active);
+    card.setAttribute('aria-current', active ? 'true' : 'false');
+    if (state) state.textContent = active ? (statusText || (isPlaying ? '正在播放' : '待播放')) : '待播放';
+    if (statusBtn) {
+      statusBtn.innerHTML = active && isPlaying ? pauseIcon() : playIcon();
+      statusBtn.setAttribute('aria-label', active && isPlaying ? '暂停 ' + song.title : '播放 ' + song.title);
+    }
+  });
+}
+
+function updatePlayButtonUI(showPause) {
+  const playBtn = document.getElementById('playbar-play-btn');
+  if (!playBtn) return;
+
+  playBtn.innerHTML = showPause ? pauseIcon() : playIcon();
+  playBtn.setAttribute('aria-label', showPause ? '暂停' : '播放');
+}
+
+function updateProgress(reset) {
+  const progressBar = document.getElementById('playbar-progress');
   const curTimeText = document.getElementById('playbar-current-time');
   const totalTimeText = document.getElementById('playbar-total-time');
 
-  // 播放暂停
-  if (playBtn) {
-    playBtn.addEventListener('click', (e) => {
-      if (isPlaying) {
-        pausePlayer();
-      } else {
-        playPlayer(e);
-      }
-    });
+  if (reset) {
+    if (progressBar) progressBar.value = 0;
+    if (curTimeText) curTimeText.textContent = '00:00';
   }
 
-  // 上下首
-  if (prevBtn) {
-    prevBtn.addEventListener('click', (e) => {
-      prevSong();
-    });
+  if (Number.isFinite(siteAudio.duration) && siteAudio.duration > 0) {
+    if (progressBar) progressBar.value = (siteAudio.currentTime / siteAudio.duration) * 100;
+    if (curTimeText) curTimeText.textContent = formatTime(siteAudio.currentTime);
+    if (totalTimeText) totalTimeText.textContent = formatTime(siteAudio.duration);
+  } else if (totalTimeText) {
+    totalTimeText.textContent = PLAYLIST[currentIndex].duration;
   }
-  if (nextBtn) {
-    nextBtn.addEventListener('click', (e) => {
-      nextSong();
-    });
-  }
-
-  // 声音滑块
-  if (volumeSlider) {
-    // 初始音量同步
-    audio.volume = volumeSlider.value;
-    volumeSlider.addEventListener('input', (e) => {
-      audio.volume = e.target.value;
-    });
-  }
-
-  // 进度时间更新
-  audio.addEventListener('timeupdate', () => {
-    if (!audio.duration) return;
-    
-    // 更新进度条的值
-    const percent = (audio.currentTime / audio.duration) * 100;
-    if (progressBar) progressBar.value = percent;
-    
-    // 更新当前时间文本
-    if (curTimeText) {
-      curTimeText.textContent = formatTime(audio.currentTime);
-    }
-  });
-
-  // 加载元数据时更新总时间
-  audio.addEventListener('loadedmetadata', () => {
-    if (totalTimeText) {
-      totalTimeText.textContent = formatTime(audio.duration);
-    }
-  });
-
-  // 拖动进度条
-  if (progressBar) {
-    progressBar.addEventListener('input', (e) => {
-      if (!audio.duration) return;
-      const newTime = (e.target.value / 100) * audio.duration;
-      audio.currentTime = newTime;
-    });
-  }
-
-  // 默认加载第一首，但不起播
-  loadCurrentSong();
 }
 
-/**
- * 格式化时间 00:00
- */
 function formatTime(seconds) {
-  if (isNaN(seconds)) return '00:00';
-  const m = Math.floor(seconds / 60);
-  const s = Math.floor(seconds % 60);
-  return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+  if (!Number.isFinite(seconds)) return '00:00';
+  const minutes = Math.floor(seconds / 60);
+  const secs = Math.floor(seconds % 60);
+  return String(minutes).padStart(2, '0') + ':' + String(secs).padStart(2, '0');
 }
 
-/**
- * 弹出自定义中式警告弹窗
- */
+function playIcon() {
+  return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
+}
+
+function pauseIcon() {
+  return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>';
+}
+
 function showAudioErrorDialog(filePath) {
   const dialog = document.getElementById('music-error-dialog');
   const pathCode = document.getElementById('dialog-file-path');
@@ -392,9 +310,6 @@ function showAudioErrorDialog(filePath) {
   }
 }
 
-/**
- * 弹窗事件绑定
- */
 function initDialogEvents() {
   const dialog = document.getElementById('music-error-dialog');
   const closeBtn = document.getElementById('dialog-close-btn');
@@ -406,14 +321,12 @@ function initDialogEvents() {
   };
 
   closeBtn.addEventListener('click', hideDialog);
-  dialog.addEventListener('click', (e) => {
-    if (e.target === dialog) {
-      hideDialog();
-    }
+  dialog.addEventListener('click', event => {
+    if (event.target === dialog) hideDialog();
   });
 
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && dialog.classList.contains('show')) {
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && dialog.classList.contains('show')) {
       hideDialog();
     }
   });

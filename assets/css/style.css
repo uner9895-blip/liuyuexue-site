@@ -3956,7 +3956,296 @@ header {
     opacity: 0.96;
   }
 
-  [data-theme="dark"] .living-ink-scene {
+[data-theme="dark"] .living-ink-scene {
     opacity: 0.42;
   }
+}
+
+/* ==========================================================================
+   v1.7.0 - real gallery photos, mobile drawer, playlist, and softer ink scene
+   ========================================================================== */
+
+body.menu-open {
+  position: fixed;
+  width: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+.mobile-menu-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 98;
+  background:
+    radial-gradient(ellipse at 80% 18%, rgba(250, 247, 239, 0.28), transparent 40%),
+    rgba(31, 35, 32, 0.46);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 240ms ease, visibility 240ms ease;
+}
+
+.mobile-menu-backdrop.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+@media (max-width: 768px) {
+  .burger-btn {
+    z-index: 130;
+    flex: 0 0 auto;
+  }
+
+  .nav-menu {
+    width: min(86vw, 360px);
+    height: 100dvh;
+    max-width: 100vw;
+    padding: 5.25rem 1.15rem 1.6rem;
+    background:
+      linear-gradient(180deg, rgba(250, 247, 239, 0.985), rgba(245, 240, 230, 0.972)),
+      repeating-radial-gradient(ellipse at 30% 20%, rgba(37, 42, 39, 0.045) 0 0.42px, transparent 0.84px 18px);
+    box-shadow: -24px 0 54px rgba(21, 25, 22, 0.22);
+    border-left: 1px solid rgba(61, 68, 63, 0.2);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    transform: translate3d(104%, 0, 0);
+    visibility: hidden;
+    z-index: 120;
+  }
+
+  [data-theme="dark"] .nav-menu {
+    background:
+      linear-gradient(180deg, rgba(18, 24, 24, 0.985), rgba(14, 19, 20, 0.972)),
+      repeating-radial-gradient(ellipse at 30% 20%, rgba(250, 247, 239, 0.028) 0 0.42px, transparent 0.84px 18px);
+    border-left-color: rgba(250, 247, 239, 0.14);
+  }
+
+  .nav-menu.is-open,
+  .nav-menu.active {
+    transform: translate3d(0, 0, 0);
+    visibility: visible;
+  }
+
+  .nav-item {
+    width: 100%;
+  }
+
+  .nav-item a {
+    justify-content: flex-start;
+    padding: 0.55rem 0.9rem;
+    color: var(--color-ink-dark);
+    background: rgba(255, 255, 255, 0.26);
+  }
+
+  .nav-item.active a,
+  .nav-item a[aria-current="page"] {
+    color: var(--color-cinnabar);
+    border-color: rgba(204, 67, 67, 0.24);
+    background: rgba(204, 67, 67, 0.075);
+  }
+
+  .theme-toggle-btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  main,
+  footer {
+    max-width: 100vw;
+  }
+}
+
+.image-note-card {
+  border-radius: 6px;
+  cursor: default;
+}
+
+.image-note-card:hover {
+  transform: translateY(-4px);
+}
+
+.image-note-media {
+  width: 100%;
+  height: 240px;
+  aspect-ratio: auto;
+  margin: 0;
+  background:
+    linear-gradient(145deg, rgba(250, 247, 239, 0.82), rgba(235, 227, 210, 0.64));
+  border-bottom: 1px solid rgba(61, 68, 63, 0.12);
+}
+
+.image-note-media img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transform: scale(1);
+  transition: transform 520ms cubic-bezier(0.25, 0.8, 0.25, 1), filter 520ms ease;
+}
+
+.image-note-card:hover .image-note-media img {
+  transform: scale(1.025);
+}
+
+.image-note-media::before {
+  z-index: 1;
+  background:
+    linear-gradient(180deg, rgba(250, 247, 239, 0.18), transparent 38%, rgba(33, 40, 35, 0.08)),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)' opacity='0.042'/%3E%3C/svg%3E");
+  mix-blend-mode: soft-light;
+}
+
+.image-note-media::after {
+  z-index: 1;
+  inset: 0;
+  height: auto;
+  background:
+    linear-gradient(90deg, rgba(250, 247, 239, 0.2), transparent 16%, transparent 84%, rgba(250, 247, 239, 0.16)),
+    radial-gradient(ellipse at 50% 108%, rgba(45, 50, 46, 0.16), transparent 50%);
+  filter: none;
+}
+
+.image-note-media-rain img {
+  object-position: 50% 58%;
+}
+
+.image-note-media-cloud img {
+  object-position: 50% 40%;
+}
+
+.image-note-media-tree img {
+  object-position: 50% 50%;
+}
+
+.image-note-media-tea img {
+  object-position: 51% 58%;
+}
+
+.image-note-media-night img {
+  object-position: 48% 48%;
+}
+
+.image-note-media-mountain img {
+  object-position: 50% 52%;
+}
+
+@media (max-width: 768px) {
+  .image-note-media {
+    height: 190px;
+  }
+
+  .image-note-media-cloud img {
+    object-position: 50% 36%;
+  }
+
+  .image-note-media-night img {
+    object-position: 48% 42%;
+  }
+}
+
+.playlist-section {
+  grid-template-columns: 1fr;
+}
+
+.song-card {
+  display: grid;
+  grid-template-columns: 2.2rem minmax(0, 1fr) auto auto;
+  gap: 0.9rem;
+  align-items: center;
+  padding: 1rem 1.1rem;
+  border-left: 3px solid transparent;
+}
+
+.song-card.active {
+  border-left-color: var(--color-cinnabar);
+  background:
+    linear-gradient(145deg, rgba(250, 247, 239, 0.9), rgba(245, 240, 230, 0.76)),
+    repeating-radial-gradient(ellipse at 28% 22%, rgba(37, 42, 39, 0.036) 0 0.42px, transparent 0.84px 18px);
+}
+
+.song-card-number {
+  font-family: var(--font-title);
+  color: var(--color-cinnabar);
+  font-weight: 700;
+  text-align: center;
+}
+
+.song-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-width: 0;
+}
+
+.song-card-duration,
+.song-card-state {
+  color: var(--color-ink-light);
+  font-size: 0.78rem;
+  white-space: nowrap;
+}
+
+.song-card.active .song-card-state {
+  color: var(--color-cinnabar);
+  font-weight: 700;
+}
+
+.song-play-status {
+  border-radius: 4px;
+}
+
+.music-current-title {
+  font-family: var(--font-title);
+  color: var(--color-ink-dark);
+  font-size: 1.16rem;
+  line-height: 1.45;
+}
+
+.music-current-meta {
+  color: var(--color-ink-light);
+  font-size: 0.88rem;
+}
+
+.music-current-status {
+  display: inline-flex;
+  align-self: flex-start;
+  padding: 0.16rem 0.5rem;
+  border-left: 2px solid var(--color-cinnabar);
+  background: rgba(204, 67, 67, 0.055);
+  color: var(--color-cinnabar);
+  font-size: 0.82rem;
+}
+
+@media (max-width: 768px) {
+  .music-layout-container {
+    gap: 1.2rem;
+    margin-bottom: 190px;
+  }
+
+  .song-card {
+    grid-template-columns: 1.8rem minmax(0, 1fr) auto;
+    gap: 0.7rem;
+  }
+
+  .song-card-duration {
+    display: none;
+  }
+
+  .song-card-state {
+    grid-column: 2 / 4;
+  }
+
+  .music-playbar-container {
+    max-height: 46dvh;
+  }
+}
+
+.living-ink-scene {
+  opacity: 0.92;
+}
+
+.living-ink-svg {
+  min-width: 100%;
+  min-height: 100%;
 }
