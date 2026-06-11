@@ -3,6 +3,7 @@
  */
 
 function initAll() {
+  initLivingInkScene();
   initMobileMenu();
   initContactForm();
   initActiveNavLink();
@@ -20,11 +21,59 @@ function initAll() {
 
 const musicTracks = [
   {
-    id: 'qingtian',
-    title: '晴天',
+    id: 'ecoute-cherie',
+    title: 'Ecoute Cherie',
     artist: '本地音乐',
-    src: 'assets/audio/qingtian.mp3',
-    tag: '晴音',
+    src: 'assets/audio/ecoute-cherie.mp3',
+    tag: '雪音',
+    duration: '本地'
+  },
+  {
+    id: 'fallin-out',
+    title: 'Fallin Out',
+    artist: '本地音乐',
+    src: 'assets/audio/fallin-out.mp3',
+    tag: '风音',
+    duration: '本地'
+  },
+  {
+    id: 'hong-san-ke-zhan',
+    title: '红伞客栈',
+    artist: '本地音乐',
+    src: 'assets/audio/hong-san-ke-zhan.mp3',
+    tag: '伞音',
+    duration: '本地'
+  },
+  {
+    id: 'ji-mo-ji-mo-bu-hao',
+    title: '寂寞寂寞不好',
+    artist: '本地音乐',
+    src: 'assets/audio/ji-mo-ji-mo-bu-hao.mp3',
+    tag: '夜音',
+    duration: '本地'
+  },
+  {
+    id: 'lan-ting-xu',
+    title: '兰亭序',
+    artist: '本地音乐',
+    src: 'assets/audio/lan-ting-xu.mp3',
+    tag: '墨音',
+    duration: '本地'
+  },
+  {
+    id: 'lian-ren',
+    title: '恋人',
+    artist: '本地音乐',
+    src: 'assets/audio/lian-ren.mp3',
+    tag: '梅音',
+    duration: '本地'
+  },
+  {
+    id: 'yin-tian',
+    title: '阴天',
+    artist: '本地音乐',
+    src: 'assets/audio/yin-tian.mp3',
+    tag: '雨音',
     duration: '本地'
   }
 ];
@@ -85,6 +134,123 @@ if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initAll);
 } else {
   initAll();
+}
+
+function initLivingInkScene() {
+  if (document.querySelector('.living-ink-scene')) return;
+
+  const scene = document.createElement('div');
+  scene.className = 'living-ink-scene';
+  scene.setAttribute('aria-hidden', 'true');
+  scene.innerHTML = `
+    <svg class="living-ink-svg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="livingSun" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#d5bd82" stop-opacity="0.34"/>
+          <stop offset="64%" stop-color="#c6a86a" stop-opacity="0.14"/>
+          <stop offset="100%" stop-color="#c6a86a" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="mountainWash" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#252a27" stop-opacity="0.32"/>
+          <stop offset="56%" stop-color="#747970" stop-opacity="0.18"/>
+          <stop offset="100%" stop-color="#faf7ef" stop-opacity="0.02"/>
+        </linearGradient>
+        <linearGradient id="bambooInk" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#9cac8d" stop-opacity="0.52"/>
+          <stop offset="100%" stop-color="#252a27" stop-opacity="0.34"/>
+        </linearGradient>
+        <linearGradient id="riverWash" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#faf7ef" stop-opacity="0.04"/>
+          <stop offset="45%" stop-color="#9a9a91" stop-opacity="0.28"/>
+          <stop offset="100%" stop-color="#252a27" stop-opacity="0.1"/>
+        </linearGradient>
+        <filter id="inkBleed" x="-10%" y="-10%" width="120%" height="120%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.018 0.04" numOctaves="2" seed="8"/>
+          <feDisplacementMap in="SourceGraphic" scale="7"/>
+          <feGaussianBlur stdDeviation="0.7"/>
+        </filter>
+        <filter id="softMist" x="-20%" y="-80%" width="140%" height="260%">
+          <feGaussianBlur stdDeviation="13"/>
+        </filter>
+      </defs>
+
+      <g class="living-ink-sun">
+        <circle cx="540" cy="150" r="54" fill="url(#livingSun)"/>
+      </g>
+
+      <g class="living-ink-birds" fill="none" stroke="#252a27" stroke-width="2.2" stroke-linecap="round" opacity="0.42">
+        <path d="M638 174 q13 -12 26 0 q13 -12 26 0"/>
+        <path d="M704 136 q10 -9 20 0 q10 -9 20 0" opacity="0.7"/>
+        <path d="M598 126 q8 -7 16 0 q8 -7 16 0" opacity="0.62"/>
+        <path d="M776 184 q8 -7 16 0 q8 -7 16 0" opacity="0.5"/>
+      </g>
+
+      <g class="living-ink-mountains" filter="url(#inkBleed)">
+        <path d="M-36 538 C58 416 116 450 188 286 C226 204 304 170 340 292 C366 384 418 392 506 318 C584 252 642 286 716 254 C668 360 612 434 536 504 C402 626 214 628 -36 620 Z" fill="url(#mountainWash)" opacity="0.44"/>
+        <path d="M-30 615 C80 510 150 536 238 440 C294 380 346 430 406 390 C486 338 558 410 642 368 C584 492 454 626 240 670 C126 694 38 672 -30 650 Z" fill="#3d443f" opacity="0.16"/>
+        <path d="M30 492 C142 430 250 458 350 408 C438 364 512 400 606 350" fill="none" stroke="#747970" stroke-width="9" stroke-linecap="round" opacity="0.1"/>
+        <path d="M346 284 C330 352 318 418 286 492" fill="none" stroke="#faf7ef" stroke-width="7" stroke-linecap="round" opacity="0.58"/>
+        <g fill="#252a27" opacity="0.2">
+          <circle cx="128" cy="520" r="5"/><circle cx="154" cy="500" r="3"/><circle cx="202" cy="550" r="4"/>
+          <circle cx="426" cy="454" r="4"/><circle cx="466" cy="426" r="3"/><circle cx="524" cy="476" r="5"/>
+        </g>
+      </g>
+
+      <g class="living-ink-river" fill="none" stroke-linecap="round">
+        <path d="M512 344 C628 430 778 430 848 524 C920 620 808 658 670 702 C524 748 448 808 546 900" stroke="url(#riverWash)" stroke-width="36" opacity="0.26"/>
+        <path d="M530 364 C650 452 794 452 830 534 C862 608 748 642 628 686 C520 726 484 790 574 884" stroke="#747970" stroke-width="3" opacity="0.22"/>
+        <path d="M608 548 C700 582 774 560 832 518" stroke="#9a9a91" stroke-width="1.6" opacity="0.28"/>
+        <path d="M514 746 C604 708 700 704 784 662" stroke="#c6a86a" stroke-width="1.4" opacity="0.24"/>
+        <path d="M704 812 C760 780 814 764 892 752" stroke="#c6a86a" stroke-width="1.2" opacity="0.16"/>
+      </g>
+
+      <g class="living-ink-mist" filter="url(#softMist)" fill="none" stroke="#faf7ef" stroke-width="34" stroke-linecap="round" opacity="0.62">
+        <path d="M80 514 C230 478 336 520 484 492 C632 464 754 500 914 466"/>
+        <path d="M438 286 C604 256 734 286 884 252"/>
+      </g>
+
+      <g class="living-ink-bamboo" fill="none" stroke-linecap="round">
+        <path d="M1144 -40 C1120 170 1162 408 1128 920" stroke="url(#bambooInk)" stroke-width="15"/>
+        <path d="M1230 -30 C1198 216 1234 480 1204 930" stroke="#3d443f" stroke-width="18" opacity="0.42"/>
+        <path d="M1314 -52 C1268 252 1308 520 1270 934" stroke="#252a27" stroke-width="13" opacity="0.36"/>
+        <path d="M1070 42 C1110 96 1168 98 1210 86"/>
+        <path d="M1082 130 C1138 154 1196 144 1236 106"/>
+        <path d="M1028 230 C1096 244 1162 222 1208 174"/>
+        <path d="M1160 312 C1216 328 1284 302 1354 236"/>
+        <path d="M1104 92 C1060 78 1016 48 984 10" stroke="#819276" stroke-width="2.4" opacity="0.44"/>
+        <path d="M1114 146 C1062 138 1008 112 960 66" stroke="#819276" stroke-width="2.2" opacity="0.4"/>
+        <path d="M1162 242 C1102 230 1044 208 994 166" stroke="#687b61" stroke-width="2.4" opacity="0.38"/>
+        <path d="M1232 336 C1170 338 1116 318 1068 276" stroke="#687b61" stroke-width="2.1" opacity="0.34"/>
+        <g class="living-ink-bamboo-leaves" fill="#687b61" opacity="0.54">
+          <path d="M1042 48 C1090 32 1128 48 1164 84 C1114 88 1076 78 1042 48"/>
+          <path d="M986 14 C1032 8 1068 28 1098 64 C1052 62 1014 48 986 14"/>
+          <path d="M980 126 C1038 110 1080 124 1118 166 C1062 168 1018 154 980 126"/>
+          <path d="M1090 178 C1142 156 1190 164 1238 202 C1182 214 1136 204 1090 178"/>
+          <path d="M1162 276 C1220 250 1278 256 1336 300 C1270 318 1218 306 1162 276"/>
+          <path d="M1248 132 C1304 108 1354 114 1406 152 C1346 166 1298 158 1248 132"/>
+          <path d="M1216 58 C1264 34 1308 36 1358 68 C1304 88 1262 82 1216 58"/>
+        </g>
+      </g>
+
+      <g class="living-ink-plum" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M-18 858 C72 804 120 730 178 704 C232 680 286 710 340 652" stroke="#252a27" stroke-width="9" opacity="0.76"/>
+        <path d="M116 752 C146 724 166 700 180 660" stroke="#3d443f" stroke-width="4.5" opacity="0.7"/>
+        <path d="M206 694 C236 660 268 642 310 632" stroke="#3d443f" stroke-width="4" opacity="0.66"/>
+        <path d="M70 804 C52 764 46 732 56 696" stroke="#3d443f" stroke-width="4.2" opacity="0.62"/>
+        <g class="living-ink-plum-blossoms">
+          <circle cx="116" cy="748" r="6" fill="#c94b52" opacity="0.9"/>
+          <circle cx="136" cy="724" r="9" fill="#b83e46" opacity="0.8"/>
+          <circle cx="178" cy="662" r="6" fill="#c94b52" opacity="0.86"/>
+          <circle cx="224" cy="684" r="8" fill="#c94b52" opacity="0.78"/>
+          <circle cx="288" cy="638" r="5" fill="#b83e46" opacity="0.78"/>
+          <circle cx="58" cy="702" r="6" fill="#c94b52" opacity="0.75"/>
+          <circle cx="90" cy="784" r="4" fill="#b83e46" opacity="0.78"/>
+          <circle cx="152" cy="758" r="3" fill="#c94b52" opacity="0.62"/>
+        </g>
+      </g>
+    </svg>`;
+
+  document.body.insertBefore(scene, document.body.firstChild);
 }
 
 /**
@@ -392,16 +558,16 @@ function initMusicWidget() {
     audio = document.createElement('audio');
     audio.id = 'global-audio';
     audio.loop = true;
-    audio.preload = 'none';
+    audio.preload = 'metadata';
     document.body.appendChild(audio);
   }
 
   if (title) title.textContent = track.title;
-  if (subtitle) subtitle.textContent = track.artist + ' · assets/audio/qingtian.mp3';
+  if (subtitle) subtitle.textContent = track.artist + ' · ' + track.src;
 
   audio.addEventListener('error', () => {
     console.log('音频文件未找到，请检查 ' + track.src, audio.error);
-    showToast('音频文件未找到，请检查 assets/audio/qingtian.mp3');
+    showToast('音频文件未找到，请检查 ' + track.src);
     updateMusicUI(false);
   });
 
@@ -425,7 +591,7 @@ function initMusicWidget() {
         updateMusicUI(true);
       }).catch(err => {
         console.log('音频播放失败，请检查浏览器权限或文件路径 ' + track.src, err);
-        showToast('音频文件未找到，请检查 assets/audio/qingtian.mp3');
+        showToast('音频播放失败，请检查浏览器权限或文件路径 ' + track.src);
         updateMusicUI(false);
       });
     } else {
@@ -499,6 +665,11 @@ function createPlumPetal(x, y, options) {
   petal.style.setProperty('--petal-color', color);
   petal.style.setProperty('--petal-peak-opacity', opacity);
   petal.style.setProperty('--petal-mid-opacity', midOpacity);
+
+  var existingPetals = document.querySelectorAll('.plum-petal');
+  if (existingPetals.length >= 35) {
+    existingPetals[0].remove();
+  }
 
   document.body.appendChild(petal);
 
@@ -610,6 +781,9 @@ function initDomPlumTrail() {
   };
 
   if (!enabled) {
+    if (window.PointerEvent) {
+      document.addEventListener('pointerdown', handleTouchPlumBurst, { passive: true, capture: true });
+    }
     return;
   }
 
@@ -662,8 +836,33 @@ function initDomPlumTrail() {
 
   if (window.PointerEvent) {
     document.addEventListener('pointermove', handlePlumMove, { passive: true, capture: true });
+    document.addEventListener('pointerdown', handleTouchPlumBurst, { passive: true, capture: true });
   } else {
     document.addEventListener('mousemove', handlePlumMove, { passive: true, capture: true });
+  }
+
+  function handleTouchPlumBurst(event) {
+    if (!event.pointerType || event.pointerType !== 'touch') return;
+
+    var total = Math.floor(randomBetween(3, 6));
+    for (var i = 0; i < total; i++) {
+      createPlumPetal(
+        event.clientX + (Math.random() - 0.5) * 26,
+        event.clientY + (Math.random() - 0.5) * 20,
+        {
+          size: randomBetween(17, 26),
+          life: randomBetween(2600, 3800),
+          driftX: (Math.random() - 0.5) * 58,
+          driftY: randomBetween(44, 92),
+          rotate: (Math.random() - 0.5) * 80,
+          rotateMid: (Math.random() - 0.5) * 120,
+          rotateEnd: (Math.random() - 0.5) * 180,
+          color: ['rgba(201, 75, 82, 0.9)', 'rgba(184, 62, 70, 0.82)', 'rgba(251, 202, 208, 0.78)'][Math.floor(Math.random() * 3)],
+          opacity: randomBetween(0.78, 0.94),
+          midOpacity: randomBetween(0.58, 0.76)
+        }
+      );
+    }
   }
 }
 

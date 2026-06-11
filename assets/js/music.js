@@ -4,19 +4,67 @@
 
 const PLAYLIST = (window.musicTracks && window.musicTracks.length ? window.musicTracks : [
   {
-    id: 'qingtian',
-    title: '晴天',
+    id: 'ecoute-cherie',
+    title: 'Ecoute Cherie',
     artist: '本地音乐',
-    src: 'assets/audio/qingtian.mp3',
-    tag: '晴音',
+    src: 'assets/audio/ecoute-cherie.mp3',
+    tag: '雪音',
+    duration: '本地'
+  },
+  {
+    id: 'fallin-out',
+    title: 'Fallin Out',
+    artist: '本地音乐',
+    src: 'assets/audio/fallin-out.mp3',
+    tag: '风音',
+    duration: '本地'
+  },
+  {
+    id: 'hong-san-ke-zhan',
+    title: '红伞客栈',
+    artist: '本地音乐',
+    src: 'assets/audio/hong-san-ke-zhan.mp3',
+    tag: '伞音',
+    duration: '本地'
+  },
+  {
+    id: 'ji-mo-ji-mo-bu-hao',
+    title: '寂寞寂寞不好',
+    artist: '本地音乐',
+    src: 'assets/audio/ji-mo-ji-mo-bu-hao.mp3',
+    tag: '夜音',
+    duration: '本地'
+  },
+  {
+    id: 'lan-ting-xu',
+    title: '兰亭序',
+    artist: '本地音乐',
+    src: 'assets/audio/lan-ting-xu.mp3',
+    tag: '墨音',
+    duration: '本地'
+  },
+  {
+    id: 'lian-ren',
+    title: '恋人',
+    artist: '本地音乐',
+    src: 'assets/audio/lian-ren.mp3',
+    tag: '梅音',
+    duration: '本地'
+  },
+  {
+    id: 'yin-tian',
+    title: '阴天',
+    artist: '本地音乐',
+    src: 'assets/audio/yin-tian.mp3',
+    tag: '雨音',
     duration: '本地'
   }
 ]).map((song, index) => ({
   id: song.id || index + 1,
-  title: song.title || '晴天',
+  title: song.title || '本地曲目',
   artist: song.artist || '本地音乐',
-  src: song.src || 'assets/audio/qingtian.mp3',
-  tag: song.tag || '晴音',
+  src: song.src || 'assets/audio/ecoute-cherie.mp3',
+  tag: song.tag || '雪音',
   duration: song.duration || '本地'
 }));
 
@@ -39,8 +87,10 @@ function initAudioElement() {
   if (!audio) {
     audio = document.createElement('audio');
     audio.id = 'global-audio';
-    audio.preload = 'none';
+    audio.preload = 'metadata';
     document.body.appendChild(audio);
+  } else {
+    audio.preload = 'metadata';
   }
   
   // 绑定原生错误监听，捕获媒体加载失败
