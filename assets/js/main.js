@@ -302,12 +302,17 @@ function initLivingInkScene() {
  */
 function initMobileMenu() {
   const burgerBtn = document.querySelector('.burger-btn');
-  const navMenu = document.querySelector('.nav-menu');
+  const navMenu = document.getElementById('site-menu') || document.querySelector('.nav-menu');
 
   if (!burgerBtn || !navMenu) return;
+  if (burgerBtn.dataset.mobileMenuReady === 'true') return;
+  burgerBtn.dataset.mobileMenuReady = 'true';
 
   let backdrop = document.querySelector('.mobile-menu-backdrop');
   let lockedScrollY = 0;
+  let isMenuOpen = false;
+  let isScrollLocked = false;
+  let previousScrollBehavior = '';
 
   if (!backdrop) {
     backdrop = document.createElement('div');
@@ -316,62 +321,164 @@ function initMobileMenu() {
     document.body.appendChild(backdrop);
   }
 
+  if (!navMenu.querySelector('.nav-drawer-header')) {
+    const drawerHeader = document.createElement('li');
+    drawerHeader.className = 'nav-drawer-header';
+    drawerHeader.innerHTML = `
+      <span class="nav-drawer-brand">
+        <span class="seal">六月<br>雪印</span>
+        <span>六月雪</span>
+      </span>
+      <button class="nav-drawer-close" type="button" aria-label="关闭导航菜单">×</button>
+    `;
+    navMenu.insertBefore(drawerHeader, navMenu.firstElementChild);
+  }
+
+  const closeBtn = navMenu.querySelector('.nav-drawer-close');
+  const focusableSelector = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+  const originalMenuParent = navMenu.parentNode;
+  const originalMenuNextSibling = navMenu.nextSibling;
+
+  const moveMenuToBody = () => {
+    if (navMenu.parentNode !== document.body) {
+      document.body.appendChild(navMenu);
+    }
+  };
+
+  const restoreMenuPosition = () => {
+    if (!originalMenuParent || navMenu.parentNode === originalMenuParent) return;
+    originalMenuParent.insertBefore(navMenu, originalMenuNextSibling);
+  };
+
+  const getInertTargets = () => {
+    const targets = document.querySelectorAll('main, footer, .music-widget, .music-playbar-container, .music-pendant, .back-to-top');
+    return Array.from(targets).filter((element, index, list) => {
+      return list.indexOf(element) === index && !element.contains(navMenu) && !navMenu.contains(element);
+    });
+  };
+
   const lockPageScroll = () => {
+    if (isScrollLocked) return;
     lockedScrollY = window.scrollY || window.pageYOffset || 0;
+    previousScrollBehavior = document.documentElement.style.scrollBehavior;
+    document.body.style.position = 'fixed';
     document.body.style.top = '-' + lockedScrollY + 'px';
+    document.body.style.left = '0';
+    document.body.style.right = '0';
+    document.body.style.width = '100%';
     document.body.classList.add('menu-open');
+    isScrollLocked = true;
   };
 
   const unlockPageScroll = () => {
-    if (!document.body.classList.contains('menu-open')) return;
+    if (!isScrollLocked) return;
     document.body.classList.remove('menu-open');
+    document.body.style.position = '';
     document.body.style.top = '';
+    document.body.style.left = '';
+    document.body.style.right = '';
+    document.body.style.width = '';
+    isScrollLocked = false;
+    document.documentElement.style.scrollBehavior = 'auto';
     window.scrollTo(0, lockedScrollY);
+    window.requestAnimationFrame(() => {
+      window.scrollTo(0, lockedScrollY);
+      document.documentElement.style.scrollBehavior = previousScrollBehavior;
+    });
   };
 
-  const openMenu = () => {
-    burgerBtn.classList.add('active');
-    navMenu.classList.add('active', 'is-open');
-    backdrop.classList.add('is-open');
-    burgerBtn.setAttribute('aria-expanded', 'true');
-    burgerBtn.setAttribute('aria-label', '关闭导航菜单');
-    lockPageScroll();
+  const setBackgroundInert = (inert) => {
+    getInertTargets().forEach((element) => {
+      if (inert) {
+        element.dataset.menuWasInert = element.inert ? 'true' : 'false';
+        element.inert = true;
+      } else {
+        element.inert = element.dataset.menuWasInert === 'true';
+        delete element.dataset.menuWasInert;
+      }
+    });
   };
 
-  const closeMenu = () => {
-    if (!navMenu.classList.contains('is-open')) return;
-    burgerBtn.classList.remove('active');
-    navMenu.classList.remove('active', 'is-open');
-    backdrop.classList.remove('is-open');
-    burgerBtn.setAttribute('aria-expanded', 'false');
-    burgerBtn.setAttribute('aria-label', '打开导航菜单');
+  const focusDrawer = () => {
+    const firstFocusable = closeBtn || navMenu.querySelector(focusableSelector);
+    if (firstFocusable) {
+      firstFocusable.focus({ preventScroll: true });
+    }
+  };
+
+  const setMobileMenu = (open, options = {}) => {
+    const shouldReturnFocus = options.returnFocus !== false;
+    if (open === isMenuOpen) return;
+
+    if (open) {
+      moveMenuToBody();
+    }
+
+    isMenuOpen = open;
+    navMenu.classList.toggle('is-open', open);
+    backdrop.classList.toggle('is-open', open);
+    burgerBtn.setAttribute('aria-expanded', String(open));
+    burgerBtn.setAttribute('aria-label', open ? '关闭导航菜单' : '打开导航菜单');
+    backdrop.setAttribute('aria-hidden', String(!open));
+    document.body.classList.toggle('menu-open', open);
+
+    if (open) {
+      lockPageScroll();
+      setBackgroundInert(true);
+      window.requestAnimationFrame(focusDrawer);
+      return;
+    }
+
+    setBackgroundInert(false);
     unlockPageScroll();
+    restoreMenuPosition();
+    if (shouldReturnFocus) {
+      burgerBtn.focus({ preventScroll: true });
+    }
+  };
+
+  const trapFocus = (event) => {
+    if (!isMenuOpen || event.key !== 'Tab') return;
+    const focusableItems = Array.from(navMenu.querySelectorAll(focusableSelector))
+      .filter((element) => element.offsetParent !== null || element === document.activeElement);
+    if (!focusableItems.length) return;
+
+    const firstItem = focusableItems[0];
+    const lastItem = focusableItems[focusableItems.length - 1];
+
+    if (event.shiftKey && document.activeElement === firstItem) {
+      event.preventDefault();
+      lastItem.focus({ preventScroll: true });
+    } else if (!event.shiftKey && document.activeElement === lastItem) {
+      event.preventDefault();
+      firstItem.focus({ preventScroll: true });
+    }
   };
 
   burgerBtn.addEventListener('click', (event) => {
     event.stopPropagation();
-    if (navMenu.classList.contains('is-open')) {
-      closeMenu();
-    } else {
-      openMenu();
-    }
+    setMobileMenu(!isMenuOpen);
   });
+
+  closeBtn?.addEventListener('click', () => setMobileMenu(false));
 
   navMenu.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', closeMenu);
+    link.addEventListener('click', () => setMobileMenu(false));
   });
 
-  backdrop.addEventListener('click', closeMenu);
+  backdrop.addEventListener('click', () => setMobileMenu(false));
 
   document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && navMenu.classList.contains('is-open')) {
-      closeMenu();
+    if (event.key === 'Escape' && isMenuOpen) {
+      setMobileMenu(false);
+      return;
     }
+    trapFocus(event);
   });
 
   window.addEventListener('resize', () => {
-    if (window.innerWidth > 768 && navMenu.classList.contains('is-open')) {
-      closeMenu();
+    if (window.innerWidth > 768 && isMenuOpen) {
+      setMobileMenu(false, { returnFocus: false });
     }
   });
 }
