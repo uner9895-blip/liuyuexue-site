@@ -15,7 +15,7 @@
   <meta property="og:title" content="六月雪 | 中式水墨个人主页">
   <meta property="og:description" content="六月雪的个人主页，一个中式水墨风格的静态个人网站，用于记录前端学习、个人项目和网页设计实践。">
   <meta property="og:url" content="https://uner9895-blip.github.io/liuyuexue-site/">
-  <link rel="stylesheet" href="assets/css/style.css?v=1.7.2">
+  <link rel="stylesheet" href="assets/css/style.css?v=1.7.3">
   <script>
     (function() {
       const theme = localStorage.getItem('theme') || 'light';
@@ -156,37 +156,68 @@
         <p class="home-section-subtitle">关于我与技能积累</p>
       </div>
       
-      <div class="about-grid">
-        <div class="about-intro-section">
-          <div>
+      <div class="about-grid knowledge-layout">
+        <div class="about-intro-section knowledge-column">
+          <article class="knowledge-block">
             <h3 class="section-subheading">我是谁</h3>
             <p class="concept-box">
               一名对网页开发充满热情的在校学生。我没有参与过大型商业项目，目前正专注于夯实基础。相比于直接套用繁复的现成框架，我更喜欢从零开始写原生代码，琢磨如何用 HTML 骨架和 CSS 样式去实现属于自己的页面表达。
             </p>
-          </div>
-          <div>
+          </article>
+          <article class="knowledge-block">
             <h3 class="section-subheading">喜欢的设计</h3>
             <p>
               崇尚留白与克制。在墨分五色的变化中，黛青为雅，朱砂为骨，浅金为韵，不过度装饰，让页面拥有自然的浏览节奏与呼吸感。
             </p>
-          </div>
+          </article>
         </div>
         
-        <div class="timeline-section">
-          <h3 class="section-subheading">技能树 (点击可查看详情)</h3>
-          <ul class="skills-list" style="margin-bottom: 2rem;">
-            <li class="skill-tag" tabindex="0">HTML</li>
-            <li class="skill-tag" tabindex="0">CSS</li>
-            <li class="skill-tag" tabindex="0">JavaScript</li>
-            <li class="skill-tag" tabindex="0">响应式布局</li>
-            <li class="skill-tag" tabindex="0">GitHub Pages</li>
-            <li class="skill-tag" tabindex="0">个人网页设计</li>
-          </ul>
-          
-          <h3 class="section-subheading">本站记录了什么</h3>
-          <p class="timeline-content">
-            这个网站本身就是我的第一个完整前端实践项目。我在这里记录学习笔记、探索传统色彩与排版在现代屏幕上的和谐呈现，并逐步堆叠自己的作品轨迹。
-          </p>
+        <div class="timeline-section knowledge-column">
+          <article class="knowledge-block skills-section" aria-labelledby="skills-heading">
+            <h3 class="section-subheading" id="skills-heading">技能树</h3>
+            <p class="skill-hint">点击标签查看当前网站中对应的真实练习内容。</p>
+            <div class="skills-list" role="list" aria-label="技能标签">
+              <button class="skill-tag" type="button" aria-expanded="false" aria-controls="skill-panel-html" data-skill="html">HTML</button>
+              <button class="skill-tag" type="button" aria-expanded="false" aria-controls="skill-panel-css" data-skill="css">CSS</button>
+              <button class="skill-tag" type="button" aria-expanded="false" aria-controls="skill-panel-javascript" data-skill="javascript">JavaScript</button>
+              <button class="skill-tag" type="button" aria-expanded="false" aria-controls="skill-panel-responsive" data-skill="responsive">响应式布局</button>
+              <button class="skill-tag" type="button" aria-expanded="false" aria-controls="skill-panel-github-pages" data-skill="github-pages">GitHub Pages</button>
+              <button class="skill-tag" type="button" aria-expanded="false" aria-controls="skill-panel-personal-design" data-skill="personal-design">个人网页设计</button>
+            </div>
+            <div class="skill-detail-stack" aria-live="polite">
+              <div id="skill-panel-html" class="skill-detail" hidden>
+                <h4>HTML</h4>
+                <p>用于搭建这个静态站的语义化页面结构，包括导航、section、article、表单和图片内容的基础组织。</p>
+              </div>
+              <div id="skill-panel-css" class="skill-detail" hidden>
+                <h4>CSS</h4>
+                <p>用于实现响应式布局、中式色彩系统、宣纸卡片、独立背景图和克制的滚动与交互动效。</p>
+              </div>
+              <div id="skill-panel-javascript" class="skill-detail" hidden>
+                <h4>JavaScript</h4>
+                <p>用于完成手机菜单、主题切换、梅花特效、水墨涟漪、返回顶部和音乐播放器的原生交互。</p>
+              </div>
+              <div id="skill-panel-responsive" class="skill-detail" hidden>
+                <h4>响应式布局</h4>
+                <p>用于适配手机导航抽屉、卡片换列、图片裁切、文字换行和触屏尺寸下的播放器控制。</p>
+              </div>
+              <div id="skill-panel-github-pages" class="skill-detail" hidden>
+                <h4>GitHub Pages</h4>
+                <p>用于托管纯静态网站，保持资源相对路径、缓存版本号和子目录部署兼容。</p>
+              </div>
+              <div id="skill-panel-personal-design" class="skill-detail" hidden>
+                <h4>个人网页设计</h4>
+                <p>用于整理内容结构、控制水墨视觉方向，并通过留白、层次和传统色彩让页面更安静易读。</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="knowledge-block">
+            <h3 class="section-subheading">本站记录了什么</h3>
+            <p class="timeline-content">
+              这个网站本身就是我的第一个完整前端实践项目。我在这里记录学习笔记、探索传统色彩与排版在现代屏幕上的和谐呈现，并逐步堆叠自己的作品轨迹。
+            </p>
+          </article>
         </div>
       </div>
     </section>
@@ -387,6 +418,6 @@
     </div>
   </div>
  
-  <script src="assets/js/main.js?v=1.7.1"></script>
+  <script src="assets/js/main.js?v=1.7.2"></script>
 </body>
 </html>

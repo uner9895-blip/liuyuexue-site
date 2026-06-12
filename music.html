@@ -9,7 +9,7 @@
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#fbf8f1">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%23faf7ef'/%3E%3Ctext x='32' y='42' font-size='34' text-anchor='middle' fill='%23cc4343' font-family='serif'%3E雪%3C/text%3E%3C/svg%3E">
-  <link rel="stylesheet" href="assets/css/style.css?v=1.7.2">
+  <link rel="stylesheet" href="assets/css/style.css?v=1.7.3">
   <script>
     (function() {
       const theme = localStorage.getItem('theme') || 'light';
@@ -69,36 +69,38 @@
   </header>
 
   <main class="page-fade">
-    <section class="page-title-section scroll-reveal">
+    <section class="page-title-section music-hero-section scroll-reveal">
       <h1 class="page-title">听雪小筑</h1>
       <p class="page-subtitle">松花酿酒，春水煎茶。闲看庭前花开，静听雪落松梢。</p>
+      <p class="music-atmosphere" id="music-atmosphere" aria-live="polite">静待清音……</p>
     </section>
 
-    <div class="content-container">
+    <div class="content-container music-content-container">
       <div class="music-layout-container">
-        <!-- 左侧：写意信笺式歌单列表 -->
-        <div class="playlist-section" id="playlist-container">
-          <!-- 由 JS 渲染生成 -->
-        </div>
-
-        <!-- 右侧：古典介绍与意境小品 -->
-        <aside class="music-intro-panel scroll-reveal">
-          <h2 class="section-subheading" style="margin-top: 0; font-size: 1.15rem; color: var(--color-cinnabar);">清听雅集</h2>
-          <div class="music-current-card" aria-live="polite">
-            <h3 class="music-current-title" id="music-current-title">Ecoute Cherie</h3>
-            <p class="music-current-meta" id="music-current-meta">Vendredi sur mer · 03:46</p>
-            <span class="music-current-status" id="music-current-status">等待播放</span>
+        <section class="playlist-panel scroll-reveal" aria-labelledby="playlist-title">
+          <div class="playlist-heading">
+            <h2 id="playlist-title" class="section-subheading">清音歌单</h2>
+            <p>本页只加载当前选中的本地曲目。</p>
           </div>
-          <p style="font-style: italic; line-height: 1.8; color: var(--color-ink-medium);">
+          <ol class="track-list" id="playlist-container" aria-label="听雪小筑歌单"></ol>
+        </section>
+
+        <aside class="music-intro-panel scroll-reveal">
+          <h2 class="section-subheading music-panel-title">清听雅集</h2>
+          <div class="music-current-card" aria-live="polite" aria-atomic="true">
+            <span class="music-current-index" id="music-current-index">01</span>
+            <h3 class="music-current-title" id="music-current-title">静待选曲</h3>
+            <p class="music-current-meta" id="music-current-meta">本地音乐 · --:--</p>
+            <span class="music-current-status" id="music-current-status">未开始</span>
+          </div>
+          <p class="music-poem">
             “独坐幽篁里，弹琴复长啸。<br>深林人不知，明月来相照。”
           </p>
-          <p style="font-size: 0.9rem; line-height: 1.7; color: var(--color-ink-medium);">
+          <p class="music-note">
             在此处，您可以选择一曲清音，伴着春日的梅影与宣纸的留白，静静聆听墨香与音符的交融。
           </p>
-          <p style="font-size: 0.86rem; line-height: 1.7; color: var(--color-ink-light);">
-            温馨提示：当前播放器只加载当前选中的本地曲目，首次点击后开始播放。若无法播放，系统会弹出温和提示，请检查文件名与路径。
-          </p>
-          <div class="seal seal-yinke" style="align-self: center; margin-top: 1rem; transform: rotate(-3deg);">听雪<br>清供</div>
+          <p class="music-error-inline" id="music-error-message" role="status" aria-live="polite" hidden></p>
+          <div class="seal seal-yinke music-panel-seal">听雪<br>清供</div>
         </aside>
       </div>
     </div>
@@ -111,7 +113,7 @@
       <div class="playbar-info-area">
         <div class="playbar-cover">雪</div>
         <div class="playbar-text">
-          <span class="playbar-title" id="playbar-title">Ecoute Cherie</span>
+          <span class="playbar-title" id="playbar-title">静待选曲</span>
           <span class="playbar-artist" id="playbar-artist">本地音乐</span>
         </div>
       </div>
@@ -122,7 +124,7 @@
           <button class="playbar-btn" id="playbar-prev-btn" type="button" aria-label="上一首">
             <svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
           </button>
-          <button class="playbar-btn playbar-btn-play" id="playbar-play-btn" type="button" aria-label="播放">
+          <button class="playbar-btn playbar-btn-play music-play-control" id="playbar-play-btn" type="button" aria-label="播放当前歌曲">
             <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
           </button>
           <button class="playbar-btn" id="playbar-next-btn" type="button" aria-label="下一首">
@@ -131,8 +133,8 @@
         </div>
         <div class="playbar-progress-wrapper">
           <span class="playbar-time" id="playbar-current-time">00:00</span>
-          <input type="range" class="progress-bar-slider" id="playbar-progress" min="0" max="100" value="0" aria-label="播放进度">
-          <span class="playbar-time" id="playbar-total-time">00:00</span>
+          <input type="range" class="progress-bar-slider" id="playbar-progress" min="0" max="1000" value="0" aria-label="播放进度" aria-valuetext="00:00 / --:--">
+          <span class="playbar-time" id="playbar-total-time">--:--</span>
         </div>
       </div>
 
@@ -143,7 +145,7 @@
             <path d="M11 5L6 9H2v6h4l5 4V5z"/>
             <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
           </svg>
-          <input type="range" class="progress-bar-slider" id="playbar-volume" min="0" max="1" step="0.05" value="0.6" aria-label="音量">
+          <input type="range" class="progress-bar-slider" id="playbar-volume" min="0" max="1" step="0.05" value="0.6" aria-label="音量" aria-valuetext="音量 60%">
         </div>
       </div>
     </div>
@@ -154,17 +156,17 @@
     <div class="custom-dialog">
       <h3 class="custom-dialog-title" id="dialog-title">清音未启</h3>
       <p class="custom-dialog-message">
-        音频文件未找到，请检查本地或 GitHub Pages 是否已部署对应文件。<br>
-        如需播放，请在本地将您的音频文件命名并放入以下路径：<br>
-        <code id="dialog-file-path" style="display: block; margin-top: 0.6rem; padding: 4px 8px; background: rgba(168, 46, 46, 0.05); color: var(--color-cinnabar); font-family: monospace; border-radius: 2px;">assets/audio/ecoute-cherie.mp3</code>
+        这首曲子暂时无法播放，请检查本地或 GitHub Pages 是否已部署对应文件。<br>
+        当前路径：<br>
+        <code id="dialog-file-path" class="dialog-file-path">assets/audio/ecoute-cherie.mp3</code>
       </p>
       <button class="custom-dialog-btn" id="dialog-close-btn" type="button">晚生知晓</button>
     </div>
   </div>
 
   <!-- 载入基础交互与粒子效果 -->
-  <script src="assets/js/main.js?v=1.7.1"></script>
+  <script src="assets/js/main.js?v=1.7.2"></script>
   <!-- 载入本页播放器逻辑 -->
-  <script src="assets/js/music.js?v=1.7.0"></script>
+  <script src="assets/js/music.js?v=1.7.2"></script>
 </body>
 </html>

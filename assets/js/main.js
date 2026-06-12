@@ -584,65 +584,44 @@ function initScrollReveal() {
   });
 }
 
-/**
- * 技能标签点击互动释义
- */
-const SKILL_EXPLANATIONS = {
-  'HTML': '超文本标记语言。网页的骨骼与墨线，我遵循语义化原则，力求结构清晰、无障碍友好。',
-  'CSS': '层叠样式表。网页的设色与笔触，在此用于实践中式留白、淡雅色调及响应式布局。',
-  'JavaScript': '网页的生命力。使用原生 JS 实现轻量且无依赖的动画与交互，关注性能。',
-  '响应式布局': '随器赋形。确保网站从 320px 手机屏到 2K 显示器都能如卷轴般完美舒展。',
-  'GitHub Pages': '行止留痕。将静态代码一键托管，是我的第一个线上发布与版本管理实践。',
-  '个人网页设计': '以画入网。探索传统水墨美学在现代数字媒介中的体现，讲究克制与留白。'
-};
-
 function initSkillExplanations() {
-  const skillTags = document.querySelectorAll('.skill-tag');
+  const skillsSection = document.querySelector('.skills-section');
+  if (!skillsSection || skillsSection.dataset.skillsReady === 'true') return;
 
-  skillTags.forEach(tag => {
-    const skillName = tag.textContent.trim();
-    const explanation = SKILL_EXPLANATIONS[skillName];
-    if (!explanation) return;
+  const skillButtons = Array.from(skillsSection.querySelectorAll('.skill-tag[aria-controls]'));
+  const skillPanels = Array.from(skillsSection.querySelectorAll('.skill-detail'));
+  if (!skillButtons.length || !skillPanels.length) return;
 
-    const showExplanation = (e) => {
-      e.stopPropagation();
+  skillsSection.dataset.skillsReady = 'true';
 
-      // 关闭其他提示气泡
-      document.querySelectorAll('.skill-tooltip').forEach(tip => {
-        tip.classList.remove('show');
-      });
-
-      let tooltip = tag.querySelector('.skill-tooltip');
-      if (!tooltip) {
-        tooltip = document.createElement('div');
-        tooltip.className = 'skill-tooltip';
-        tooltip.textContent = explanation;
-        tag.appendChild(tooltip);
-
-        // 强制重绘
-        tooltip.offsetHeight;
-      }
-
-      tooltip.classList.add('show');
-
-      clearTimeout(tag.tooltipTimeout);
-      tag.tooltipTimeout = setTimeout(() => {
-        tooltip.classList.remove('show');
-      }, 3500);
-    };
-
-    tag.addEventListener('click', showExplanation);
-    tag.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        showExplanation(e);
-      }
+  const closeAllSkillPanels = () => {
+    skillButtons.forEach(button => {
+      button.classList.remove('is-active');
+      button.setAttribute('aria-expanded', 'false');
     });
-  });
+    skillPanels.forEach(panel => {
+      panel.hidden = true;
+      panel.classList.remove('is-open');
+    });
+  };
 
-  document.addEventListener('click', () => {
-    document.querySelectorAll('.skill-tooltip').forEach(tip => {
-      tip.classList.remove('show');
+  skillsSection.addEventListener('click', event => {
+    const button = event.target.closest('.skill-tag[aria-controls]');
+    if (!button || !skillsSection.contains(button)) return;
+
+    const panel = document.getElementById(button.getAttribute('aria-controls'));
+    if (!panel) return;
+
+    const shouldOpen = button.getAttribute('aria-expanded') !== 'true';
+    closeAllSkillPanels();
+
+    if (!shouldOpen) return;
+
+    button.classList.add('is-active');
+    button.setAttribute('aria-expanded', 'true');
+    panel.hidden = false;
+    window.requestAnimationFrame(() => {
+      panel.classList.add('is-open');
     });
   });
 }
@@ -707,6 +686,8 @@ function initThemeToggle() {
  * 2. 听雪小筑音乐挂件播放逻辑
  */
 function initMusicWidget() {
+  if (document.body.classList.contains('page-music')) return;
+
   const pendant = document.querySelector('.music-pendant');
   const card = document.querySelector('.music-card');
   const playBtn = document.querySelector('.music-play-btn');
@@ -715,6 +696,8 @@ function initMusicWidget() {
   const subtitle = document.querySelector('.music-subtitle');
 
   if (!pendant || !card || !playBtn) return;
+  if (pendant.dataset.musicWidgetReady === 'true') return;
+  pendant.dataset.musicWidgetReady = 'true';
 
   const track = musicTracks[0];
 
