@@ -5313,90 +5313,221 @@ header {
 }
 
 /* ==========================================================================
-   v1.7.4 - memories page
+   v1.7.5 - memories page
    ========================================================================== */
 
 body.page-memories {
-  --page-bg-overlay: rgba(248, 244, 235, 0.34);
+  --memories-paper: #fbf8f1;
+  --memories-warm: #f6ecdf;
+  --memories-blush: rgba(201, 92, 104, 0.12);
+  --memories-gold: rgba(200, 169, 81, 0.16);
+  --memories-ink: rgba(54, 58, 52, 0.12);
+  --memories-vermilion: #b5434a;
+  --page-bg-overlay: rgba(251, 248, 241, 0.24);
+  background-color: var(--memories-paper);
+  background-image:
+    radial-gradient(ellipse at 50% 24%, rgba(255, 253, 247, 0.92) 0 24%, rgba(255, 253, 247, 0.52) 42%, transparent 68%),
+    radial-gradient(circle at 82% 16%, rgba(255, 253, 247, 0.46) 0 8rem, rgba(200, 169, 81, 0.08) 8.2rem 8.55rem, transparent 8.8rem),
+    radial-gradient(ellipse at 78% 18%, rgba(201, 92, 104, 0.10), transparent 42%),
+    radial-gradient(ellipse at 16% 78%, rgba(181, 67, 74, 0.07), transparent 38%),
+    linear-gradient(180deg, rgba(251, 248, 241, 0.96), rgba(246, 236, 223, 0.9)),
+    repeating-radial-gradient(circle at 20% 18%, rgba(54, 58, 52, 0.028) 0 0.45px, transparent 0.8px 18px);
+  background-attachment: fixed;
+}
+
+body.page-memories::before {
+  z-index: -4;
+  background:
+    radial-gradient(circle at 9% 76%, rgba(181, 67, 74, 0.11) 0 0.32rem, transparent 0.36rem),
+    radial-gradient(circle at 13% 82%, rgba(181, 67, 74, 0.08) 0 0.24rem, transparent 0.28rem),
+    radial-gradient(circle at 17% 70%, rgba(181, 67, 74, 0.075) 0 0.22rem, transparent 0.26rem),
+    linear-gradient(144deg, transparent 0 14%, rgba(54, 58, 52, 0.095) 14.2% 14.55%, transparent 14.75% 100%),
+    linear-gradient(128deg, transparent 0 18%, rgba(54, 58, 52, 0.065) 18.15% 18.38%, transparent 18.6% 100%),
+    linear-gradient(104deg, transparent 0 34%, rgba(200, 169, 81, 0.11) 34.05% 34.18%, transparent 34.35% 100%),
+    repeating-linear-gradient(98deg, transparent 0 82px, rgba(200, 169, 81, 0.035) 83px 84px, transparent 85px 166px);
+  background-position:
+    left bottom,
+    left bottom,
+    left bottom,
+    left bottom,
+    left bottom,
+    center top,
+    center;
+  opacity: 0.72;
+  filter: none;
+  animation: none;
+}
+
+body.page-memories::after {
+  z-index: -5;
+  background:
+    radial-gradient(ellipse at 50% 34%, rgba(255, 253, 247, 0.92) 0 18%, rgba(255, 253, 247, 0.54) 40%, transparent 70%),
+    radial-gradient(ellipse at 78% 18%, rgba(200, 169, 81, 0.18), transparent 36%),
+    radial-gradient(ellipse at 22% 72%, rgba(201, 92, 104, 0.12), transparent 42%),
+    linear-gradient(115deg, transparent 0 48%, rgba(200, 169, 81, 0.09) 48.1% 48.22%, transparent 48.36% 100%);
+  opacity: 0.9;
+  filter: blur(0);
+  animation: none;
 }
 
 .memories-page {
+  position: relative;
+  z-index: 1;
   max-width: 1120px;
-  padding-top: clamp(3.5rem, 7vw, 5.5rem);
-  padding-bottom: clamp(4.5rem, 8vw, 6.5rem);
+  padding-top: clamp(3.75rem, 7vw, 5.8rem);
+  padding-bottom: clamp(4.7rem, 8vw, 6.8rem);
+}
+
+.memories-page::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: clamp(1.8rem, 4vw, 3.2rem);
+  left: 50%;
+  width: min(88vw, 960px);
+  height: min(72rem, 82%);
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(255, 253, 247, 0.72) 0 42%, rgba(255, 253, 247, 0.32) 62%, transparent 76%);
+  transform: translateX(-50%);
+  pointer-events: none;
 }
 
 .memories-hero {
+  position: relative;
   max-width: 760px;
-  margin: 0 auto clamp(2.8rem, 6vw, 4.8rem);
+  margin: 0 auto clamp(3rem, 6vw, 5rem);
+  padding: clamp(1.1rem, 3vw, 2.2rem) 1rem clamp(1rem, 2.5vw, 1.8rem);
   text-align: center;
 }
 
+.memories-hero::before {
+  content: "";
+  position: absolute;
+  inset: -0.9rem 8% auto;
+  height: clamp(9rem, 18vw, 13.5rem);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, rgba(255, 253, 247, 0.64) 0 28%, rgba(200, 169, 81, 0.11) 29% 30%, transparent 31%),
+    radial-gradient(ellipse at 50% 62%, rgba(201, 92, 104, 0.09), transparent 58%);
+  pointer-events: none;
+}
+
 .memories-kicker {
+  position: relative;
+  z-index: 1;
   display: inline-flex;
   align-items: center;
-  gap: 0.65rem;
-  margin-bottom: 0.8rem;
-  color: var(--color-cinnabar);
+  gap: 0.72rem;
+  margin-bottom: 0.75rem;
+  color: var(--memories-vermilion);
   font-family: var(--font-title);
-  font-size: 0.95rem;
+  font-size: 0.92rem;
 }
 
 .memories-kicker::before,
 .memories-kicker::after {
   content: "";
-  width: 2.4rem;
+  width: 2.6rem;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(200, 169, 81, 0.68), transparent);
+  background: linear-gradient(90deg, transparent, rgba(200, 169, 81, 0.7), transparent);
 }
 
 .memories-title {
-  font-size: clamp(2.35rem, 6vw, 4.15rem);
-  margin-bottom: 0.65rem;
+  position: relative;
+  z-index: 1;
+  font-size: clamp(2.35rem, 5.4vw, 4.05rem);
+  margin-bottom: 0.72rem;
   color: var(--color-ink-dark);
+}
+
+.memories-title::after {
+  content: "";
+  display: block;
+  width: 0.38rem;
+  height: 0.38rem;
+  margin: 0.66rem auto 0;
+  border-radius: 50%;
+  background: var(--memories-vermilion);
+  box-shadow:
+    0 0 0 5px rgba(181, 67, 74, 0.075),
+    2.9rem 0 0 -1px rgba(200, 169, 81, 0.55),
+    -2.9rem 0 0 -1px rgba(200, 169, 81, 0.55);
+}
+
+.memories-subtitle,
+.memories-lead {
+  position: relative;
+  z-index: 1;
 }
 
 .memories-subtitle {
   color: var(--color-ink-medium);
   font-family: var(--font-title);
-  font-size: clamp(1rem, 2.3vw, 1.24rem);
+  font-size: clamp(1rem, 2.1vw, 1.22rem);
 }
 
 .memories-lead {
   max-width: 34rem;
-  margin: 1.05rem auto 0;
+  margin: 0.95rem auto 0;
   color: var(--color-ink-light);
   font-size: 0.98rem;
-  line-height: 1.9;
+  line-height: 1.95;
 }
 
 .memory-feature-card {
+  position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1.25fr) minmax(18rem, 0.75fr);
-  gap: clamp(1.2rem, 3vw, 2.1rem);
+  grid-template-columns: minmax(0, 1.18fr) minmax(17.5rem, 0.82fr);
+  gap: clamp(1.1rem, 3vw, 2.15rem);
   align-items: center;
   max-width: 980px;
-  margin: 0 auto clamp(3rem, 6vw, 4.8rem);
-  padding: clamp(0.85rem, 2vw, 1.15rem);
+  margin: 0 auto clamp(3.1rem, 6vw, 4.9rem);
+  padding: clamp(0.95rem, 2.2vw, 1.35rem);
   background:
-    linear-gradient(145deg, rgba(250, 247, 239, 0.96), rgba(250, 247, 239, 0.82)),
-    repeating-radial-gradient(ellipse at 26% 20%, rgba(38, 40, 35, 0.026) 0 0.42px, transparent 0.84px 18px);
-  border: 1px solid rgba(200, 169, 81, 0.28);
-  border-left: 2px solid rgba(181, 67, 74, 0.38);
-  border-radius: 4px;
-  box-shadow: 0 16px 34px rgba(38, 40, 35, 0.075);
+    linear-gradient(145deg, rgba(255, 252, 245, 0.92), rgba(246, 238, 224, 0.82)),
+    repeating-radial-gradient(ellipse at 24% 18%, rgba(54, 58, 52, 0.026) 0 0.42px, transparent 0.84px 18px);
+  border: 1px solid rgba(200, 169, 81, 0.24);
+  border-radius: 6px;
+  box-shadow:
+    0 18px 45px rgba(54, 58, 52, 0.08),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.45);
   outline: none;
+  overflow: hidden;
   transition:
     transform var(--transition-smooth),
     border-color var(--transition-smooth),
     box-shadow var(--transition-smooth);
 }
 
+.memory-feature-card::before {
+  content: "";
+  position: absolute;
+  inset: 0.72rem;
+  border: 1px solid rgba(200, 169, 81, 0.16);
+  pointer-events: none;
+}
+
+.memory-feature-card::after {
+  content: "";
+  position: absolute;
+  right: clamp(1rem, 3vw, 2rem);
+  top: clamp(0.9rem, 2vw, 1.4rem);
+  width: 3.2rem;
+  height: 1.55rem;
+  border: 1px solid rgba(181, 67, 74, 0.28);
+  background: rgba(255, 252, 245, 0.68);
+  box-shadow: 0 10px 22px rgba(54, 58, 52, 0.06);
+  transform: rotate(2deg);
+  pointer-events: none;
+}
+
 .memory-feature-card:hover,
 .memory-feature-card:focus-visible {
-  transform: translateY(-3px);
-  border-color: rgba(181, 67, 74, 0.34);
-  box-shadow: 0 18px 38px rgba(38, 40, 35, 0.09);
+  transform: translateY(-4px);
+  border-color: rgba(181, 67, 74, 0.28);
+  box-shadow:
+    0 22px 52px rgba(54, 58, 52, 0.11),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.48);
 }
 
 .memory-feature-card:focus-visible,
@@ -5410,51 +5541,81 @@ body.page-memories {
   overflow: hidden;
   min-width: 0;
   margin: 0;
-  border: 1px solid rgba(166, 146, 112, 0.34);
-  border-radius: 3px;
+  padding: 1rem;
+  border: 1px solid rgba(200, 169, 81, 0.22);
+  border-radius: 4px;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.34), rgba(244, 239, 228, 0.32)),
-    rgba(250, 247, 239, 0.76);
+    linear-gradient(180deg, rgba(255, 252, 245, 0.92), rgba(247, 241, 229, 0.76)),
+    repeating-radial-gradient(ellipse at 28% 18%, rgba(54, 58, 52, 0.022) 0 0.42px, transparent 0.84px 17px);
+  box-shadow:
+    0 14px 30px rgba(54, 58, 52, 0.07),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.52);
+}
+
+.memory-photo-frame::before {
+  content: "";
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  bottom: 0.64rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(200, 169, 81, 0.35), transparent);
+  pointer-events: none;
 }
 
 .memory-photo-frame::after {
   content: "";
   position: absolute;
-  inset: 0.62rem;
-  border: 1px solid rgba(200, 169, 81, 0.18);
+  inset: 1rem;
+  border: 1px solid rgba(200, 169, 81, 0.16);
   pointer-events: none;
 }
 
 .memory-photo {
   display: block;
   width: 100%;
-  max-height: 560px;
+  height: auto;
+  max-height: 620px;
   object-fit: contain;
   object-position: center;
   border-radius: 2px;
-  transition: transform 520ms ease;
+  box-shadow: 0 8px 18px rgba(54, 58, 52, 0.08);
+  transition:
+    transform 520ms ease,
+    filter 520ms ease;
 }
 
 .memory-feature-card:hover .memory-photo,
 .memory-feature-card:focus-visible .memory-photo {
-  transform: scale(1.018);
+  transform: scale(1.015);
+  filter: brightness(1.018);
 }
 
 .memory-caption {
+  position: relative;
   display: grid;
-  gap: 0.85rem;
+  gap: 0.86rem;
   min-width: 0;
-  padding: clamp(0.75rem, 2vw, 1.4rem) clamp(0.55rem, 1.6vw, 1.1rem);
+  padding: clamp(0.95rem, 2vw, 1.65rem) clamp(0.55rem, 1.6vw, 1.1rem);
+}
+
+.memory-caption::before {
+  content: "";
+  width: 4.6rem;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(181, 67, 74, 0.42), rgba(200, 169, 81, 0.32), transparent);
 }
 
 .memory-caption-mark {
   width: max-content;
-  padding: 0.12rem 0.52rem;
-  border: 1px solid rgba(181, 67, 74, 0.25);
-  color: var(--color-cinnabar);
+  padding: 0.14rem 0.58rem;
+  border: 1px solid rgba(181, 67, 74, 0.32);
+  color: var(--memories-vermilion);
+  background: rgba(255, 252, 245, 0.5);
   font-family: var(--font-title);
   font-size: 0.82rem;
   line-height: 1.5;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.34);
 }
 
 .memory-caption h2,
@@ -5466,20 +5627,31 @@ body.page-memories {
 .memory-caption p,
 .memory-section-heading p {
   color: var(--color-ink-medium);
-  line-height: 1.9;
+  line-height: 1.95;
 }
 
 .memory-notes-section {
+  position: relative;
   max-width: 980px;
   margin: 0 auto;
+}
+
+.memory-notes-section::before {
+  content: "";
+  position: absolute;
+  top: -1.35rem;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(200, 169, 81, 0.3), transparent);
 }
 
 .memory-section-heading {
   display: grid;
   gap: 0.45rem;
-  margin-bottom: 1.15rem;
-  padding-left: 0.9rem;
-  border-left: 2px solid rgba(200, 169, 81, 0.48);
+  margin-bottom: 1.18rem;
+  padding-left: 0.96rem;
+  border-left: 2px solid rgba(200, 169, 81, 0.5);
 }
 
 .memory-grid {
@@ -5489,34 +5661,89 @@ body.page-memories {
 }
 
 .memory-empty-card {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 9.5rem;
-  padding: 1.35rem;
-  border: 1px dashed rgba(166, 146, 112, 0.42);
-  border-radius: 4px;
+  min-height: 10rem;
+  padding: 1.55rem;
+  border: 1px dashed rgba(166, 146, 112, 0.44);
+  border-radius: 6px;
   background:
-    linear-gradient(145deg, rgba(250, 247, 239, 0.72), rgba(250, 247, 239, 0.48)),
-    repeating-radial-gradient(ellipse at 30% 20%, rgba(38, 40, 35, 0.024) 0 0.42px, transparent 0.84px 18px);
+    radial-gradient(circle at 14% 26%, rgba(181, 67, 74, 0.08) 0 0.23rem, transparent 0.27rem),
+    linear-gradient(145deg, rgba(255, 252, 245, 0.76), rgba(246, 238, 224, 0.54)),
+    repeating-radial-gradient(ellipse at 30% 20%, rgba(54, 58, 52, 0.023) 0 0.42px, transparent 0.84px 18px);
   color: var(--color-ink-light);
   font-family: var(--font-title);
   text-align: center;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.36);
   transition:
     transform var(--transition-smooth),
     border-color var(--transition-smooth),
-    color var(--transition-smooth);
+    color var(--transition-smooth),
+    box-shadow var(--transition-smooth);
+}
+
+.memory-empty-card::before {
+  content: "";
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  width: 3.6rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(200, 169, 81, 0.48), transparent);
+  transform: translateX(-50%);
 }
 
 .memory-empty-card:hover,
 .memory-empty-card:focus-visible {
-  color: var(--color-cinnabar);
+  color: var(--memories-vermilion);
   border-color: rgba(181, 67, 74, 0.32);
-  transform: translateY(-2px);
+  box-shadow:
+    0 14px 34px rgba(54, 58, 52, 0.065),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.42);
+  transform: translateY(-3px);
 }
 
 [data-theme="dark"] body.page-memories {
-  --page-bg-overlay: rgba(15, 19, 17, 0.62);
+  --memories-paper: #121613;
+  --memories-warm: #1b201c;
+  --memories-blush: rgba(226, 90, 90, 0.12);
+  --memories-gold: rgba(212, 191, 146, 0.14);
+  --memories-ink: rgba(250, 247, 239, 0.12);
+  --memories-vermilion: #e36a68;
+  --page-bg-overlay: rgba(12, 16, 19, 0.56);
+  background-color: #121613;
+  background-image:
+    radial-gradient(ellipse at 50% 25%, rgba(35, 40, 35, 0.74) 0 22%, rgba(25, 30, 26, 0.48) 46%, transparent 70%),
+    radial-gradient(circle at 82% 16%, rgba(212, 191, 146, 0.11) 0 8rem, rgba(212, 191, 146, 0.05) 8.2rem 8.55rem, transparent 8.8rem),
+    radial-gradient(ellipse at 78% 18%, rgba(226, 90, 90, 0.075), transparent 42%),
+    radial-gradient(ellipse at 16% 78%, rgba(226, 90, 90, 0.052), transparent 38%),
+    linear-gradient(180deg, rgba(12, 16, 19, 0.96), rgba(20, 27, 22, 0.92)),
+    repeating-radial-gradient(circle at 20% 18%, rgba(250, 247, 239, 0.026) 0 0.45px, transparent 0.8px 18px);
+}
+
+[data-theme="dark"] body.page-memories::before {
+  background:
+    radial-gradient(circle at 9% 76%, rgba(226, 90, 90, 0.1) 0 0.32rem, transparent 0.36rem),
+    radial-gradient(circle at 13% 82%, rgba(226, 90, 90, 0.072) 0 0.24rem, transparent 0.28rem),
+    radial-gradient(circle at 17% 70%, rgba(226, 90, 90, 0.06) 0 0.22rem, transparent 0.26rem),
+    linear-gradient(144deg, transparent 0 14%, rgba(250, 247, 239, 0.058) 14.2% 14.55%, transparent 14.75% 100%),
+    linear-gradient(128deg, transparent 0 18%, rgba(250, 247, 239, 0.04) 18.15% 18.38%, transparent 18.6% 100%),
+    linear-gradient(104deg, transparent 0 34%, rgba(212, 191, 146, 0.085) 34.05% 34.18%, transparent 34.35% 100%),
+    repeating-linear-gradient(98deg, transparent 0 82px, rgba(212, 191, 146, 0.026) 83px 84px, transparent 85px 166px);
+}
+
+[data-theme="dark"] body.page-memories::after {
+  background:
+    radial-gradient(ellipse at 50% 34%, rgba(36, 42, 36, 0.72) 0 20%, rgba(24, 30, 26, 0.48) 44%, transparent 72%),
+    radial-gradient(ellipse at 78% 18%, rgba(212, 191, 146, 0.12), transparent 36%),
+    radial-gradient(ellipse at 22% 72%, rgba(226, 90, 90, 0.085), transparent 42%),
+    linear-gradient(115deg, transparent 0 48%, rgba(212, 191, 146, 0.06) 48.1% 48.22%, transparent 48.36% 100%);
+}
+
+[data-theme="dark"] .memories-page::before {
+  background: radial-gradient(ellipse at center, rgba(30, 36, 31, 0.58) 0 42%, rgba(23, 28, 24, 0.22) 62%, transparent 76%);
 }
 
 [data-theme="dark"] .memory-feature-card,
@@ -5526,6 +5753,17 @@ body.page-memories {
     repeating-radial-gradient(ellipse at 28% 22%, rgba(250, 247, 239, 0.024) 0 0.42px, transparent 0.86px 18px);
   border-color: rgba(219, 207, 180, 0.2);
   box-shadow: 0 16px 42px rgba(0, 0, 0, 0.28);
+}
+
+[data-theme="dark"] .memory-feature-card::before,
+[data-theme="dark"] .memory-photo-frame::after {
+  border-color: rgba(219, 207, 180, 0.13);
+}
+
+[data-theme="dark"] .memory-feature-card::after,
+[data-theme="dark"] .memory-caption-mark {
+  background: rgba(20, 25, 22, 0.66);
+  border-color: rgba(226, 90, 90, 0.28);
 }
 
 [data-theme="dark"] .memory-photo-frame {
@@ -5540,13 +5778,35 @@ body.page-memories {
 }
 
 @media (max-width: 768px) {
+  body.page-memories {
+    background-image:
+      radial-gradient(ellipse at 50% 18%, rgba(255, 253, 247, 0.88) 0 20%, rgba(255, 253, 247, 0.46) 48%, transparent 72%),
+      radial-gradient(circle at 86% 12%, rgba(255, 253, 247, 0.42) 0 4.6rem, rgba(200, 169, 81, 0.07) 4.75rem 4.98rem, transparent 5.15rem),
+      radial-gradient(ellipse at 72% 18%, rgba(201, 92, 104, 0.1), transparent 44%),
+      radial-gradient(ellipse at 12% 80%, rgba(181, 67, 74, 0.06), transparent 38%),
+      linear-gradient(180deg, rgba(251, 248, 241, 0.96), rgba(246, 236, 223, 0.9)),
+      repeating-radial-gradient(circle at 20% 18%, rgba(54, 58, 52, 0.026) 0 0.45px, transparent 0.8px 18px);
+  }
+
   .memories-page {
-    padding: 2.8rem 1.1rem 4.8rem;
+    padding: 2.7rem 1rem 4.8rem;
+  }
+
+  .memories-page::before {
+    width: 106vw;
+    top: 1.4rem;
   }
 
   .memories-hero {
-    margin-bottom: 2.5rem;
+    margin-bottom: 2.55rem;
+    padding: 0.8rem 0 1rem;
     text-align: left;
+  }
+
+  .memories-hero::before {
+    inset: -0.85rem auto auto -1.2rem;
+    width: 78vw;
+    height: 9rem;
   }
 
   .memories-kicker {
@@ -5555,15 +5815,20 @@ body.page-memories {
   }
 
   .memories-kicker::before {
-    width: 1.5rem;
+    width: 1.45rem;
   }
 
   .memories-kicker::after {
-    display: none;
+    width: 2rem;
   }
 
   .memories-title {
-    font-size: clamp(2rem, 12vw, 3rem);
+    font-size: clamp(2rem, 11vw, 2.9rem);
+  }
+
+  .memories-title::after {
+    margin-left: 0;
+    margin-right: 0;
   }
 
   .memories-subtitle {
@@ -5580,19 +5845,41 @@ body.page-memories {
     gap: 1rem;
     width: 100%;
     margin-bottom: 3rem;
-    padding: 0.8rem;
+    padding: 1rem;
   }
 
-  .memory-photo {
-    max-height: min(72vh, 520px);
+  .memory-feature-card::before {
+    inset: 0.58rem;
+  }
+
+  .memory-feature-card::after {
+    top: auto;
+    right: 1rem;
+    bottom: 0.9rem;
+    width: 2.7rem;
+    height: 1.22rem;
+  }
+
+  .memory-photo-frame {
+    padding: 0.55rem;
+  }
+
+  .memory-photo-frame::before {
+    left: 0.55rem;
+    right: 0.55rem;
+    bottom: 0.38rem;
   }
 
   .memory-photo-frame::after {
-    inset: 0.45rem;
+    inset: 0.55rem;
+  }
+
+  .memory-photo {
+    max-height: none;
   }
 
   .memory-caption {
-    padding: 0.35rem 0.15rem 0.45rem;
+    padding: 0.55rem 0.1rem 0.5rem;
   }
 
   .memory-caption h2,
@@ -5605,8 +5892,18 @@ body.page-memories {
   }
 
   .memory-empty-card {
-    min-height: 8rem;
-    padding: 1.2rem 1rem;
+    min-height: 8.4rem;
+    padding: 1.25rem 1rem;
+  }
+
+  [data-theme="dark"] body.page-memories {
+    background-image:
+      radial-gradient(ellipse at 50% 18%, rgba(35, 40, 35, 0.68) 0 22%, rgba(24, 30, 26, 0.44) 48%, transparent 72%),
+      radial-gradient(circle at 86% 12%, rgba(212, 191, 146, 0.1) 0 4.6rem, rgba(212, 191, 146, 0.045) 4.75rem 4.98rem, transparent 5.15rem),
+      radial-gradient(ellipse at 72% 18%, rgba(226, 90, 90, 0.075), transparent 44%),
+      radial-gradient(ellipse at 12% 80%, rgba(226, 90, 90, 0.05), transparent 38%),
+      linear-gradient(180deg, rgba(12, 16, 19, 0.96), rgba(20, 27, 22, 0.92)),
+      repeating-radial-gradient(circle at 20% 18%, rgba(250, 247, 239, 0.026) 0 0.45px, transparent 0.8px 18px);
   }
 }
 
