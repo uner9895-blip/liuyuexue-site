@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>联系我 | 六月雪</title>
-  <meta name="description" content="联系六月雪。提供我的真实电子邮箱与 GitHub 开源社区链接，欢迎与我交流探讨前端开发与网页设计。">
+  <title>朝暮 | 六月雪</title>
+  <meta name="description" content="六月雪的朝暮页面，用克制温柔的纸笺样式收放一些平凡生活里的照片。">
   <meta name="author" content="六月雪">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#fbf8f1">
@@ -12,8 +12,8 @@
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="六月雪">
-  <meta property="og:title" content="联系我 | 六月雪">
-  <meta property="og:description" content="联系六月雪。提供我的真实电子邮箱与 GitHub 开源社区链接，欢迎与我交流探讨前端开发与网页设计。">
+  <meta property="og:title" content="朝暮 | 六月雪">
+  <meta property="og:description" content="把一些平凡日子，悄悄收进纸页里。">
   <link rel="stylesheet" href="assets/css/style.css?v=1.7.4">
   <script>
     (function() {
@@ -22,7 +22,7 @@
     })();
   </script>
 </head>
-<body class="page-contact">
+<body class="page-memories">
   <div class="plum-shadows" aria-hidden="true"></div>
   <div class="ink-wash-bg" aria-hidden="true">
     <div class="ink-wash-1"></div>
@@ -58,9 +58,9 @@
         <li class="nav-item"><a href="about.html">关于我</a></li>
         <li class="nav-item"><a href="projects.html">作品</a></li>
         <li class="nav-item"><a href="articles.html">雪笺</a></li>
-        <li class="nav-item"><a href="memories.html">朝暮</a></li>
+        <li class="nav-item active"><a href="memories.html" aria-current="page">朝暮</a></li>
         <li class="nav-item"><a href="index.html#learning-records">学习记录</a></li>
-        <li class="nav-item active"><a href="contact.html" aria-current="page">联系我</a></li>
+        <li class="nav-item"><a href="contact.html">联系我</a></li>
         <li class="nav-item"><a href="music.html">听雪</a></li>
         <li class="nav-item">
           <button class="theme-toggle-btn" type="button" aria-label="切换深色/浅色模式">
@@ -86,56 +86,42 @@
     </nav>
   </header>
 
-  <main class="page-fade">
-    <section class="page-title-section scroll-reveal">
-      <h1 class="page-title">联系我</h1>
-      <p class="page-subtitle">见字如面，顺颂时祺</p>
+  <main class="page-fade memories-page">
+    <section class="memories-hero scroll-reveal" aria-labelledby="memories-title">
+      <p class="memories-kicker">朝暮</p>
+      <h1 id="memories-title" class="memories-title">朝暮</h1>
+      <p class="memories-subtitle">把一些平凡日子，悄悄收进纸页里。</p>
+      <p class="memories-lead">不是所有日子都盛大，但和你有关的，都值得记下。</p>
     </section>
- 
-    <div class="contact-container">
-      <section class="contact-info scroll-reveal" aria-label="联系方式">
-        <div>
-          <h2 class="section-subheading">联系渠道</h2>
-          <div class="contact-item" style="margin-bottom: 1.5rem;">
-            <span class="contact-label">电子邮箱</span>
-            <a href="mailto:uner9895@gmail.com" class="contact-value" style="font-size: 1.15rem; color: var(--color-cinnabar);">uner9895@gmail.com</a>
-          </div>
-        </div>
- 
-        <div class="contact-item" style="margin-bottom: 1.5rem;">
-          <span class="contact-label">开源社区</span>
-          <div class="social-links">
-            <a href="https://github.com/uner9895-blip" class="social-icon" target="_blank" rel="noopener noreferrer">访问我的 GitHub</a>
-          </div>
-        </div>
- 
-        <div class="placeholder-panel">
-          <strong>说明：</strong>本站为托管于 GitHub Pages 的纯静态个人主页，无后端数据库支撑。右侧“留言笺”表单仅用于静态交互和前端事件绑定演示，并不会真实发送您的留言。如需与我取得联络，请优先使用上方的邮箱直接写信，或在 GitHub 发起交流。
-        </div>
-      </section>
- 
-      <section class="contact-form-wrapper scroll-reveal" style="transition-delay: 100ms;" aria-label="留言表单模拟">
-        <h2 class="section-subheading">留言笺 (交互演示)</h2>
-        <form id="contact-form" autocomplete="off">
-          <div class="form-group">
-            <label for="form-name" class="form-label">称呼</label>
-            <input type="text" id="form-name" class="form-control" placeholder="如何称呼您" required>
-          </div>
- 
-          <div class="form-group">
-            <label for="form-email" class="form-label">电子邮箱</label>
-            <input type="email" id="form-email" class="form-control" placeholder="您的联络邮箱" required>
-          </div>
- 
-          <div class="form-group">
-            <label for="form-message" class="form-label">留言内容</label>
-            <textarea id="form-message" class="form-control" placeholder="在此写下您想对我说的话" required></textarea>
-          </div>
- 
-          <button type="submit" class="btn-ink">模拟提交</button>
-        </form>
-      </section>
-    </div>
+
+    <article class="memory-feature-card scroll-reveal" tabindex="0" aria-labelledby="memory-feature-title">
+      <figure class="memory-photo-frame">
+        <img
+          class="memory-photo"
+          src="assets/images/memories/memory-01.jpg"
+          alt="朝暮小记的第一张生活照片"
+          loading="lazy"
+          decoding="async"
+        >
+      </figure>
+      <div class="memory-caption">
+        <span class="memory-caption-mark" aria-hidden="true">朝暮</span>
+        <h2 id="memory-feature-title">朝暮之间</h2>
+        <p>有些瞬间不必声张，放在这里，就已经很好。</p>
+      </div>
+    </article>
+
+    <section class="memory-notes-section scroll-reveal" aria-labelledby="memory-notes-title">
+      <div class="memory-section-heading">
+        <h2 id="memory-notes-title">日常小记</h2>
+        <p>以后会在这里慢慢放下一些同行的片段。</p>
+      </div>
+      <div class="memory-grid" aria-label="后续照片预留区">
+        <article class="memory-empty-card" tabindex="0">
+          <span>更多照片，留待后来。</span>
+        </article>
+      </div>
+    </section>
   </main>
 
   <footer>
@@ -146,7 +132,7 @@
       </div>
     </div>
   </footer>
- 
+
   <!-- 听雪小筑音乐挂件 -->
   <div class="music-widget" role="complementary" aria-label="听雪小筑音乐播放器">
     <button class="music-pendant" aria-label="展开音乐播放器" aria-expanded="false">
@@ -175,7 +161,7 @@
       </div>
     </div>
   </div>
- 
+
   <script src="assets/js/main.js?v=1.7.2"></script>
 </body>
 </html>
