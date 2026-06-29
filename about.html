@@ -3,22 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>关于我 | 六月雪</title>
-  <meta name="description" content="关于六月雪。展示了我的前端求知之路、中式审美设计理念、自学前端技术积累以及个人成长时间轴。">
-  <meta name="author" content="六月雪">
+  <title>小序 | 步青尘</title>
+  <meta name="description" content="关于步青尘。展示了我的前端求知之路、中式审美设计理念、自学前端技术积累以及个人成长时间轴。">
+  <meta name="author" content="步青尘">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#fbf8f1">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%23faf7ef'/%3E%3Ctext x='32' y='42' font-size='34' text-anchor='middle' fill='%23cc4343' font-family='serif'%3E雪%3C/text%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%23faf7ef'/%3E%3Ctext x='32' y='42' font-size='34' text-anchor='middle' fill='%23cc4343' font-family='serif'%3E步%3C/text%3E%3C/svg%3E">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="六月雪">
-  <meta property="og:title" content="关于我 | 六月雪">
-  <meta property="og:description" content="关于六月雪。展示了我的前端求知之路、中式审美设计理念、自学前端技术积累以及个人成长时间轴。">
-  <link rel="stylesheet" href="assets/css/style.css?v=1.7.6">
+  <meta property="og:site_name" content="步青尘">
+  <meta property="og:title" content="小序 | 步青尘">
+  <meta property="og:description" content="关于步青尘。展示了我的前端求知之路、中式审美设计理念、自学前端技术积累以及个人成长时间轴。">
+  <link rel="stylesheet" href="assets/css/style.css?v=2.0.0">
   <script>
     (function() {
-      const theme = localStorage.getItem('theme') || 'light';
-      document.documentElement.setAttribute('data-theme', theme);
+      var theme = localStorage.getItem('theme') || 'light';
+      var root = document.documentElement;
+      root.setAttribute('data-theme', theme);
+      root.setAttribute('data-world', theme === 'dark' ? 'night' : 'day');
     })();
   </script>
 </head>
@@ -44,9 +46,9 @@
 
   <header>
     <nav class="nav-container" aria-label="主导航">
-      <a class="logo" href="index.html" aria-label="六月雪首页">
-        <span class="seal">六月<br>雪印</span>
-        <span class="logo-text">六月雪</span>
+      <a class="logo" href="index.html" aria-label="步青尘首页">
+        <span class="seal">青尘<br>印</span>
+        <span class="logo-text">步青尘</span>
       </a>
       <button class="burger-btn" type="button" aria-label="打开导航菜单" aria-expanded="false" aria-controls="site-menu">
         <span class="burger-line"></span>
@@ -54,13 +56,14 @@
         <span class="burger-line"></span>
       </button>
       <ul class="nav-menu" id="site-menu">
-        <li class="nav-item"><a href="index.html">首页</a></li>
-        <li class="nav-item active"><a href="about.html" aria-current="page">关于我</a></li>
-        <li class="nav-item"><a href="projects.html">作品</a></li>
+        <li class="nav-item"><a href="index.html">起行</a></li>
+        <li class="nav-item active"><a href="about.html" aria-current="page">小序</a></li>
+        <li class="nav-item"><a href="projects.html">行迹</a></li>
         <li class="nav-item"><a href="articles.html">雪笺</a></li>
-        <li class="nav-item"><a href="index.html#learning-records">学习记录</a></li>
-        <li class="nav-item"><a href="contact.html">联系我</a></li>
+        <li class="nav-item"><a href="learning.html">学习路</a></li>
+        <li class="nav-item"><a href="gallery.html">影像廊</a></li>
         <li class="nav-item"><a href="music.html">听雪</a></li>
+        <li class="nav-item"><a href="contact.html">留笺</a></li>
         <li class="nav-item">
           <button class="theme-toggle-btn" type="button" aria-label="切换深色/浅色模式">
             <!-- 太阳图标 -->
@@ -87,7 +90,7 @@
 
   <main class="page-fade">
     <section class="page-title-section scroll-reveal">
-      <h1 class="page-title">关于我</h1>
+      <h1 class="page-title">小序</h1>
       <p class="page-subtitle">求知探索，格物致知</p>
     </section>
  
@@ -96,7 +99,7 @@
         <div>
           <h2 class="section-subheading">个人简介</h2>
           <div class="concept-box">
-            我是六月雪，一名在校学生。我对前端开发的兴趣源于一次偶然在浏览器中修改控制台样式的经历，那种将脑海中画面通过代码“即时实现”的感觉深深吸引了我。我没有任何商业项目背景，目前正在专注于夯实 HTML、CSS 和 JavaScript 基础，探索如何将我喜爱的中式古典美学落实在网页的排版与交互中。
+            我是步青尘，一名在校学生。我对前端开发的兴趣源于一次偶然在浏览器中修改控制台样式的经历，那种将脑海中画面通过代码“即时实现”的感觉深深吸引了我。我没有任何商业项目背景，目前正在专注于夯实 HTML、CSS 和 JavaScript 基础，探索如何将我喜爱的中式古典美学落实在网页的排版与交互中。
           </div>
         </div>
  
@@ -134,7 +137,7 @@
             <div class="timeline-marker"></div>
             <div class="timeline-time">2026年6月</div>
             <h3 class="timeline-title">完成第一个完整网页实践</h3>
-            <div class="timeline-content">设计并开发了本站——“六月雪中式水墨个人主页”。在实践中，我学会了使用 Git 命令行工具，练习了 CSS 媒体查询以进行移动端适配，并初步摸索了原生 JavaScript 的事件捕获与交互操作。</div>
+            <div class="timeline-content">设计并开发了本站——“步青尘中式水墨个人主页”。在实践中，我学会了使用 Git 命令行工具，练习了 CSS 媒体查询以进行移动端适配，并初步摸索了原生 JavaScript 的事件捕获与交互操作。</div>
           </div>
  
           <div class="timeline-item">
@@ -259,9 +262,9 @@
  
   <footer>
     <div class="footer-content">
-      <p class="footer-text">© 2026 六月雪. All Rights Reserved. 托管于 GitHub Pages</p>
+      <p class="footer-text">© 2026 步青尘. All Rights Reserved. 托管于 GitHub Pages</p>
       <div class="footer-stamp">
-        <span class="seal">雪印</span>
+        <span class="seal">青尘<br>印</span>
       </div>
     </div>
   </footer>
@@ -295,6 +298,7 @@
     </div>
   </div>
  
-  <script src="assets/js/main.js?v=1.7.2"></script>
+  <script src="assets/data/site-data.js?v=2.0.0"></script>
+  <script src="assets/js/main.js?v=2.0.0"></script>
 </body>
 </html>

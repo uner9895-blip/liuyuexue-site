@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>留笺 | 步青尘</title>
-  <meta name="description" content="联系步青尘。提供我的真实电子邮箱与 GitHub 开源社区链接，欢迎与我交流探讨前端开发与网页设计。">
+  <title>学习路 | 步青尘</title>
+  <meta name="description" content="步青尘的学习路，记录前端、AI 与游戏开发的学习过程和成长痕迹。">
   <meta name="author" content="步青尘">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#fbf8f1">
@@ -12,10 +12,9 @@
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="步青尘">
-  <meta property="og:title" content="留笺 | 步青尘">
-  <meta property="og:description" content="联系步青尘。提供我的真实电子邮箱与 GitHub 开源社区链接，欢迎与我交流探讨前端开发与网页设计。">
+  <meta property="og:title" content="学习路 | 步青尘">
+  <meta property="og:description" content="步青尘的学习路，记录前端、AI 与游戏开发的学习过程和成长痕迹。">
   <link rel="stylesheet" href="assets/css/style.css?v=2.0.0">
-  <link rel="stylesheet" href="assets/css/v2-structure.css?v=2.0.0">
   <script>
     (function() {
       var theme = localStorage.getItem('theme') || 'light';
@@ -25,7 +24,7 @@
     })();
   </script>
 </head>
-<body class="page-contact">
+<body class="page-learning">
   <div class="plum-shadows" aria-hidden="true"></div>
   <div class="ink-wash-bg" aria-hidden="true">
     <div class="ink-wash-1"></div>
@@ -61,13 +60,12 @@
         <li class="nav-item"><a href="about.html">小序</a></li>
         <li class="nav-item"><a href="projects.html">行迹</a></li>
         <li class="nav-item"><a href="articles.html">雪笺</a></li>
-        <li class="nav-item"><a href="learning.html">学习路</a></li>
+        <li class="nav-item active"><a href="learning.html" aria-current="page">学习路</a></li>
         <li class="nav-item"><a href="gallery.html">影像廊</a></li>
         <li class="nav-item"><a href="music.html">听雪</a></li>
-        <li class="nav-item active"><a href="contact.html" aria-current="page">留笺</a></li>
+        <li class="nav-item"><a href="contact.html">留笺</a></li>
         <li class="nav-item">
           <button class="theme-toggle-btn" type="button" aria-label="切换深色/浅色模式">
-            <!-- 太阳图标 -->
             <svg class="theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="12" cy="12" r="5"></circle>
               <line x1="12" y1="1" x2="12" y2="3"></line>
@@ -79,7 +77,6 @@
               <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
               <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
             </svg>
-            <!-- 月亮图标 -->
             <svg class="theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
             </svg>
@@ -91,62 +88,16 @@
 
   <main class="page-fade">
     <section class="page-title-section scroll-reveal">
-      <h1 class="page-title">留笺</h1>
-      <p class="page-subtitle">见字如面，顺颂时祺</p>
+      <h1 class="page-title">学习路</h1>
+      <p class="page-subtitle">一些踩坑、复盘和继续往前走的痕迹。</p>
     </section>
- 
-    <div class="contact-container">
-      <section class="contact-info scroll-reveal" aria-label="联系方式">
-        <div>
-          <h2 class="section-subheading">落字处</h2>
-          <div class="contact-item letter-world" style="margin-bottom: 1.5rem;">
-            <!-- 留笺挂载层：.letter-entry 为透传语义容器，Codex 可接管纸笺视觉 -->
-            <div class="letter-entry">
-              <span class="contact-label">电子邮箱</span>
-              <a href="mailto:uner9895@gmail.com" class="contact-value" style="font-size: 1.15rem; color: var(--color-cinnabar);">uner9895@gmail.com</a>
-            </div>
-            <!-- 留笺底座：真实邮箱 + 复制 + mailto，复制后给出“已复制”反馈 -->
-            <div class="contact-actions">
-              <button class="btn-ink btn-copy-email" type="button" data-copy-email="uner9895@gmail.com" aria-label="复制邮箱地址">复制邮箱</button>
-              <a class="btn-ink btn-secondary" href="mailto:uner9895@gmail.com">写信给我</a>
-            </div>
-          </div>
-        </div>
- 
-        <div class="contact-item" style="margin-bottom: 1.5rem;">
-          <span class="contact-label">开源社区</span>
-          <div class="social-links">
-            <a href="https://github.com/uner9895-blip" class="social-icon" target="_blank" rel="noopener noreferrer">访问我的 GitHub</a>
-          </div>
-        </div>
- 
-        <div class="placeholder-panel">
-          <strong>说明：</strong>本站为托管于 GitHub Pages 的纯静态个人主页，无后端数据库支撑。右侧“留言笺”表单仅用于静态交互和前端事件绑定演示，并不会真实发送您的留言。如需与我取得联络，请优先使用上方的邮箱直接写信，或在 GitHub 发起交流。
-        </div>
-      </section>
- 
-      <section class="contact-form-wrapper scroll-reveal" style="transition-delay: 100ms;" aria-label="留言表单模拟">
-        <h2 class="section-subheading">留言笺 (交互演示)</h2>
-        <form id="contact-form" autocomplete="off">
-          <div class="form-group">
-            <label for="form-name" class="form-label">称呼</label>
-            <input type="text" id="form-name" class="form-control" placeholder="如何称呼您" required>
-          </div>
- 
-          <div class="form-group">
-            <label for="form-email" class="form-label">电子邮箱</label>
-            <input type="email" id="form-email" class="form-control" placeholder="您的联络邮箱" required>
-          </div>
- 
-          <div class="form-group">
-            <label for="form-message" class="form-label">留言内容</label>
-            <textarea id="form-message" class="form-control" placeholder="在此写下您想对我说的话" required></textarea>
-          </div>
- 
-          <button type="submit" class="btn-ink">模拟提交</button>
-        </form>
-      </section>
-    </div>
+
+    <section class="learning-world content-container scroll-reveal" aria-label="学习记录">
+      <div class="learning-list" id="learning-list" aria-label="学习记录列表">
+        <!-- 由 main.js 依据 siteData.learningEntries 渲染 -->
+      </div>
+      <p class="learning-foot-note">学习路仍在延伸，新的练习与复盘会持续添加。</p>
+    </section>
   </main>
 
   <footer>
@@ -157,7 +108,7 @@
       </div>
     </div>
   </footer>
- 
+
   <!-- 听雪小筑音乐挂件 -->
   <div class="music-widget" role="complementary" aria-label="听雪小筑音乐播放器">
     <button class="music-pendant" aria-label="展开音乐播放器" aria-expanded="false">
@@ -186,9 +137,6 @@
       </div>
     </div>
   </div>
- 
-  <!-- 黑猫陪伴挂载区（Codex 接管视觉资源） -->
-  <div class="companion-zone" aria-hidden="true"></div>
 
   <script src="assets/data/site-data.js?v=2.0.0"></script>
   <script src="assets/js/main.js?v=2.0.0"></script>

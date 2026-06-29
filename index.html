@@ -3,23 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>六月雪 | 中式水墨个人主页</title>
-  <meta name="description" content="六月雪的个人主页，一个中式水墨风格的静态个人网站，用于记录前端学习、个人项目和网页设计实践。">
-  <meta name="author" content="六月雪">
+  <title>步青尘 | 中式水墨个人主页</title>
+  <meta name="description" content="步青尘的个人主页，一个中式水墨风格的静态个人网站，用于记录前端学习、个人项目和网页设计实践。">
+  <meta name="author" content="步青尘">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#fbf8f1">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%23faf7ef'/%3E%3Ctext x='32' y='42' font-size='34' text-anchor='middle' fill='%23cc4343' font-family='serif'%3E雪%3C/text%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%23faf7ef'/%3E%3Ctext x='32' y='42' font-size='34' text-anchor='middle' fill='%23cc4343' font-family='serif'%3E步%3C/text%3E%3C/svg%3E">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="六月雪">
-  <meta property="og:title" content="六月雪 | 中式水墨个人主页">
-  <meta property="og:description" content="六月雪的个人主页，一个中式水墨风格的静态个人网站，用于记录前端学习、个人项目和网页设计实践。">
+  <meta property="og:site_name" content="步青尘">
+  <meta property="og:title" content="步青尘 | 中式水墨个人主页">
+  <meta property="og:description" content="步青尘的个人主页，一个中式水墨风格的静态个人网站，用于记录前端学习、个人项目和网页设计实践。">
   <meta property="og:url" content="https://uner9895-blip.github.io/liuyuexue-site/">
-  <link rel="stylesheet" href="assets/css/style.css?v=1.7.6">
+  <link rel="stylesheet" href="assets/css/style.css?v=2.0.0">
+  <link rel="stylesheet" href="assets/css/v2-structure.css?v=2.0.0">
   <script>
     (function() {
-      const theme = localStorage.getItem('theme') || 'light';
-      document.documentElement.setAttribute('data-theme', theme);
+      var theme = localStorage.getItem('theme') || 'light';
+      var root = document.documentElement;
+      root.setAttribute('data-theme', theme);
+      root.setAttribute('data-world', theme === 'dark' ? 'night' : 'day');
     })();
   </script>
 </head>
@@ -45,23 +48,46 @@
 
   <header>
     <nav class="nav-container" aria-label="主导航">
-      <a class="logo" href="index.html" aria-label="六月雪首页">
-        <span class="seal">六月<br>雪印</span>
-        <span class="logo-text">六月雪</span>
+      <a class="logo" href="index.html" aria-label="步青尘首页">
+        <span class="seal">青尘<br>印</span>
+        <span class="logo-text">步青尘</span>
       </a>
       <button class="burger-btn" type="button" aria-label="打开导航菜单" aria-expanded="false" aria-controls="site-menu">
         <span class="burger-line"></span>
         <span class="burger-line"></span>
         <span class="burger-line"></span>
       </button>
+      <div class="home-orbit-controls" aria-label="首页快捷入口">
+        <button class="theme-toggle-btn home-world-toggle" type="button" aria-label="切换暮光山谷与夜行山路">
+          <svg class="theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+        <a class="home-trace-link" href="projects.html" aria-label="进入行迹">
+          <span class="home-trace-mark" aria-hidden="true"></span>
+          <span>行迹</span>
+        </a>
+      </div>
       <ul class="nav-menu" id="site-menu">
-        <li class="nav-item active"><a href="index.html" aria-current="page">首页</a></li>
-        <li class="nav-item"><a href="about.html">关于我</a></li>
-        <li class="nav-item"><a href="projects.html">作品</a></li>
+        <li class="nav-item active"><a href="index.html" aria-current="page">起行</a></li>
+        <li class="nav-item"><a href="about.html">小序</a></li>
+        <li class="nav-item"><a href="projects.html">行迹</a></li>
         <li class="nav-item"><a href="articles.html">雪笺</a></li>
-        <li class="nav-item"><a href="#learning-records">学习记录</a></li>
-        <li class="nav-item"><a href="contact.html">联系我</a></li>
+        <li class="nav-item"><a href="learning.html">学习路</a></li>
+        <li class="nav-item"><a href="gallery.html">影像廊</a></li>
         <li class="nav-item"><a href="music.html">听雪</a></li>
+        <li class="nav-item"><a href="contact.html">留笺</a></li>
         <li class="nav-item">
           <button class="theme-toggle-btn" type="button" aria-label="切换深色/浅色模式">
             <!-- 太阳图标 -->
@@ -87,18 +113,128 @@
   </header>
 
   <main class="page-fade">
+    <!-- 入口：夜行山路与纸卷世界 -->
+    <section class="courtyard world-shell" aria-label="步青尘 · 起行入口">
+      <div class="courtyard-scene world-scene" aria-hidden="true">
+        <div class="scene-sky"></div>
+
+        <div class="scene-layer scene-stars" style="--px:4px;--py:3px;">
+          <span class="ink-star" style="left:14%; top:20%;"></span>
+          <span class="ink-star" style="left:26%; top:13%; animation-delay:1.4s;"></span>
+          <span class="ink-star" style="left:71%; top:17%; animation-delay:.7s;"></span>
+          <span class="ink-star" style="left:83%; top:26%; animation-delay:2.1s;"></span>
+          <span class="ink-star" style="left:58%; top:11%; animation-delay:1.1s;"></span>
+        </div>
+
+        <div class="scene-layer scene-moon" style="--px:7px;--py:5px;">
+          <span class="moon-disc"></span>
+        </div>
+
+        <div class="scene-layer scene-mountains" style="--px:16px;--py:9px;">
+          <svg class="layer-inner" viewBox="0 0 1440 700" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
+            <path class="ridge ridge-far" d="M0 470 C170 410 280 452 430 392 C560 340 690 392 820 356 C980 312 1110 372 1260 330 C1340 308 1400 320 1440 300 L1440 700 L0 700 Z"/>
+            <path class="ridge ridge-mid" d="M0 532 C150 486 300 510 440 462 C600 408 720 462 870 420 C1010 382 1150 430 1290 396 C1360 380 1410 388 1440 378 L1440 700 L0 700 Z"/>
+            <path class="ridge ridge-near" d="M0 600 C140 560 250 588 400 552 C560 514 700 566 850 536 C1010 504 1150 556 1300 528 C1370 516 1410 522 1440 514 L1440 700 L0 700 Z"/>
+          </svg>
+        </div>
+
+        <div class="scene-layer scene-fog" style="--px:30px;--py:6px;">
+          <span class="fog-band fog-1"></span>
+          <span class="fog-band fog-2"></span>
+        </div>
+
+        <div class="scene-layer scene-plum" style="--px:34px;--py:15px;">
+          <svg class="layer-inner" viewBox="0 0 1440 700" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
+            <g class="plum-branch" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M-20 706 C90 612 150 560 196 470 C236 392 250 320 300 250" stroke-width="15"/>
+              <path d="M196 470 C250 452 300 470 360 430" stroke-width="7"/>
+              <path d="M236 392 C190 360 150 356 96 330" stroke-width="6"/>
+              <path d="M268 308 C320 296 360 312 408 286" stroke-width="5.5"/>
+              <path d="M250 320 C214 286 196 262 188 220" stroke-width="5"/>
+            </g>
+            <g class="plum-blossoms">
+              <g class="blossom" transform="translate(300 250)"><circle r="7"/><circle class="b-core" r="2.4"/></g>
+              <g class="blossom" transform="translate(360 430)"><circle r="6"/><circle class="b-core" r="2.1"/></g>
+              <g class="blossom" transform="translate(408 286)"><circle r="6.5"/><circle class="b-core" r="2.2"/></g>
+              <g class="blossom" transform="translate(96 330)"><circle r="5.5"/><circle class="b-core" r="2"/></g>
+              <g class="blossom" transform="translate(188 220)"><circle r="6"/><circle class="b-core" r="2.1"/></g>
+              <g class="blossom" transform="translate(232 420)"><circle r="5"/><circle class="b-core" r="1.8"/></g>
+              <g class="blossom" transform="translate(150 470)"><circle r="6.5"/><circle class="b-core" r="2.2"/></g>
+              <g class="blossom" transform="translate(330 320)"><circle r="5"/><circle class="b-core" r="1.8"/></g>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <div class="courtyard-content world-content">
+        <span class="seal seal-yinke courtyard-seal" aria-hidden="true">青尘<br>印</span>
+        <p class="courtyard-kicker">见字如面 · 岁在丙午</p>
+        <h1 class="courtyard-title">步青尘</h1>
+        <p class="courtyard-subtitle">纸卷初展 · 山路向前</p>
+        <a class="courtyard-enter" href="#enter" aria-controls="home-route-map" aria-expanded="false">起行</a>
+        <!-- 空间地图（路线式入口）：静态链接，无 JS 亦可访问；Codex 可重做视觉 -->
+        <nav class="route-guide" id="home-route-map" aria-label="起行路线图">
+          <button class="route-guide-close" type="button" aria-label="收起路线图">收</button>
+          <div class="route-guide-scroll">
+            <a class="route-link" href="about.html" style="--rx:7%;--ry:66%;--route-delay:0ms;">
+              <span class="route-point" aria-hidden="true"></span>
+              <span class="route-name">小序</span>
+              <span class="route-note">先识其人</span>
+            </a>
+            <a class="route-link route-link-featured" href="projects.html" style="--rx:24%;--ry:49%;--route-delay:55ms;" data-route="trace">
+              <span class="route-point" aria-hidden="true"></span>
+              <span class="route-name">行迹</span>
+              <span class="route-note">作品与路标</span>
+            </a>
+            <a class="route-link" href="articles.html" style="--rx:42%;--ry:62%;--route-delay:110ms;">
+              <span class="route-point" aria-hidden="true"></span>
+              <span class="route-name">雪笺</span>
+              <span class="route-note">短文与想法</span>
+            </a>
+            <a class="route-link" href="learning.html" style="--rx:57%;--ry:43%;--route-delay:165ms;">
+              <span class="route-point" aria-hidden="true"></span>
+              <span class="route-name">学习路</span>
+              <span class="route-note">正在补齐</span>
+            </a>
+            <a class="route-link" href="gallery.html" style="--rx:72%;--ry:56%;--route-delay:220ms;">
+              <span class="route-point" aria-hidden="true"></span>
+              <span class="route-name">影像廊</span>
+              <span class="route-note">路上所见</span>
+            </a>
+            <a class="route-link" href="music.html" style="--rx:85%;--ry:38%;--route-delay:275ms;">
+              <span class="route-point" aria-hidden="true"></span>
+              <span class="route-name">听雪</span>
+              <span class="route-note">曲与静听</span>
+            </a>
+            <a class="route-link" href="contact.html" style="--rx:93%;--ry:69%;--route-delay:330ms;">
+              <span class="route-point" aria-hidden="true"></span>
+              <span class="route-name">留笺</span>
+              <span class="route-note">写下一句</span>
+            </a>
+          </div>
+        </nav>
+      </div>
+
+      <a class="courtyard-cue" href="#enter" aria-label="向下浏览，起行">
+        <span class="cue-text">入</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </a>
+    </section>
+
     <!-- 第一屏：见字如面 (Hero) -->
-    <section class="hero-section" aria-labelledby="home-title">
+    <section class="hero-section" id="enter" aria-labelledby="home-title">
       <div class="hero-layout">
         <div class="hero-copy scroll-reveal">
           <div class="hero-stamp-wrapper">
-            <span class="seal seal-yinke">六月<br>新印</span>
+            <span class="seal seal-yinke">青尘<br>印</span>
           </div>
           <p class="hero-kicker">见字如面 · 岁在丙午</p>
-          <h1 id="home-title" class="hero-title">六月雪</h1>
+          <h1 id="home-title" class="hero-title">步青尘</h1>
           <p class="hero-subtitle">学生 · 前端学习者 · 个人网页创作者</p>
           <p class="hero-desc">
-            欢迎来到我的数字角落。我叫六月雪，是一名学生，也是前端开发与网页设计的初学者。目前我正在自学 HTML、CSS 和 JavaScript，探索如何将古典的中式审美与静态页面交互相结合。这个网站是我第一个完整的前端网页实践项目，用于记录我学习路上的每一步积累、存放练习作品，也是我数字创作的起点。
+            欢迎来到我的数字角落。我叫步青尘，是一名学生，也是前端开发与网页设计的初学者。目前我正在自学 HTML、CSS 和 JavaScript，探索如何将古典的中式审美与静态页面交互相结合。这个网站是我第一个完整的前端网页实践项目，用于记录我学习路上的每一步积累、存放练习作品，也是我数字创作的起点。
           </p>
           <div class="hero-actions">
             <a href="projects.html" class="btn-ink">查看作品</a>
@@ -356,7 +492,7 @@
     <!-- 第六屏：学习记录与联络入口 -->
     <section class="home-section scroll-reveal" id="learning-records" aria-labelledby="contact-section-title">
       <div class="home-section-title">
-        <h2 id="contact-section-title">学习记录</h2>
+        <h2 id="contact-section-title">学习路</h2>
         <p class="home-section-subtitle">一些踩坑、复盘和继续往前走的痕迹。</p>
       </div>
 
@@ -382,9 +518,9 @@
  
   <footer>
     <div class="footer-content">
-      <p class="footer-text">© 2026 六月雪. All Rights Reserved. 托管于 GitHub Pages</p>
+      <p class="footer-text">© 2026 步青尘. All Rights Reserved. 托管于 GitHub Pages</p>
       <div class="footer-stamp">
-        <span class="seal">雪印</span>
+        <span class="seal">青尘<br>印</span>
       </div>
     </div>
   </footer>
@@ -418,6 +554,10 @@
     </div>
   </div>
  
-  <script src="assets/js/main.js?v=1.7.2"></script>
+  <!-- 黑猫陪伴挂载区（Codex 接管视觉资源） -->
+  <div class="companion-zone" aria-hidden="true"></div>
+
+  <script src="assets/data/site-data.js?v=2.0.0"></script>
+  <script src="assets/js/main.js?v=2.0.0"></script>
 </body>
 </html>

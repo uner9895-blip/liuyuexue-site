@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 720" role="img" aria-label="old plum tree in moonlit water">
+  <defs>
+    <linearGradient id="barkMain" x1="0.08" y1="0.95" x2="0.88" y2="0.08">
+      <stop offset="0" stop-color="#121719"/>
+      <stop offset="0.42" stop-color="#27302b"/>
+      <stop offset="0.72" stop-color="#4f4639"/>
+      <stop offset="1" stop-color="#75604d"/>
+    </linearGradient>
+    <linearGradient id="barkDry" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#080b0c"/>
+      <stop offset="0.55" stop-color="#222a26"/>
+      <stop offset="1" stop-color="#5e4b3c"/>
+    </linearGradient>
+    <filter id="softInk" x="-12%" y="-12%" width="124%" height="124%">
+      <feGaussianBlur stdDeviation="0.55"/>
+    </filter>
+    <filter id="dryBrush" x="-16%" y="-16%" width="132%" height="132%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.024 0.11" numOctaves="3" seed="21"/>
+      <feDisplacementMap in="SourceGraphic" scale="5"/>
+      <feGaussianBlur stdDeviation="0.22"/>
+    </filter>
+  </defs>
+
+  <g opacity="0.2" fill="none" stroke="#8f806c" stroke-linecap="round">
+    <path d="M62 642 C198 614 330 642 480 610 C646 574 796 622 1058 574" stroke-width="2"/>
+    <path d="M34 672 C226 650 390 680 588 650 C770 624 906 662 1106 632" stroke-width="1.4"/>
+  </g>
+
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round" filter="url(#softInk)">
+    <path d="M110 706 C150 634 176 548 202 456 C228 362 250 276 318 220 C384 166 462 160 558 190" stroke="url(#barkMain)" stroke-width="38"/>
+    <path d="M150 706 C194 640 212 556 226 470 C242 374 274 286 344 230" stroke="#0f1516" stroke-width="18" opacity="0.78"/>
+    <path d="M250 326 C348 304 438 268 536 206 C630 146 728 105 875 84" stroke="url(#barkMain)" stroke-width="20"/>
+    <path d="M332 256 C294 210 272 160 264 92" stroke="url(#barkDry)" stroke-width="12"/>
+    <path d="M394 252 C482 270 562 316 646 382 C732 450 824 468 958 440" stroke="#242e29" stroke-width="15"/>
+    <path d="M520 210 C580 244 636 252 706 232" stroke="#3a352d" stroke-width="10"/>
+    <path d="M612 162 C708 194 786 240 884 318" stroke="#2b332e" stroke-width="13"/>
+    <path d="M710 112 C780 96 856 96 956 112" stroke="#483d31" stroke-width="9"/>
+    <path d="M242 420 C168 392 116 352 76 292" stroke="#151d1d" stroke-width="12"/>
+    <path d="M216 502 C150 524 100 568 46 638" stroke="#111718" stroke-width="10"/>
+  </g>
+
+  <g filter="url(#dryBrush)" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.52">
+    <path d="M190 594 C212 528 230 452 252 368 C282 256 366 204 472 188" stroke="#74624d" stroke-width="4"/>
+    <path d="M276 318 C384 302 474 246 620 152" stroke="#998268" stroke-width="3.2"/>
+    <path d="M408 252 C514 276 590 342 708 404 C784 444 866 454 948 438" stroke="#6a5c49" stroke-width="3"/>
+    <path d="M612 162 C706 184 812 250 898 320" stroke="#7c6a54" stroke-width="3.2"/>
+  </g>
+
+  <g fill="#bb4a55" opacity="0.9">
+    <circle cx="264" cy="92" r="4.5"/>
+    <circle cx="875" cy="84" r="5.8"/>
+    <circle cx="956" cy="112" r="4.8"/>
+    <circle cx="884" cy="318" r="5.2"/>
+    <circle cx="958" cy="440" r="5.6"/>
+    <circle cx="646" cy="382" r="4.8"/>
+    <circle cx="706" cy="232" r="4.6"/>
+    <circle cx="76" cy="292" r="4.8"/>
+    <circle cx="46" cy="638" r="4.2"/>
+  </g>
+</svg>

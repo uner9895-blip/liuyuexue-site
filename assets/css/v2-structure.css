@@ -1,0 +1,62 @@
+/* ==========================================================================
+   步青尘 V2 · 结构挂载层样式（Structure Contract）
+   --------------------------------------------------------------------------
+   仅承载“功能/结构合同”所需的最低限度样式，**不是最终美术**。
+   作用域规则：本文件只新增结构挂载用选择器，不覆盖、不污染旧页面样式，
+   不使用 !important，便于 Codex 后续整体替换或覆盖。
+
+   加载顺序：必须在 style.css 之后引入。
+
+   契约对照（详见 .claude/codex-handoff/01_visual-mount-map.md）：
+     夜行场景  .world-shell > .world-scene / .world-content / .route-guide / .companion-zone
+     听雪梅树  .music-world > .plum-tree-scene / .track-node-layer / (.music-playbar-container 作控制区)
+     留笺      .letter-world > .letter-entry / .contact-actions
+   说明：.world-shell/.world-scene/.world-content/.music-world 为**叠加在现有真实节点上的语义 class**，
+   本身不带视觉样式（保持现状），仅供 Codex 作为稳定挂载钩子。
+   ========================================================================== */
+
+/* --- 透传包裹：新增的语义容器默认不改变布局，Codex 可随时改 display 接管 --- */
+.plum-tree-scene,
+.track-node-layer,
+.letter-entry {
+  display: contents;
+}
+
+/* --- 首页空间地图（路线式入口）：静态 <a>，无 JS 亦可用 --- */
+.route-guide {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem 1.1rem;
+  margin-top: 1.6rem;
+  font-family: var(--font-title);
+}
+.route-guide .route-link {
+  font-size: 0.92rem;
+  letter-spacing: 0.18em;
+  color: rgba(238, 232, 216, 0.78);
+  padding: 0.2rem 0.1rem;
+  border-bottom: 1px solid transparent;
+  transition: color var(--transition-smooth), border-color var(--transition-smooth);
+}
+.route-guide .route-link:hover,
+.route-guide .route-link:focus-visible {
+  color: #f4efe3;
+  border-bottom-color: rgba(238, 232, 216, 0.7);
+}
+
+/* 白天世界下，入口若改为浅底，链接也保持可读（Codex 可覆盖配色） */
+[data-world="day"] .route-guide .route-link {
+  color: rgba(244, 239, 227, 0.82);
+}
+
+@media (max-width: 480px) {
+  .route-guide {
+    gap: 0.35rem 0.8rem;
+    margin-top: 1.2rem;
+  }
+  .route-guide .route-link {
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+  }
+}

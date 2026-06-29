@@ -3,17 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>听雪小筑 | 纯净东方自然风</title>
-  <meta name="description" content="六月雪的听雪小筑，古典清音与意境个人主页，播放舒缓的背景曲目。">
-  <meta name="author" content="六月雪">
+  <title>听雪 | 步青尘</title>
+  <meta name="description" content="步青尘的听雪小筑，古典清音与意境个人主页，播放舒缓的背景曲目。">
+  <meta name="author" content="步青尘">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#fbf8f1">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%23faf7ef'/%3E%3Ctext x='32' y='42' font-size='34' text-anchor='middle' fill='%23cc4343' font-family='serif'%3E雪%3C/text%3E%3C/svg%3E">
-  <link rel="stylesheet" href="assets/css/style.css?v=1.7.6">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%23faf7ef'/%3E%3Ctext x='32' y='42' font-size='34' text-anchor='middle' fill='%23cc4343' font-family='serif'%3E步%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="assets/css/style.css?v=2.0.0">
+  <link rel="stylesheet" href="assets/css/v2-structure.css?v=2.0.0">
   <script>
     (function() {
-      const theme = localStorage.getItem('theme') || 'light';
-      document.documentElement.setAttribute('data-theme', theme);
+      var theme = localStorage.getItem('theme') || 'light';
+      var root = document.documentElement;
+      root.setAttribute('data-theme', theme);
+      root.setAttribute('data-world', theme === 'dark' ? 'night' : 'day');
     })();
   </script>
 </head>
@@ -27,9 +30,9 @@
 
   <header>
     <nav class="nav-container" aria-label="主导航">
-      <a class="logo" href="index.html" aria-label="六月雪首页">
-        <span class="seal">六月<br>雪印</span>
-        <span class="logo-text">六月雪</span>
+      <a class="logo" href="index.html" aria-label="步青尘首页">
+        <span class="seal">青尘<br>印</span>
+        <span class="logo-text">步青尘</span>
       </a>
       <button class="burger-btn" type="button" aria-label="打开导航菜单" aria-expanded="false" aria-controls="site-menu">
         <span class="burger-line"></span>
@@ -37,13 +40,14 @@
         <span class="burger-line"></span>
       </button>
       <ul class="nav-menu" id="site-menu">
-        <li class="nav-item"><a href="index.html">首页</a></li>
-        <li class="nav-item"><a href="about.html">关于我</a></li>
-        <li class="nav-item"><a href="projects.html">作品</a></li>
+        <li class="nav-item"><a href="index.html">起行</a></li>
+        <li class="nav-item"><a href="about.html">小序</a></li>
+        <li class="nav-item"><a href="projects.html">行迹</a></li>
         <li class="nav-item"><a href="articles.html">雪笺</a></li>
-        <li class="nav-item"><a href="index.html#learning-records">学习记录</a></li>
-        <li class="nav-item"><a href="contact.html">联系我</a></li>
+        <li class="nav-item"><a href="learning.html">学习路</a></li>
+        <li class="nav-item"><a href="gallery.html">影像廊</a></li>
         <li class="nav-item active"><a href="music.html" aria-current="page">听雪</a></li>
+        <li class="nav-item"><a href="contact.html">留笺</a></li>
         <li class="nav-item">
           <button class="theme-toggle-btn" type="button" aria-label="切换深色/浅色模式">
             <!-- 太阳图标 -->
@@ -70,19 +74,25 @@
 
   <main class="page-fade">
     <section class="page-title-section music-hero-section scroll-reveal">
-      <h1 class="page-title">听雪小筑</h1>
-      <p class="page-subtitle">松花酿酒，春水煎茶。闲看庭前花开，静听雪落松梢。</p>
+      <h1 class="page-title">听雪</h1>
+      <p class="page-subtitle">老梅树上的歌，静待一朵一朵启封。</p>
       <p class="music-atmosphere" id="music-atmosphere" aria-live="polite">静待清音……</p>
     </section>
 
-    <div class="content-container music-content-container">
+    <div class="content-container music-content-container music-world">
       <div class="music-layout-container">
         <section class="playlist-panel scroll-reveal" aria-labelledby="playlist-title">
           <div class="playlist-heading">
-            <h2 id="playlist-title" class="section-subheading">清音歌单</h2>
+            <h2 id="playlist-title" class="section-subheading">梅上曲目</h2>
             <p>本页只加载当前选中的本地曲目。</p>
           </div>
-          <ol class="track-list" id="playlist-container" aria-label="听雪小筑歌单"></ol>
+          <!-- 听雪梅树挂载层：Codex 可在此接管梅树场景与枝头节点；
+               #playlist-container 由 music.js 按 id 渲染，结构与 id 不可改 -->
+          <div class="plum-tree-scene">
+            <div class="track-node-layer">
+              <ol class="track-list" id="playlist-container" aria-label="听雪小筑歌单"></ol>
+            </div>
+          </div>
         </section>
 
         <aside class="music-intro-panel scroll-reveal">
@@ -108,6 +118,12 @@
 
   <!-- 底部常驻案头清供播放栏 -->
   <div class="music-playbar-container" id="playbar-container">
+    <!-- 可收起挂载接口：仅切换容器状态，不触碰 music.js 播放逻辑 -->
+    <button class="playbar-dock-toggle" type="button" data-playbar-toggle aria-expanded="true" aria-label="收起播放栏" aria-controls="playbar-container">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <polyline points="6 9 12 15 18 9"></polyline>
+      </svg>
+    </button>
     <div class="music-playbar-layout">
       <!-- 左：歌曲详情 -->
       <div class="playbar-info-area">
@@ -164,8 +180,13 @@
     </div>
   </div>
 
+  <!-- 黑猫陪伴挂载区（Codex 接管视觉资源） -->
+  <div class="companion-zone" aria-hidden="true"></div>
+
+  <!-- 站点数据层（须先于 main.js / music.js 加载） -->
+  <script src="assets/data/site-data.js?v=2.0.0"></script>
   <!-- 载入基础交互与粒子效果 -->
-  <script src="assets/js/main.js?v=1.7.2"></script>
+  <script src="assets/js/main.js?v=2.0.0"></script>
   <!-- 载入本页播放器逻辑 -->
   <script src="assets/js/music.js?v=1.7.2"></script>
 </body>

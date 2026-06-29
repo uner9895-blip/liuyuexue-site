@@ -1,82 +1,39 @@
 /**
- * 六月雪个人网页 - 静态站基础交互与特效系统
+ * 步青尘个人网页 - 静态站基础交互与特效系统
  */
 
 function initAll() {
   initLivingInkScene();
+  initWorldState();
   initMobileMenu();
   initContactForm();
+  initCopyActions();
   initActiveNavLink();
   initScrollReveal();
   initSkillExplanations();
   initBackToTop();
   initThemeToggle();
   initMusicWidget();
+  initMusicPlaybarDock();
+  initMusicPlaybarReveal();
   initDomPlumTrail();
   initInkRipples();
   initSnowLettersPage();
   initHomeLatestSnowLetters();
+  initGalleryPage();
+  initLearningPage();
+  initHomeStage();
+  initHomeRouteMap();
+  initCompanionCat();
   initLightParallax();
 }
 
-const musicTracks = [
-  {
-    id: 'ecoute-cherie',
-    title: 'Ecoute Cherie',
-    artist: 'Vendredi sur mer',
-    src: 'assets/audio/ecoute-cherie.mp3',
-    tag: '雪音',
-    duration: '03:46'
-  },
-  {
-    id: 'fallin-out',
-    title: 'Fallin Out',
-    artist: 'Keyshia Cole',
-    src: 'assets/audio/fallin-out.mp3',
-    tag: '风音',
-    duration: '04:27'
-  },
-  {
-    id: 'hong-san-ke-zhan',
-    title: '红尘客栈',
-    artist: '周杰伦',
-    src: 'assets/audio/hong-san-ke-zhan.mp3',
-    tag: '伞音',
-    duration: '04:34'
-  },
-  {
-    id: 'ji-mo-ji-mo-bu-hao',
-    title: '寂寞寂寞不好',
-    artist: '曹格',
-    src: 'assets/audio/ji-mo-ji-mo-bu-hao.mp3',
-    tag: '夜音',
-    duration: '04:03'
-  },
-  {
-    id: 'lan-ting-xu',
-    title: '兰亭序',
-    artist: '周杰伦',
-    src: 'assets/audio/lan-ting-xu.mp3',
-    tag: '墨音',
-    duration: '04:14'
-  },
-  {
-    id: 'lian-ren',
-    title: '恋人',
-    artist: '李荣浩',
-    src: 'assets/audio/lian-ren.mp3',
-    tag: '梅音',
-    duration: '04:35'
-  },
-  {
-    id: 'yin-tian',
-    title: '阴天',
-    artist: '莫文蔚',
-    src: 'assets/audio/yin-tian.mp3',
-    tag: '雨音',
-    duration: '04:02'
-  }
-];
+/**
+ * 数据层入口：所有内容来自 assets/data/site-data.js（window.siteData）。
+ * 若数据脚本缺失则优雅降级为空集合，绝不让页面骨架崩溃。
+ */
+const siteData = window.siteData || {};
+const musicTracks = siteData.musicTracks || window.musicTracks || [];
 
 window.musicTracks = musicTracks;
 
@@ -94,53 +51,7 @@ function getSiteAudio() {
 
 window.getSiteAudio = getSiteAudio;
 
-const snowLetterPosts = [
-  {
-    id: 'why-personal-site',
-    title: '我为什么开始做这个个人网页',
-    category: '项目',
-    date: '2026.01.01',
-    readTime: '3 分钟',
-    excerpt: '从一个空白页面开始，我想给自己搭一个安静的小角落。',
-    content: '这是我第一次认真做一个完整的个人网页。它不只是一个展示名字和作品的地方，也像一个可以慢慢记录学习过程的小房间。我希望这里能放下我的前端练习、网页作品、一些风景照片，也放下一些还没有完全想明白的话。'
-  },
-  {
-    id: 'first-web-music',
-    title: '第一次让音乐在网页里响起来',
-    category: '学习',
-    date: '2026.01.02',
-    readTime: '2 分钟',
-    excerpt: '音乐按钮看起来很小，但里面藏着浏览器限制和交互逻辑。',
-    content: '给网页加音乐以后，我才发现浏览器并不总是允许页面自动播放声音。后来我把音乐改成需要点击按钮后播放，这样在电脑和手机上都更稳定。一个小小的按钮，也让我明白网页交互需要尊重用户的操作。'
-  },
-  {
-    id: 'ink-background-thoughts',
-    title: '关于中式水墨网页背景的一点想法',
-    category: '灵感',
-    date: '2026.01.03',
-    readTime: '4 分钟',
-    excerpt: '水墨风不是简单放一张图，而是留白、层次、墨色和呼吸感。',
-    content: '我想要的中式网页背景，不应该只是铺一张模糊图片。它应该像一张慢慢展开的纸：有淡淡的纸纹，有远山一样的墨影，有很轻的水波线，也有恰到好处的留白。背景不应该抢走文字，而应该让文字像落在纸面上一样安静。'
-  },
-  {
-    id: 'words-to-future-self',
-    title: '给未来自己的几句话',
-    category: '随笔',
-    date: '2026.01.04',
-    readTime: '2 分钟',
-    excerpt: '慢一点也没关系，重要的是一直在走。',
-    content: '如果以后再看到这个网页，希望我还能记得现在一点点搭建它的心情。也许那时候我已经学会了更多技术，也许这个网站已经变了很多样子。但我希望它仍然保留一点安静，一点认真，还有一点属于自己的温度。'
-  },
-  {
-    id: 'first-road-of-front-end',
-    title: 'HTML、CSS 和 JavaScript 的第一段路',
-    category: '学习',
-    date: '2026.01.05',
-    readTime: '3 分钟',
-    excerpt: '网页不是一下子完成的，它是一层一层搭起来的。',
-    content: 'HTML 像骨架，CSS 像衣服和气质，JavaScript 则让页面开始回应人的动作。刚开始学的时候，每一部分都很零散，但当它们组合到一个完整页面里，我才真正感觉到前端开发的乐趣。'
-  }
-];
+const snowLetterPosts = siteData.articles || window.snowLetterPosts || [];
 
 window.snowLetterPosts = snowLetterPosts;
 
@@ -326,8 +237,8 @@ function initMobileMenu() {
     drawerHeader.className = 'nav-drawer-header';
     drawerHeader.innerHTML = `
       <span class="nav-drawer-brand">
-        <span class="seal">六月<br>雪印</span>
-        <span>六月雪</span>
+        <span class="seal">青尘<br>印</span>
+        <span>步青尘</span>
       </span>
       <button class="nav-drawer-close" type="button" aria-label="关闭导航菜单">×</button>
     `;
@@ -528,6 +439,21 @@ function showToast(message) {
 }
 
 /**
+ * HTML 转义，供数据驱动的模板渲染使用（影像廊 / 学习路等）。
+ */
+function escapeHtml(value) {
+  return String(value == null ? '' : value).replace(/[&<>"']/g, function (char) {
+    return ({
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#39;'
+    })[char];
+  });
+}
+
+/**
  * 导航菜单高亮
  */
 function initActiveNavLink() {
@@ -671,6 +597,9 @@ function initThemeToggle() {
   const setTheme = (theme) => {
     document.documentElement.setAttribute('data-theme', theme);
     document.documentElement.dataset.theme = theme;
+    // 世界状态：data-theme(light/dark) 与 data-world(day/night) 保持镜像，
+    // 现有暗色样式继续生效，[data-world="night"] 留给 Codex 挂接夜行场景。
+    document.documentElement.setAttribute('data-world', theme === 'dark' ? 'night' : 'day');
     localStorage.setItem('theme', theme);
   };
 
@@ -697,9 +626,10 @@ function initMusicWidget() {
 
   if (!pendant || !card || !playBtn) return;
   if (pendant.dataset.musicWidgetReady === 'true') return;
-  pendant.dataset.musicWidgetReady = 'true';
 
   const track = musicTracks[0];
+  if (!track) return;
+  pendant.dataset.musicWidgetReady = 'true';
 
   document.addEventListener('click', (e) => {
     if (!card.contains(e.target) && !pendant.contains(e.target)) {
@@ -1213,5 +1143,538 @@ function initHomeLatestSnowLetters() {
       window.location.href = 'articles.html#' + post.id;
     });
     container.appendChild(card);
+  });
+}
+
+/**
+ * 世界状态初始化（早期 inline 脚本已设置好属性，这里只做兜底与同步）。
+ * data-theme(light/dark) 与 data-world(day/night) 互为镜像。
+ */
+function initWorldState() {
+  var root = document.documentElement;
+  var theme = root.getAttribute('data-theme') || localStorage.getItem('theme') || 'light';
+  root.setAttribute('data-theme', theme);
+  root.setAttribute('data-world', theme === 'dark' ? 'night' : 'day');
+}
+
+/**
+ * 首页“世界入口状态”：进入页面为 entrance，滑过庭院入口后切到 content。
+ * 仅作为 Codex 的视觉挂载钩子（body[data-home-stage]），不锁滚动、不改内容。
+ */
+function initHomeStage() {
+  if (!document.body.classList.contains('page-home')) return;
+  var entrance = document.querySelector('.courtyard');
+  if (!entrance) return;
+
+  document.body.setAttribute('data-home-stage', 'entrance');
+
+  if (!('IntersectionObserver' in window)) {
+    document.body.setAttribute('data-home-stage', 'content');
+    return;
+  }
+
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      document.body.setAttribute('data-home-stage', entry.isIntersecting ? 'entrance' : 'content');
+    });
+  }, { threshold: 0.18 });
+
+  observer.observe(entrance);
+}
+
+/**
+ * 首页起行路线图：有 JS 时由“起行”展开；无 JS 时保留静态链接。
+ */
+function initHomeRouteMap() {
+  if (!document.body.classList.contains('page-home')) return;
+
+  var enter = document.querySelector('.courtyard-enter');
+  var routeMap = document.getElementById('home-route-map');
+  if (!enter || !routeMap) return;
+
+  var closeBtn = routeMap.querySelector('.route-guide-close');
+  var focusableSelector = 'a[href], button:not([disabled])';
+  var originalRouteParent = routeMap.parentNode;
+  var originalRouteNext = routeMap.nextSibling;
+  var isOpen = false;
+
+  document.body.classList.add('route-map-ready');
+  routeMap.setAttribute('aria-hidden', 'true');
+  routeMap.setAttribute('tabindex', '-1');
+  enter.setAttribute('aria-expanded', 'false');
+
+  var moveRouteMapToBody = function () {
+    if (routeMap.parentNode !== document.body) {
+      document.body.appendChild(routeMap);
+    }
+  };
+
+  var restoreRouteMapPosition = function () {
+    if (!originalRouteParent || routeMap.parentNode === originalRouteParent) return;
+    originalRouteParent.insertBefore(routeMap, originalRouteNext);
+  };
+
+  var setRouteMap = function (open, options) {
+    options = options || {};
+    if (open === isOpen) return;
+    if (open) moveRouteMapToBody();
+    isOpen = open;
+    document.body.classList.toggle('route-map-open', open);
+    routeMap.classList.toggle('is-open', open);
+    routeMap.setAttribute('aria-hidden', String(!open));
+    enter.setAttribute('aria-expanded', String(open));
+
+    if (open) {
+      window.requestAnimationFrame(function () {
+        var first = routeMap.querySelector(focusableSelector);
+        if (first) first.focus({ preventScroll: true });
+      });
+      return;
+    }
+
+    if (options.returnFocus !== false) {
+      enter.focus({ preventScroll: true });
+    }
+    restoreRouteMapPosition();
+  };
+
+  enter.addEventListener('click', function (event) {
+    event.preventDefault();
+    setRouteMap(true);
+  });
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', function () {
+      setRouteMap(false);
+    });
+  }
+
+  document.addEventListener('keydown', function (event) {
+    if (!isOpen || event.key !== 'Escape') return;
+    event.preventDefault();
+    setRouteMap(false);
+  });
+
+  document.addEventListener('click', function (event) {
+    if (!isOpen) return;
+    if (routeMap.contains(event.target) || enter.contains(event.target)) return;
+    setRouteMap(false, { returnFocus: false });
+  });
+}
+
+/**
+ * 复制类操作（留笺底座）：任意 [data-copy-email] / [data-copy-text] 元素，
+ * 点击后复制邮箱并给出“已复制”反馈。带 execCommand 回退，无障碍可用。
+ */
+function initCopyActions() {
+  var triggers = document.querySelectorAll('[data-copy-email], [data-copy-text]');
+  if (!triggers.length) return;
+
+  function copyText(text) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      return navigator.clipboard.writeText(text);
+    }
+    return new Promise(function (resolve, reject) {
+      try {
+        var helper = document.createElement('textarea');
+        helper.value = text;
+        helper.setAttribute('readonly', '');
+        helper.style.position = 'absolute';
+        helper.style.left = '-9999px';
+        document.body.appendChild(helper);
+        helper.select();
+        var ok = document.execCommand('copy');
+        document.body.removeChild(helper);
+        ok ? resolve() : reject(new Error('execCommand 复制失败'));
+      } catch (err) {
+        reject(err);
+      }
+    });
+  }
+
+  triggers.forEach(function (trigger) {
+    if (trigger.dataset.copyReady === 'true') return;
+    trigger.dataset.copyReady = 'true';
+
+    trigger.addEventListener('click', function (event) {
+      event.preventDefault();
+      var text = trigger.getAttribute('data-copy-email') || trigger.getAttribute('data-copy-text') || '';
+      if (!text) return;
+
+      copyText(text).then(function () {
+        showToast('邮箱已复制：' + text);
+        trigger.classList.add('is-copied');
+        window.clearTimeout(trigger.__copyTimer);
+        trigger.__copyTimer = window.setTimeout(function () {
+          trigger.classList.remove('is-copied');
+        }, 2200);
+      }).catch(function () {
+        showToast('复制失败，请手动选择邮箱：' + text);
+      });
+    });
+  });
+}
+
+/**
+ * 听雪底部播放栏“可收起”挂载接口。仅在存在收起按钮时启用，
+ * 不触碰 music.js 的播放逻辑，只切换容器状态供 CSS / Codex 使用。
+ */
+function initMusicPlaybarDock() {
+  var playbar = document.getElementById('playbar-container');
+  var toggle = document.querySelector('[data-playbar-toggle]');
+  if (!playbar || !toggle) return;
+  if (toggle.dataset.dockReady === 'true') return;
+  toggle.dataset.dockReady = 'true';
+
+  var setCollapsed = function (collapsed) {
+    playbar.classList.toggle('is-collapsed', collapsed);
+    playbar.setAttribute('data-collapsed', String(collapsed));
+    toggle.setAttribute('aria-expanded', String(!collapsed));
+    toggle.setAttribute('aria-label', collapsed ? '展开播放栏' : '收起播放栏');
+  };
+
+  setCollapsed(false);
+  toggle.addEventListener('click', function () {
+    setCollapsed(!playbar.classList.contains('is-collapsed'));
+  });
+}
+
+/**
+ * 听雪播放栏显隐状态。播放核心仍由 music.js 控制；这里仅在用户点选
+ * 歌曲后给播放栏加视觉状态，避免初始常驻底部。
+ */
+function initMusicPlaybarReveal() {
+  if (!document.body.classList.contains('page-music')) return;
+
+  var playbar = document.getElementById('playbar-container');
+  var playlist = document.getElementById('playlist-container');
+  if (!playbar || !playlist) return;
+  if (playbar.dataset.revealReady === 'true') return;
+
+  playbar.dataset.revealReady = 'true';
+  playbar.dataset.revealed = 'false';
+  playbar.classList.add('is-awaiting-selection');
+  document.body.classList.remove('music-playbar-revealed');
+
+  var revealPlaybar = function () {
+    playbar.classList.remove('is-awaiting-selection');
+    playbar.classList.add('is-revealed');
+    playbar.dataset.revealed = 'true';
+    document.body.classList.add('music-playbar-revealed');
+  };
+
+  playlist.addEventListener('click', function (event) {
+    if (event.target.closest('[data-track-index]')) {
+      revealPlaybar();
+    }
+  });
+
+  playlist.addEventListener('keydown', function (event) {
+    if ((event.key === 'Enter' || event.key === ' ') && event.target.closest('[data-track-index]')) {
+      revealPlaybar();
+    }
+  });
+}
+
+/**
+ * 影像廊功能底座：渲染影像流 + 可访问灯箱（键盘关闭/切换、焦点管理、
+ * 触屏横向滚动回退）。无照片时呈现克制的真实空状态，不伪造内容。
+ */
+function initGalleryPage() {
+  var flow = document.getElementById('gallery-flow');
+  if (!flow) return;
+
+  var items = (window.siteData && window.siteData.galleryItems) || [];
+  var publicItems = items.filter(function (item) { return item && item.visibility !== 'private' && item.src; });
+
+  if (!publicItems.length) {
+    flow.innerHTML = '<p class="gallery-empty">影像廊还在整理中，路上的风景会慢慢收进来。</p>';
+    return;
+  }
+
+  flow.innerHTML = publicItems.map(function (item, index) {
+    var meta = [item.date, item.locationOptional].filter(Boolean).join(' · ');
+    return [
+      '<button class="gallery-frame" type="button" data-gallery-index="' + index + '"',
+      ' data-scene-tone="' + escapeHtml(item.sceneTone || 'neutral') + '"',
+      ' aria-label="查看影像：' + escapeHtml(item.title || '影像') + '">',
+      '  <span class="gallery-frame-media">',
+      '    <img src="' + escapeHtml(item.src) + '" alt="' + escapeHtml(item.alt || item.title || '生活影像') + '" loading="lazy" decoding="async">',
+      '  </span>',
+      '  <span class="gallery-frame-caption">',
+      '    <span class="gallery-frame-title">' + escapeHtml(item.title || '') + '</span>',
+      (meta ? '    <span class="gallery-frame-meta">' + escapeHtml(meta) + '</span>' : ''),
+      '  </span>',
+      '</button>'
+    ].join('');
+  }).join('');
+
+  var dialog = document.getElementById('gallery-dialog');
+  if (!dialog) return;
+
+  var dialogImg = dialog.querySelector('[data-gallery-image]');
+  var dialogTitle = dialog.querySelector('[data-gallery-title]');
+  var dialogCaption = dialog.querySelector('[data-gallery-caption]');
+  var closeBtn = dialog.querySelector('[data-gallery-close]');
+  var prevBtn = dialog.querySelector('[data-gallery-prev]');
+  var nextBtn = dialog.querySelector('[data-gallery-next]');
+  var lastTrigger = null;
+  var currentIndex = 0;
+
+  function renderDialog(index) {
+    var item = publicItems[index];
+    if (!item) return;
+    currentIndex = index;
+    if (dialogImg) {
+      dialogImg.src = item.src;
+      dialogImg.alt = item.alt || item.title || '生活影像';
+    }
+    if (dialogTitle) dialogTitle.textContent = item.title || '';
+    if (dialogCaption) dialogCaption.textContent = item.caption || '';
+  }
+
+  function openDialog(index, trigger) {
+    lastTrigger = trigger || null;
+    renderDialog(index);
+    dialog.classList.add('is-open');
+    dialog.removeAttribute('hidden');
+    document.body.classList.add('gallery-dialog-open');
+    if (closeBtn) closeBtn.focus({ preventScroll: true });
+  }
+
+  function closeDialog() {
+    dialog.classList.remove('is-open');
+    dialog.setAttribute('hidden', '');
+    document.body.classList.remove('gallery-dialog-open');
+    if (lastTrigger) lastTrigger.focus({ preventScroll: true });
+  }
+
+  function step(delta) {
+    renderDialog((currentIndex + delta + publicItems.length) % publicItems.length);
+  }
+
+  flow.addEventListener('click', function (event) {
+    var frame = event.target.closest('[data-gallery-index]');
+    if (!frame) return;
+    openDialog(Number(frame.getAttribute('data-gallery-index')), frame);
+  });
+
+  if (closeBtn) closeBtn.addEventListener('click', closeDialog);
+  if (prevBtn) prevBtn.addEventListener('click', function () { step(-1); });
+  if (nextBtn) nextBtn.addEventListener('click', function () { step(1); });
+
+  dialog.addEventListener('click', function (event) {
+    if (event.target === dialog || event.target.hasAttribute('data-gallery-backdrop')) closeDialog();
+  });
+
+  document.addEventListener('keydown', function (event) {
+    if (!dialog.classList.contains('is-open')) return;
+    if (event.key === 'Escape') { closeDialog(); }
+    else if (event.key === 'ArrowLeft') { step(-1); }
+    else if (event.key === 'ArrowRight') { step(1); }
+  });
+}
+
+/**
+ * 学习路功能底座：渲染学习记录条目，关联到真实雪笺文章。
+ */
+function initLearningPage() {
+  var list = document.getElementById('learning-list');
+  if (!list) return;
+
+  var entries = (window.siteData && window.siteData.learningEntries) || [];
+  if (!entries.length) {
+    list.innerHTML = '<p class="learning-empty">学习记录正在路上，慢慢补齐。</p>';
+    return;
+  }
+
+  list.innerHTML = entries.map(function (entry) {
+    var link = entry.relatedArticle
+      ? '<a class="learning-entry-link" href="articles.html#' + escapeHtml(entry.relatedArticle) + '">读相关雪笺 →</a>'
+      : '';
+    return [
+      '<article class="learning-entry" data-accent="' + escapeHtml(entry.accent || 'ink') + '">',
+      '  <div class="learning-entry-head">',
+      '    <span class="learning-entry-period">' + escapeHtml(entry.period || '') + '</span>',
+      '    <span class="learning-entry-tag">' + escapeHtml(entry.tag || '') + '</span>',
+      '  </div>',
+      '  <h3 class="learning-entry-title">' + escapeHtml(entry.title || '') + '</h3>',
+      '  <p class="learning-entry-summary">' + escapeHtml(entry.summary || '') + '</p>',
+      link,
+      '</article>'
+    ].join('');
+  }).join('');
+}
+
+/**
+ * 黑猫陪伴系统 · 行为底座。
+ * - 自动注入 [data-companion-cat]（home / music / contact / gallery 优先）。
+ * - 状态：idle / walk / sit / look / sleep / pet，写在 data-cat-state。
+ * - 仅猫自身可点，不用透明层覆盖页面。
+ * - 安全路线点：仅在页面底部安全带内移动，远离顶部导航。
+ * - prefers-reduced-motion：停止走动，仅保留静态坐姿。
+ * - 手机端：降低移动频率。
+ */
+function initCompanionCat() {
+  var priorityPages = ['page-home', 'page-music', 'page-contact', 'page-gallery'];
+  var isPriority = priorityPages.some(function (cls) { return document.body.classList.contains(cls); });
+
+  var cat = document.querySelector('[data-companion-cat]');
+  if (!cat && !isPriority) return;
+
+  if (!cat) {
+    cat = document.createElement('button');
+    cat.type = 'button';
+    cat.setAttribute('data-companion-cat', '');
+    cat.setAttribute('aria-label', '轻轻抚摸黑猫');
+    cat.className = 'companion-cat';
+    cat.innerHTML = '<span class="companion-cat-visual"></span>';
+    var zone = document.querySelector('.companion-zone') || document.body;
+    zone.removeAttribute('aria-hidden');
+    zone.appendChild(cat);
+  }
+
+  var states = ['idle', 'walk', 'sit', 'look', 'sleep', 'pet'];
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isCoarse = window.matchMedia('(pointer: coarse)').matches;
+  var meowSources = [
+    'assets/audio/cat-meow-soft-01.wav',
+    'assets/audio/cat-meow-soft-02.wav',
+    'assets/audio/cat-meow-soft-03.wav'
+  ];
+  var catSfxAudio = null;
+  var lastPetAt = 0;
+
+  var setState = function (state) {
+    if (states.indexOf(state) === -1) state = 'idle';
+    cat.setAttribute('data-cat-state', state);
+  };
+
+  // 在底部安全带内取一个不与交互元素重叠的落点（百分比定位，随视口自适应）。
+  var avoidSelector = 'header, .nav-container, a, button, input, textarea, .music-widget, .music-playbar-container, .back-to-top';
+
+  var pickWaypoint = function () {
+    var width = window.innerWidth;
+    var height = window.innerHeight;
+    var catW = cat.offsetWidth || 56;
+    var catH = cat.offsetHeight || 56;
+    // 安全带：底部 18vh ~ 6vh 之间，左右留 6% 边距。
+    for (var attempt = 0; attempt < 8; attempt++) {
+      var x = (0.06 + Math.random() * 0.88) * width;
+      var y = height - (0.06 + Math.random() * 0.12) * height;
+      var hit = document.elementFromPoint(
+        Math.min(width - 2, Math.max(2, x)),
+        Math.min(height - 2, Math.max(2, y))
+      );
+      if (hit && hit.closest && hit.closest(avoidSelector)) continue;
+      return {
+        x: Math.min(width - catW - 8, Math.max(8, x - catW / 2)),
+        y: Math.min(height - catH - 8, Math.max(8, y - catH))
+      };
+    }
+    return null;
+  };
+
+  var placeStatic = function () {
+    cat.style.left = Math.max(8, window.innerWidth * 0.08) + 'px';
+    cat.style.top = (window.innerHeight - (cat.offsetHeight || 56) - window.innerHeight * 0.08) + 'px';
+  };
+
+  cat.style.position = 'fixed';
+  placeStatic();
+  setState('sit');
+
+  var playCatMeow = function () {
+    if (!catSfxAudio) {
+      catSfxAudio = new Audio();
+      catSfxAudio.preload = 'auto';
+      catSfxAudio.volume = 0.28;
+    }
+
+    var source = meowSources[Math.floor(Math.random() * meowSources.length)];
+    catSfxAudio.pause();
+    catSfxAudio.src = source;
+    catSfxAudio.currentTime = 0;
+    catSfxAudio.play().catch(function () {});
+  };
+
+  var petCat = function () {
+    var now = Date.now();
+    if (now - lastPetAt < 3600) return;
+    lastPetAt = now;
+    window.clearTimeout(cat.__settleTimer);
+    setState('pet');
+    playCatMeow();
+    cat.__settleTimer = window.setTimeout(function () {
+      setState('sit');
+    }, 1250);
+  };
+
+  cat.addEventListener('pointerdown', petCat);
+  cat.addEventListener('click', petCat);
+  cat.addEventListener('keydown', function (event) {
+    if (event.key !== 'Enter' && event.key !== ' ') return;
+    event.preventDefault();
+    petCat();
+  });
+
+  if (reduceMotion) {
+    // 减少动态：保持静态坐姿，不走动。
+    return;
+  }
+
+  var moveTimer = null;
+  var idleStates = ['idle', 'sit', 'look'];
+
+  var scheduleNext = function () {
+    var base = isCoarse ? 9000 : 5200; // 手机端更低频率
+    var jitter = isCoarse ? 7000 : 5000;
+    var delay = base + Math.random() * jitter;
+    moveTimer = window.setTimeout(tick, delay);
+  };
+
+  var tick = function () {
+    if (document.hidden) { scheduleNext(); return; }
+
+    var roll = Math.random();
+    if (roll < 0.18) {
+      setState('sleep');
+      scheduleNext();
+      return;
+    }
+    if (roll < 0.5) {
+      setState(idleStates[Math.floor(Math.random() * idleStates.length)]);
+      scheduleNext();
+      return;
+    }
+
+    var point = pickWaypoint();
+    if (!point) {
+      setState('sit');
+      scheduleNext();
+      return;
+    }
+
+    setState('walk');
+    cat.style.setProperty('--cat-face', point.x < parseFloat(cat.style.left || 0) ? '-1' : '1');
+    cat.style.left = point.x + 'px';
+    cat.style.top = point.y + 'px';
+
+    window.clearTimeout(cat.__settleTimer);
+    cat.__settleTimer = window.setTimeout(function () {
+      setState('sit');
+    }, 1600);
+
+    scheduleNext();
+  };
+
+  cat.style.transition = 'left 1.5s cubic-bezier(0.33, 0, 0.2, 1), top 1.5s cubic-bezier(0.33, 0, 0.2, 1)';
+  scheduleNext();
+
+  window.addEventListener('resize', function () {
+    var left = parseFloat(cat.style.left || 0);
+    var top = parseFloat(cat.style.top || 0);
+    cat.style.left = Math.min(window.innerWidth - (cat.offsetWidth || 56) - 8, Math.max(8, left)) + 'px';
+    cat.style.top = Math.min(window.innerHeight - (cat.offsetHeight || 56) - 8, Math.max(8, top)) + 'px';
   });
 }

@@ -3,22 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>作品 | 六月雪</title>
-  <meta name="description" content="六月雪的作品集页面。展示了我设计的第一个水墨风静态个人网页作品以及未来的 Canvas 和 CSS 布局规划项目。">
-  <meta name="author" content="六月雪">
+  <title>行迹 | 步青尘</title>
+  <meta name="description" content="步青尘的作品集页面。展示了我设计的第一个水墨风静态个人网页作品以及未来的 Canvas 和 CSS 布局规划项目。">
+  <meta name="author" content="步青尘">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#fbf8f1">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%23faf7ef'/%3E%3Ctext x='32' y='42' font-size='34' text-anchor='middle' fill='%23cc4343' font-family='serif'%3E雪%3C/text%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%23faf7ef'/%3E%3Ctext x='32' y='42' font-size='34' text-anchor='middle' fill='%23cc4343' font-family='serif'%3E步%3C/text%3E%3C/svg%3E">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="六月雪">
-  <meta property="og:title" content="作品 | 六月雪">
-  <meta property="og:description" content="六月雪的作品集。包含中式水墨个人主页以及两个规划中的前端交互项目。">
-  <link rel="stylesheet" href="assets/css/style.css?v=1.7.6">
+  <meta property="og:site_name" content="步青尘">
+  <meta property="og:title" content="行迹 | 步青尘">
+  <meta property="og:description" content="步青尘的作品集。包含中式水墨个人主页以及两个规划中的前端交互项目。">
+  <link rel="stylesheet" href="assets/css/style.css?v=2.0.0">
   <script>
     (function() {
-      const theme = localStorage.getItem('theme') || 'light';
-      document.documentElement.setAttribute('data-theme', theme);
+      var theme = localStorage.getItem('theme') || 'light';
+      var root = document.documentElement;
+      root.setAttribute('data-theme', theme);
+      root.setAttribute('data-world', theme === 'dark' ? 'night' : 'day');
     })();
   </script>
 </head>
@@ -44,9 +46,9 @@
 
   <header>
     <nav class="nav-container" aria-label="主导航">
-      <a class="logo" href="index.html" aria-label="六月雪首页">
-        <span class="seal">六月<br>雪印</span>
-        <span class="logo-text">六月雪</span>
+      <a class="logo" href="index.html" aria-label="步青尘首页">
+        <span class="seal">青尘<br>印</span>
+        <span class="logo-text">步青尘</span>
       </a>
       <button class="burger-btn" type="button" aria-label="打开导航菜单" aria-expanded="false" aria-controls="site-menu">
         <span class="burger-line"></span>
@@ -54,13 +56,14 @@
         <span class="burger-line"></span>
       </button>
       <ul class="nav-menu" id="site-menu">
-        <li class="nav-item"><a href="index.html">首页</a></li>
-        <li class="nav-item"><a href="about.html">关于我</a></li>
-        <li class="nav-item active"><a href="projects.html" aria-current="page">作品</a></li>
+        <li class="nav-item"><a href="index.html">起行</a></li>
+        <li class="nav-item"><a href="about.html">小序</a></li>
+        <li class="nav-item active"><a href="projects.html" aria-current="page">行迹</a></li>
         <li class="nav-item"><a href="articles.html">雪笺</a></li>
-        <li class="nav-item"><a href="index.html#learning-records">学习记录</a></li>
-        <li class="nav-item"><a href="contact.html">联系我</a></li>
+        <li class="nav-item"><a href="learning.html">学习路</a></li>
+        <li class="nav-item"><a href="gallery.html">影像廊</a></li>
         <li class="nav-item"><a href="music.html">听雪</a></li>
+        <li class="nav-item"><a href="contact.html">留笺</a></li>
         <li class="nav-item">
           <button class="theme-toggle-btn" type="button" aria-label="切换深色/浅色模式">
             <!-- 太阳图标 -->
@@ -87,7 +90,7 @@
 
   <main class="page-fade">
     <section class="page-title-section scroll-reveal">
-      <h1 class="page-title">作品</h1>
+      <h1 class="page-title">行迹</h1>
       <p class="page-subtitle">行止留痕，循迹前行</p>
     </section>
 
@@ -168,9 +171,9 @@
 
   <footer>
     <div class="footer-content">
-      <p class="footer-text">© 2026 六月雪. All Rights Reserved. 托管于 GitHub Pages</p>
+      <p class="footer-text">© 2026 步青尘. All Rights Reserved. 托管于 GitHub Pages</p>
       <div class="footer-stamp">
-        <span class="seal">雪印</span>
+        <span class="seal">青尘<br>印</span>
       </div>
     </div>
   </footer>
@@ -204,6 +207,7 @@
     </div>
   </div>
 
-  <script src="assets/js/main.js?v=1.7.2"></script>
+  <script src="assets/data/site-data.js?v=2.0.0"></script>
+  <script src="assets/js/main.js?v=2.0.0"></script>
 </body>
 </html>
