@@ -236,11 +236,11 @@ function initMobileMenu() {
   if (!navMenu.querySelector('.nav-drawer-header')) {
     const drawerHeader = document.createElement('li');
     drawerHeader.className = 'nav-drawer-header';
+    const drawerBrand = document.body.classList.contains('page-home')
+      ? '<span class="nav-drawer-brand"><span>步青尘</span></span>'
+      : '<span class="nav-drawer-brand"><span class="seal">青尘<br>印</span><span>步青尘</span></span>';
     drawerHeader.innerHTML = `
-      <span class="nav-drawer-brand">
-        <span class="seal">青尘<br>印</span>
-        <span>步青尘</span>
-      </span>
+      ${drawerBrand}
       <button class="nav-drawer-close" type="button" aria-label="关闭导航菜单">×</button>
     `;
     navMenu.insertBefore(drawerHeader, navMenu.firstElementChild);
@@ -778,8 +778,9 @@ function initDomPlumTrail() {
   var hasFinePointer = window.matchMedia('(pointer: fine)').matches;
   var hasCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
   var isPureTouch = hasCoarsePointer && !hasFinePointer;
+  var isHomePage = document.body.classList.contains('page-home');
 
-  var enabled = hasFinePointer && !isPureTouch;
+  var enabled = false;
   var trailConfig = reducedMotion ? {
     throttleMin: 180,
     throttleMax: 260,
@@ -827,10 +828,9 @@ function initDomPlumTrail() {
     lastX: null,
     lastY: null,
     lastTime: null,
-    petalsCreated: 0
+    petalsCreated: 0,
+    disabledByV3: true
   };
-
-  console.log('Plum trail ready', window.__plumTrailState);
 
   window.__testDomPetals = function () {
     var centerX = window.innerWidth / 2;
@@ -859,11 +859,9 @@ function initDomPlumTrail() {
         }, idx * 35);
       })(i);
     }
-    window.setTimeout(function () {
-      console.log('__testDomPetals spawned:', total);
-      console.log('current petals:', document.querySelectorAll('.plum-petal').length);
-    }, total * 35 + 120);
   };
+
+  return;
 
   if (!enabled) {
     if (window.PointerEvent) {
@@ -1256,7 +1254,7 @@ function initHomeRouteMap() {
     restoreTimer = window.setTimeout(function () {
       routeMap.classList.remove('is-closing');
       restoreRouteMapPosition();
-    }, reduceMotion ? 0 : 560);
+    }, reduceMotion ? 0 : 880);
   };
 
   triggers.forEach(function (trigger) {
@@ -1300,8 +1298,8 @@ function initHomeSunResponse() {
   var stage = document.querySelector('.courtyard');
   if (!stage) return;
 
-  var current = { dx: 0, dy: 0, rot: 0, opacity: 0.72 };
-  var target = { dx: 0, dy: 0, rot: 0, opacity: 0.72 };
+  var current = { dx: 0, dy: 0, rot: 0, opacity: 0.42 };
+  var target = { dx: 0, dy: 0, rot: 0, opacity: 0.42 };
   var frame = null;
   var settleTimer = null;
   var pauseSelector = '.courtyard-content, .home-orbit-controls, .route-guide, a, button';
@@ -1310,7 +1308,7 @@ function initHomeSunResponse() {
     target.dx = 0;
     target.dy = 0;
     target.rot = 0;
-    target.opacity = 0.72;
+    target.opacity = 0.42;
     requestTick();
   }
 
@@ -1359,7 +1357,7 @@ function initHomeSunResponse() {
     target.dx = Math.max(-3, Math.min(3, x * 6));
     target.dy = Math.max(-2, Math.min(2, y * 4));
     target.rot = Math.max(-4.5, Math.min(4.5, x * 7 + y * 2));
-    target.opacity = 0.72 + Math.max(-0.03, Math.min(0.04, x * 0.035 - y * 0.025));
+    target.opacity = 0.42 + Math.max(-0.025, Math.min(0.03, x * 0.03 - y * 0.02));
 
     window.clearTimeout(settleTimer);
     settleTimer = window.setTimeout(setNeutral, 850);
@@ -1630,19 +1628,40 @@ function initCompanionCat() {
   var cat = document.querySelector('[data-companion-cat]');
   if (!cat && !isPriority) return;
 
+  var catMarkup = [
+    '<span class="companion-cat-shadow" aria-hidden="true"></span>',
+    '<span class="companion-cat-visual" aria-hidden="true">',
+    '  <span class="companion-cat-tail"></span>',
+    '  <span class="companion-cat-body"></span>',
+    '  <span class="companion-cat-head">',
+    '    <span class="companion-cat-ear companion-cat-ear-left"></span>',
+    '    <span class="companion-cat-ear companion-cat-ear-right"></span>',
+    '    <span class="companion-cat-eye companion-cat-eye-left"></span>',
+    '    <span class="companion-cat-eye companion-cat-eye-right"></span>',
+    '    <span class="companion-cat-muzzle"></span>',
+    '    <span class="companion-cat-whisker companion-cat-whisker-left"></span>',
+    '    <span class="companion-cat-whisker companion-cat-whisker-right"></span>',
+    '  </span>',
+    '  <span class="companion-cat-paw companion-cat-paw-left"></span>',
+    '  <span class="companion-cat-paw companion-cat-paw-right"></span>',
+    '</span>'
+  ].join('');
+
   if (!cat) {
     cat = document.createElement('button');
     cat.type = 'button';
     cat.setAttribute('data-companion-cat', '');
     cat.setAttribute('aria-label', '轻轻抚摸黑猫');
     cat.className = 'companion-cat';
-    cat.innerHTML = '<span class="companion-cat-visual"></span>';
+    cat.innerHTML = catMarkup;
     var zone = document.querySelector('.companion-zone') || document.body;
     zone.removeAttribute('aria-hidden');
     zone.appendChild(cat);
+  } else if (!cat.querySelector('.companion-cat-body')) {
+    cat.innerHTML = catMarkup;
   }
 
-  var states = ['idle', 'walk', 'sit', 'look', 'sleep', 'pet'];
+  var states = ['idle', 'walk', 'sit', 'look', 'sleep', 'stretch', 'pet'];
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var isCoarse = window.matchMedia('(pointer: coarse)').matches;
   var meowSources = [
@@ -1659,17 +1678,21 @@ function initCompanionCat() {
   };
 
   // 在底部安全带内取一个不与交互元素重叠的落点（百分比定位，随视口自适应）。
-  var avoidSelector = 'header, .nav-container, a, button, input, textarea, .music-widget, .music-playbar-container, .back-to-top';
+  var isHome = document.body.classList.contains('page-home');
+  var avoidSelector = 'header, .nav-container, .courtyard-content, .home-orbit-controls, .route-guide, a, button, input, textarea, .music-widget, .music-playbar-container, .back-to-top';
 
   var pickWaypoint = function () {
     var width = window.innerWidth;
     var height = window.innerHeight;
     var catW = cat.offsetWidth || 56;
     var catH = cat.offsetHeight || 56;
-    // 安全带：底部 18vh ~ 6vh 之间，左右留 6% 边距。
+    var minX = isHome ? 0.54 : 0.06;
+    var rangeX = isHome ? 0.38 : 0.88;
+    var minBottom = isHome ? 0.09 : 0.06;
+    var rangeBottom = isHome ? 0.1 : 0.12;
     for (var attempt = 0; attempt < 8; attempt++) {
-      var x = (0.06 + Math.random() * 0.88) * width;
-      var y = height - (0.06 + Math.random() * 0.12) * height;
+      var x = (minX + Math.random() * rangeX) * width;
+      var y = height - (minBottom + Math.random() * rangeBottom) * height;
       var hit = document.elementFromPoint(
         Math.min(width - 2, Math.max(2, x)),
         Math.min(height - 2, Math.max(2, y))
@@ -1684,19 +1707,39 @@ function initCompanionCat() {
   };
 
   var placeStatic = function () {
-    cat.style.left = Math.max(8, window.innerWidth * 0.08) + 'px';
-    cat.style.top = (window.innerHeight - (cat.offsetHeight || 56) - window.innerHeight * 0.08) + 'px';
+    var homeX = window.matchMedia('(max-width: 768px)').matches ? 0.66 : 0.76;
+    var x = isHome ? window.innerWidth * homeX : window.innerWidth * 0.08;
+    var bottom = isHome ? 0.12 : 0.08;
+    cat.style.left = Math.max(8, Math.min(window.innerWidth - (cat.offsetWidth || 72) - 8, x)) + 'px';
+    cat.style.top = (window.innerHeight - (cat.offsetHeight || 62) - window.innerHeight * bottom) + 'px';
+  };
+
+  var placeMapWatcher = function () {
+    if (!isHome || !document.body.classList.contains('route-map-open')) return;
+    var catW = cat.offsetWidth || 108;
+    var catH = cat.offsetHeight || 84;
+    var rightGap = Math.max(18, window.innerWidth * 0.045);
+    var bottomGap = Math.max(16, window.innerHeight * 0.075);
+    cat.style.setProperty('--cat-face', '1');
+    cat.style.left = Math.max(8, window.innerWidth - catW - rightGap) + 'px';
+    cat.style.top = Math.max(8, window.innerHeight - catH - bottomGap) + 'px';
+    setState('look');
   };
 
   cat.style.position = 'fixed';
   placeStatic();
   setState('sit');
 
+  if (isHome && 'MutationObserver' in window) {
+    var routeMapObserver = new MutationObserver(placeMapWatcher);
+    routeMapObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+  }
+
   var playCatMeow = function () {
     if (!catSfxAudio) {
       catSfxAudio = new Audio();
       catSfxAudio.preload = 'auto';
-      catSfxAudio.volume = 0.28;
+      catSfxAudio.volume = 0.18;
     }
 
     var source = meowSources[Math.floor(Math.random() * meowSources.length)];
@@ -1708,7 +1751,7 @@ function initCompanionCat() {
 
   var petCat = function () {
     var now = Date.now();
-    if (now - lastPetAt < 3600) return;
+    if (now - lastPetAt < 4200) return;
     lastPetAt = now;
     window.clearTimeout(cat.__settleTimer);
     setState('pet');
@@ -1732,7 +1775,7 @@ function initCompanionCat() {
   }
 
   var moveTimer = null;
-  var idleStates = ['idle', 'sit', 'look'];
+  var idleStates = ['idle', 'sit', 'look', 'stretch'];
 
   var scheduleNext = function () {
     var base = isCoarse ? 9000 : 5200; // 手机端更低频率
@@ -1743,6 +1786,11 @@ function initCompanionCat() {
 
   var tick = function () {
     if (document.hidden) { scheduleNext(); return; }
+    if (document.body.classList.contains('route-map-open')) {
+      setState('look');
+      scheduleNext();
+      return;
+    }
 
     var roll = Math.random();
     if (roll < 0.18) {
