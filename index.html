@@ -15,7 +15,7 @@
   <meta property="og:title" content="步青尘 | 中式水墨个人主页">
   <meta property="og:description" content="步青尘的个人主页，一个中式水墨风格的静态个人网站，用于记录前端学习、个人项目和网页设计实践。">
   <meta property="og:url" content="https://uner9895-blip.github.io/liuyuexue-site/">
-  <link rel="stylesheet" href="assets/css/style.css?v=2.0.0">
+  <link rel="stylesheet" href="assets/css/style.css?v=2.0.4">
   <link rel="stylesheet" href="assets/css/v2-structure.css?v=2.0.0">
   <script>
     (function() {
@@ -73,6 +73,7 @@
           <svg class="theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
           </svg>
+          <span class="home-world-label">日夜切换</span>
         </button>
         <a class="home-trace-link" href="projects.html" aria-label="进入行迹">
           <span class="home-trace-mark" aria-hidden="true"></span>
@@ -138,11 +139,6 @@
           </svg>
         </div>
 
-        <div class="scene-layer scene-fog" style="--px:30px;--py:6px;">
-          <span class="fog-band fog-1"></span>
-          <span class="fog-band fog-2"></span>
-        </div>
-
         <div class="scene-layer scene-plum" style="--px:34px;--py:15px;">
           <svg class="layer-inner" viewBox="0 0 1440 700" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
             <g class="plum-branch" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -174,8 +170,21 @@
         <a class="courtyard-enter" href="#enter" aria-controls="home-route-map" aria-expanded="false">起行</a>
         <!-- 空间地图（路线式入口）：静态链接，无 JS 亦可访问；Codex 可重做视觉 -->
         <nav class="route-guide" id="home-route-map" aria-label="起行路线图">
+          <div class="route-guide-heading" aria-hidden="true">
+            <span class="route-guide-eyebrow">山路小图</span>
+            <strong>起行路线</strong>
+          </div>
           <button class="route-guide-close" type="button" aria-label="收起路线图">收</button>
           <div class="route-guide-scroll">
+            <svg class="route-map-line" viewBox="0 0 1000 520" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+              <path class="route-map-ridge route-map-ridge-back" d="M26 354 C112 286 162 332 236 268 C315 199 380 249 448 210 C546 154 624 220 698 174 C784 119 858 169 974 112" />
+              <path class="route-map-ridge route-map-ridge-front" d="M28 398 C126 342 190 384 272 328 C356 270 424 318 512 270 C612 216 692 286 782 232 C850 190 914 218 974 184" />
+              <path class="route-map-shadow" d="M70 360 C170 300 224 292 292 256 C380 208 438 340 520 292 C620 234 620 174 724 208 C796 232 824 154 920 150" />
+              <path class="route-map-main" d="M70 360 C170 300 224 292 292 256 C380 208 438 340 520 292 C620 234 620 174 724 208 C796 232 824 154 920 150" />
+            </svg>
+            <span class="route-map-terrain route-map-terrain-1" aria-hidden="true"></span>
+            <span class="route-map-terrain route-map-terrain-2" aria-hidden="true"></span>
+            <span class="route-map-terrain route-map-terrain-3" aria-hidden="true"></span>
             <a class="route-link" href="about.html" style="--rx:7%;--ry:66%;--route-delay:0ms;">
               <span class="route-point" aria-hidden="true"></span>
               <span class="route-name">小序</span>
@@ -223,60 +232,25 @@
       </a>
     </section>
 
-    <!-- 第一屏：见字如面 (Hero) -->
-    <section class="hero-section" id="enter" aria-labelledby="home-title">
-      <div class="hero-layout">
-        <div class="hero-copy scroll-reveal">
-          <div class="hero-stamp-wrapper">
-            <span class="seal seal-yinke">青尘<br>印</span>
-          </div>
-          <p class="hero-kicker">见字如面 · 岁在丙午</p>
-          <h1 id="home-title" class="hero-title">步青尘</h1>
-          <p class="hero-subtitle">学生 · 前端学习者 · 个人网页创作者</p>
-          <p class="hero-desc">
-            欢迎来到我的数字角落。我叫步青尘，是一名学生，也是前端开发与网页设计的初学者。目前我正在自学 HTML、CSS 和 JavaScript，探索如何将古典的中式审美与静态页面交互相结合。这个网站是我第一个完整的前端网页实践项目，用于记录我学习路上的每一步积累、存放练习作品，也是我数字创作的起点。
-          </p>
-          <div class="hero-actions">
-            <a href="projects.html" class="btn-ink">查看作品</a>
-            <a href="contact.html" class="btn-ink btn-secondary">与我联络</a>
-          </div>
+    <!-- 第一屏之后：短序与继续入口 -->
+    <section class="hero-section home-brief-intro" id="enter" aria-labelledby="home-title">
+      <div class="home-brief-scroll scroll-reveal">
+        <span class="home-brief-mark" aria-hidden="true">序</span>
+        <p class="hero-kicker">短小序</p>
+        <h2 id="home-title" class="hero-title">纸卷初展，山路向前。</h2>
+        <p class="hero-desc">
+          我叫步青尘，是一名学生，也是前端开发与网页设计的初学者。目前我正在自学 HTML、CSS 和 JavaScript，探索如何将古典的中式审美与静态页面交互相结合。
+        </p>
+        <div class="home-intro-actions" aria-label="继续进入其他空间">
+          <a href="#enter" class="btn-ink home-route-reopen" aria-controls="home-route-map" aria-expanded="false" data-route-map-trigger>再看路线</a>
+          <a href="about.html" class="btn-ink btn-secondary">读小序</a>
+          <a href="projects.html" class="btn-ink btn-secondary">去行迹</a>
         </div>
-
-        <aside class="hero-brief scroll-reveal" style="transition-delay: 100ms;" aria-label="个人简报">
-          <div class="brief-list">
-            <div class="brief-row">
-              <span class="brief-label">身份</span>
-              <span class="brief-value">学生 / 前端探索者</span>
-            </div>
-            <div class="brief-row">
-              <span class="brief-label">技能</span>
-              <span class="brief-value">HTML · CSS · JavaScript</span>
-            </div>
-            <div class="brief-row">
-              <span class="brief-label">作品</span>
-              <span class="brief-value">中式水墨个人主页 等</span>
-            </div>
-            <div class="brief-row">
-              <span class="brief-label">联络</span>
-              <span class="brief-value">uner9895@gmail.com</span>
-            </div>
-          </div>
-
-          <article class="image-note-preview tilt-card" aria-label="影像小记预览">
-            <div class="image-note-preview-media" aria-hidden="true"></div>
-            <div class="image-note-preview-body">
-              <span class="card-category">影像小记</span>
-              <h2 class="image-note-preview-title">影像小记</h2>
-              <p class="image-note-preview-subtitle">把路过的风景，轻轻收好。</p>
-              <p class="image-note-preview-text">傍晚的云慢慢散开，今天也算好好结束了。</p>
-            </div>
-          </article>
-        </aside>
       </div>
     </section>
 
     <!-- 第二屏：最新雪笺 -->
-    <section class="home-section scroll-reveal" aria-labelledby="latest-snow-title">
+    <section class="home-section home-legacy-section scroll-reveal" aria-labelledby="latest-snow-title">
       <div class="home-section-title">
         <h2 id="latest-snow-title">最新雪笺</h2>
         <p class="home-section-subtitle">最近写下的几页小记。</p>
@@ -286,7 +260,7 @@
     </section>
 
     <!-- 第三屏：格物致知 (关于我与技能) -->
-    <section class="home-section scroll-reveal" aria-labelledby="about-section-title">
+    <section class="home-section home-legacy-section scroll-reveal" aria-labelledby="about-section-title">
       <div class="home-section-title">
         <h2 id="about-section-title">格物致知</h2>
         <p class="home-section-subtitle">关于我与技能积累</p>
@@ -359,7 +333,7 @@
     </section>
 
     <!-- 第四屏：循迹前行 (精选作品) -->
-    <section class="home-section scroll-reveal" aria-labelledby="project-section-title">
+    <section class="home-section home-legacy-section scroll-reveal" aria-labelledby="project-section-title">
       <div class="home-section-title">
         <h2 id="project-section-title">循迹前行</h2>
         <p class="home-section-subtitle">前端实践与作品</p>
@@ -425,7 +399,7 @@
     </section>
 
     <!-- 第五屏：影像小记 -->
-    <section class="home-section image-notes-section scroll-reveal" aria-labelledby="image-notes-title">
+    <section class="home-section home-legacy-section image-notes-section scroll-reveal" aria-labelledby="image-notes-title">
       <div class="home-section-title">
         <h2 id="image-notes-title">影像小记</h2>
         <p class="home-section-subtitle">几张路上的风景，和一些慢慢写下来的句子。</p>
@@ -490,7 +464,7 @@
     </section>
 
     <!-- 第六屏：学习记录与联络入口 -->
-    <section class="home-section scroll-reveal" id="learning-records" aria-labelledby="contact-section-title">
+    <section class="home-section home-legacy-section scroll-reveal" id="learning-records" aria-labelledby="contact-section-title">
       <div class="home-section-title">
         <h2 id="contact-section-title">学习路</h2>
         <p class="home-section-subtitle">一些踩坑、复盘和继续往前走的痕迹。</p>
@@ -558,6 +532,6 @@
   <div class="companion-zone" aria-hidden="true"></div>
 
   <script src="assets/data/site-data.js?v=2.0.0"></script>
-  <script src="assets/js/main.js?v=2.0.0"></script>
+  <script src="assets/js/main.js?v=2.0.2"></script>
 </body>
 </html>

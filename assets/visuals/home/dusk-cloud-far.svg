@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 320" preserveAspectRatio="none">
+  <defs>
+    <radialGradient id="cloud-warm" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#f4d39a" stop-opacity="0.34"/>
+      <stop offset="0.5" stop-color="#c7b18a" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#c7b18a" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="cloud-cool" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#8b918d" stop-opacity="0.26"/>
+      <stop offset="0.58" stop-color="#676f70" stop-opacity="0.14"/>
+      <stop offset="1" stop-color="#676f70" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <g opacity="0.82">
+    <ellipse cx="270" cy="112" rx="230" ry="42" fill="url(#cloud-cool)"/>
+    <ellipse cx="475" cy="96" rx="280" ry="48" fill="url(#cloud-warm)"/>
+    <ellipse cx="770" cy="118" rx="250" ry="40" fill="url(#cloud-cool)"/>
+    <ellipse cx="1030" cy="92" rx="330" ry="52" fill="url(#cloud-warm)"/>
+    <ellipse cx="1320" cy="126" rx="260" ry="42" fill="url(#cloud-cool)"/>
+  </g>
+</svg>

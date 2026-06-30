@@ -24,6 +24,7 @@ function initAll() {
   initLearningPage();
   initHomeStage();
   initHomeRouteMap();
+  initHomeSunResponse();
   initCompanionCat();
   initLightParallax();
 }
@@ -1188,20 +1189,28 @@ function initHomeStage() {
 function initHomeRouteMap() {
   if (!document.body.classList.contains('page-home')) return;
 
-  var enter = document.querySelector('.courtyard-enter');
   var routeMap = document.getElementById('home-route-map');
-  if (!enter || !routeMap) return;
+  if (!routeMap) return;
 
+  var triggers = Array.prototype.slice.call(document.querySelectorAll('[aria-controls="home-route-map"], [data-route-map-trigger]'));
+  if (!triggers.length) return;
+
+  var primaryTrigger = triggers[0];
   var closeBtn = routeMap.querySelector('.route-guide-close');
   var focusableSelector = 'a[href], button:not([disabled])';
   var originalRouteParent = routeMap.parentNode;
   var originalRouteNext = routeMap.nextSibling;
   var isOpen = false;
+  var activeTrigger = primaryTrigger;
+  var restoreTimer = null;
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   document.body.classList.add('route-map-ready');
   routeMap.setAttribute('aria-hidden', 'true');
   routeMap.setAttribute('tabindex', '-1');
-  enter.setAttribute('aria-expanded', 'false');
+  triggers.forEach(function (trigger) {
+    trigger.setAttribute('aria-expanded', 'false');
+  });
 
   var moveRouteMapToBody = function () {
     if (routeMap.parentNode !== document.body) {
@@ -1217,12 +1226,20 @@ function initHomeRouteMap() {
   var setRouteMap = function (open, options) {
     options = options || {};
     if (open === isOpen) return;
-    if (open) moveRouteMapToBody();
+    window.clearTimeout(restoreTimer);
+    if (open) {
+      activeTrigger = options.trigger || activeTrigger || primaryTrigger;
+      moveRouteMapToBody();
+      routeMap.classList.remove('is-closing');
+    }
     isOpen = open;
     document.body.classList.toggle('route-map-open', open);
     routeMap.classList.toggle('is-open', open);
+    routeMap.classList.toggle('is-closing', !open);
     routeMap.setAttribute('aria-hidden', String(!open));
-    enter.setAttribute('aria-expanded', String(open));
+    triggers.forEach(function (trigger) {
+      trigger.setAttribute('aria-expanded', String(open));
+    });
 
     if (open) {
       window.requestAnimationFrame(function () {
@@ -1233,14 +1250,20 @@ function initHomeRouteMap() {
     }
 
     if (options.returnFocus !== false) {
-      enter.focus({ preventScroll: true });
+      (activeTrigger || primaryTrigger).focus({ preventScroll: true });
     }
-    restoreRouteMapPosition();
+
+    restoreTimer = window.setTimeout(function () {
+      routeMap.classList.remove('is-closing');
+      restoreRouteMapPosition();
+    }, reduceMotion ? 0 : 560);
   };
 
-  enter.addEventListener('click', function (event) {
-    event.preventDefault();
-    setRouteMap(true);
+  triggers.forEach(function (trigger) {
+    trigger.addEventListener('click', function (event) {
+      event.preventDefault();
+      setRouteMap(true, { trigger: trigger });
+    });
   });
 
   if (closeBtn) {
@@ -1257,9 +1280,94 @@ function initHomeRouteMap() {
 
   document.addEventListener('click', function (event) {
     if (!isOpen) return;
-    if (routeMap.contains(event.target) || enter.contains(event.target)) return;
+    if (routeMap.contains(event.target) || triggers.some(function (trigger) { return trigger.contains(event.target); })) return;
     setRouteMap(false, { returnFocus: false });
   });
+}
+
+/**
+ * 首页暮光日线：只在桌面精细指针下轻微响应鼠标，不移动背景本体。
+ */
+function initHomeSunResponse() {
+  if (!document.body.classList.contains('page-home')) return;
+
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if (reduceMotion || !canHover) return;
+
+  var themeRoot = document.documentElement;
+  var motionRoot = document.body;
+  var stage = document.querySelector('.courtyard');
+  if (!stage) return;
+
+  var current = { dx: 0, dy: 0, rot: 0, opacity: 0.72 };
+  var target = { dx: 0, dy: 0, rot: 0, opacity: 0.72 };
+  var frame = null;
+  var settleTimer = null;
+  var pauseSelector = '.courtyard-content, .home-orbit-controls, .route-guide, a, button';
+
+  function setNeutral() {
+    target.dx = 0;
+    target.dy = 0;
+    target.rot = 0;
+    target.opacity = 0.72;
+    requestTick();
+  }
+
+  function requestTick() {
+    if (frame) return;
+    frame = window.requestAnimationFrame(tick);
+  }
+
+  function tick() {
+    frame = null;
+
+    current.dx += (target.dx - current.dx) * 0.1;
+    current.dy += (target.dy - current.dy) * 0.1;
+    current.rot += (target.rot - current.rot) * 0.1;
+    current.opacity += (target.opacity - current.opacity) * 0.08;
+
+    motionRoot.style.setProperty('--home-sun-dx', current.dx.toFixed(2) + 'px');
+    motionRoot.style.setProperty('--home-sun-dy', current.dy.toFixed(2) + 'px');
+    motionRoot.style.setProperty('--home-sun-rot', current.rot.toFixed(2) + 'deg');
+    motionRoot.style.setProperty('--home-sun-opacity', current.opacity.toFixed(3));
+
+    if (
+      Math.abs(target.dx - current.dx) > 0.05 ||
+      Math.abs(target.dy - current.dy) > 0.05 ||
+      Math.abs(target.rot - current.rot) > 0.02 ||
+      Math.abs(target.opacity - current.opacity) > 0.002
+    ) {
+      requestTick();
+    }
+  }
+
+  function handlePointerMove(event) {
+    if ((event.pointerType && event.pointerType !== 'mouse') || themeRoot.getAttribute('data-world') !== 'day') {
+      setNeutral();
+      return;
+    }
+
+    if (document.body.classList.contains('route-map-open') || event.target.closest(pauseSelector)) {
+      setNeutral();
+      return;
+    }
+
+    var x = event.clientX / window.innerWidth - 0.5;
+    var y = event.clientY / window.innerHeight - 0.5;
+
+    target.dx = Math.max(-3, Math.min(3, x * 6));
+    target.dy = Math.max(-2, Math.min(2, y * 4));
+    target.rot = Math.max(-4.5, Math.min(4.5, x * 7 + y * 2));
+    target.opacity = 0.72 + Math.max(-0.03, Math.min(0.04, x * 0.035 - y * 0.025));
+
+    window.clearTimeout(settleTimer);
+    settleTimer = window.setTimeout(setNeutral, 850);
+    requestTick();
+  }
+
+  stage.addEventListener('pointermove', handlePointerMove, { passive: true });
+  stage.addEventListener('pointerleave', setNeutral, { passive: true });
 }
 
 /**
