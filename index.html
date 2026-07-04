@@ -181,45 +181,218 @@
                 <button class="route-guide-close mount-map__close" type="button" aria-label="收起路线图">合卷</button>
               </header>
               <div class="mount-map__terrain mount-map__terrain--desktop" aria-hidden="true">
-                <span class="mount-map__ridge mount-map__ridge--far"></span>
-                <span class="mount-map__ridge mount-map__ridge--near"></span>
+                <svg class="mount-map__terrain-svg mount-map__terrain-svg--desktop" viewBox="0 0 1000 620" preserveAspectRatio="none" focusable="false">
+                  <path class="mount-map__wash mount-map__wash--upper" d="M0 0H1000V196C892 168 812 178 724 158C586 127 502 155 382 132C262 109 161 134 0 102Z"></path>
+                  <path class="mount-map__ridge mount-map__ridge--far" d="M0 236C98 185 178 207 258 171C352 128 440 173 523 142C620 105 710 148 804 117C892 88 948 105 1000 78V620H0Z"></path>
+                  <path class="mount-map__ridge mount-map__ridge--mid" d="M0 328C90 278 165 299 242 266C337 225 425 274 514 238C618 196 708 251 807 218C884 193 940 211 1000 187V620H0Z"></path>
+                  <path class="mount-map__valley mount-map__valley--left" d="M0 469C86 414 150 414 234 390C319 366 382 317 470 336C558 355 618 421 714 398C836 369 912 400 1000 362V620H0Z"></path>
+                  <path class="mount-map__valley mount-map__valley--right" d="M0 620V520C132 473 236 498 350 459C477 416 552 462 657 415C782 359 873 401 1000 333V620Z"></path>
+                  <path class="mount-map__river" d="M324 416C382 375 437 381 492 402C555 426 606 411 662 368C709 332 764 328 826 350C752 373 708 378 664 414C609 458 542 459 481 434C422 409 378 417 324 452Z"></path>
+                  <path class="mount-map__slope mount-map__slope--gate" d="M44 500C78 458 121 438 181 443C157 481 126 513 72 536C58 526 49 515 44 500Z"></path>
+                  <path class="mount-map__slope mount-map__slope--saddle" d="M446 428C491 371 537 344 604 353C580 412 544 458 477 484C461 469 451 450 446 428Z"></path>
+                  <path class="mount-map__slope mount-map__slope--plum" d="M703 371C756 337 816 322 884 345C845 389 798 411 725 414C713 401 706 386 703 371Z"></path>
+                  <path class="mount-map__terrace mount-map__terrace--desk" d="M318 358C354 339 393 336 432 351C421 371 386 381 340 376C330 371 323 365 318 358Z"></path>
+                  <path class="mount-map__terrace mount-map__terrace--gallery" d="M626 308C674 279 733 274 789 300C762 328 709 341 647 330C637 324 630 316 626 308Z"></path>
+                  <path class="mount-map__terrace mount-map__terrace--station" d="M856 229C889 201 927 190 968 206C946 239 913 254 869 252C862 245 858 237 856 229Z"></path>
+                  <g class="mount-map__forest mount-map__forest--left">
+                    <path d="M170 395l-10 30M190 382l-13 41M214 386l-9 34M238 376l-12 38"></path>
+                    <path d="M150 435C178 425 207 424 241 433"></path>
+                  </g>
+                  <g class="mount-map__forest mount-map__forest--mid">
+                    <path d="M520 326l-12 39M545 315l-9 34M570 323l-13 40M601 317l-10 36"></path>
+                    <path d="M492 374C536 357 576 357 617 372"></path>
+                  </g>
+                  <g class="mount-map__forest mount-map__forest--right">
+                    <path d="M760 283l-12 38M786 272l-10 34M812 277l-13 39M842 268l-11 36"></path>
+                    <path d="M736 330C778 313 820 314 863 329"></path>
+                  </g>
+                  <g class="mount-map__plum-branch">
+                    <path d="M747 347C773 323 791 302 804 266"></path>
+                    <path d="M783 310C810 303 833 308 858 291"></path>
+                    <path d="M791 292C773 278 762 264 755 242"></path>
+                    <circle cx="844" cy="294" r="3"></circle>
+                    <circle cx="758" cy="246" r="2.6"></circle>
+                    <circle cx="806" cy="267" r="2.4"></circle>
+                  </g>
+                  <g class="mount-map__stone-scatter">
+                    <circle cx="92" cy="460" r="4"></circle>
+                    <circle cx="120" cy="444" r="2.6"></circle>
+                    <circle cx="284" cy="404" r="2.8"></circle>
+                    <circle cx="472" cy="366" r="3.2"></circle>
+                    <circle cx="602" cy="438" r="2.8"></circle>
+                    <circle cx="913" cy="244" r="3.4"></circle>
+                  </g>
+                </svg>
               </div>
               <div class="mount-map__terrain mount-map__terrain--mobile" aria-hidden="true">
-                <span class="mount-map__ridge mount-map__ridge--mobile"></span>
+                <svg class="mount-map__terrain-svg mount-map__terrain-svg--mobile" viewBox="0 0 390 844" preserveAspectRatio="none" focusable="false">
+                  <path class="mount-map__wash mount-map__wash--upper" d="M0 0H390V158C326 139 284 148 236 126C170 96 110 123 48 102C28 95 12 88 0 80Z"></path>
+                  <path class="mount-map__ridge mount-map__ridge--far" d="M0 184C42 137 78 157 118 126C168 87 210 134 250 104C300 66 338 93 390 58V844H0Z"></path>
+                  <path class="mount-map__ridge mount-map__ridge--mid" d="M0 282C44 238 78 256 122 222C178 178 214 232 263 197C315 160 348 184 390 154V844H0Z"></path>
+                  <path class="mount-map__valley mount-map__valley--left" d="M0 420C46 378 84 380 132 354C184 326 226 360 270 330C324 293 356 308 390 286V844H0Z"></path>
+                  <path class="mount-map__valley mount-map__valley--right" d="M0 844V520C58 486 104 507 156 469C211 430 253 474 303 431C340 399 362 392 390 378V844Z"></path>
+                  <path class="mount-map__river" d="M84 372C124 346 162 349 198 376C232 401 265 393 304 356C281 399 249 426 207 420C166 414 136 384 84 414Z"></path>
+                  <path class="mount-map__slope mount-map__slope--gate" d="M36 194C62 169 94 163 128 180C102 210 74 230 44 229C37 219 34 207 36 194Z"></path>
+                  <path class="mount-map__slope mount-map__slope--saddle" d="M178 420C213 381 248 372 288 393C262 434 229 456 187 454C181 443 178 432 178 420Z"></path>
+                  <path class="mount-map__slope mount-map__slope--plum" d="M178 604C225 571 282 568 334 597C297 631 244 646 190 633C184 625 180 614 178 604Z"></path>
+                  <path class="mount-map__terrace mount-map__terrace--desk" d="M78 340C112 321 146 322 180 340C158 362 115 369 84 356C80 351 78 345 78 340Z"></path>
+                  <path class="mount-map__terrace mount-map__terrace--gallery" d="M84 536C128 509 181 511 226 540C190 568 131 574 90 557C86 551 84 543 84 536Z"></path>
+                  <path class="mount-map__terrace mount-map__terrace--station" d="M128 742C167 715 216 711 260 737C227 768 174 780 135 762C131 756 128 749 128 742Z"></path>
+                  <g class="mount-map__forest mount-map__forest--left">
+                    <path d="M72 264l-8 34M94 252l-9 37M116 260l-8 33"></path>
+                    <path d="M54 306C78 296 106 296 132 306"></path>
+                  </g>
+                  <g class="mount-map__forest mount-map__forest--mid">
+                    <path d="M245 342l-9 34M266 332l-8 31M290 340l-10 36"></path>
+                    <path d="M226 386C254 374 284 374 313 386"></path>
+                  </g>
+                  <g class="mount-map__forest mount-map__forest--right">
+                    <path d="M237 548l-8 32M260 538l-9 37M286 548l-8 33"></path>
+                    <path d="M214 590C246 576 282 576 319 590"></path>
+                  </g>
+                  <g class="mount-map__plum-branch">
+                    <path d="M222 605C243 579 256 556 260 526"></path>
+                    <path d="M251 568C273 558 294 560 316 546"></path>
+                    <path d="M255 552C238 539 226 524 221 505"></path>
+                    <circle cx="309" cy="548" r="2.6"></circle>
+                    <circle cx="222" cy="508" r="2.2"></circle>
+                    <circle cx="260" cy="528" r="2.4"></circle>
+                  </g>
+                  <g class="mount-map__stone-scatter">
+                    <circle cx="68" cy="210" r="3"></circle>
+                    <circle cx="210" cy="424" r="3.2"></circle>
+                    <circle cx="150" cy="545" r="2.6"></circle>
+                    <circle cx="194" cy="746" r="3.2"></circle>
+                  </g>
+                </svg>
               </div>
               <div class="mount-map__roads" aria-hidden="true">
-                <span class="mount-map__road-line mount-map__road-line--main"></span>
-                <span class="mount-map__road-line mount-map__road-line--upper"></span>
-                <span class="mount-map__road-line mount-map__road-line--lower"></span>
+                <svg class="mount-map__road-svg mount-map__road-svg--desktop" viewBox="0 0 1000 620" preserveAspectRatio="none" focusable="false">
+                  <g class="mount-map__road-beds">
+                    <path class="mount-map__road-bed mount-map__road-segment mount-map__road-segment--one" pathLength="1" d="M74 485C118 452 152 448 196 430C230 416 255 394 290 390"></path>
+                    <path class="mount-map__road-bed mount-map__road-segment mount-map__road-segment--two" pathLength="1" d="M304 389C350 363 390 344 432 360C470 374 485 415 520 424"></path>
+                    <path class="mount-map__road-bed mount-map__road-segment mount-map__road-segment--three" pathLength="1" d="M536 425C582 436 590 371 632 340C668 314 713 318 750 326"></path>
+                    <path class="mount-map__road-bed mount-map__road-segment mount-map__road-segment--four" pathLength="1" d="M766 329C814 337 831 306 866 273C895 246 925 236 955 204"></path>
+                  </g>
+                  <g class="mount-map__road-inks">
+                    <path class="mount-map__road-ink mount-map__road-segment mount-map__road-segment--one" pathLength="1" d="M74 485C118 452 152 448 196 430C230 416 255 394 290 390"></path>
+                    <path class="mount-map__road-ink mount-map__road-segment mount-map__road-segment--two" pathLength="1" d="M304 389C350 363 390 344 432 360C470 374 485 415 520 424"></path>
+                    <path class="mount-map__road-ink mount-map__road-segment mount-map__road-segment--three" pathLength="1" d="M536 425C582 436 590 371 632 340C668 314 713 318 750 326"></path>
+                    <path class="mount-map__road-ink mount-map__road-segment mount-map__road-segment--four" pathLength="1" d="M766 329C814 337 831 306 866 273C895 246 925 236 955 204"></path>
+                  </g>
+                  <g class="mount-map__road-branches">
+                    <path d="M124 455C120 467 116 474 107 486"></path>
+                    <path d="M238 407C236 394 239 383 250 371"></path>
+                    <path d="M374 354C378 342 385 333 398 324"></path>
+                    <path d="M514 423C520 407 527 395 536 383"></path>
+                    <path d="M672 318C670 304 674 292 688 279"></path>
+                    <path d="M796 331C789 344 785 355 781 368"></path>
+                    <path d="M925 236C923 222 928 211 940 196"></path>
+                  </g>
+                  <g class="mount-map__road-steps">
+                    <path d="M500 403l34 7M512 386l34 7M526 369l32 7M544 353l29 7"></path>
+                  </g>
+                  <g class="mount-map__road-bridge">
+                    <path d="M354 374C384 363 413 363 442 376"></path>
+                    <path d="M365 369l-5 16M383 366l-4 18M402 367l-3 18M421 371l-4 16"></path>
+                  </g>
+                  <g class="mount-map__road-cover">
+                    <path d="M282 384C310 372 332 371 357 378"></path>
+                    <path d="M742 321C760 316 779 318 794 327"></path>
+                  </g>
+                  <g class="mount-map__travel-marks">
+                    <path d="M97 475l18 -9"></path>
+                    <path d="M455 384l14 11"></path>
+                    <path d="M944 213l10 -12"></path>
+                  </g>
+                </svg>
+                <svg class="mount-map__road-svg mount-map__road-svg--mobile" viewBox="0 0 390 844" preserveAspectRatio="none" focusable="false">
+                  <g class="mount-map__road-beds">
+                    <path class="mount-map__road-bed mount-map__road-segment mount-map__road-segment--one" pathLength="1" d="M87 214C126 250 208 232 222 292C234 342 132 326 123 380"></path>
+                    <path class="mount-map__road-bed mount-map__road-segment mount-map__road-segment--two" pathLength="1" d="M123 380C115 432 230 404 239 462C247 512 126 511 115 568"></path>
+                    <path class="mount-map__road-bed mount-map__road-segment mount-map__road-segment--three" pathLength="1" d="M115 568C105 622 245 608 248 670C251 717 159 712 163 762"></path>
+                  </g>
+                  <g class="mount-map__road-inks">
+                    <path class="mount-map__road-ink mount-map__road-segment mount-map__road-segment--one" pathLength="1" d="M87 214C126 250 208 232 222 292C234 342 132 326 123 380"></path>
+                    <path class="mount-map__road-ink mount-map__road-segment mount-map__road-segment--two" pathLength="1" d="M123 380C115 432 230 404 239 462C247 512 126 511 115 568"></path>
+                    <path class="mount-map__road-ink mount-map__road-segment mount-map__road-segment--three" pathLength="1" d="M115 568C105 622 245 608 248 670C251 717 159 712 163 762"></path>
+                  </g>
+                  <g class="mount-map__road-branches">
+                    <path d="M102 228C88 222 76 213 64 199"></path>
+                    <path d="M212 292C225 283 239 274 256 268"></path>
+                    <path d="M129 379C112 373 100 366 88 352"></path>
+                    <path d="M230 462C242 453 254 444 267 432"></path>
+                    <path d="M116 568C105 555 96 548 82 540"></path>
+                    <path d="M245 671C261 666 275 658 290 646"></path>
+                    <path d="M165 762C174 752 185 744 201 735"></path>
+                  </g>
+                  <g class="mount-map__road-steps">
+                    <path d="M213 420l31 8M222 438l32 8M230 457l31 8M226 476l28 8"></path>
+                  </g>
+                  <g class="mount-map__road-bridge">
+                    <path d="M105 374C134 358 165 359 192 376"></path>
+                    <path d="M119 367l-5 17M137 363l-4 18M156 365l-3 18M175 370l-4 17"></path>
+                  </g>
+                  <g class="mount-map__road-cover">
+                    <path d="M203 279C224 272 247 274 266 286"></path>
+                    <path d="M102 559C123 551 146 552 165 563"></path>
+                  </g>
+                  <g class="mount-map__travel-marks">
+                    <path d="M72 207l14 -9"></path>
+                    <path d="M241 462l13 11"></path>
+                    <path d="M204 739l12 -12"></path>
+                  </g>
+                </svg>
               </div>
               <nav class="mount-map__landmarks" aria-label="入山行图页面入口">
                 <a class="mount-map__landmark" href="about.html" data-landmark="about">
-                  <span class="mount-map__landmark-name">小序</span>
-                  <span class="mount-map__landmark-caption">先识其人</span>
+                  <span class="mount-map__landmark-object" aria-hidden="true"></span>
+                  <span class="mount-map__landmark-text">
+                    <span class="mount-map__landmark-name">小序</span>
+                    <span class="mount-map__landmark-caption">先识其人</span>
+                  </span>
                 </a>
                 <a class="mount-map__landmark" href="projects.html" data-landmark="projects">
-                  <span class="mount-map__landmark-name">行迹</span>
-                  <span class="mount-map__landmark-caption">作品与路标</span>
+                  <span class="mount-map__landmark-object" aria-hidden="true"></span>
+                  <span class="mount-map__landmark-text">
+                    <span class="mount-map__landmark-name">行迹</span>
+                    <span class="mount-map__landmark-caption">作品与路标</span>
+                  </span>
                 </a>
                 <a class="mount-map__landmark" href="articles.html" data-landmark="articles">
-                  <span class="mount-map__landmark-name">雪笺</span>
-                  <span class="mount-map__landmark-caption">短文与想法</span>
+                  <span class="mount-map__landmark-object" aria-hidden="true"></span>
+                  <span class="mount-map__landmark-text">
+                    <span class="mount-map__landmark-name">雪笺</span>
+                    <span class="mount-map__landmark-caption">短文与想法</span>
+                  </span>
                 </a>
                 <a class="mount-map__landmark" href="learning.html" data-landmark="learning">
-                  <span class="mount-map__landmark-name">学习路</span>
-                  <span class="mount-map__landmark-caption">正在补齐</span>
+                  <span class="mount-map__landmark-object" aria-hidden="true"></span>
+                  <span class="mount-map__landmark-text">
+                    <span class="mount-map__landmark-name">学习路</span>
+                    <span class="mount-map__landmark-caption">正在补齐</span>
+                  </span>
                 </a>
                 <a class="mount-map__landmark" href="gallery.html" data-landmark="gallery">
-                  <span class="mount-map__landmark-name">影像廊</span>
-                  <span class="mount-map__landmark-caption">路上所见</span>
+                  <span class="mount-map__landmark-object" aria-hidden="true"></span>
+                  <span class="mount-map__landmark-text">
+                    <span class="mount-map__landmark-name">影像廊</span>
+                    <span class="mount-map__landmark-caption">路上所见</span>
+                  </span>
                 </a>
                 <a class="mount-map__landmark" href="music.html" data-landmark="music">
-                  <span class="mount-map__landmark-name">听雪</span>
-                  <span class="mount-map__landmark-caption">曲与静听</span>
+                  <span class="mount-map__landmark-object" aria-hidden="true"></span>
+                  <span class="mount-map__landmark-text">
+                    <span class="mount-map__landmark-name">听雪</span>
+                    <span class="mount-map__landmark-caption">曲与静听</span>
+                  </span>
                 </a>
                 <a class="mount-map__landmark" href="contact.html" data-landmark="contact">
-                  <span class="mount-map__landmark-name">留笺</span>
-                  <span class="mount-map__landmark-caption">写下一句</span>
+                  <span class="mount-map__landmark-object" aria-hidden="true"></span>
+                  <span class="mount-map__landmark-text">
+                    <span class="mount-map__landmark-name">留笺</span>
+                    <span class="mount-map__landmark-caption">写下一句</span>
+                  </span>
                 </a>
               </nav>
             </div>
