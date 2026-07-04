@@ -1197,16 +1197,28 @@ function initHomeRouteMap() {
 
   var primaryTrigger = triggers[0];
   var closeBtn = routeMap.querySelector('.route-guide-close');
-  var focusableSelector = 'a[href], button:not([disabled])';
+  var focusableSelector = [
+    'a[href]',
+    'area[href]',
+    'button:not([disabled])',
+    'input:not([disabled]):not([type="hidden"])',
+    'select:not([disabled])',
+    'textarea:not([disabled])',
+    '[tabindex]:not([tabindex="-1"])'
+  ].join(',');
   var originalRouteParent = routeMap.parentNode;
   var originalRouteNext = routeMap.nextSibling;
   var isOpen = false;
+  var isClosing = false;
   var activeTrigger = primaryTrigger;
   var restoreTimer = null;
-  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var canTiltCompass = !reduceMotion && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  var backgroundState = [];
+  var scrollLockState = null;
+  var reduceMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   document.body.classList.add('route-map-ready');
+  routeMap.setAttribute('role', 'dialog');
+  routeMap.setAttribute('aria-modal', 'true');
   routeMap.setAttribute('aria-hidden', 'true');
   routeMap.setAttribute('tabindex', '-1');
   triggers.forEach(function (trigger) {
@@ -1224,47 +1236,177 @@ function initHomeRouteMap() {
     originalRouteParent.insertBefore(routeMap, originalRouteNext);
   };
 
-  var resetCompassTilt = function () {
-    routeMap.style.setProperty('--route-compass-x', '0deg');
-    routeMap.style.setProperty('--route-compass-y', '0deg');
+  var isReducedMotion = function () {
+    return reduceMotionQuery.matches;
   };
 
-  var setRouteMap = function (open, options) {
-    options = options || {};
-    if (open === isOpen) return;
-    window.clearTimeout(restoreTimer);
-    if (open) {
-      activeTrigger = options.trigger || activeTrigger || primaryTrigger;
-      moveRouteMapToBody();
-      routeMap.classList.remove('is-closing');
-      resetCompassTilt();
-    }
-    isOpen = open;
-    document.body.classList.toggle('route-map-open', open);
-    routeMap.classList.toggle('is-open', open);
-    routeMap.classList.toggle('is-closing', !open);
-    routeMap.setAttribute('aria-hidden', String(!open));
-    triggers.forEach(function (trigger) {
-      trigger.setAttribute('aria-expanded', String(open));
+  var getFocusableItems = function () {
+    return Array.prototype.slice.call(routeMap.querySelectorAll(focusableSelector)).filter(function (item) {
+      return !item.hasAttribute('disabled') && item.getAttribute('aria-hidden') !== 'true' && item.offsetParent !== null;
     });
+  };
 
-    if (open) {
-      window.requestAnimationFrame(function () {
-        var first = routeMap.querySelector(focusableSelector);
-        if (first) first.focus({ preventScroll: true });
+  var setBackgroundDisabled = function (disabled) {
+    if (disabled) {
+      if (backgroundState.length) return;
+      backgroundState = Array.prototype.slice.call(document.body.children).filter(function (element) {
+        return element !== routeMap;
+      }).map(function (element) {
+        return {
+          element: element,
+          ariaHidden: element.getAttribute('aria-hidden'),
+          inert: element.hasAttribute('inert')
+        };
+      });
+      backgroundState.forEach(function (entry) {
+        entry.element.setAttribute('aria-hidden', 'true');
+        entry.element.setAttribute('inert', '');
+        if ('inert' in entry.element) entry.element.inert = true;
       });
       return;
     }
 
-    if (options.returnFocus !== false) {
-      (activeTrigger || primaryTrigger).focus({ preventScroll: true });
+    backgroundState.forEach(function (entry) {
+      if (entry.ariaHidden === null) {
+        entry.element.removeAttribute('aria-hidden');
+      } else {
+        entry.element.setAttribute('aria-hidden', entry.ariaHidden);
+      }
+
+      if (!entry.inert) {
+        entry.element.removeAttribute('inert');
+        if ('inert' in entry.element) entry.element.inert = false;
+      } else if ('inert' in entry.element) {
+        entry.element.inert = true;
+      }
+    });
+    backgroundState = [];
+  };
+
+  var lockScroll = function () {
+    if (scrollLockState) return;
+    scrollLockState = {
+      x: window.scrollX || window.pageXOffset || 0,
+      y: window.scrollY || window.pageYOffset || 0,
+      bodyPosition: document.body.style.position,
+      bodyTop: document.body.style.top,
+      bodyLeft: document.body.style.left,
+      bodyRight: document.body.style.right,
+      bodyWidth: document.body.style.width,
+      bodyOverflow: document.body.style.overflow,
+      rootScrollBehavior: document.documentElement.style.scrollBehavior
+    };
+
+    document.documentElement.style.scrollBehavior = 'auto';
+    document.body.style.position = 'fixed';
+    document.body.style.top = '-' + scrollLockState.y + 'px';
+    document.body.style.left = '-' + scrollLockState.x + 'px';
+    document.body.style.right = '0';
+    document.body.style.width = '100%';
+    document.body.style.overflow = 'hidden';
+  };
+
+  var unlockScroll = function () {
+    if (!scrollLockState) return;
+    var x = scrollLockState.x;
+    var y = scrollLockState.y;
+    var rootScrollBehavior = scrollLockState.rootScrollBehavior;
+    var restoreScrollPosition = function () {
+      var scrollingElement = document.scrollingElement || document.documentElement;
+      if (scrollingElement) {
+        scrollingElement.scrollLeft = x;
+        scrollingElement.scrollTop = y;
+      }
+      document.documentElement.scrollTop = y;
+      document.body.scrollTop = y;
+      window.scrollTo(x, y);
+    };
+    var restoreScrollBehavior = function () {
+      document.documentElement.style.scrollBehavior = rootScrollBehavior;
+    };
+
+    document.body.style.position = scrollLockState.bodyPosition;
+    document.body.style.top = scrollLockState.bodyTop;
+    document.body.style.left = scrollLockState.bodyLeft;
+    document.body.style.right = scrollLockState.bodyRight;
+    document.body.style.width = scrollLockState.bodyWidth;
+    document.body.style.overflow = scrollLockState.bodyOverflow;
+    scrollLockState = null;
+    restoreScrollPosition();
+    window.requestAnimationFrame(restoreScrollPosition);
+    window.setTimeout(function () {
+      restoreScrollPosition();
+      restoreScrollBehavior();
+    }, 80);
+  };
+
+  var setTriggerState = function (open) {
+    triggers.forEach(function (trigger) {
+      trigger.setAttribute('aria-expanded', String(open));
+    });
+  };
+
+  var finishClose = function (returnFocus) {
+    routeMap.classList.remove('is-closing');
+    document.body.classList.remove('route-map-open');
+    routeMap.setAttribute('aria-hidden', 'true');
+    restoreRouteMapPosition();
+    setBackgroundDisabled(false);
+
+    if (returnFocus !== false && activeTrigger && typeof activeTrigger.focus === 'function') {
+      activeTrigger.focus({ preventScroll: true });
     }
 
-    resetCompassTilt();
+    unlockScroll();
+  };
+
+  var openRouteMap = function (trigger) {
+    window.clearTimeout(restoreTimer);
+    activeTrigger = trigger || activeTrigger || primaryTrigger;
+    moveRouteMapToBody();
+    lockScroll();
+    setBackgroundDisabled(true);
+    isOpen = true;
+    isClosing = false;
+    document.body.classList.add('route-map-open');
+    routeMap.classList.remove('is-closing');
+    routeMap.classList.add('is-open');
+    routeMap.setAttribute('aria-hidden', 'false');
+    setTriggerState(true);
+
+    window.requestAnimationFrame(function () {
+      var first = getFocusableItems()[0];
+      (first || routeMap).focus({ preventScroll: true });
+    });
+  };
+
+  var closeRouteMap = function (options) {
+    options = options || {};
+    if (!isOpen || isClosing) return;
+    window.clearTimeout(restoreTimer);
+    isOpen = false;
+    isClosing = true;
+    routeMap.classList.remove('is-open');
+    routeMap.classList.add('is-closing');
+    setTriggerState(false);
+
+    var delay = isReducedMotion() ? 0 : 560;
     restoreTimer = window.setTimeout(function () {
-      routeMap.classList.remove('is-closing');
-      restoreRouteMapPosition();
-    }, reduceMotion ? 0 : 1120);
+      isClosing = false;
+      finishClose(options.returnFocus);
+    }, delay);
+  };
+
+  var setRouteMap = function (open, options) {
+    options = options || {};
+
+    if (open) {
+      if (isOpen && !isClosing) return;
+      openRouteMap(options.trigger);
+      return;
+    }
+
+    closeRouteMap(options);
   };
 
   triggers.forEach(function (trigger) {
@@ -1281,29 +1423,38 @@ function initHomeRouteMap() {
   }
 
   document.addEventListener('keydown', function (event) {
-    if (!isOpen || event.key !== 'Escape') return;
-    event.preventDefault();
-    setRouteMap(false);
-  });
-
-  document.addEventListener('click', function (event) {
     if (!isOpen) return;
-    if (routeMap.contains(event.target) || triggers.some(function (trigger) { return trigger.contains(event.target); })) return;
-    setRouteMap(false, { returnFocus: false });
+
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      setRouteMap(false);
+      return;
+    }
+
+    if (event.key !== 'Tab') return;
+
+    var focusableItems = getFocusableItems();
+    if (!focusableItems.length) {
+      event.preventDefault();
+      routeMap.focus({ preventScroll: true });
+      return;
+    }
+
+    var first = focusableItems[0];
+    var last = focusableItems[focusableItems.length - 1];
+    var active = document.activeElement;
+
+    if (event.shiftKey && (active === first || active === routeMap || !routeMap.contains(active))) {
+      event.preventDefault();
+      last.focus({ preventScroll: true });
+      return;
+    }
+
+    if (!event.shiftKey && active === last) {
+      event.preventDefault();
+      first.focus({ preventScroll: true });
+    }
   });
-
-  if (canTiltCompass) {
-    routeMap.addEventListener('pointermove', function (event) {
-      if (!isOpen) return;
-      var rect = routeMap.getBoundingClientRect();
-      var x = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
-      var y = ((event.clientY - rect.top) / rect.height - 0.5) * 2;
-      routeMap.style.setProperty('--route-compass-x', (x * 2.4).toFixed(2) + 'deg');
-      routeMap.style.setProperty('--route-compass-y', (y * -2).toFixed(2) + 'deg');
-    });
-
-    routeMap.addEventListener('pointerleave', resetCompassTilt);
-  }
 }
 
 /**

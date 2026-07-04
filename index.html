@@ -17,6 +17,7 @@
   <meta property="og:url" content="https://uner9895-blip.github.io/liuyuexue-site/">
   <link rel="stylesheet" href="assets/css/style.css?v=2.0.4">
   <link rel="stylesheet" href="assets/css/v2-structure.css?v=2.0.0">
+  <link rel="stylesheet" href="assets/css/home-route-map.css">
   <script>
     (function() {
       var theme = localStorage.getItem('theme') || 'light';
@@ -164,133 +165,77 @@
         <p class="courtyard-subtitle">纸卷初展，山路向前</p>
         <p class="courtyard-atmosphere">暮色沿山谷落下，云在路口慢慢经过。</p>
         <a class="courtyard-enter" href="#enter" aria-controls="home-route-map" aria-expanded="false">起行</a>
-        <!-- 空间地图（路线式入口）：静态链接，无 JS 亦可访问；Codex 可重做视觉 -->
-        <nav class="route-guide" id="home-route-map" role="dialog" aria-modal="true" aria-labelledby="route-map-title" aria-describedby="route-map-subtitle">
-          <div class="route-guide-shell">
-            <span class="route-scroll-rod route-scroll-rod-top" aria-hidden="true"></span>
-            <span class="route-scroll-rod route-scroll-rod-bottom" aria-hidden="true"></span>
-            <span class="route-scroll-cap route-scroll-cap-left" aria-hidden="true"></span>
-            <span class="route-scroll-cap route-scroll-cap-right" aria-hidden="true"></span>
-
-            <div class="route-guide-heading">
-              <span class="route-guide-eyebrow">起行卷 · 卷轴山路</span>
-              <strong id="route-map-title">入山行图</strong>
-              <em id="route-map-subtitle">循纸上山路，择一处停驻</em>
+        <!-- 空间地图：有 JS 时展开为对话层，无 JS 时保留静态链接。 -->
+        <section class="route-guide mount-map" id="home-route-map" aria-labelledby="route-map-title" aria-describedby="route-map-subtitle">
+          <div class="mount-map__scrim" aria-hidden="true"></div>
+          <div class="mount-map__scene">
+            <div class="mount-map__scroll">
+              <div class="mount-map__paper" aria-hidden="true"></div>
+              <div class="mount-map__terrain mount-map__terrain--desktop" aria-hidden="true">
+                <span class="mount-map__ridge mount-map__ridge--far"></span>
+                <span class="mount-map__ridge mount-map__ridge--near"></span>
+              </div>
+              <div class="mount-map__terrain mount-map__terrain--mobile" aria-hidden="true">
+                <span class="mount-map__ridge mount-map__ridge--mobile"></span>
+              </div>
+              <div class="mount-map__roads" aria-hidden="true">
+                <span class="mount-map__road-line mount-map__road-line--main"></span>
+                <span class="mount-map__road-line mount-map__road-line--upper"></span>
+                <span class="mount-map__road-line mount-map__road-line--lower"></span>
+              </div>
+              <nav class="mount-map__landmarks" aria-label="入山行图页面入口">
+                <a class="mount-map__landmark" href="about.html" data-landmark="about">
+                  <span class="mount-map__landmark-name">小序</span>
+                  <span class="mount-map__landmark-caption">先识其人</span>
+                </a>
+                <a class="mount-map__landmark" href="projects.html" data-landmark="projects">
+                  <span class="mount-map__landmark-name">行迹</span>
+                  <span class="mount-map__landmark-caption">作品与路标</span>
+                </a>
+                <a class="mount-map__landmark" href="articles.html" data-landmark="articles">
+                  <span class="mount-map__landmark-name">雪笺</span>
+                  <span class="mount-map__landmark-caption">短文与想法</span>
+                </a>
+                <a class="mount-map__landmark" href="learning.html" data-landmark="learning">
+                  <span class="mount-map__landmark-name">学习路</span>
+                  <span class="mount-map__landmark-caption">正在补齐</span>
+                </a>
+                <a class="mount-map__landmark" href="gallery.html" data-landmark="gallery">
+                  <span class="mount-map__landmark-name">影像廊</span>
+                  <span class="mount-map__landmark-caption">路上所见</span>
+                </a>
+                <a class="mount-map__landmark" href="music.html" data-landmark="music">
+                  <span class="mount-map__landmark-name">听雪</span>
+                  <span class="mount-map__landmark-caption">曲与静听</span>
+                </a>
+                <a class="mount-map__landmark" href="contact.html" data-landmark="contact">
+                  <span class="mount-map__landmark-name">留笺</span>
+                  <span class="mount-map__landmark-caption">写下一句</span>
+                </a>
+              </nav>
             </div>
-
-            <div class="route-compass" aria-hidden="true">
-              <span class="route-compass-face">
-                <span class="route-compass-ring"></span>
-                <span class="route-compass-mark route-compass-n">北</span>
-                <span class="route-compass-mark route-compass-s">南</span>
-                <span class="route-compass-mark route-compass-e">东</span>
-                <span class="route-compass-mark route-compass-w">西</span>
-                <span class="route-compass-needle"></span>
-                <span class="route-compass-pin"></span>
-              </span>
-            </div>
-
-            <button class="route-guide-close" type="button" aria-label="收起路线图">合卷</button>
-
-            <div class="route-guide-scroll">
-              <span class="route-paper-edge route-paper-edge-top" aria-hidden="true"></span>
-              <span class="route-paper-edge route-paper-edge-bottom" aria-hidden="true"></span>
-              <span class="route-map-fold route-map-fold-left" aria-hidden="true"></span>
-              <span class="route-map-fold route-map-fold-right" aria-hidden="true"></span>
-              <span class="route-map-curl route-map-curl-left" aria-hidden="true"></span>
-              <span class="route-map-curl route-map-curl-right" aria-hidden="true"></span>
-              <span class="route-map-stamp" aria-hidden="true">行</span>
-              <svg class="route-map-line" viewBox="0 0 1440 820" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-                <defs>
-                  <filter id="routeInkShadow" x="-15%" y="-15%" width="130%" height="130%">
-                    <feDropShadow dx="0" dy="8" stdDeviation="7" flood-color="#59371e" flood-opacity="0.18" />
-                  </filter>
-                  <filter id="routePaperBleed" x="-8%" y="-8%" width="116%" height="116%">
-                    <feTurbulence type="fractalNoise" baseFrequency="0.018 0.055" numOctaves="2" seed="21" result="noise" />
-                    <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.8" xChannelSelector="R" yChannelSelector="G" />
-                  </filter>
-                </defs>
-                <g class="route-map-wash" filter="url(#routePaperBleed)">
-                  <path class="route-map-mountain route-map-mountain-back" d="M18 548 C112 488 188 512 284 440 C398 354 500 404 616 314 C724 230 828 284 936 204 C1046 122 1162 154 1300 78 C1358 46 1406 38 1440 30" />
-                  <path class="route-map-mountain route-map-mountain-front" d="M0 690 C118 596 236 632 352 552 C458 480 568 532 690 452 C810 374 912 440 1022 356 C1136 270 1232 310 1358 222 C1392 198 1420 188 1440 184" />
-                  <path class="route-map-river" d="M-20 410 C118 374 190 426 314 364 C444 298 540 354 676 284 C804 218 912 264 1052 184 C1192 106 1288 142 1460 70" />
-                </g>
-                <g class="route-map-contours">
-                  <path d="M118 658 C58 606 80 536 158 504 C242 470 334 522 318 598 C304 660 202 714 118 658" />
-                  <path d="M380 520 C306 468 340 376 438 350 C542 322 626 396 582 480 C544 550 446 566 380 520" />
-                  <path d="M696 558 C622 506 658 418 744 394 C846 366 932 428 902 508 C876 580 762 604 696 558" />
-                  <path d="M850 350 C780 302 810 206 902 176 C1018 138 1134 218 1094 306 C1058 384 926 402 850 350" />
-                  <path d="M1162 252 C1098 204 1122 132 1198 102 C1298 62 1390 118 1372 198 C1356 264 1230 304 1162 252" />
-                </g>
-                <g class="route-map-secondary">
-                  <path class="route-map-old route-map-old-1" d="M142 296 C258 336 358 296 452 226 C562 142 676 196 748 284" />
-                  <path class="route-map-old route-map-old-2" d="M566 652 C666 584 750 612 836 546 C924 478 1004 526 1102 450" />
-                  <path class="route-map-branch route-map-branch-1" d="M374 560 C334 468 376 388 482 344" />
-                  <path class="route-map-branch route-map-branch-2" d="M770 526 C840 472 916 478 980 528" />
-                </g>
-                <g class="route-map-road" filter="url(#routeInkShadow)">
-                  <path class="route-map-shadow" d="M116 640 C190 608 222 568 312 560 C420 552 442 468 538 470 C608 472 626 548 716 532 C810 516 820 400 916 392 C996 384 1026 448 1118 414 C1214 378 1224 296 1322 252" />
-                  <path class="route-map-bed" d="M116 640 C190 608 222 568 312 560 C420 552 442 468 538 470 C608 472 626 548 716 532 C810 516 820 400 916 392 C996 384 1026 448 1118 414 C1214 378 1224 296 1322 252" />
-                  <path class="route-map-main" d="M116 640 C190 608 222 568 312 560 C420 552 442 468 538 470 C608 472 626 548 716 532 C810 516 820 400 916 392 C996 384 1026 448 1118 414 C1214 378 1224 296 1322 252" />
-                  <path class="route-map-highlight" d="M116 640 C190 608 222 568 312 560 C420 552 442 468 538 470 C608 472 626 548 716 532 C810 516 820 400 916 392 C996 384 1026 448 1118 414 C1214 378 1224 296 1322 252" />
-                </g>
-              </svg>
-              <span class="route-map-terrain route-map-terrain-1" aria-hidden="true"></span>
-              <span class="route-map-terrain route-map-terrain-2" aria-hidden="true"></span>
-              <span class="route-map-terrain route-map-terrain-3" aria-hidden="true"></span>
-              <span class="route-map-terrain route-map-terrain-4" aria-hidden="true"></span>
-              <a class="route-link route-node-about" href="about.html" style="--rx:10%;--ry:78%;--route-delay:520ms;--node-tilt:-5deg;--tag-tilt:-7deg;--label-y:0.2rem;--node-z:8px;">
-                <span class="route-point" aria-hidden="true"><span class="route-point-mark">序</span></span>
-                <span class="route-label">
-                  <span class="route-name">小序</span>
-                  <span class="route-note">先识其人</span>
-                </span>
-              </a>
-              <a class="route-link route-link-featured route-node-trace" href="projects.html" style="--rx:24%;--ry:68%;--route-delay:640ms;--node-tilt:3deg;--tag-tilt:-2deg;--label-y:0.05rem;--node-z:18px;" data-route="trace">
-                <span class="route-point" aria-hidden="true"><span class="route-point-mark">迹</span></span>
-                <span class="route-label">
-                  <span class="route-name">行迹</span>
-                  <span class="route-note">作品与路标</span>
-                </span>
-              </a>
-              <a class="route-link route-node-articles" href="articles.html" style="--rx:38%;--ry:57%;--route-delay:760ms;--node-tilt:-3deg;--tag-tilt:3deg;--label-y:-0.1rem;--node-z:12px;">
-                <span class="route-point" aria-hidden="true"><span class="route-point-mark">笺</span></span>
-                <span class="route-label">
-                  <span class="route-name">雪笺</span>
-                  <span class="route-note">短文与想法</span>
-                </span>
-              </a>
-              <a class="route-link route-node-learning" href="learning.html" style="--rx:51%;--ry:66%;--route-delay:880ms;--node-tilt:4deg;--tag-tilt:-4deg;--label-y:0.18rem;--node-z:10px;">
-                <span class="route-point" aria-hidden="true"><span class="route-point-mark">学</span></span>
-                <span class="route-label">
-                  <span class="route-name">学习路</span>
-                  <span class="route-note">正在补齐</span>
-                </span>
-              </a>
-              <a class="route-link route-node-gallery" href="gallery.html" style="--rx:64%;--ry:48%;--route-delay:1000ms;--node-tilt:-5deg;--tag-tilt:2deg;--label-y:-0.15rem;--node-z:16px;">
-                <span class="route-point" aria-hidden="true"><span class="route-point-mark">廊</span></span>
-                <span class="route-label">
-                  <span class="route-name">影像廊</span>
-                  <span class="route-note">路上所见</span>
-                </span>
-              </a>
-              <a class="route-link route-node-music" href="music.html" style="--rx:78%;--ry:51%;--route-delay:1120ms;--node-tilt:5deg;--tag-tilt:-3deg;--label-y:0.08rem;--node-z:14px;">
-                <span class="route-point" aria-hidden="true"><span class="route-point-mark">雪</span></span>
-                <span class="route-label">
-                  <span class="route-name">听雪</span>
-                  <span class="route-note">曲与静听</span>
-                </span>
-              </a>
-              <a class="route-link route-node-contact" href="contact.html" style="--rx:91%;--ry:34%;--route-delay:1240ms;--node-tilt:-2deg;--tag-tilt:4deg;--label-y:-0.15rem;--node-z:20px;">
-                <span class="route-point" aria-hidden="true"><span class="route-point-mark">留</span></span>
-                <span class="route-label">
-                  <span class="route-name">留笺</span>
-                  <span class="route-note">写下一句</span>
-                </span>
-              </a>
-            </div>
+            <header class="mount-map__header">
+              <p class="mount-map__eyebrow">起行卷 · 山路向前</p>
+              <h2 id="route-map-title" class="mount-map__title">入山行图</h2>
+              <p id="route-map-subtitle" class="mount-map__subtitle">循纸上山路，择一处停驻</p>
+              <div class="mount-map__compass" aria-hidden="true">
+                <span class="mount-map__compass-point">北</span>
+              </div>
+              <button class="route-guide-close mount-map__close" type="button" aria-label="收起路线图">合卷</button>
+            </header>
+            <span class="mount-map__axis mount-map__axis--top" aria-hidden="true"></span>
+            <span class="mount-map__axis mount-map__axis--bottom" aria-hidden="true"></span>
           </div>
-        </nav>
+          <nav class="mount-map__fallback-links" aria-label="静态入山链接">
+            <a href="about.html">小序</a>
+            <a href="projects.html">行迹</a>
+            <a href="articles.html">雪笺</a>
+            <a href="learning.html">学习路</a>
+            <a href="gallery.html">影像廊</a>
+            <a href="music.html">听雪</a>
+            <a href="contact.html">留笺</a>
+          </nav>
+        </section>
       </div>
 
       <a class="courtyard-cue" href="#enter" aria-label="向下浏览，起行">
