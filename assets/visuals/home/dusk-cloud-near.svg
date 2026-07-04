@@ -1,22 +1,21 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 260" preserveAspectRatio="none">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 300" preserveAspectRatio="none">
   <defs>
-    <radialGradient id="near-warm" cx="50%" cy="50%" r="50%">
-      <stop offset="0" stop-color="#ffe2aa" stop-opacity="0.28"/>
-      <stop offset="0.48" stop-color="#d6a966" stop-opacity="0.16"/>
-      <stop offset="1" stop-color="#d6a966" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="near-shadow" cx="50%" cy="50%" r="50%">
-      <stop offset="0" stop-color="#4b5354" stop-opacity="0.24"/>
-      <stop offset="0.58" stop-color="#30383b" stop-opacity="0.13"/>
-      <stop offset="1" stop-color="#30383b" stop-opacity="0"/>
-    </radialGradient>
+    <linearGradient id="nearWarm" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#d7ad72" stop-opacity="0.08"/>
+      <stop offset="0.42" stop-color="#ffe0a6" stop-opacity="0.24"/>
+      <stop offset="0.72" stop-color="#bd8d58" stop-opacity="0.14"/>
+      <stop offset="1" stop-color="#536067" stop-opacity="0.1"/>
+    </linearGradient>
+    <linearGradient id="nearBase" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f2d39b" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#2f3d45" stop-opacity="0.18"/>
+    </linearGradient>
   </defs>
-  <g opacity="0.76">
-    <ellipse cx="145" cy="94" rx="210" ry="46" fill="url(#near-shadow)"/>
-    <ellipse cx="390" cy="76" rx="250" ry="54" fill="url(#near-warm)"/>
-    <ellipse cx="635" cy="98" rx="210" ry="42" fill="url(#near-shadow)"/>
-    <ellipse cx="930" cy="72" rx="270" ry="56" fill="url(#near-warm)"/>
-    <ellipse cx="1210" cy="96" rx="230" ry="44" fill="url(#near-shadow)"/>
-    <ellipse cx="1480" cy="82" rx="250" ry="50" fill="url(#near-warm)"/>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M-20 130 C92 96 168 124 276 98 C402 68 486 98 604 78 C744 54 842 84 958 70 C1098 54 1200 78 1330 62 C1496 42 1602 76 1820 58" stroke="url(#nearWarm)" stroke-width="56" opacity="0.76"/>
+    <path d="M72 168 C202 132 320 160 452 134 C596 106 696 138 830 116 C968 94 1088 122 1224 98 C1386 70 1518 110 1690 88" stroke="url(#nearBase)" stroke-width="42" opacity="0.62"/>
+    <path d="M182 106 C288 80 370 102 468 82 C562 64 626 80 710 66" stroke="#ffdfaa" stroke-width="22" opacity="0.16"/>
+    <path d="M816 96 C940 64 1018 88 1126 70 C1214 56 1288 68 1374 58" stroke="#ffdfaa" stroke-width="24" opacity="0.18"/>
+    <path d="M364 198 C508 174 644 196 784 174 C938 150 1068 176 1224 150 C1404 120 1548 158 1718 132" stroke="#33424b" stroke-width="15" opacity="0.14"/>
   </g>
 </svg>

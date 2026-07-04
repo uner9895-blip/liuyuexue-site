@@ -1,21 +1,20 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 320" preserveAspectRatio="none">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 320" preserveAspectRatio="none">
   <defs>
-    <radialGradient id="cloud-warm" cx="50%" cy="50%" r="50%">
-      <stop offset="0" stop-color="#f4d39a" stop-opacity="0.34"/>
-      <stop offset="0.5" stop-color="#c7b18a" stop-opacity="0.18"/>
-      <stop offset="1" stop-color="#c7b18a" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="cloud-cool" cx="50%" cy="50%" r="50%">
-      <stop offset="0" stop-color="#8b918d" stop-opacity="0.26"/>
-      <stop offset="0.58" stop-color="#676f70" stop-opacity="0.14"/>
-      <stop offset="1" stop-color="#676f70" stop-opacity="0"/>
-    </radialGradient>
+    <linearGradient id="farWarm" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#8b9792" stop-opacity="0.12"/>
+      <stop offset="0.48" stop-color="#e3c58a" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#7f8e93" stop-opacity="0.1"/>
+    </linearGradient>
+    <linearGradient id="farShade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f0d49e" stop-opacity="0.2"/>
+      <stop offset="1" stop-color="#44525a" stop-opacity="0.16"/>
+    </linearGradient>
   </defs>
-  <g opacity="0.82">
-    <ellipse cx="270" cy="112" rx="230" ry="42" fill="url(#cloud-cool)"/>
-    <ellipse cx="475" cy="96" rx="280" ry="48" fill="url(#cloud-warm)"/>
-    <ellipse cx="770" cy="118" rx="250" ry="40" fill="url(#cloud-cool)"/>
-    <ellipse cx="1030" cy="92" rx="330" ry="52" fill="url(#cloud-warm)"/>
-    <ellipse cx="1320" cy="126" rx="260" ry="42" fill="url(#cloud-cool)"/>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M60 126 C164 92 246 112 348 96 C466 78 548 98 660 86 C780 74 876 92 980 80 C1124 64 1218 88 1342 78 C1506 66 1606 92 1742 76" stroke="url(#farWarm)" stroke-width="46" opacity="0.82"/>
+    <path d="M118 152 C254 132 354 150 486 132 C626 114 738 138 870 120 C1014 100 1126 122 1268 108 C1424 92 1548 118 1692 104" stroke="url(#farShade)" stroke-width="34" opacity="0.66"/>
+    <path d="M296 106 C388 82 438 98 518 82 C604 64 668 78 738 66 C826 52 898 74 972 62" stroke="#efd7a5" stroke-width="18" opacity="0.18"/>
+    <path d="M1048 96 C1144 66 1214 86 1300 68 C1390 50 1462 76 1548 60" stroke="#efd7a5" stroke-width="20" opacity="0.16"/>
+    <path d="M228 174 C386 152 526 172 684 150 C842 128 972 154 1128 134 C1302 112 1454 146 1626 124" stroke="#4d5d64" stroke-width="14" opacity="0.14"/>
   </g>
 </svg>

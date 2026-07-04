@@ -979,6 +979,7 @@ function initLightParallax() {
   if (reduceMotion || !hasFinePointer) return;
 
   var root = document.documentElement;
+  var allowAmbientScene = !document.body.classList.contains('page-home');
   var ticking = false;
   var lastX = 0;
   var lastY = 0;
@@ -992,6 +993,7 @@ function initLightParallax() {
   }
 
   document.addEventListener('pointermove', function (event) {
+    if (!allowAmbientScene) return;
     if (event.pointerType && event.pointerType === 'touch') return;
     lastX = event.clientX;
     lastY = event.clientY;
@@ -1202,6 +1204,7 @@ function initHomeRouteMap() {
   var activeTrigger = primaryTrigger;
   var restoreTimer = null;
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var canTiltCompass = !reduceMotion && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
   document.body.classList.add('route-map-ready');
   routeMap.setAttribute('aria-hidden', 'true');
@@ -1221,6 +1224,11 @@ function initHomeRouteMap() {
     originalRouteParent.insertBefore(routeMap, originalRouteNext);
   };
 
+  var resetCompassTilt = function () {
+    routeMap.style.setProperty('--route-compass-x', '0deg');
+    routeMap.style.setProperty('--route-compass-y', '0deg');
+  };
+
   var setRouteMap = function (open, options) {
     options = options || {};
     if (open === isOpen) return;
@@ -1229,6 +1237,7 @@ function initHomeRouteMap() {
       activeTrigger = options.trigger || activeTrigger || primaryTrigger;
       moveRouteMapToBody();
       routeMap.classList.remove('is-closing');
+      resetCompassTilt();
     }
     isOpen = open;
     document.body.classList.toggle('route-map-open', open);
@@ -1251,10 +1260,11 @@ function initHomeRouteMap() {
       (activeTrigger || primaryTrigger).focus({ preventScroll: true });
     }
 
+    resetCompassTilt();
     restoreTimer = window.setTimeout(function () {
       routeMap.classList.remove('is-closing');
       restoreRouteMapPosition();
-    }, reduceMotion ? 0 : 880);
+    }, reduceMotion ? 0 : 1120);
   };
 
   triggers.forEach(function (trigger) {
@@ -1281,6 +1291,19 @@ function initHomeRouteMap() {
     if (routeMap.contains(event.target) || triggers.some(function (trigger) { return trigger.contains(event.target); })) return;
     setRouteMap(false, { returnFocus: false });
   });
+
+  if (canTiltCompass) {
+    routeMap.addEventListener('pointermove', function (event) {
+      if (!isOpen) return;
+      var rect = routeMap.getBoundingClientRect();
+      var x = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
+      var y = ((event.clientY - rect.top) / rect.height - 0.5) * 2;
+      routeMap.style.setProperty('--route-compass-x', (x * 2.4).toFixed(2) + 'deg');
+      routeMap.style.setProperty('--route-compass-y', (y * -2).toFixed(2) + 'deg');
+    });
+
+    routeMap.addEventListener('pointerleave', resetCompassTilt);
+  }
 }
 
 /**
@@ -1298,17 +1321,25 @@ function initHomeSunResponse() {
   var stage = document.querySelector('.courtyard');
   if (!stage) return;
 
-  var current = { dx: 0, dy: 0, rot: 0, opacity: 0.42 };
-  var target = { dx: 0, dy: 0, rot: 0, opacity: 0.42 };
+  var current = { dx: 0, dy: 0, opacity: getBaseOpacity(), cloud: 0 };
+  var target = { dx: 0, dy: 0, opacity: getBaseOpacity(), cloud: 0 };
   var frame = null;
   var settleTimer = null;
   var pauseSelector = '.courtyard-content, .home-orbit-controls, .route-guide, a, button';
 
+  function clamp(value, min, max) {
+    return Math.max(min, Math.min(max, value));
+  }
+
+  function getBaseOpacity() {
+    return themeRoot.getAttribute('data-world') === 'night' ? 0.22 : 0.38;
+  }
+
   function setNeutral() {
     target.dx = 0;
     target.dy = 0;
-    target.rot = 0;
-    target.opacity = 0.42;
+    target.opacity = getBaseOpacity();
+    target.cloud = 0;
     requestTick();
   }
 
@@ -1322,19 +1353,19 @@ function initHomeSunResponse() {
 
     current.dx += (target.dx - current.dx) * 0.1;
     current.dy += (target.dy - current.dy) * 0.1;
-    current.rot += (target.rot - current.rot) * 0.1;
     current.opacity += (target.opacity - current.opacity) * 0.08;
+    current.cloud += (target.cloud - current.cloud) * 0.08;
 
     motionRoot.style.setProperty('--home-sun-dx', current.dx.toFixed(2) + 'px');
     motionRoot.style.setProperty('--home-sun-dy', current.dy.toFixed(2) + 'px');
-    motionRoot.style.setProperty('--home-sun-rot', current.rot.toFixed(2) + 'deg');
     motionRoot.style.setProperty('--home-sun-opacity', current.opacity.toFixed(3));
+    motionRoot.style.setProperty('--home-cloud-lift', current.cloud.toFixed(3));
 
     if (
       Math.abs(target.dx - current.dx) > 0.05 ||
       Math.abs(target.dy - current.dy) > 0.05 ||
-      Math.abs(target.rot - current.rot) > 0.02 ||
-      Math.abs(target.opacity - current.opacity) > 0.002
+      Math.abs(target.opacity - current.opacity) > 0.002 ||
+      Math.abs(target.cloud - current.cloud) > 0.001
     ) {
       requestTick();
     }
@@ -1353,11 +1384,12 @@ function initHomeSunResponse() {
 
     var x = event.clientX / window.innerWidth - 0.5;
     var y = event.clientY / window.innerHeight - 0.5;
+    var baseOpacity = getBaseOpacity();
 
-    target.dx = Math.max(-3, Math.min(3, x * 6));
-    target.dy = Math.max(-2, Math.min(2, y * 4));
-    target.rot = Math.max(-4.5, Math.min(4.5, x * 7 + y * 2));
-    target.opacity = 0.42 + Math.max(-0.025, Math.min(0.03, x * 0.03 - y * 0.02));
+    target.dx = clamp(x * 28, -14, 14);
+    target.dy = clamp(y * 20, -10, 10);
+    target.opacity = baseOpacity + clamp(x * 0.028 - y * 0.018, -0.035, 0.04);
+    target.cloud = clamp(x * 0.018 - y * 0.012, -0.012, 0.024);
 
     window.clearTimeout(settleTimer);
     settleTimer = window.setTimeout(setNeutral, 850);
@@ -1366,6 +1398,11 @@ function initHomeSunResponse() {
 
   stage.addEventListener('pointermove', handlePointerMove, { passive: true });
   stage.addEventListener('pointerleave', setNeutral, { passive: true });
+
+  if ('MutationObserver' in window) {
+    var worldObserver = new MutationObserver(setNeutral);
+    worldObserver.observe(themeRoot, { attributes: true, attributeFilter: ['data-world'] });
+  }
 }
 
 /**
@@ -1631,19 +1668,12 @@ function initCompanionCat() {
   var catMarkup = [
     '<span class="companion-cat-shadow" aria-hidden="true"></span>',
     '<span class="companion-cat-visual" aria-hidden="true">',
+    '  <span class="companion-cat-sprite"></span>',
     '  <span class="companion-cat-tail"></span>',
-    '  <span class="companion-cat-body"></span>',
-    '  <span class="companion-cat-head">',
-    '    <span class="companion-cat-ear companion-cat-ear-left"></span>',
-    '    <span class="companion-cat-ear companion-cat-ear-right"></span>',
-    '    <span class="companion-cat-eye companion-cat-eye-left"></span>',
-    '    <span class="companion-cat-eye companion-cat-eye-right"></span>',
-    '    <span class="companion-cat-muzzle"></span>',
-    '    <span class="companion-cat-whisker companion-cat-whisker-left"></span>',
-    '    <span class="companion-cat-whisker companion-cat-whisker-right"></span>',
-    '  </span>',
-    '  <span class="companion-cat-paw companion-cat-paw-left"></span>',
-    '  <span class="companion-cat-paw companion-cat-paw-right"></span>',
+    '  <span class="companion-cat-ear companion-cat-ear-left"></span>',
+    '  <span class="companion-cat-ear companion-cat-ear-right"></span>',
+    '  <span class="companion-cat-eye companion-cat-eye-left"></span>',
+    '  <span class="companion-cat-eye companion-cat-eye-right"></span>',
     '</span>'
   ].join('');
 
@@ -1657,11 +1687,11 @@ function initCompanionCat() {
     var zone = document.querySelector('.companion-zone') || document.body;
     zone.removeAttribute('aria-hidden');
     zone.appendChild(cat);
-  } else if (!cat.querySelector('.companion-cat-body')) {
+  } else if (!cat.querySelector('.companion-cat-sprite')) {
     cat.innerHTML = catMarkup;
   }
 
-  var states = ['idle', 'walk', 'sit', 'look', 'sleep', 'stretch', 'pet'];
+  var states = ['idle', 'walk', 'sit', 'look', 'sleep', 'pet'];
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var isCoarse = window.matchMedia('(pointer: coarse)').matches;
   var meowSources = [
@@ -1679,37 +1709,69 @@ function initCompanionCat() {
 
   // 在底部安全带内取一个不与交互元素重叠的落点（百分比定位，随视口自适应）。
   var isHome = document.body.classList.contains('page-home');
-  var avoidSelector = 'header, .nav-container, .courtyard-content, .home-orbit-controls, .route-guide, a, button, input, textarea, .music-widget, .music-playbar-container, .back-to-top';
+  var avoidSelector = 'header, .nav-container, .courtyard-content, .home-orbit-controls, .courtyard-cue, .route-guide, a, button, input, textarea, .music-widget, .music-playbar-container, .back-to-top';
+
+  var getHomeSafeZones = function () {
+    if (window.matchMedia('(max-width: 768px)').matches) {
+      return [
+        { minX: 0.58, maxX: 0.82, minBottom: 0.11, maxBottom: 0.18 }
+      ];
+    }
+    return [
+      { minX: 0.08, maxX: 0.28, minBottom: 0.1, maxBottom: 0.17 },
+      { minX: 0.62, maxX: 0.86, minBottom: 0.08, maxBottom: 0.16 }
+    ];
+  };
+
+  var isBlockedAt = function (left, top, width, height) {
+    var samples = [
+      [left + width * 0.5, top + height * 0.82],
+      [left + width * 0.26, top + height * 0.62],
+      [left + width * 0.74, top + height * 0.62]
+    ];
+
+    return samples.some(function (sample) {
+      var x = Math.min(window.innerWidth - 2, Math.max(2, sample[0]));
+      var y = Math.min(window.innerHeight - 2, Math.max(2, sample[1]));
+      var hit = document.elementFromPoint(x, y);
+      if (!hit || !hit.closest) return false;
+      if (hit.closest('[data-companion-cat]')) return false;
+      return Boolean(hit.closest(avoidSelector));
+    });
+  };
 
   var pickWaypoint = function () {
     var width = window.innerWidth;
     var height = window.innerHeight;
-    var catW = cat.offsetWidth || 56;
-    var catH = cat.offsetHeight || 56;
-    var minX = isHome ? 0.54 : 0.06;
-    var rangeX = isHome ? 0.38 : 0.88;
-    var minBottom = isHome ? 0.09 : 0.06;
-    var rangeBottom = isHome ? 0.1 : 0.12;
+    var catW = cat.offsetWidth || 108;
+    var catH = cat.offsetHeight || 88;
     for (var attempt = 0; attempt < 8; attempt++) {
+      var zone = null;
+      if (isHome) {
+        var homeZones = getHomeSafeZones();
+        zone = homeZones[Math.floor(Math.random() * homeZones.length)];
+      }
+      var minX = zone ? zone.minX : 0.06;
+      var rangeX = zone ? (zone.maxX - zone.minX) : 0.88;
+      var minBottom = zone ? zone.minBottom : 0.06;
+      var rangeBottom = zone ? (zone.maxBottom - zone.minBottom) : 0.12;
       var x = (minX + Math.random() * rangeX) * width;
       var y = height - (minBottom + Math.random() * rangeBottom) * height;
-      var hit = document.elementFromPoint(
-        Math.min(width - 2, Math.max(2, x)),
-        Math.min(height - 2, Math.max(2, y))
-      );
-      if (hit && hit.closest && hit.closest(avoidSelector)) continue;
+      var left = Math.min(width - catW - 8, Math.max(8, x - catW / 2));
+      var top = Math.min(height - catH - 8, Math.max(8, y - catH));
+      if (isBlockedAt(left, top, catW, catH)) continue;
       return {
-        x: Math.min(width - catW - 8, Math.max(8, x - catW / 2)),
-        y: Math.min(height - catH - 8, Math.max(8, y - catH))
+        x: left,
+        y: top
       };
     }
     return null;
   };
 
   var placeStatic = function () {
-    var homeX = window.matchMedia('(max-width: 768px)').matches ? 0.66 : 0.76;
+    var homeX = window.matchMedia('(max-width: 768px)').matches ? 0.68 : 0.76;
     var x = isHome ? window.innerWidth * homeX : window.innerWidth * 0.08;
-    var bottom = isHome ? 0.12 : 0.08;
+    var bottom = isHome ? (window.matchMedia('(max-width: 768px)').matches ? 0.14 : 0.12) : 0.08;
     cat.style.left = Math.max(8, Math.min(window.innerWidth - (cat.offsetWidth || 72) - 8, x)) + 'px';
     cat.style.top = (window.innerHeight - (cat.offsetHeight || 62) - window.innerHeight * bottom) + 'px';
   };
@@ -1720,6 +1782,7 @@ function initCompanionCat() {
     var catH = cat.offsetHeight || 84;
     var rightGap = Math.max(18, window.innerWidth * 0.045);
     var bottomGap = Math.max(16, window.innerHeight * 0.075);
+    window.clearTimeout(cat.__settleTimer);
     cat.style.setProperty('--cat-face', '1');
     cat.style.left = Math.max(8, window.innerWidth - catW - rightGap) + 'px';
     cat.style.top = Math.max(8, window.innerHeight - catH - bottomGap) + 'px';
@@ -1731,7 +1794,9 @@ function initCompanionCat() {
   setState('sit');
 
   if (isHome && 'MutationObserver' in window) {
-    var routeMapObserver = new MutationObserver(placeMapWatcher);
+    var routeMapObserver = new MutationObserver(function () {
+      window.requestAnimationFrame(placeMapWatcher);
+    });
     routeMapObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] });
   }
 
@@ -1750,6 +1815,7 @@ function initCompanionCat() {
   };
 
   var petCat = function () {
+    if (isHome && document.body.classList.contains('route-map-open')) return;
     var now = Date.now();
     if (now - lastPetAt < 4200) return;
     lastPetAt = now;
@@ -1761,7 +1827,6 @@ function initCompanionCat() {
     }, 1250);
   };
 
-  cat.addEventListener('pointerdown', petCat);
   cat.addEventListener('click', petCat);
   cat.addEventListener('keydown', function (event) {
     if (event.key !== 'Enter' && event.key !== ' ') return;
@@ -1775,11 +1840,11 @@ function initCompanionCat() {
   }
 
   var moveTimer = null;
-  var idleStates = ['idle', 'sit', 'look', 'stretch'];
+  var idleStates = ['idle', 'sit', 'look'];
 
   var scheduleNext = function () {
-    var base = isCoarse ? 9000 : 5200; // 手机端更低频率
-    var jitter = isCoarse ? 7000 : 5000;
+    var base = isCoarse ? 12000 : 7600; // 手机端更低频率
+    var jitter = isCoarse ? 9000 : 6200;
     var delay = base + Math.random() * jitter;
     moveTimer = window.setTimeout(tick, delay);
   };
@@ -1793,12 +1858,12 @@ function initCompanionCat() {
     }
 
     var roll = Math.random();
-    if (roll < 0.18) {
+    if (roll < 0.12) {
       setState('sleep');
       scheduleNext();
       return;
     }
-    if (roll < 0.5) {
+    if (roll < 0.68) {
       setState(idleStates[Math.floor(Math.random() * idleStates.length)]);
       scheduleNext();
       return;

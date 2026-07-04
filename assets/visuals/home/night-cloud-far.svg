@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 320" preserveAspectRatio="none">
+  <defs>
+    <linearGradient id="nightFar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#25313e" stop-opacity="0.1"/>
+      <stop offset="0.48" stop-color="#6f8795" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#1d2936" stop-opacity="0.1"/>
+    </linearGradient>
+    <linearGradient id="nightFarLow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8ca2ad" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#172231" stop-opacity="0.18"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M74 112 C214 84 318 106 448 88 C584 70 704 92 836 74 C998 52 1110 82 1260 66 C1428 48 1562 78 1734 58" stroke="url(#nightFar)" stroke-width="44" opacity="0.74"/>
+    <path d="M168 148 C300 126 410 148 544 128 C696 106 824 134 972 112 C1134 90 1264 120 1422 98 C1548 82 1640 96 1736 86" stroke="url(#nightFarLow)" stroke-width="32" opacity="0.58"/>
+    <path d="M392 104 C506 78 584 92 688 74 C776 60 856 72 940 58" stroke="#98abb5" stroke-width="16" opacity="0.1"/>
+    <path d="M1118 92 C1224 66 1308 82 1420 64 C1516 50 1592 68 1688 54" stroke="#98abb5" stroke-width="18" opacity="0.09"/>
+    <path d="M262 170 C438 146 596 168 760 146 C940 124 1092 150 1270 126 C1428 104 1572 132 1714 114" stroke="#142030" stroke-width="12" opacity="0.16"/>
+  </g>
+</svg>
