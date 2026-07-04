@@ -1294,10 +1294,12 @@ function initHomeRouteMap() {
       bodyRight: document.body.style.right,
       bodyWidth: document.body.style.width,
       bodyOverflow: document.body.style.overflow,
+      rootOverflow: document.documentElement.style.overflow,
       rootScrollBehavior: document.documentElement.style.scrollBehavior
     };
 
     document.documentElement.style.scrollBehavior = 'auto';
+    document.documentElement.style.overflow = 'hidden';
     document.body.style.position = 'fixed';
     document.body.style.top = '-' + scrollLockState.y + 'px';
     document.body.style.left = '-' + scrollLockState.x + 'px';
@@ -1331,6 +1333,7 @@ function initHomeRouteMap() {
     document.body.style.right = scrollLockState.bodyRight;
     document.body.style.width = scrollLockState.bodyWidth;
     document.body.style.overflow = scrollLockState.bodyOverflow;
+    document.documentElement.style.overflow = scrollLockState.rootOverflow;
     scrollLockState = null;
     restoreScrollPosition();
     window.requestAnimationFrame(restoreScrollPosition);
