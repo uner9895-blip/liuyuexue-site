@@ -5,14 +5,15 @@
 .route-guide.mount-map {
   --map-image-wide: url("../visuals/home/route-scroll-valley-wide-v3.png");
   --map-image-mobile: url("../visuals/home/route-scroll-valley-mobile-v3.png");
-  --map-ink: rgba(39, 34, 25, 0.9);
-  --map-ink-soft: rgba(60, 52, 38, 0.66);
+  --map-ink: rgba(31, 25, 17, 0.96);
+  --map-ink-soft: rgba(51, 42, 29, 0.8);
   --map-paper: rgba(232, 207, 154, 0.42);
   --map-paper-light: rgba(255, 241, 204, 0.42);
   --map-focus: rgba(92, 105, 76, 0.74);
-  --map-label: rgba(44, 37, 27, 0.86);
-  --map-label-hover: rgba(28, 24, 18, 0.96);
-  --map-glow: rgba(236, 178, 82, 0.3);
+  --map-label: rgba(34, 27, 18, 0.94);
+  --map-label-hover: rgba(18, 15, 11, 0.98);
+  --map-label-paper: rgba(238, 218, 174, 0.72);
+  --map-glow: rgba(236, 178, 82, 0.36);
   box-sizing: border-box;
   margin-top: 1.35rem;
   color: rgba(244, 239, 227, 0.86);
@@ -174,8 +175,10 @@ body.page-home.route-map-ready .mount-map.is-open .mount-map__scene {
 
 .mount-map__scroll::after {
   background:
-    radial-gradient(ellipse at 18% 21%, rgba(255, 233, 177, 0.22), transparent 25%),
-    radial-gradient(ellipse at 76% 18%, rgba(24, 28, 22, 0.22), transparent 36%),
+    radial-gradient(ellipse at 18% 20%, rgba(255, 234, 178, 0.38), transparent 26%),
+    radial-gradient(ellipse at 44% 63%, rgba(246, 232, 198, 0.2), transparent 28%),
+    radial-gradient(ellipse at 69% 49%, rgba(237, 222, 190, 0.16), transparent 31%),
+    radial-gradient(ellipse at 83% 43%, rgba(42, 34, 24, 0.23), transparent 35%),
     radial-gradient(ellipse at 50% 101%, rgba(12, 12, 9, 0.3), transparent 52%);
 }
 
@@ -226,6 +229,25 @@ body.page-home.route-map-ready .mount-map.is-open .mount-map__scene {
   z-index: 0;
   overflow: hidden;
   pointer-events: none;
+}
+
+.mount-map__vista::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 12% 72%, rgba(239, 225, 190, 0.22), transparent 13%),
+    radial-gradient(ellipse at 29% 64%, rgba(239, 225, 190, 0.18), transparent 12%),
+    radial-gradient(ellipse at 43% 60%, rgba(239, 225, 190, 0.18), transparent 13%),
+    radial-gradient(ellipse at 55% 69%, rgba(239, 225, 190, 0.2), transparent 14%),
+    radial-gradient(ellipse at 69% 48%, rgba(239, 225, 190, 0.18), transparent 13%),
+    radial-gradient(ellipse at 80% 60%, rgba(239, 225, 190, 0.18), transparent 12%),
+    radial-gradient(ellipse at 89% 34%, rgba(239, 225, 190, 0.16), transparent 11%),
+    linear-gradient(90deg, rgba(242, 225, 187, 0.08), transparent 34% 66%, rgba(28, 21, 14, 0.14));
+  mix-blend-mode: screen;
+  opacity: 0.92;
 }
 
 .mount-map__image,
@@ -301,8 +323,8 @@ body.page-home.route-map-ready .mount-map.is-open .mount-map__scene {
 
 .mount-map__landmark {
   position: absolute;
-  width: clamp(5.2rem, 8vw, 7.25rem);
-  min-height: 3.55rem;
+  width: clamp(6.2rem, 9.2vw, 8.6rem);
+  min-height: 4.35rem;
   display: grid;
   place-items: center;
   color: var(--map-label);
@@ -313,7 +335,32 @@ body.page-home.route-map-ready .mount-map.is-open .mount-map__scene {
   transition:
     color 160ms ease,
     filter 160ms ease,
+    transform 160ms ease,
     opacity 180ms ease;
+}
+
+.mount-map__landmark::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 57%;
+  z-index: 0;
+  width: 4.9rem;
+  height: 2.25rem;
+  border-radius: 54% 44% 50% 46%;
+  background:
+    radial-gradient(ellipse at 34% 36%, rgba(255, 244, 211, 0.82), rgba(234, 209, 159, 0.54) 54%, rgba(157, 112, 56, 0.13) 76%, transparent 78%),
+    linear-gradient(90deg, rgba(255, 239, 199, 0.34), rgba(214, 174, 104, 0.22));
+  box-shadow:
+    0 0.32rem 1.1rem rgba(35, 28, 18, 0.18),
+    inset 0 0 0 1px rgba(97, 66, 32, 0.12);
+  filter: blur(0.1px);
+  opacity: 0.78;
+  transform: translate(-50%, -50%) rotate(-2deg);
+  transition:
+    opacity 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
 }
 
 .mount-map.is-open .mount-map__landmark {
@@ -337,11 +384,12 @@ body.page-home.route-map-ready .mount-map.is-open .mount-map__scene {
   position: absolute;
   left: 50%;
   top: 52%;
-  width: 3rem;
-  height: 1.7rem;
+  z-index: 1;
+  width: 4rem;
+  height: 2.2rem;
   border-radius: 50%;
   background: radial-gradient(ellipse, var(--map-glow), transparent 70%);
-  opacity: 0;
+  opacity: 0.18;
   transform: translate(-50%, -50%);
   transition: opacity 160ms ease;
 }
@@ -349,15 +397,16 @@ body.page-home.route-map-ready .mount-map.is-open .mount-map__scene {
 .mount-map__landmark-object {
   position: absolute;
   left: 50%;
-  top: 50%;
-  width: 0.52rem;
-  height: 1.24rem;
+  top: 43%;
+  z-index: 2;
+  width: 0.72rem;
+  height: 1.55rem;
   border-radius: 45% 38% 32% 42%;
   background:
     radial-gradient(ellipse at 42% 18%, rgba(255, 241, 204, 0.42), transparent 44%),
     linear-gradient(180deg, rgba(142, 117, 72, 0.62), rgba(55, 48, 35, 0.58));
-  box-shadow: 0 0.35rem 0.8rem rgba(22, 17, 11, 0.2);
-  opacity: 0.76;
+  box-shadow: 0 0.35rem 0.9rem rgba(22, 17, 11, 0.24);
+  opacity: 0.92;
   transform: translate(-50%, -50%) rotate(-4deg);
   transition:
     opacity 160ms ease,
@@ -375,28 +424,51 @@ body.page-home.route-map-ready .mount-map.is-open .mount-map__scene {
 .mount-map__landmark-name {
   position: absolute;
   left: 50%;
-  top: calc(50% + 1.12rem);
-  max-width: 5.8rem;
+  top: calc(43% + 1.22rem);
+  z-index: 3;
+  max-width: 6.5rem;
+  min-height: 1.36rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.13rem 0.45rem 0.16rem;
+  border-radius: 50% 44% 52% 45%;
+  background:
+    radial-gradient(ellipse at 42% 42%, rgba(253, 240, 206, 0.86), rgba(230, 202, 150, 0.52) 68%, transparent 72%),
+    linear-gradient(90deg, rgba(250, 232, 190, 0.6), rgba(217, 177, 105, 0.2));
   color: currentColor;
-  font-size: clamp(0.74rem, 0.84vw, 0.86rem);
-  font-weight: 500;
+  font-size: clamp(0.86rem, 0.98vw, 1rem);
+  font-weight: 600;
   line-height: 1.1;
   letter-spacing: 0;
   text-align: center;
   white-space: nowrap;
   text-shadow:
-    0 1px 6px rgba(244, 226, 184, 0.74),
-    0 0 15px rgba(244, 226, 184, 0.28);
+    0 1px 0 rgba(255, 246, 219, 0.64),
+    0 0 10px rgba(246, 231, 195, 0.46);
   transform: translateX(-50%);
+  box-shadow: 0 0.22rem 0.7rem rgba(33, 25, 15, 0.16);
   transition:
+    background 160ms ease,
     color 160ms ease,
+    box-shadow 160ms ease,
     text-shadow 160ms ease,
     opacity 160ms ease;
 }
 
+.mount-map__landmark:hover::before,
+.mount-map__landmark:focus-visible::before {
+  opacity: 0.96;
+  box-shadow:
+    0 0.38rem 1.2rem rgba(35, 28, 18, 0.2),
+    0 0 1.5rem rgba(238, 188, 95, 0.18),
+    inset 0 0 0 1px rgba(97, 66, 32, 0.16);
+  transform: translate(-50%, -52%) rotate(-2deg) scale(1.04);
+}
+
 .mount-map__landmark:hover .mount-map__landmark-glow,
 .mount-map__landmark:focus-visible .mount-map__landmark-glow {
-  opacity: 0.72;
+  opacity: 0.86;
 }
 
 .mount-map__landmark:hover .mount-map__landmark-object,
@@ -409,9 +481,15 @@ body.page-home.route-map-ready .mount-map.is-open .mount-map__scene {
 .mount-map__landmark:hover .mount-map__landmark-name,
 .mount-map__landmark:focus-visible .mount-map__landmark-name {
   color: var(--map-label-hover);
+  background:
+    radial-gradient(ellipse at 42% 42%, rgba(255, 246, 219, 0.94), rgba(236, 208, 154, 0.68) 68%, transparent 73%),
+    linear-gradient(90deg, rgba(255, 239, 199, 0.72), rgba(225, 181, 101, 0.28));
+  box-shadow:
+    0 0.26rem 0.8rem rgba(33, 25, 15, 0.18),
+    0 0 1.1rem rgba(239, 193, 96, 0.2);
   text-shadow:
-    0 1px 8px rgba(255, 241, 202, 0.88),
-    0 0 18px rgba(244, 199, 111, 0.4);
+    0 1px 0 rgba(255, 246, 219, 0.7),
+    0 0 14px rgba(244, 199, 111, 0.42);
 }
 
 .mount-map__landmark[data-landmark="about"] {
@@ -420,8 +498,8 @@ body.page-home.route-map-ready .mount-map.is-open .mount-map__scene {
 }
 
 .mount-map__landmark[data-landmark="about"] .mount-map__landmark-object {
-  width: 0.74rem;
-  height: 1.54rem;
+  width: 0.88rem;
+  height: 1.72rem;
   border-radius: 0.12rem 0.18rem 0.16rem 0.1rem;
   background:
     linear-gradient(160deg, rgba(244, 226, 184, 0.62), rgba(146, 105, 55, 0.22)),
@@ -445,8 +523,8 @@ body.page-home.route-map-ready .mount-map.is-open .mount-map__scene {
 }
 
 .mount-map__landmark[data-landmark="projects"] .mount-map__landmark-object {
-  width: 0.64rem;
-  height: 1.72rem;
+  width: 0.78rem;
+  height: 1.92rem;
   border-radius: 45% 36% 28% 34%;
   background: linear-gradient(180deg, rgba(104, 97, 74, 0.72), rgba(45, 39, 29, 0.52));
 }
@@ -457,8 +535,8 @@ body.page-home.route-map-ready .mount-map.is-open .mount-map__scene {
 }
 
 .mount-map__landmark[data-landmark="articles"] .mount-map__landmark-object {
-  width: 1.08rem;
-  height: 0.76rem;
+  width: 1.36rem;
+  height: 0.88rem;
   border-radius: 0.08rem 0.16rem 0.12rem 0.18rem;
   clip-path: polygon(0 13%, 82% 0, 100% 78%, 15% 100%);
   background: linear-gradient(135deg, rgba(248, 238, 207, 0.78), rgba(138, 107, 59, 0.38));
@@ -471,8 +549,8 @@ body.page-home.route-map-ready .mount-map.is-open .mount-map__scene {
 }
 
 .mount-map__landmark[data-landmark="learning"] .mount-map__landmark-object {
-  width: 0.72rem;
-  height: 1.26rem;
+  width: 0.88rem;
+  height: 1.44rem;
   border-radius: 40% 42% 30% 34%;
   background: linear-gradient(180deg, rgba(176, 152, 98, 0.64), rgba(55, 49, 38, 0.54));
   transform: translate(-50%, -50%) rotate(3deg);
@@ -484,8 +562,8 @@ body.page-home.route-map-ready .mount-map.is-open .mount-map__scene {
 }
 
 .mount-map__landmark[data-landmark="gallery"] .mount-map__landmark-object {
-  width: 1.4rem;
-  height: 0.78rem;
+  width: 1.58rem;
+  height: 0.9rem;
   border-radius: 0.5rem 0.5rem 0.18rem 0.18rem;
   background:
     radial-gradient(ellipse at 50% 100%, rgba(233, 197, 123, 0.24), transparent 42%),
@@ -512,8 +590,8 @@ body.page-home.route-map-ready .mount-map.is-open .mount-map__scene {
 }
 
 .mount-map__landmark[data-landmark="music"] .mount-map__landmark-object {
-  width: 1.16rem;
-  height: 0.76rem;
+  width: 1.36rem;
+  height: 0.92rem;
   border-radius: 48% 44% 50% 42%;
   background:
     radial-gradient(ellipse at 72% 25%, rgba(255, 236, 188, 0.52), transparent 28%),
@@ -527,8 +605,8 @@ body.page-home.route-map-ready .mount-map.is-open .mount-map__scene {
 }
 
 .mount-map__landmark[data-landmark="contact"] .mount-map__landmark-object {
-  width: 0.52rem;
-  height: 1.16rem;
+  width: 0.68rem;
+  height: 1.36rem;
   border-radius: 0.24rem 0.24rem 0.12rem 0.12rem;
   background:
     radial-gradient(circle at 50% 17%, rgba(255, 218, 126, 0.88) 0 0.16rem, transparent 0.2rem),
@@ -536,7 +614,7 @@ body.page-home.route-map-ready .mount-map.is-open .mount-map__scene {
   box-shadow: 0 0 13px rgba(239, 177, 74, 0.36);
 }
 
-.mount-map__header {
+.route-guide.mount-map .mount-map__header {
   position: absolute;
   left: clamp(1.2rem, 3.2vw, 3rem);
   top: clamp(1rem, 3.1svh, 2rem);
@@ -544,7 +622,7 @@ body.page-home.route-map-ready .mount-map.is-open .mount-map__scene {
   width: auto;
   height: auto;
   min-height: 0;
-  max-width: min(35rem, calc(100% - 10rem));
+  max-width: min(37rem, calc(100% - 10rem));
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
   grid-template-areas:
@@ -553,12 +631,18 @@ body.page-home.route-map-ready .mount-map.is-open .mount-map__scene {
     "compass subtitle";
   align-items: center;
   column-gap: 0.72rem;
-  row-gap: 0.03rem;
+  row-gap: 0.08rem;
   color: var(--map-ink);
-  padding: 0;
+  padding: 0.62rem 1.25rem 0.72rem 0.72rem;
   border: 0;
-  background: transparent !important;
-  box-shadow: none !important;
+  border-radius: 54% 2rem 48% 1.2rem / 1.4rem 45% 1.1rem 52%;
+  background:
+    radial-gradient(ellipse at 18% 24%, rgba(255, 247, 219, 0.96), rgba(246, 226, 181, 0.78) 50%, rgba(232, 198, 130, 0.3) 72%, transparent 76%),
+    radial-gradient(ellipse at 82% 70%, rgba(237, 213, 166, 0.44), transparent 64%),
+    linear-gradient(90deg, rgba(250, 234, 193, 0.86), rgba(229, 196, 136, 0.34) 78%, transparent);
+  box-shadow:
+    0 0.45rem 1.4rem rgba(37, 27, 15, 0.14),
+    inset 0 0 0 1px rgba(105, 73, 36, 0.08);
   backdrop-filter: none !important;
   transform: none;
   pointer-events: none;
@@ -579,30 +663,32 @@ body.page-home .mount-map__header::after {
 
 .mount-map__eyebrow {
   grid-area: eyebrow;
-  color: rgba(107, 65, 40, 0.64);
-  font-size: 0.82rem;
+  color: rgba(111, 67, 36, 0.84);
+  font-size: 0.88rem;
+  font-weight: 600;
   line-height: 1.2;
-  text-shadow: 0 1px 14px rgba(246, 228, 190, 0.62);
+  text-shadow: 0 1px 0 rgba(255, 248, 224, 0.7);
 }
 
 .mount-map__title {
   grid-area: title;
   color: currentColor;
-  font-size: clamp(1.52rem, 2vw, 2.12rem);
-  font-weight: 500;
+  font-size: clamp(2rem, 2.55vw, 2.7rem);
+  font-weight: 600;
   line-height: 1.08;
   text-shadow:
-    0 1px 12px rgba(248, 231, 190, 0.64),
-    0 0 24px rgba(248, 231, 190, 0.24);
+    0 1px 0 rgba(255, 249, 226, 0.72),
+    0 0 12px rgba(247, 230, 188, 0.36);
 }
 
 .mount-map__subtitle {
   grid-area: subtitle;
   color: var(--map-ink-soft);
   font-family: var(--font-body);
-  font-size: 0.84rem;
-  line-height: 1.36;
-  text-shadow: 0 1px 14px rgba(248, 231, 190, 0.52);
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.38;
+  text-shadow: 0 1px 0 rgba(255, 249, 226, 0.58);
 }
 
 .mount-map__compass {
@@ -664,24 +750,31 @@ body.page-home .mount-map__header::after {
   right: clamp(1rem, 2.7vw, 2.35rem);
   top: clamp(1rem, 3svh, 1.9rem);
   z-index: 9;
-  min-width: 2.25rem;
-  min-height: 4.1rem;
-  padding: 0.54rem 0.36rem;
+  min-width: 2.58rem;
+  min-height: 4.72rem;
+  padding: 0.66rem 0.42rem;
   border: 0;
   border-radius: 0.8rem 0.8rem 0.42rem 0.42rem;
   background:
-    radial-gradient(ellipse at 50% 18%, rgba(255, 229, 166, 0.34), transparent 36%),
-    linear-gradient(180deg, rgba(119, 82, 42, 0.72), rgba(57, 41, 26, 0.66));
-  color: rgba(249, 233, 195, 0.9);
+    radial-gradient(ellipse at 50% 18%, rgba(255, 232, 172, 0.56), transparent 36%),
+    linear-gradient(180deg, rgba(129, 84, 38, 0.92), rgba(61, 41, 22, 0.88));
+  color: rgba(255, 245, 216, 0.98);
   cursor: pointer;
   font-family: var(--font-title);
-  font-size: 0.84rem;
+  font-size: 0.92rem;
+  font-weight: 600;
   line-height: 1.1;
   writing-mode: vertical-rl;
   box-shadow:
     inset 0 1px 0 rgba(255, 237, 190, 0.16),
-    0 7px 18px rgba(35, 25, 14, 0.2);
+    0 8px 20px rgba(35, 25, 14, 0.28),
+    0 0 1.2rem rgba(234, 178, 78, 0.12);
   pointer-events: auto;
+  transition:
+    background 160ms ease,
+    box-shadow 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
 }
 
 .mount-map__close::before {
@@ -701,8 +794,14 @@ body.page-home .mount-map__header::after {
   outline: 2px solid var(--map-focus);
   outline-offset: 4px;
   background:
-    radial-gradient(ellipse at 50% 18%, rgba(255, 229, 166, 0.44), transparent 36%),
-    linear-gradient(180deg, rgba(132, 91, 45, 0.78), rgba(68, 46, 26, 0.68));
+    radial-gradient(ellipse at 50% 18%, rgba(255, 237, 188, 0.74), transparent 38%),
+    linear-gradient(180deg, rgba(149, 97, 43, 0.96), rgba(70, 46, 24, 0.92));
+  color: #fff4d1;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 237, 190, 0.22),
+    0 10px 24px rgba(35, 25, 14, 0.34),
+    0 0 1.5rem rgba(234, 178, 78, 0.26);
+  transform: translateY(-0.08rem);
 }
 
 [data-world="night"] .route-guide.mount-map {
@@ -777,27 +876,43 @@ body.page-home .mount-map__header::after {
 }
 
 [data-world="night"] .mount-map__landmark-name {
+  background:
+    radial-gradient(ellipse at 42% 42%, rgba(220, 202, 159, 0.78), rgba(114, 96, 63, 0.46) 68%, transparent 73%),
+    linear-gradient(90deg, rgba(219, 199, 156, 0.5), rgba(104, 81, 43, 0.25));
   text-shadow:
-    0 1px 8px rgba(8, 13, 13, 0.78),
-    0 0 18px rgba(206, 183, 121, 0.2);
+    0 1px 0 rgba(244, 228, 188, 0.34),
+    0 0 12px rgba(0, 0, 0, 0.42);
 }
 
 [data-world="night"] .mount-map__landmark:hover .mount-map__landmark-name,
 [data-world="night"] .mount-map__landmark:focus-visible .mount-map__landmark-name {
+  background:
+    radial-gradient(ellipse at 42% 42%, rgba(242, 222, 176, 0.88), rgba(139, 108, 58, 0.56) 68%, transparent 73%),
+    linear-gradient(90deg, rgba(239, 214, 166, 0.62), rgba(135, 91, 39, 0.34));
   text-shadow:
-    0 1px 10px rgba(0, 0, 0, 0.86),
-    0 0 20px rgba(233, 177, 80, 0.38);
+    0 1px 0 rgba(255, 241, 203, 0.44),
+    0 0 14px rgba(233, 177, 80, 0.44);
 }
 
 [data-world="night"] .mount-map__eyebrow {
-  color: rgba(224, 184, 111, 0.72);
+  color: rgba(112, 65, 33, 0.88);
+}
+
+[data-world="night"] .route-guide.mount-map .mount-map__header {
+  color: rgba(31, 25, 17, 0.96);
+  background:
+    radial-gradient(ellipse at 18% 24%, rgba(239, 225, 189, 0.95), rgba(219, 192, 138, 0.78) 50%, rgba(129, 97, 48, 0.28) 72%, transparent 76%),
+    radial-gradient(ellipse at 82% 70%, rgba(203, 180, 135, 0.42), transparent 64%),
+    linear-gradient(90deg, rgba(232, 211, 170, 0.86), rgba(162, 126, 65, 0.3) 78%, transparent);
+  box-shadow:
+    0 0.45rem 1.4rem rgba(0, 0, 0, 0.28),
+    0 0 1.6rem rgba(143, 167, 166, 0.12),
+    inset 0 0 0 1px rgba(105, 73, 36, 0.08);
 }
 
 [data-world="night"] .mount-map__title,
 [data-world="night"] .mount-map__subtitle {
-  text-shadow:
-    0 1px 12px rgba(0, 0, 0, 0.72),
-    0 0 22px rgba(129, 158, 162, 0.2);
+  text-shadow: 0 1px 0 rgba(255, 246, 214, 0.5);
 }
 
 [data-world="night"] .mount-map__compass {
@@ -809,9 +924,9 @@ body.page-home .mount-map__header::after {
 
 [data-world="night"] .mount-map__close {
   background:
-    radial-gradient(ellipse at 50% 18%, rgba(232, 183, 93, 0.2), transparent 36%),
-    linear-gradient(180deg, rgba(61, 70, 60, 0.9), rgba(25, 33, 31, 0.84));
-  color: rgba(241, 225, 190, 0.9);
+    radial-gradient(ellipse at 50% 18%, rgba(237, 196, 111, 0.4), transparent 36%),
+    linear-gradient(180deg, rgba(85, 78, 55, 0.96), rgba(24, 31, 29, 0.94));
+  color: rgba(255, 240, 204, 0.98);
 }
 
 @keyframes mountMapPlaceIn {
@@ -861,6 +976,7 @@ body.page-home .mount-map__header::after {
     max-width: calc(100% - 5.6rem);
     grid-template-columns: auto minmax(0, 1fr);
     column-gap: 0.48rem;
+    padding: 0.48rem 0.74rem 0.52rem 0.52rem;
   }
 
   .mount-map__eyebrow {
@@ -905,13 +1021,24 @@ body.page-home .mount-map__header::after {
   }
 
   .mount-map__landmark {
-    width: 5.45rem;
-    min-height: 3.05rem;
+    width: 6rem;
+    min-height: 3.45rem;
   }
 
   .mount-map__landmark-name {
-    max-width: 4.8rem;
-    font-size: 0.74rem;
+    max-width: 5.5rem;
+    min-height: 1.26rem;
+    padding: 0.12rem 0.42rem 0.14rem;
+    font-size: 0.82rem;
+  }
+
+  .mount-map__landmark::before {
+    width: 4.45rem;
+    height: 2rem;
+  }
+
+  .mount-map__landmark-object {
+    transform: translate(-50%, -50%) rotate(-4deg) scale(0.92);
   }
 
   .mount-map__landmark[data-landmark="about"] {
@@ -971,11 +1098,16 @@ body.page-home .mount-map__header::after {
   }
 
   .mount-map__landmark {
-    width: 5.05rem;
+    width: 5.72rem;
   }
 
   .mount-map__landmark-name {
-    font-size: 0.7rem;
+    max-width: 5.1rem;
+    font-size: 0.78rem;
+  }
+
+  .mount-map__landmark::before {
+    width: 4.2rem;
   }
 }
 
