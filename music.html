@@ -75,7 +75,7 @@
   <main class="page-fade">
     <section class="page-title-section music-hero-section scroll-reveal">
       <h1 class="page-title">听雪</h1>
-      <p class="page-subtitle">老梅树上的歌，静待一朵一朵启封。</p>
+      <p class="page-subtitle">山中小亭，留一盏灯，听几首本地清音。</p>
       <p class="music-atmosphere" id="music-atmosphere" aria-live="polite">静待清音……</p>
     </section>
 
@@ -83,8 +83,8 @@
       <div class="music-layout-container">
         <section class="playlist-panel scroll-reveal" aria-labelledby="playlist-title">
           <div class="playlist-heading">
-            <h2 id="playlist-title" class="section-subheading">梅上曲目</h2>
-            <p>本页只加载当前选中的本地曲目。</p>
+            <h2 id="playlist-title" class="section-subheading">曲目纸签</h2>
+            <p>选择一张纸签，播放器会载入对应的本地音频。</p>
           </div>
           <!-- 听雪梅树挂载层：Codex 可在此接管梅树场景与枝头节点；
                #playlist-container 由 music.js 按 id 渲染，结构与 id 不可改 -->
@@ -103,11 +103,56 @@
             <p class="music-current-meta" id="music-current-meta">本地音乐 · --:--</p>
             <span class="music-current-status" id="music-current-status">未开始</span>
           </div>
-          <p class="music-poem">
-            “独坐幽篁里，弹琴复长啸。<br>深林人不知，明月来相照。”
-          </p>
+
+          <!-- 案头播放控制：保留 music.js 真实播放 / 暂停 / 切歌 / 进度 / 音量能力 -->
+          <div class="music-playbar-container" id="playbar-container">
+            <button class="playbar-dock-toggle" type="button" data-playbar-toggle aria-expanded="true" aria-label="收起播放栏" aria-controls="playbar-container">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div class="music-playbar-layout">
+              <div class="playbar-info-area">
+                <div class="playbar-cover">雪</div>
+                <div class="playbar-text">
+                  <span class="playbar-title" id="playbar-title">静待选曲</span>
+                  <span class="playbar-artist" id="playbar-artist">本地音乐</span>
+                </div>
+              </div>
+
+              <div class="playbar-control-area">
+                <div class="playbar-buttons">
+                  <button class="playbar-btn" id="playbar-prev-btn" type="button" aria-label="上一首">
+                    <svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+                  </button>
+                  <button class="playbar-btn playbar-btn-play music-play-control" id="playbar-play-btn" type="button" aria-label="播放当前歌曲">
+                    <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                  </button>
+                  <button class="playbar-btn" id="playbar-next-btn" type="button" aria-label="下一首">
+                    <svg viewBox="0 0 24 24"><path d="M6 18h2V6H6zm3.5-6L18 6v12z"/></svg>
+                  </button>
+                </div>
+                <div class="playbar-progress-wrapper">
+                  <span class="playbar-time" id="playbar-current-time">00:00</span>
+                  <input type="range" class="progress-bar-slider" id="playbar-progress" min="0" max="1000" value="0" aria-label="播放进度" aria-valuetext="00:00 / --:--">
+                  <span class="playbar-time" id="playbar-total-time">--:--</span>
+                </div>
+              </div>
+
+              <div class="playbar-func-area">
+                <div class="playbar-volume">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+                    <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+                  </svg>
+                  <input type="range" class="progress-bar-slider" id="playbar-volume" min="0" max="1" step="0.05" value="0.6" aria-label="音量" aria-valuetext="音量 60%">
+                </div>
+              </div>
+            </div>
+          </div>
+
           <p class="music-note">
-            在此处，您可以选择一曲清音，伴着春日的梅影与宣纸的留白，静静聆听墨香与音符的交融。
+            曲目来自仓库内已有音频文件；没有歌词、收藏量或听众数据时，这里只显示真实可用的信息。
           </p>
           <p class="music-error-inline" id="music-error-message" role="status" aria-live="polite" hidden></p>
           <div class="seal seal-yinke music-panel-seal">听雪<br>清供</div>
@@ -115,57 +160,6 @@
       </div>
     </div>
   </main>
-
-  <!-- 底部常驻案头清供播放栏 -->
-  <div class="music-playbar-container" id="playbar-container">
-    <!-- 可收起挂载接口：仅切换容器状态，不触碰 music.js 播放逻辑 -->
-    <button class="playbar-dock-toggle" type="button" data-playbar-toggle aria-expanded="true" aria-label="收起播放栏" aria-controls="playbar-container">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <polyline points="6 9 12 15 18 9"></polyline>
-      </svg>
-    </button>
-    <div class="music-playbar-layout">
-      <!-- 左：歌曲详情 -->
-      <div class="playbar-info-area">
-        <div class="playbar-cover">雪</div>
-        <div class="playbar-text">
-          <span class="playbar-title" id="playbar-title">静待选曲</span>
-          <span class="playbar-artist" id="playbar-artist">本地音乐</span>
-        </div>
-      </div>
-
-      <!-- 中：控制按钮与进度条 -->
-      <div class="playbar-control-area">
-        <div class="playbar-buttons">
-          <button class="playbar-btn" id="playbar-prev-btn" type="button" aria-label="上一首">
-            <svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
-          </button>
-          <button class="playbar-btn playbar-btn-play music-play-control" id="playbar-play-btn" type="button" aria-label="播放当前歌曲">
-            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-          </button>
-          <button class="playbar-btn" id="playbar-next-btn" type="button" aria-label="下一首">
-            <svg viewBox="0 0 24 24"><path d="M6 18h2V6H6zm3.5-6L18 6v12z"/></svg>
-          </button>
-        </div>
-        <div class="playbar-progress-wrapper">
-          <span class="playbar-time" id="playbar-current-time">00:00</span>
-          <input type="range" class="progress-bar-slider" id="playbar-progress" min="0" max="1000" value="0" aria-label="播放进度" aria-valuetext="00:00 / --:--">
-          <span class="playbar-time" id="playbar-total-time">--:--</span>
-        </div>
-      </div>
-
-      <!-- 右：音量调节 -->
-      <div class="playbar-func-area">
-        <div class="playbar-volume">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-            <path d="M11 5L6 9H2v6h4l5 4V5z"/>
-            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
-          </svg>
-          <input type="range" class="progress-bar-slider" id="playbar-volume" min="0" max="1" step="0.05" value="0.6" aria-label="音量" aria-valuetext="音量 60%">
-        </div>
-      </div>
-    </div>
-  </div>
 
   <!-- 自定义中式温和提示弹窗 -->
   <div class="custom-dialog-overlay" id="music-error-dialog" role="dialog" aria-modal="true" aria-labelledby="dialog-title">

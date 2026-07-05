@@ -646,7 +646,7 @@ function initMusicWidget() {
   if (subtitle) subtitle.textContent = track.artist + ' · ' + track.duration;
 
   audio.addEventListener('error', () => {
-    console.error('Audio load failed:', {
+    console.warn('Audio load failed:', {
       src: audio.currentSrc || audio.src,
       errorCode: audio.error?.code
     });
@@ -1805,16 +1805,12 @@ function initLearningPage() {
 
 /**
  * 黑猫陪伴系统 · 行为底座。
- * - 自动注入 [data-companion-cat]（home / music / contact / gallery 优先）。
- * - 状态：idle / walk / sit / look / sleep / pet，写在 data-cat-state。
- * - 仅猫自身可点，不用透明层覆盖页面。
- * - 安全路线点：仅在页面底部安全带内移动，远离顶部导航。
- * - prefers-reduced-motion：停止走动，仅保留静态坐姿。
- * - 手机端：降低移动频率。
+ * 首页保留既有可抚摸行为；非首页只作为安静视觉角色，不可点击。
  */
 function initCompanionCat() {
   var priorityPages = ['page-home', 'page-music', 'page-contact', 'page-gallery'];
   var isPriority = priorityPages.some(function (cls) { return document.body.classList.contains(cls); });
+  var isHome = document.body.classList.contains('page-home');
 
   var cat = document.querySelector('[data-companion-cat]');
   if (!cat && !isPriority) return;
@@ -1832,17 +1828,34 @@ function initCompanionCat() {
   ].join('');
 
   if (!cat) {
-    cat = document.createElement('button');
-    cat.type = 'button';
+    cat = document.createElement(isHome ? 'button' : 'span');
+    if (isHome) {
+      cat.type = 'button';
+    }
     cat.setAttribute('data-companion-cat', '');
-    cat.setAttribute('aria-label', '轻轻抚摸黑猫');
     cat.className = 'companion-cat';
     cat.innerHTML = catMarkup;
     var zone = document.querySelector('.companion-zone') || document.body;
-    zone.removeAttribute('aria-hidden');
+    if (isHome) {
+      cat.setAttribute('aria-label', '轻轻抚摸黑猫');
+      zone.removeAttribute('aria-hidden');
+    } else {
+      cat.setAttribute('aria-hidden', 'true');
+    }
     zone.appendChild(cat);
   } else if (!cat.querySelector('.companion-cat-sprite')) {
     cat.innerHTML = catMarkup;
+  }
+
+  if (!isHome) {
+    cat.setAttribute('aria-hidden', 'true');
+    cat.removeAttribute('aria-label');
+    cat.removeAttribute('tabindex');
+    cat.setAttribute('data-cat-state', 'sit');
+    cat.style.removeProperty('left');
+    cat.style.removeProperty('top');
+    cat.style.removeProperty('transition');
+    return;
   }
 
   var states = ['idle', 'walk', 'sit', 'look', 'sleep', 'pet'];
@@ -1862,7 +1875,6 @@ function initCompanionCat() {
   };
 
   // 在底部安全带内取一个不与交互元素重叠的落点（百分比定位，随视口自适应）。
-  var isHome = document.body.classList.contains('page-home');
   var avoidSelector = 'header, .nav-container, .courtyard-content, .home-orbit-controls, .courtyard-cue, .route-guide, a, button, input, textarea, .music-widget, .music-playbar-container, .back-to-top';
 
   var getHomeSafeZones = function () {
