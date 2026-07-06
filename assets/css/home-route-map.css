@@ -374,6 +374,7 @@ body.page-home.route-map-ready .mount-map.is-open .mount-map__scene {
 .mount-map.is-open .mount-map__landmark:nth-child(5) { animation-delay: 380ms; }
 .mount-map.is-open .mount-map__landmark:nth-child(6) { animation-delay: 430ms; }
 .mount-map.is-open .mount-map__landmark:nth-child(7) { animation-delay: 480ms; }
+.mount-map.is-open .mount-map__landmark:nth-child(8) { animation-delay: 530ms; }
 
 .mount-map__landmark:focus-visible {
   outline: 2px solid var(--map-focus);
@@ -612,6 +613,47 @@ body.page-home.route-map-ready .mount-map.is-open .mount-map__scene {
     radial-gradient(circle at 50% 17%, rgba(255, 218, 126, 0.88) 0 0.16rem, transparent 0.2rem),
     linear-gradient(180deg, rgba(83, 58, 32, 0.76), rgba(139, 92, 44, 0.46));
   box-shadow: 0 0 13px rgba(239, 177, 74, 0.36);
+}
+
+.mount-map__landmark[data-landmark="cat"] {
+  left: 58%;
+  top: 42%;
+}
+
+.mount-map__landmark[data-landmark="cat"] .mount-map__landmark-glow {
+  opacity: 0.34;
+}
+
+.mount-map__landmark[data-landmark="cat"] .mount-map__landmark-object {
+  width: 1.42rem;
+  height: 0.88rem;
+  border-radius: 58% 48% 46% 54%;
+  background:
+    radial-gradient(circle at 76% 32%, rgba(255, 224, 143, 0.86) 0 0.08rem, transparent 0.1rem),
+    linear-gradient(145deg, rgba(20, 21, 18, 0.94), rgba(49, 38, 27, 0.74));
+  box-shadow:
+    0 0.35rem 0.9rem rgba(22, 17, 11, 0.24),
+    0 0 0.9rem rgba(236, 188, 95, 0.14);
+  transform: translate(-50%, -50%) rotate(4deg);
+}
+
+.mount-map__landmark[data-landmark="cat"] .mount-map__landmark-object::before,
+.mount-map__landmark[data-landmark="cat"] .mount-map__landmark-object::after {
+  top: -0.28rem;
+  width: 0.34rem;
+  height: 0.38rem;
+  background: rgba(23, 22, 18, 0.95);
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+}
+
+.mount-map__landmark[data-landmark="cat"] .mount-map__landmark-object::before {
+  left: 0.16rem;
+  transform: rotate(-12deg);
+}
+
+.mount-map__landmark[data-landmark="cat"] .mount-map__landmark-object::after {
+  right: 0.18rem;
+  transform: rotate(12deg);
 }
 
 .route-guide.mount-map .mount-map__header {
@@ -1074,6 +1116,11 @@ body.page-home .mount-map__header::after {
   .mount-map__landmark[data-landmark="contact"] {
     left: 51%;
     top: 90%;
+  }
+
+  .mount-map__landmark[data-landmark="cat"] {
+    left: 30%;
+    top: 84%;
   }
 }
 

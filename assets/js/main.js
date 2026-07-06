@@ -1863,7 +1863,7 @@ function initCompanionCat() {
 
   // 在底部安全带内取一个不与交互元素重叠的落点（百分比定位，随视口自适应）。
   var isHome = document.body.classList.contains('page-home');
-  var avoidSelector = 'header, .nav-container, .courtyard-content, .home-orbit-controls, .courtyard-cue, .route-guide, a, button, input, textarea, .music-widget, .music-playbar-container, .back-to-top';
+  var avoidSelector = 'header, .nav-container, .courtyard-content, .home-orbit-controls, .home-hero-aside, .home-preview-card, .home-scroll-section, .courtyard-cue, .route-guide, a, button, input, textarea, .music-widget, .music-playbar-container, .back-to-top';
 
   var getHomeSafeZones = function () {
     if (window.matchMedia('(max-width: 768px)').matches) {

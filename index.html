@@ -7,7 +7,7 @@
   <meta name="description" content="步青尘的个人主页，一个中式水墨风格的静态个人网站，用于记录前端学习、个人项目和网页设计实践。">
   <meta name="author" content="步青尘">
   <meta name="robots" content="index, follow">
-  <meta name="theme-color" content="#fbf8f1">
+  <meta name="theme-color" content="#080b0c">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%23faf7ef'/%3E%3Ctext x='32' y='42' font-size='34' text-anchor='middle' fill='%23cc4343' font-family='serif'%3E步%3C/text%3E%3C/svg%3E">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="website">
@@ -15,9 +15,9 @@
   <meta property="og:title" content="步青尘 | 中式水墨个人主页">
   <meta property="og:description" content="步青尘的个人主页，一个中式水墨风格的静态个人网站，用于记录前端学习、个人项目和网页设计实践。">
   <meta property="og:url" content="https://uner9895-blip.github.io/liuyuexue-site/">
-  <link rel="stylesheet" href="assets/css/style.css?v=2.0.4">
+  <link rel="stylesheet" href="assets/css/style.css?v=2.0.5">
   <link rel="stylesheet" href="assets/css/v2-structure.css?v=2.0.0">
-  <link rel="stylesheet" href="assets/css/home-route-map.css">
+  <link rel="stylesheet" href="assets/css/home-route-map.css?v=2.0.1">
   <script>
     (function() {
       var theme = localStorage.getItem('theme') || 'light';
@@ -111,7 +111,7 @@
 
   <main class="page-fade">
     <!-- 入口：夜行山路与纸卷世界 -->
-    <section class="courtyard world-shell" aria-label="步青尘 · 起行入口">
+    <section class="courtyard world-shell home-scroll-hero" aria-label="步青尘 · 起行入口">
       <div class="courtyard-scene world-scene" aria-hidden="true">
         <div class="scene-sky"></div>
 
@@ -160,86 +160,131 @@
 
       <div class="courtyard-content world-content">
         <span class="seal seal-yinke courtyard-seal" aria-hidden="true">青尘<br>印</span>
-        <p class="courtyard-kicker">见字如面 · 岁在丙午</p>
+        <p class="courtyard-kicker">青尘印 · 暮光山谷</p>
         <h1 class="courtyard-title">步青尘</h1>
-        <p class="courtyard-subtitle">纸卷初展，山路向前</p>
-        <p class="courtyard-atmosphere">暮色沿山谷落下，云在路口慢慢经过。</p>
-        <a class="courtyard-enter" href="#enter" aria-controls="home-route-map" aria-expanded="false">起行</a>
-        <!-- 空间地图：有 JS 时展开为对话层，无 JS 时保留静态链接。 -->
-        <section class="route-guide mount-map" id="home-route-map" aria-labelledby="route-map-title" aria-describedby="route-map-subtitle">
-          <div class="mount-map__scrim" aria-hidden="true"></div>
-          <div class="mount-map__scene">
-            <div class="mount-map__scroll">
-              <div class="mount-map__paper" aria-hidden="true"></div>
-              <header class="mount-map__header">
-                <p class="mount-map__eyebrow">起行卷 · 山路向前</p>
-                <h2 id="route-map-title" class="mount-map__title">入山行图</h2>
-                <p id="route-map-subtitle" class="mount-map__subtitle">循纸上山路，择一处停驻</p>
-                <div class="mount-map__compass" aria-hidden="true">
-                  <span class="mount-map__compass-point">北</span>
-                </div>
-              </header>
-              <button class="route-guide-close mount-map__close" type="button" aria-label="收起路线图">合卷</button>
-              <div class="mount-map__vista" aria-hidden="true">
-                <div class="mount-map__image mount-map__image--day"></div>
-                <div class="mount-map__image mount-map__image--night"></div>
-                <div class="mount-map__light mount-map__light--day"></div>
-                <div class="mount-map__light mount-map__light--night"></div>
-                <div class="mount-map__mist mount-map__mist--far"></div>
-                <div class="mount-map__mist mount-map__mist--near"></div>
-              </div>
-              <nav class="mount-map__landmarks" aria-label="入山行图页面入口">
-                <a class="mount-map__landmark" href="about.html" data-landmark="about" aria-label="小序，谷口题签">
-                  <span class="mount-map__landmark-glow" aria-hidden="true"></span>
-                  <span class="mount-map__landmark-object" aria-hidden="true"></span>
-                  <span class="mount-map__landmark-name">小序</span>
-                </a>
-                <a class="mount-map__landmark" href="projects.html" data-landmark="projects" aria-label="行迹，旧路碑">
-                  <span class="mount-map__landmark-glow" aria-hidden="true"></span>
-                  <span class="mount-map__landmark-object" aria-hidden="true"></span>
-                  <span class="mount-map__landmark-name">行迹</span>
-                </a>
-                <a class="mount-map__landmark" href="articles.html" data-landmark="articles" aria-label="雪笺，临水石台">
-                  <span class="mount-map__landmark-glow" aria-hidden="true"></span>
-                  <span class="mount-map__landmark-object" aria-hidden="true"></span>
-                  <span class="mount-map__landmark-name">雪笺</span>
-                </a>
-                <a class="mount-map__landmark" href="learning.html" data-landmark="learning" aria-label="学习路，坡上里程石">
-                  <span class="mount-map__landmark-glow" aria-hidden="true"></span>
-                  <span class="mount-map__landmark-object" aria-hidden="true"></span>
-                  <span class="mount-map__landmark-name">学习路</span>
-                </a>
-                <a class="mount-map__landmark" href="gallery.html" data-landmark="gallery" aria-label="影像廊，山腰观景廊">
-                  <span class="mount-map__landmark-glow" aria-hidden="true"></span>
-                  <span class="mount-map__landmark-object" aria-hidden="true"></span>
-                  <span class="mount-map__landmark-name">影像廊</span>
-                </a>
-                <a class="mount-map__landmark" href="music.html" data-landmark="music" aria-label="听雪，梅枝下的微光">
-                  <span class="mount-map__landmark-glow" aria-hidden="true"></span>
-                  <span class="mount-map__landmark-object" aria-hidden="true"></span>
-                  <span class="mount-map__landmark-name">听雪</span>
-                </a>
-                <a class="mount-map__landmark" href="contact.html" data-landmark="contact" aria-label="留笺，远处驿站灯台">
-                  <span class="mount-map__landmark-glow" aria-hidden="true"></span>
-                  <span class="mount-map__landmark-object" aria-hidden="true"></span>
-                  <span class="mount-map__landmark-name">留笺</span>
-                </a>
-              </nav>
-            </div>
-          </div>
-          <nav class="mount-map__fallback-links" aria-label="静态入山链接">
-            <a href="about.html">小序</a>
-            <a href="projects.html">行迹</a>
-            <a href="articles.html">雪笺</a>
-            <a href="learning.html">学习路</a>
-            <a href="gallery.html">影像廊</a>
-            <a href="music.html">听雪</a>
-            <a href="contact.html">留笺</a>
-          </nav>
-        </section>
+        <p class="courtyard-subtitle">纸卷初展 · 山路向前</p>
+        <p class="courtyard-atmosphere">暮色沿山谷落下，卷轴在路口慢慢展开。</p>
+        <div class="courtyard-actions" aria-label="首页主要入口">
+          <a class="courtyard-enter" href="#home-prologue">起 行</a>
+          <a class="courtyard-link" href="music.html">听雪</a>
+          <a class="courtyard-link" href="cat.html">小猫</a>
+        </div>
       </div>
 
-      <a class="courtyard-cue" href="#enter" aria-label="向下浏览，起行">
+      <aside class="home-hero-aside" aria-label="路线地图与影像廊预览">
+        <article class="home-preview-card home-map-card">
+          <div class="home-preview-head">
+            <span class="home-preview-kicker">卷轴</span>
+            <h2>路线地图</h2>
+          </div>
+          <p>一卷入山路，沿途设有驿站与停驻点。点击节点，即可前往对应空间。未启的节点仍在路上，卷轴可慢慢展开。</p>
+          <div class="home-map-preview" aria-hidden="true">
+            <img src="assets/visuals/home/route-scroll-valley-wide-v3.png" alt="">
+            <span class="home-map-pin home-map-pin-prologue">小序</span>
+            <span class="home-map-pin home-map-pin-gallery">影像</span>
+            <span class="home-map-pin home-map-pin-music">听雪</span>
+            <span class="home-map-pin home-map-pin-cat">小猫</span>
+          </div>
+          <div class="home-map-actions">
+            <button class="btn-ink home-route-reopen" type="button" aria-controls="home-route-map" aria-expanded="false" data-route-map-trigger>展开地图</button>
+            <a class="btn-ink btn-secondary" href="#home-pathways">看驿站</a>
+          </div>
+        </article>
+
+        <article class="home-preview-card home-gallery-preview">
+          <div class="home-preview-head">
+            <span class="home-preview-kicker">展厅</span>
+            <h2>影像廊</h2>
+          </div>
+          <p>山影 · 微雾<br>有山的时候，愿你慢慢看；<br>一帧风景，也可以是一段故事。</p>
+          <a class="home-gallery-strip" href="gallery.html" aria-label="进入影像廊">
+            <img src="assets/images/gallery/3df858748cd0f8375a2a4f2727a2b05b.jpg" alt="远处山谷、河面倒影和被云光照亮的山坡">
+            <img src="assets/images/gallery/1534941e2495b8bc5b1b0722ea1ae57c.jpg" alt="傍晚天空里层叠的蓝灰云与透出的日光">
+            <img src="assets/images/gallery/spring_moss.jpg" alt="雨后林地里带着水汽的青苔与细小新芽">
+          </a>
+        </article>
+      </aside>
+
+      <!-- 空间地图：有 JS 时展开为对话层，无 JS 时保留静态链接。 -->
+      <section class="route-guide mount-map" id="home-route-map" aria-labelledby="route-map-title" aria-describedby="route-map-subtitle">
+        <div class="mount-map__scrim" aria-hidden="true"></div>
+        <div class="mount-map__scene">
+          <div class="mount-map__scroll">
+            <div class="mount-map__paper" aria-hidden="true"></div>
+            <header class="mount-map__header">
+              <p class="mount-map__eyebrow">起行卷 · 山路向前</p>
+              <h2 id="route-map-title" class="mount-map__title">路线地图</h2>
+              <p id="route-map-subtitle" class="mount-map__subtitle">一卷入山路，沿途设有驿站与停驻点。</p>
+              <div class="mount-map__compass" aria-hidden="true">
+                <span class="mount-map__compass-point">北</span>
+              </div>
+            </header>
+            <button class="route-guide-close mount-map__close" type="button" aria-label="收起路线图">合卷</button>
+            <div class="mount-map__vista" aria-hidden="true">
+              <div class="mount-map__image mount-map__image--day"></div>
+              <div class="mount-map__image mount-map__image--night"></div>
+              <div class="mount-map__light mount-map__light--day"></div>
+              <div class="mount-map__light mount-map__light--night"></div>
+              <div class="mount-map__mist mount-map__mist--far"></div>
+              <div class="mount-map__mist mount-map__mist--near"></div>
+            </div>
+            <nav class="mount-map__landmarks" aria-label="入山行图页面入口">
+              <a class="mount-map__landmark" href="#home-prologue" data-landmark="about" aria-label="小序，谷口题签">
+                <span class="mount-map__landmark-glow" aria-hidden="true"></span>
+                <span class="mount-map__landmark-object" aria-hidden="true"></span>
+                <span class="mount-map__landmark-name">小序</span>
+              </a>
+              <a class="mount-map__landmark" href="projects.html" data-landmark="projects" aria-label="行迹，旧路碑">
+                <span class="mount-map__landmark-glow" aria-hidden="true"></span>
+                <span class="mount-map__landmark-object" aria-hidden="true"></span>
+                <span class="mount-map__landmark-name">行迹</span>
+              </a>
+              <a class="mount-map__landmark" href="articles.html" data-landmark="articles" aria-label="雪笺，临水石台">
+                <span class="mount-map__landmark-glow" aria-hidden="true"></span>
+                <span class="mount-map__landmark-object" aria-hidden="true"></span>
+                <span class="mount-map__landmark-name">雪笺</span>
+              </a>
+              <a class="mount-map__landmark" href="learning.html" data-landmark="learning" aria-label="学习路，坡上里程石">
+                <span class="mount-map__landmark-glow" aria-hidden="true"></span>
+                <span class="mount-map__landmark-object" aria-hidden="true"></span>
+                <span class="mount-map__landmark-name">学习路</span>
+              </a>
+              <a class="mount-map__landmark" href="gallery.html" data-landmark="gallery" aria-label="影像廊，山腰观景廊">
+                <span class="mount-map__landmark-glow" aria-hidden="true"></span>
+                <span class="mount-map__landmark-object" aria-hidden="true"></span>
+                <span class="mount-map__landmark-name">影像廊</span>
+              </a>
+              <a class="mount-map__landmark" href="music.html" data-landmark="music" aria-label="听雪，梅枝下的微光">
+                <span class="mount-map__landmark-glow" aria-hidden="true"></span>
+                <span class="mount-map__landmark-object" aria-hidden="true"></span>
+                <span class="mount-map__landmark-name">听雪</span>
+              </a>
+              <a class="mount-map__landmark" href="contact.html" data-landmark="contact" aria-label="留笺，远处驿站灯台">
+                <span class="mount-map__landmark-glow" aria-hidden="true"></span>
+                <span class="mount-map__landmark-object" aria-hidden="true"></span>
+                <span class="mount-map__landmark-name">留笺</span>
+              </a>
+              <a class="mount-map__landmark" href="cat.html" data-landmark="cat" aria-label="小猫，山路同行者">
+                <span class="mount-map__landmark-glow" aria-hidden="true"></span>
+                <span class="mount-map__landmark-object" aria-hidden="true"></span>
+                <span class="mount-map__landmark-name">小猫</span>
+              </a>
+            </nav>
+          </div>
+        </div>
+        <nav class="mount-map__fallback-links" aria-label="静态入山链接">
+          <a href="#home-prologue">小序</a>
+          <a href="projects.html">行迹</a>
+          <a href="articles.html">雪笺</a>
+          <a href="learning.html">学习路</a>
+          <a href="gallery.html">影像廊</a>
+          <a href="music.html">听雪</a>
+          <a href="contact.html">留笺</a>
+          <a href="cat.html">小猫</a>
+        </nav>
+      </section>
+
+      <a class="courtyard-cue" href="#home-prologue" aria-label="向下浏览，起行">
         <span class="cue-text">入</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <polyline points="6 9 12 15 18 9"></polyline>
@@ -248,20 +293,119 @@
     </section>
 
     <!-- 第一屏之后：短序与继续入口 -->
-    <section class="hero-section home-brief-intro" id="enter" aria-labelledby="home-title">
-      <div class="home-brief-scroll scroll-reveal">
+    <section class="hero-section home-brief-intro home-scroll-section" id="home-prologue" aria-labelledby="home-title">
+      <div class="home-brief-scroll home-section-shell scroll-reveal">
         <span class="home-brief-mark" aria-hidden="true">序</span>
-        <p class="hero-kicker">短小序</p>
-        <h2 id="home-title" class="hero-title">
-          <span class="home-title-line">纸卷初展，</span><span class="home-title-line">山路向前。</span>
-        </h2>
+        <p class="hero-kicker">小序</p>
+        <h2 id="home-title" class="hero-title">小序</h2>
         <p class="hero-desc">
-          这里不放完整履历，只留一页小序。顺着这条山路，可以去看作品、读短文、听一段雪声，也可以在末尾写下一句。
+          这里是「步青尘」的山谷。<br>
+          我在纸上走路，也在生活里行走。<br>
+          记录所见、所思、所学、所行，<br>
+          也收藏一些温柔而安定的瞬间。<br>
+          愿你在此，遇见一段属于自己的路。
         </p>
         <div class="home-intro-actions" aria-label="继续进入其他空间">
-          <a href="#enter" class="btn-ink home-route-reopen" aria-controls="home-route-map" aria-expanded="false" data-route-map-trigger>展卷</a>
-          <a href="about.html" class="btn-ink btn-secondary">读小序</a>
+          <button class="btn-ink home-route-reopen" type="button" aria-controls="home-route-map" aria-expanded="false" data-route-map-trigger>展卷</button>
           <a href="projects.html" class="btn-ink btn-secondary">去行迹</a>
+          <a href="music.html" class="btn-ink btn-secondary">听雪</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="home-scroll-section home-pathways-section" id="home-pathways" aria-labelledby="home-pathways-title">
+      <div class="home-section-shell">
+        <div class="home-section-title">
+          <p class="home-section-kicker">驿站</p>
+          <h2 id="home-pathways-title">功能卡片导航</h2>
+          <p>从卷轴上选择一处停驻，或者继续沿山路向前。</p>
+        </div>
+        <div class="home-feature-grid">
+          <a class="home-feature-card" href="#home-prologue">
+            <span class="home-feature-index">01</span>
+            <h3>小序</h3>
+            <p>在山谷入口读一段简短自述。</p>
+          </a>
+          <a class="home-feature-card" href="projects.html">
+            <span class="home-feature-index">02</span>
+            <h3>行迹</h3>
+            <p>作品、练习与正在走的路。</p>
+          </a>
+          <a class="home-feature-card" href="articles.html">
+            <span class="home-feature-index">03</span>
+            <h3>雪笺</h3>
+            <p>短文、记录和落在纸上的想法。</p>
+          </a>
+          <a class="home-feature-card" href="learning.html">
+            <span class="home-feature-index">04</span>
+            <h3>学习路</h3>
+            <p>把每天学到的东西留成里程石。</p>
+          </a>
+          <a class="home-feature-card" href="gallery.html">
+            <span class="home-feature-index">05</span>
+            <h3>影像廊</h3>
+            <p>山影、微雾与生活里的安静片段。</p>
+          </a>
+          <a class="home-feature-card home-feature-card--music" href="music.html">
+            <span class="home-feature-index">06</span>
+            <h3>听雪</h3>
+            <p>月下生微灯，雪落听清音。</p>
+          </a>
+          <a class="home-feature-card" href="contact.html">
+            <span class="home-feature-index">07</span>
+            <h3>留笺</h3>
+            <p>写下一句话，或者寄来一封信。</p>
+          </a>
+          <a class="home-feature-card home-feature-card--cat" href="cat.html">
+            <span class="home-feature-index">08</span>
+            <h3>小猫</h3>
+            <p>一只同行的小猫，陪我走过山路与雪夜。</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="home-scroll-section home-companion-section" aria-labelledby="home-cat-title">
+      <div class="home-section-shell home-companion-shell">
+        <div class="home-cat-panel">
+          <div class="home-cat-portrait" aria-hidden="true">
+            <img src="assets/visuals/cat/cat-idle.png" alt="">
+          </div>
+          <div>
+            <p class="home-section-kicker">同行者</p>
+            <h2 id="home-cat-title">小猫同行者</h2>
+            <p>愿意醒来，愿意可爱，有体温感。它不是装饰，是陪伴入口。</p>
+            <a class="btn-ink" href="cat.html">去见小猫</a>
+          </div>
+        </div>
+        <div class="home-snow-panel">
+          <p class="home-section-kicker">听雪</p>
+          <h2>听雪入口</h2>
+          <p>月下生微灯，雪落听清音。把背景音乐留给另一个安静房间。</p>
+          <a class="btn-ink btn-secondary" href="music.html">进入听雪</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="home-scroll-section home-ledger-section" aria-labelledby="home-ledger-title">
+      <div class="home-section-shell">
+        <div class="home-section-title">
+          <p class="home-section-kicker">卷末</p>
+          <h2 id="home-ledger-title">底部三栏</h2>
+        </div>
+        <div class="home-ledger-grid">
+          <article class="home-ledger-card">
+            <h3>整体气质</h3>
+            <p>暮光山谷、夜行山路、纸卷地图、黑金水墨。</p>
+          </article>
+          <article class="home-ledger-card">
+            <h3>小猫同行者</h3>
+            <p>愿意醒来，愿意可爱，有体温感，不是装饰，是陪伴入口。</p>
+          </article>
+          <article class="home-ledger-card">
+            <h3>技术方向</h3>
+            <p>静态网站（HTML + CSS + JS）、GitHub Pages 部署、响应式设计、支持 reduced-motion、不引入新框架。</p>
+          </article>
         </div>
       </div>
     </section>
@@ -306,6 +450,6 @@
   <div class="companion-zone" aria-hidden="true"></div>
 
   <script src="assets/data/site-data.js?v=2.0.0"></script>
-  <script src="assets/js/main.js?v=2.0.2"></script>
+  <script src="assets/js/main.js?v=2.0.3"></script>
 </body>
 </html>
