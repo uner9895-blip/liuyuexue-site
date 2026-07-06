@@ -5,9 +5,51 @@
 (function () {
   if (window.__liuyuexueMusicInitialized) return;
 
+  const plumTrackCopy = {
+    'ecoute-cherie': {
+      title: '一枝雪：月下轻语',
+      branch: '一枝雪',
+      note: '月光先落在低枝，像一句很轻的开场。'
+    },
+    'fallin-out': {
+      title: '二枝雪：坠入风外',
+      branch: '二枝雪',
+      note: '风从枝梢掠过，旧雪在暗处慢慢发亮。'
+    },
+    'hong-san-ke-zhan': {
+      title: '三枝雪：红山客栈',
+      branch: '三枝雪',
+      note: '远灯照着来路，梅影像一封未拆的信。'
+    },
+    'ji-mo-ji-mo-bu-hao': {
+      title: '四枝雪：寂寞不声',
+      branch: '四枝雪',
+      note: '雪压低了檐声，花却替沉默开了一点。'
+    },
+    'lan-ting-xu': {
+      title: '五枝雪：兰亭旧序',
+      branch: '五枝雪',
+      note: '墨痕在月下回温，枝头留着旧日行书。'
+    },
+    'lian-ren': {
+      title: '六枝雪：恋人未远',
+      branch: '六枝雪',
+      note: '一朵梅向夜里倾身，像还没走远的人。'
+    },
+    'yin-tian': {
+      title: '七枝雪：阴天听雪',
+      branch: '七枝雪',
+      note: '云色压低，仍有一盏暖音悬在枝上。'
+    }
+  };
+
   const MUSIC_PLAYLIST = (window.musicTracks || []).map((song, index) => ({
     id: song.id || 'track-' + (index + 1),
-    title: song.title || formatTitleFromPath(song.src || '本地曲目'),
+    title: getPlumCopy(song, index).title,
+    branch: getPlumCopy(song, index).branch,
+    originalTitle: song.title || formatTitleFromPath(song.src || '本地曲目'),
+    fileName: getFileName(song.src || ''),
+    note: getPlumCopy(song, index).note,
     artist: song.artist || '本地音乐',
     src: song.src,
     tag: song.tag || '雪音',
@@ -16,18 +58,18 @@
 
   const stateText = {
     idle: '未开始',
-    loading: '加载中',
-    playing: '正在播放',
-    paused: '暂歇',
+    loading: '启封中',
+    playing: '正在听',
+    paused: '已暂停',
     ended: '曲终',
-    error: '无法播放'
+    error: '加载失败'
   };
 
   const atmosphereText = {
     idle: '静待清音……',
-    loading: '清音将至……',
-    playing: '正在聆听……',
-    paused: '暂歇片刻……',
+    loading: '梅上清音将至……',
+    playing: '雪落枝头，正在听……',
+    paused: '清音暂歇，梅灯仍在……',
     ended: '曲终余韵……',
     error: '此曲暂不可闻'
   };
@@ -40,6 +82,8 @@
   let isSeeking = false;
   let intendedToPlay = false;
   let lastRenderedAtmosphere = '';
+  let hasSelectedTrack = false;
+  const listenedTrackIds = new Set();
   let elements = {};
 
   if (document.readyState === 'loading') {
@@ -73,10 +117,14 @@
       playlist: document.getElementById('playlist-container'),
       currentIndex: document.getElementById('music-current-index'),
       currentTitle: document.getElementById('music-current-title'),
+      currentOriginal: document.getElementById('music-current-original'),
       currentMeta: document.getElementById('music-current-meta'),
       currentStatus: document.getElementById('music-current-status'),
+      currentCopy: document.getElementById('music-current-copy'),
       atmosphere: document.getElementById('music-atmosphere'),
       errorMessage: document.getElementById('music-error-message'),
+      trackIndex: document.getElementById('music-track-index'),
+      playbar: document.getElementById('playbar-container'),
       playbarTitle: document.getElementById('playbar-title'),
       playbarArtist: document.getElementById('playbar-artist'),
       playbarCover: document.querySelector('.playbar-cover'),
@@ -100,14 +148,42 @@
       const number = String(index + 1).padStart(2, '0');
       return [
         '<li class="track-item" data-index="' + index + '">',
-        '  <button class="track-select" type="button" data-track-index="' + index + '" aria-label="选择 ' + escapeHtml(song.title) + '">',
+        '  <button class="track-select" type="button" data-track-index="' + index + '" aria-label="播放 ' + escapeHtml(song.title) + '">',
+        '    <span class="track-branch-mark" aria-hidden="true"></span>',
+        '    <span class="track-blossom" aria-hidden="true">',
+        '      <span class="track-petal track-petal-1"></span>',
+        '      <span class="track-petal track-petal-2"></span>',
+        '      <span class="track-petal track-petal-3"></span>',
+        '      <span class="track-petal track-petal-4"></span>',
+        '      <span class="track-petal track-petal-5"></span>',
+        '      <span class="track-blossom-heart"></span>',
+        '    </span>',
         '    <span class="track-number">' + number + '</span>',
         '    <span class="track-main">',
         '      <span class="track-title">' + escapeHtml(song.title) + '</span>',
-        '      <span class="track-artist">' + escapeHtml(song.artist || '本地音乐') + '</span>',
+        '      <span class="track-artist">' + escapeHtml(song.originalTitle || song.fileName || '本地音乐') + '</span>',
         '    </span>',
         '    <span class="track-duration" data-duration-for="' + escapeHtml(song.id) + '">' + escapeHtml(song.duration || '--:--') + '</span>',
-        '    <span class="track-state"><span class="track-wave" aria-hidden="true"><i></i><i></i><i></i></span><span class="track-state-text">待播放</span></span>',
+        '    <span class="track-state"><span class="track-wave" aria-hidden="true"><i></i><i></i><i></i></span><span class="track-state-text">待启封</span></span>',
+        '  </button>',
+        '</li>'
+      ].join('');
+    }).join('');
+
+    renderTrackIndex();
+  }
+
+  function renderTrackIndex() {
+    if (!elements.trackIndex) return;
+
+    elements.trackIndex.innerHTML = MUSIC_PLAYLIST.map((song, index) => {
+      const number = String(index + 1).padStart(2, '0');
+      return [
+        '<li class="music-index-item" data-index="' + index + '">',
+        '  <button class="music-index-select" type="button" data-track-index="' + index + '" aria-label="播放 ' + escapeHtml(song.title) + '">',
+        '    <span class="music-index-number">' + number + '</span>',
+        '    <span class="music-index-name">' + escapeHtml(song.title) + '</span>',
+        '    <span class="music-index-duration">' + escapeHtml(song.duration || '--:--') + '</span>',
         '  </button>',
         '</li>'
       ].join('');
@@ -119,7 +195,15 @@
       elements.playlist.addEventListener('click', event => {
         const button = event.target.closest('[data-track-index]');
         if (!button) return;
-        toggleTrack(Number(button.getAttribute('data-track-index')));
+        selectTrack(Number(button.getAttribute('data-track-index')));
+      });
+    }
+
+    if (elements.trackIndex) {
+      elements.trackIndex.addEventListener('click', event => {
+        const button = event.target.closest('[data-track-index]');
+        if (!button) return;
+        selectTrack(Number(button.getAttribute('data-track-index')));
       });
     }
 
@@ -132,6 +216,7 @@
     if (elements.prevBtn) {
       elements.prevBtn.addEventListener('click', () => {
         const shouldPlay = playerState === 'playing' || playerState === 'loading';
+        hasSelectedTrack = true;
         switchTrack((currentTrackIndex - 1 + MUSIC_PLAYLIST.length) % MUSIC_PLAYLIST.length, shouldPlay);
       });
     }
@@ -139,6 +224,7 @@
     if (elements.nextBtn) {
       elements.nextBtn.addEventListener('click', () => {
         const shouldPlay = playerState === 'playing' || playerState === 'loading';
+        hasSelectedTrack = true;
         switchTrack((currentTrackIndex + 1) % MUSIC_PLAYLIST.length, shouldPlay);
       });
     }
@@ -217,6 +303,7 @@
       }
       intendedToPlay = true;
       playerState = 'playing';
+      listenedTrackIds.add(getCurrentTrack().id);
       renderPlayerState();
     });
 
@@ -253,7 +340,7 @@
     });
 
     siteAudio.addEventListener('error', () => {
-      console.error('Audio load failed:', {
+      console.warn('Audio load failed:', {
         src: siteAudio.currentSrc || siteAudio.src,
         errorCode: siteAudio.error?.code
       });
@@ -266,8 +353,27 @@
     siteAudio.addEventListener('timeupdate', updateProgress);
   }
 
+  function selectTrack(index) {
+    if (!Number.isInteger(index) || !MUSIC_PLAYLIST[index]) return;
+    hasSelectedTrack = true;
+    revealPlaybar();
+
+    if (index === currentTrackIndex) {
+      if (playerState === 'playing' || playerState === 'loading') {
+        renderPlayerState();
+        return;
+      }
+      playCurrentTrack();
+      return;
+    }
+
+    switchTrack(index, true);
+  }
+
   function toggleTrack(index) {
     if (!Number.isInteger(index) || !MUSIC_PLAYLIST[index]) return;
+    hasSelectedTrack = true;
+    revealPlaybar();
 
     if (index === currentTrackIndex) {
       if (playerState === 'playing' || playerState === 'loading') {
@@ -328,7 +434,7 @@
         renderPlayerState();
         return;
       }
-      console.error('Audio play failed:', error);
+      console.warn('Audio play failed:', error);
       playerState = 'error';
       renderPlayerState();
       showErrorDialog(getCurrentTrack().src);
@@ -355,16 +461,29 @@
     const isBusy = playerState === 'loading';
     const isPlaying = playerState === 'playing';
 
-    setText(elements.currentIndex, currentNumber);
-    setText(elements.currentTitle, song.title);
-    setText(elements.currentMeta, (song.artist || '本地音乐') + ' · ' + duration);
-    setText(elements.currentStatus, stateText[playerState] || stateText.idle);
-    setText(elements.playbarTitle, song.title);
-    setText(elements.playbarArtist, song.artist || '本地音乐');
+    if (hasSelectedTrack) {
+      setText(elements.currentIndex, song.branch || currentNumber);
+      setText(elements.currentTitle, song.title);
+      setText(elements.currentOriginal, (song.originalTitle || song.fileName || '本地曲目') + ' · ' + (song.fileName || '本地音频'));
+      setText(elements.currentMeta, (song.artist || '本地音乐') + ' · ' + duration);
+      setText(elements.currentStatus, stateText[playerState] || stateText.idle);
+      setText(elements.currentCopy, getCurrentCopy(song));
+      setText(elements.playbarTitle, song.title);
+      setText(elements.playbarArtist, song.originalTitle ? song.originalTitle + ' · ' + (song.artist || '本地音乐') : (song.artist || '本地音乐'));
+    } else {
+      setText(elements.currentIndex, '未启');
+      setText(elements.currentTitle, '静待选曲');
+      setText(elements.currentOriginal, '选择一朵梅花');
+      setText(elements.currentMeta, '本地音乐 · --:--');
+      setText(elements.currentStatus, stateText.idle);
+      setText(elements.currentCopy, '月下微灯未启，先让雪声落满枝头。');
+      setText(elements.playbarTitle, '静待选曲');
+      setText(elements.playbarArtist, '本地音乐');
+    }
     setText(elements.totalTime, duration);
 
     if (elements.playbarCover) {
-      elements.playbarCover.textContent = currentNumber;
+      elements.playbarCover.textContent = hasSelectedTrack ? currentNumber : '梅';
     }
 
     if (elements.playBtn) {
@@ -380,6 +499,7 @@
     }
 
     renderPlaylistState();
+    renderTrackIndexState();
     renderErrorMessage();
   }
 
@@ -390,19 +510,40 @@
       const button = item.querySelector('.track-select');
       const stateLabel = item.querySelector('.track-state-text');
       const durationLabel = item.querySelector('.track-duration');
-      const active = index === currentTrackIndex;
-      const itemState = active ? (stateText[playerState] || '待播放') : '待播放';
+      const active = hasSelectedTrack && index === currentTrackIndex;
+      const song = MUSIC_PLAYLIST[index];
+      const listened = listenedTrackIds.has(song.id);
+      const itemState = active ? (stateText[playerState] || '待启封') : (listened ? '已听过' : '待启封');
 
       item.classList.toggle('is-current', active);
       item.classList.toggle('is-playing', active && playerState === 'playing');
+      item.classList.toggle('is-paused', active && playerState === 'paused');
       item.classList.toggle('is-loading', active && playerState === 'loading');
       item.classList.toggle('is-error', active && playerState === 'error');
+      item.classList.toggle('is-listened', listened);
 
       if (button) {
         button.setAttribute('aria-current', active ? 'true' : 'false');
-        button.setAttribute('aria-label', (active && playerState === 'playing' ? '暂停 ' : '选择 ') + MUSIC_PLAYLIST[index].title);
+        button.setAttribute('aria-label', (active && playerState === 'playing' ? '正在听 ' : '播放 ') + song.title);
       }
       if (stateLabel) stateLabel.textContent = itemState;
+      if (durationLabel) durationLabel.textContent = getDurationText(song);
+    });
+  }
+
+  function renderTrackIndexState() {
+    if (!elements.trackIndex) return;
+
+    elements.trackIndex.querySelectorAll('.music-index-item').forEach((item, index) => {
+      const button = item.querySelector('.music-index-select');
+      const durationLabel = item.querySelector('.music-index-duration');
+      const active = hasSelectedTrack && index === currentTrackIndex;
+      const listened = listenedTrackIds.has(MUSIC_PLAYLIST[index].id);
+
+      item.classList.toggle('is-current', active);
+      item.classList.toggle('is-playing', active && playerState === 'playing');
+      item.classList.toggle('is-listened', listened);
+      if (button) button.setAttribute('aria-current', active ? 'true' : 'false');
       if (durationLabel) durationLabel.textContent = getDurationText(MUSIC_PLAYLIST[index]);
     });
   }
@@ -416,7 +557,7 @@
     }
 
     elements.errorMessage.hidden = false;
-    elements.errorMessage.textContent = '此曲暂不可闻，请确认音频文件路径存在：' + getCurrentTrack().src;
+    elements.errorMessage.textContent = '这枝梅暂时没有声音，换一朵试试。当前路径：' + getCurrentTrack().src;
   }
 
   function hideErrorMessage() {
@@ -504,6 +645,14 @@
     return MUSIC_PLAYLIST[currentTrackIndex] || MUSIC_PLAYLIST[0];
   }
 
+  function getCurrentCopy(song) {
+    if (playerState === 'error') return '这枝梅暂时没有声音，换一朵试试。';
+    if (playerState === 'loading') return '纸笺轻动，正在把这枝梅里的声音启封。';
+    if (playerState === 'paused') return '曲声暂歇，花光仍留在枝头。';
+    if (playerState === 'ended') return '一曲落尽，余温还在旧纸边上。';
+    return song.note || '月下微灯已启，雪声落在枝头。';
+  }
+
   function getDurationText(song) {
     return song && song.duration ? song.duration : '--:--';
   }
@@ -526,6 +675,27 @@
       .filter(Boolean)
       .map(part => part.charAt(0).toUpperCase() + part.slice(1))
       .join(' ') || '本地曲目';
+  }
+
+  function getFileName(path) {
+    return String(path).split('/').pop() || '';
+  }
+
+  function getPlumCopy(song, index) {
+    const id = song.id || 'track-' + (index + 1);
+    return plumTrackCopy[id] || {
+      title: song.title || formatTitleFromPath(song.src || '本地曲目'),
+      branch: String(index + 1).padStart(2, '0'),
+      note: '月下微灯已启，雪声落在枝头。'
+    };
+  }
+
+  function revealPlaybar() {
+    if (!elements.playbar) return;
+    elements.playbar.classList.remove('is-awaiting-selection');
+    elements.playbar.classList.add('is-revealed');
+    elements.playbar.dataset.revealed = 'true';
+    document.body.classList.add('music-playbar-revealed');
   }
 
   function escapeHtml(value) {
