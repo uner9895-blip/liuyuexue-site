@@ -602,6 +602,9 @@ function initThemeToggle() {
     // 现有暗色样式继续生效，[data-world="night"] 留给 Codex 挂接夜行场景。
     document.documentElement.setAttribute('data-world', theme === 'dark' ? 'night' : 'day');
     localStorage.setItem('theme', theme);
+    if (document.body.classList.contains('page-home')) {
+      localStorage.setItem('home-world', theme === 'dark' ? 'night' : 'day');
+    }
   };
 
   toggleBtns.forEach(btn => {
@@ -1153,7 +1156,12 @@ function initHomeLatestSnowLetters() {
  */
 function initWorldState() {
   var root = document.documentElement;
-  var theme = root.getAttribute('data-theme') || localStorage.getItem('theme') || 'light';
+  var theme = root.getAttribute('data-theme');
+  if (!theme) {
+    theme = document.body.classList.contains('page-home')
+      ? (localStorage.getItem('home-world') === 'night' ? 'dark' : 'light')
+      : (localStorage.getItem('theme') || 'light');
+  }
   root.setAttribute('data-theme', theme);
   root.setAttribute('data-world', theme === 'dark' ? 'night' : 'day');
 }

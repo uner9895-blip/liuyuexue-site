@@ -7,7 +7,7 @@
   <meta name="description" content="步青尘的个人主页，一个中式水墨风格的静态个人网站，用于记录前端学习、个人项目和网页设计实践。">
   <meta name="author" content="步青尘">
   <meta name="robots" content="index, follow">
-  <meta name="theme-color" content="#080b0c">
+  <meta name="theme-color" content="#21150c">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%23faf7ef'/%3E%3Ctext x='32' y='42' font-size='34' text-anchor='middle' fill='%23cc4343' font-family='serif'%3E步%3C/text%3E%3C/svg%3E">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="website">
@@ -20,7 +20,8 @@
   <link rel="stylesheet" href="assets/css/home-route-map.css?v=2.0.1">
   <script>
     (function() {
-      var theme = localStorage.getItem('theme') || 'light';
+      var homeWorld = localStorage.getItem('home-world');
+      var theme = homeWorld === 'night' ? 'dark' : 'light';
       var root = document.documentElement;
       root.setAttribute('data-theme', theme);
       root.setAttribute('data-world', theme === 'dark' ? 'night' : 'day');
@@ -110,7 +111,7 @@
   </header>
 
   <main class="page-fade">
-    <!-- 入口：夜行山路与纸卷世界 -->
+    <!-- 入口：暮光山谷与纸卷世界 -->
     <section class="courtyard world-shell home-scroll-hero" aria-label="步青尘 · 起行入口">
       <div class="courtyard-scene world-scene" aria-hidden="true">
         <div class="scene-sky"></div>
