@@ -50,26 +50,16 @@
 
   function initMusicPage() {
     if (!document.body.classList.contains('page-music')) return;
+    if (!MUSIC_PLAYLIST.length || typeof window.getSiteAudio !== 'function') return;
 
     window.__liuyuexueMusicInitialized = true;
     document.body.dataset.musicInitialized = 'true';
-    cacheElements();
-
-    if (!MUSIC_PLAYLIST.length) {
-      renderUnavailableState('山亭里暂时没有可播放的本地曲目。');
-      return;
-    }
-
-    if (typeof window.getSiteAudio !== 'function') {
-      renderUnavailableState('播放器未能启用，请稍后再试。');
-      return;
-    }
-
     siteAudio = window.getSiteAudio();
     siteAudio.preload = 'metadata';
     siteAudio.playsInline = true;
     siteAudio.loop = false;
 
+    cacheElements();
     renderPlaylist();
     bindControls();
     bindAudioEvents();
@@ -101,43 +91,6 @@
       dialogPath: document.getElementById('dialog-file-path'),
       dialogClose: document.getElementById('dialog-close-btn')
     };
-  }
-
-  function renderUnavailableState(message) {
-    if (!elements.playlist) cacheElements();
-    if (elements.playlist) {
-      elements.playlist.innerHTML = [
-        '<li class="track-empty">',
-        '  <span class="track-empty-title">雪亭暂寂</span>',
-        '  <span class="track-empty-text">' + escapeHtml(message) + '</span>',
-        '</li>'
-      ].join('');
-    }
-
-    setText(elements.currentIndex, '--');
-    setText(elements.currentTitle, '暂无曲目');
-    setText(elements.currentMeta, '本地音乐 · --:--');
-    setText(elements.currentStatus, '不可播放');
-    setText(elements.atmosphere, '此处暂且无声。');
-    setText(elements.playbarTitle, '暂无曲目');
-    setText(elements.playbarArtist, '本地音乐');
-    setText(elements.totalTime, '--:--');
-    setText(elements.currentTime, '00:00');
-
-    if (elements.errorMessage) {
-      elements.errorMessage.hidden = false;
-      elements.errorMessage.textContent = message;
-    }
-
-    [
-      elements.playBtn,
-      elements.prevBtn,
-      elements.nextBtn,
-      elements.progress,
-      elements.volume
-    ].forEach(element => {
-      if (element) element.disabled = true;
-    });
   }
 
   function renderPlaylist() {
@@ -300,17 +253,14 @@
     });
 
     siteAudio.addEventListener('error', () => {
-      const shouldShowDialog = intendedToPlay;
-      console.warn('Audio load failed:', {
+      console.error('Audio load failed:', {
         src: siteAudio.currentSrc || siteAudio.src,
         errorCode: siteAudio.error?.code
       });
       intendedToPlay = false;
       playerState = 'error';
       renderPlayerState();
-      if (shouldShowDialog) {
-        showErrorDialog(getCurrentTrack().src);
-      }
+      showErrorDialog(getCurrentTrack().src);
     });
 
     siteAudio.addEventListener('timeupdate', updateProgress);
@@ -378,7 +328,7 @@
         renderPlayerState();
         return;
       }
-      console.warn('Audio play failed:', error);
+      console.error('Audio play failed:', error);
       playerState = 'error';
       renderPlayerState();
       showErrorDialog(getCurrentTrack().src);
