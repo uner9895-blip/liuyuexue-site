@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 820" preserveAspectRatio="none" role="img" aria-label="Moonlit old plum tree in snow">
+  <title>Moonlit old plum tree in snow</title>
+  <defs>
+    <linearGradient id="trunkInk" x1="0.09" y1="0.95" x2="0.85" y2="0.1">
+      <stop offset="0" stop-color="#050807"/>
+      <stop offset="0.34" stop-color="#141814"/>
+      <stop offset="0.66" stop-color="#3d3327"/>
+      <stop offset="1" stop-color="#8a7152"/>
+    </linearGradient>
+    <linearGradient id="coldBark" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#070a09"/>
+      <stop offset="0.48" stop-color="#22251f"/>
+      <stop offset="1" stop-color="#6e5a42"/>
+    </linearGradient>
+    <linearGradient id="snowCap" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#eef1df" stop-opacity="0"/>
+      <stop offset="0.36" stop-color="#f7f0d4" stop-opacity="0.76"/>
+      <stop offset="1" stop-color="#f7f0d4" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="inkRough" x="-16%" y="-18%" width="132%" height="136%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.022 0.09" numOctaves="3" seed="36"/>
+      <feDisplacementMap in="SourceGraphic" scale="7"/>
+      <feGaussianBlur stdDeviation="0.18"/>
+    </filter>
+    <filter id="softShadow" x="-18%" y="-18%" width="136%" height="136%">
+      <feDropShadow dx="0" dy="18" stdDeviation="12" flood-color="#000000" flood-opacity="0.3"/>
+    </filter>
+    <filter id="mistBlur" x="-20%" y="-80%" width="140%" height="260%">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+  </defs>
+
+  <g opacity="0.36" filter="url(#mistBlur)" fill="none" stroke-linecap="round">
+    <path d="M40 704 C190 676 332 708 500 682 C698 652 834 688 1030 652 C1170 626 1270 642 1372 618" stroke="#f2ead2" stroke-width="30"/>
+    <path d="M246 594 C414 556 560 594 732 560 C910 526 1060 546 1286 514" stroke="#f7f0d4" stroke-width="16" opacity="0.52"/>
+  </g>
+
+  <g opacity="0.18" fill="none" stroke="#d7c492" stroke-linecap="round">
+    <path d="M0 727 C168 708 302 738 472 708 C640 678 800 716 958 686 C1140 652 1256 686 1400 662" stroke-width="1.8"/>
+    <path d="M14 762 C214 748 340 778 548 750 C746 724 870 758 1064 728 C1198 708 1296 732 1396 710" stroke-width="1.2"/>
+  </g>
+
+  <g filter="url(#softShadow)">
+    <g fill="none" stroke-linecap="round" stroke-linejoin="round" filter="url(#inkRough)">
+      <path d="M150 834 C214 720 218 610 286 500 C342 410 430 352 560 294" stroke="url(#trunkInk)" stroke-width="55"/>
+      <path d="M190 830 C238 720 244 618 314 510 C366 430 444 366 552 318" stroke="#070908" stroke-width="25" opacity="0.82"/>
+      <path d="M282 512 C418 432 540 352 720 278 C884 210 1028 170 1200 138" stroke="url(#trunkInk)" stroke-width="26"/>
+      <path d="M458 350 C554 382 646 430 748 456 C842 480 942 470 1088 420" stroke="#20231e" stroke-width="19"/>
+      <path d="M646 452 C764 520 900 550 1060 526 C1182 508 1278 470 1380 404" stroke="#171b18" stroke-width="16"/>
+      <path d="M404 386 C356 356 326 312 302 252 C278 196 270 142 268 74" stroke="url(#coldBark)" stroke-width="15"/>
+      <path d="M566 294 C638 252 702 216 782 188 C850 164 916 154 988 162" stroke="#403629" stroke-width="13"/>
+      <path d="M720 278 C804 304 892 298 972 278" stroke="#2b2d25" stroke-width="11"/>
+      <path d="M858 214 C950 222 1046 250 1136 302" stroke="#2a2d26" stroke-width="14"/>
+      <path d="M1008 166 C1110 122 1222 118 1340 142" stroke="#5b4835" stroke-width="10"/>
+      <path d="M296 506 C220 502 144 540 68 624" stroke="#0a0f0d" stroke-width="14"/>
+      <path d="M258 594 C186 626 112 704 40 812" stroke="#080b0a" stroke-width="13"/>
+    </g>
+
+    <g fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.56">
+      <path d="M180 804 C230 704 236 610 304 506 C360 420 442 368 548 320" stroke="#9b815f" stroke-width="5" filter="url(#inkRough)"/>
+      <path d="M304 506 C436 430 554 350 724 280 C888 214 1036 172 1202 140" stroke="#c0a46f" stroke-width="4" filter="url(#inkRough)"/>
+      <path d="M460 352 C564 388 640 434 750 456 C856 480 964 462 1086 420" stroke="#8f7656" stroke-width="3.6" filter="url(#inkRough)"/>
+      <path d="M648 452 C764 516 904 548 1062 526 C1198 506 1288 458 1378 404" stroke="#7d684e" stroke-width="3.2" filter="url(#inkRough)"/>
+    </g>
+
+    <g fill="none" stroke="url(#snowCap)" stroke-linecap="round" stroke-linejoin="round" opacity="0.74">
+      <path d="M298 486 C432 410 558 336 728 268 C884 206 1032 164 1190 136" stroke-width="8"/>
+      <path d="M466 342 C568 374 650 422 748 444 C858 468 952 452 1072 412" stroke-width="6"/>
+      <path d="M650 440 C780 506 902 534 1056 510 C1180 492 1282 450 1360 398" stroke-width="5"/>
+      <path d="M402 372 C350 330 322 278 294 198" stroke-width="5"/>
+      <path d="M298 502 C232 502 154 546 78 620" stroke-width="4"/>
+    </g>
+  </g>
+
+  <g fill="#b6414d" opacity="0.54">
+    <circle cx="268" cy="74" r="4.4"/>
+    <circle cx="386" cy="386" r="3.8"/>
+    <circle cx="628" cy="252" r="4.8"/>
+    <circle cx="896" cy="280" r="4.2"/>
+    <circle cx="1120" cy="164" r="5.4"/>
+    <circle cx="756" cy="452" r="3.8"/>
+    <circle cx="1036" cy="526" r="4.6"/>
+    <circle cx="80" cy="622" r="3.4"/>
+  </g>
+
+  <g fill="#f6f1dc" opacity="0.52">
+    <circle cx="184" cy="144" r="1.5"/>
+    <circle cx="342" cy="108" r="1.1"/>
+    <circle cx="548" cy="132" r="1.35"/>
+    <circle cx="760" cy="84" r="1.2"/>
+    <circle cx="1036" cy="96" r="1.5"/>
+    <circle cx="1268" cy="210" r="1.2"/>
+    <circle cx="1180" cy="344" r="1.05"/>
+    <circle cx="920" cy="382" r="1.25"/>
+    <circle cx="586" cy="496" r="1.1"/>
+    <circle cx="352" cy="604" r="1.3"/>
+  </g>
+</svg>

@@ -124,6 +124,8 @@
       atmosphere: document.getElementById('music-atmosphere'),
       errorMessage: document.getElementById('music-error-message'),
       trackIndex: document.getElementById('music-track-index'),
+      musicWorld: document.querySelector('.music-world'),
+      notePanel: document.querySelector('.music-intro-panel'),
       playbar: document.getElementById('playbar-container'),
       playbarTitle: document.getElementById('playbar-title'),
       playbarArtist: document.getElementById('playbar-artist'),
@@ -501,6 +503,29 @@
     renderPlaylistState();
     renderTrackIndexState();
     renderErrorMessage();
+    renderSceneState();
+  }
+
+  function renderSceneState() {
+    const hasTrack = hasSelectedTrack && Boolean(getCurrentTrack());
+
+    document.body.classList.toggle('music-has-selection', hasTrack);
+    document.body.classList.toggle('music-is-playing', hasTrack && playerState === 'playing');
+    document.body.dataset.musicPlayerState = hasTrack ? playerState : 'idle';
+
+    if (elements.musicWorld) {
+      if (hasTrack) {
+        elements.musicWorld.dataset.currentTrack = String(currentTrackIndex);
+        elements.musicWorld.dataset.playerState = playerState;
+      } else {
+        delete elements.musicWorld.dataset.currentTrack;
+        elements.musicWorld.dataset.playerState = 'idle';
+      }
+    }
+
+    if (elements.notePanel) {
+      elements.notePanel.setAttribute('aria-hidden', hasTrack ? 'false' : 'true');
+    }
   }
 
   function renderPlaylistState() {
