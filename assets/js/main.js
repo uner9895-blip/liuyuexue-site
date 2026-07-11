@@ -755,7 +755,7 @@ function createPlumPetal(x, y, options) {
   petal.style.setProperty('--petal-mid-opacity', midOpacity);
 
   var existingPetals = document.querySelectorAll('.plum-petal');
-  if (existingPetals.length >= 35) {
+  if (existingPetals.length >= 16) {
     existingPetals[0].remove();
   }
 
@@ -776,143 +776,131 @@ function createPlumPetal(x, y, options) {
 }
 
 function initDomPlumTrail() {
-  var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var reducedMotion = prefersReducedMotion;
-  var hasFinePointer = window.matchMedia('(pointer: fine)').matches;
-  var hasCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
-  var isPureTouch = hasCoarsePointer && !hasFinePointer;
-  var isHomePage = document.body.classList.contains('page-home');
+  if (window.__plumTrailController && window.__plumTrailController.initialized) {
+    window.__plumTrailController.duplicateInitSkips += 1;
+    if (window.__plumTrailState) window.__plumTrailState.duplicateInitSkips = window.__plumTrailController.duplicateInitSkips;
+    return;
+  }
 
-  var enabled = false;
-  var trailConfig = reducedMotion ? {
-    throttleMin: 180,
-    throttleMax: 260,
-    durationMin: 3200,
-    durationMax: 4800,
-    sizeMin: 20,
-    sizeMax: 34,
-    opacityMin: 0.75,
-    opacityMax: 0.95,
+  var reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var finePointerQuery = window.matchMedia('(pointer: fine)');
+  var coarsePointerQuery = window.matchMedia('(pointer: coarse)');
+  var hoverQuery = window.matchMedia('(hover: hover)');
+  var hoverNoneQuery = window.matchMedia('(hover: none)');
+  var mobileViewportQuery = window.matchMedia('(max-width: 820px)');
+  var trailConfig = {
+    throttleMin: 105,
+    throttleMax: 145,
+    durationMin: 1400,
+    durationMax: 2050,
+    sizeMin: 14,
+    sizeMax: 22,
+    opacityMin: 0.68,
+    opacityMax: 0.9,
     jitter: 12,
-    driftX: 42,
-    driftYMin: 38,
-    driftYMax: 78,
-    rotateBase: 46,
-    rotateStepMin: 18,
-    rotateStepMax: 48
-  } : {
-    throttleMin: 90,
-    throttleMax: 120,
-    durationMin: 3200,
-    durationMax: 5000,
-    sizeMin: 16,
-    sizeMax: 32,
-    opacityMin: 0.78,
-    opacityMax: 0.96,
-    jitter: 16,
-    driftX: 76,
-    driftYMin: 64,
-    driftYMax: 132,
-    rotateBase: 96,
-    rotateStepMin: 58,
-    rotateStepMax: 148
+    driftX: 46,
+    driftYMin: 34,
+    driftYMax: 70,
+    rotateBase: 72,
+    rotateStepMin: 38,
+    rotateStepMax: 92
   };
+  var controller = window.__plumTrailController = {
+    initialized: true,
+    registered: false,
+    listenerCount: 0,
+    duplicateInitSkips: 0,
+    cleaned: false
+  };
+  var lastSpawnTime = 0;
+  var spawnInterval = Math.round(randomBetween(trailConfig.throttleMin, trailConfig.throttleMax));
 
   window.__plumTrailState = {
-    enabled: enabled,
-    prefersReducedMotion: prefersReducedMotion,
-    reducedMotion: reducedMotion,
-    hasFinePointer: hasFinePointer,
-    hasCoarsePointer: hasCoarsePointer,
-    isPureTouch: isPureTouch,
+    enabled: false,
+    prefersReducedMotion: reducedMotionQuery.matches,
+    hasFinePointer: finePointerQuery.matches,
+    hasCoarsePointer: coarsePointerQuery.matches,
+    hasHover: hoverQuery.matches,
+    hoverNone: hoverNoneQuery.matches,
+    isMobileViewport: mobileViewportQuery.matches,
     viewportWidth: window.innerWidth,
-    throttle: Math.round(randomBetween(trailConfig.throttleMin, trailConfig.throttleMax)),
+    throttle: spawnInterval,
+    listenerCount: 0,
+    duplicateInitSkips: 0,
     lastEventType: null,
     lastX: null,
     lastY: null,
     lastTime: null,
     petalsCreated: 0,
-    disabledByV3: true
+    disabledReason: null
   };
 
-  window.__testDomPetals = function () {
-    var centerX = window.innerWidth / 2;
-    var centerY = window.innerHeight / 2;
-    var total = 30;
-    for (var i = 0; i < total; i++) {
-      (function (idx) {
-        setTimeout(function () {
-          createPlumPetal(
-            centerX + (Math.random() - 0.5) * 220,
-            centerY + (Math.random() - 0.5) * 120,
-            {
-              className: 'plum-petal--test',
-              size: randomBetween(26, 40),
-              life: randomBetween(4200, 5200),
-              driftX: (Math.random() - 0.5) * 110,
-              driftY: randomBetween(64, 132),
-              rotate: (Math.random() - 0.5) * 70,
-              rotateMid: (Math.random() - 0.5) * 120,
-              rotateEnd: (Math.random() - 0.5) * 180,
-              color: 'rgba(216, 70, 84, 0.95)',
-              opacity: 0.95,
-              midOpacity: 0.86
-            }
-          );
-        }, idx * 35);
-      })(i);
-    }
-  };
-
-  return;
-
-  if (!enabled) {
-    if (window.PointerEvent) {
-      document.addEventListener('pointerdown', handleTouchPlumBurst, { passive: true, capture: true });
-    }
-    return;
+  function getEligibility() {
+    var pureTouch = coarsePointerQuery.matches && !finePointerQuery.matches;
+    var enabled = !reducedMotionQuery.matches && finePointerQuery.matches && hoverQuery.matches && !coarsePointerQuery.matches && !pureTouch && !mobileViewportQuery.matches;
+    var reason = null;
+    if (reducedMotionQuery.matches) reason = 'prefers-reduced-motion';
+    else if (coarsePointerQuery.matches || pureTouch) reason = 'coarse-or-touch-pointer';
+    else if (mobileViewportQuery.matches) reason = 'mobile-viewport';
+    else if (!hoverQuery.matches) reason = 'hover-unavailable';
+    else if (!finePointerQuery.matches) reason = 'fine-pointer-unavailable';
+    return { enabled: enabled, pureTouch: pureTouch, reason: reason };
   }
 
-  var lastSpawnTime = 0;
-  var spawnInterval = window.__plumTrailState.throttle;
+  function syncState() {
+    var eligibility = getEligibility();
+    var state = window.__plumTrailState;
+    state.enabled = eligibility.enabled;
+    state.prefersReducedMotion = reducedMotionQuery.matches;
+    state.hasFinePointer = finePointerQuery.matches;
+    state.hasCoarsePointer = coarsePointerQuery.matches;
+    state.hasHover = hoverQuery.matches;
+    state.hoverNone = hoverNoneQuery.matches;
+    state.isPureTouch = eligibility.pureTouch;
+    state.isMobileViewport = mobileViewportQuery.matches;
+    state.viewportWidth = window.innerWidth;
+    state.disabledReason = eligibility.reason;
+    return eligibility.enabled;
+  }
 
   function buildPetalOptions() {
     var rotate = (Math.random() - 0.5) * trailConfig.rotateBase;
     var rotateStep = randomBetween(trailConfig.rotateStepMin, trailConfig.rotateStepMax);
     var depth = Math.random();
-    var depthClass = depth > 0.72 ? 'plum-petal--near' : (depth < 0.34 ? 'plum-petal--far' : '');
+    var depthClass = depth > 0.74 ? 'plum-petal--near' : (depth < 0.3 ? 'plum-petal--far' : '');
     var petalColors = [
-      'rgba(204, 67, 67, 0.9)',
-      'rgba(188, 58, 72, 0.78)',
-      'rgba(251, 202, 208, 0.82)'
+      'rgba(151, 42, 53, 0.86)',
+      'rgba(188, 58, 72, 0.8)',
+      'rgba(238, 224, 211, 0.82)',
+      'rgba(210, 169, 82, 0.68)'
     ];
 
     return {
       className: depthClass,
-      size: randomBetween(trailConfig.sizeMin, trailConfig.sizeMax) * (depthClass === 'plum-petal--near' ? 1.08 : 0.92),
-      life: randomBetween(trailConfig.durationMin, trailConfig.durationMax) + (depthClass === 'plum-petal--far' ? 400 : 0),
+      size: randomBetween(trailConfig.sizeMin, trailConfig.sizeMax) * (depthClass === 'plum-petal--near' ? 1.06 : 0.92),
+      life: randomBetween(trailConfig.durationMin, trailConfig.durationMax),
       driftX: (Math.random() - 0.5) * trailConfig.driftX * (depthClass === 'plum-petal--far' ? 0.72 : 1),
-      driftY: randomBetween(trailConfig.driftYMin, trailConfig.driftYMax) * (depthClass === 'plum-petal--far' ? 0.78 : 1),
+      driftY: randomBetween(trailConfig.driftYMin, trailConfig.driftYMax) * (depthClass === 'plum-petal--far' ? 0.8 : 1),
       rotate: rotate,
       rotateMid: rotate + rotateStep * 0.5,
       rotateEnd: rotate + rotateStep,
-      opacity: randomBetween(trailConfig.opacityMin, trailConfig.opacityMax) * (depthClass === 'plum-petal--far' ? 0.76 : 1),
+      opacity: randomBetween(trailConfig.opacityMin, trailConfig.opacityMax) * (depthClass === 'plum-petal--far' ? 0.78 : 1),
       color: petalColors[Math.floor(Math.random() * petalColors.length)]
     };
   }
 
   function handlePlumMove(event) {
-    if (event.pointerType && event.pointerType === 'touch') return;
+    if (!window.__plumTrailState.enabled || (event.pointerType && event.pointerType !== 'mouse')) return;
+    if (event.target instanceof Element && event.target.closest('header, nav, a, button, input, textarea, select, [role="dialog"], .music-note, .music-player, .music-index-drawer, .hero-copy, .page-title, .page-subtitle')) return;
 
     var now = Date.now();
-    window.__plumTrailState.lastEventType = event.type;
-    window.__plumTrailState.lastX = event.clientX;
-    window.__plumTrailState.lastY = event.clientY;
-    window.__plumTrailState.lastTime = now;
-
+    var state = window.__plumTrailState;
+    state.lastEventType = event.type;
+    state.lastX = event.clientX;
+    state.lastY = event.clientY;
+    state.lastTime = now;
     if (now - lastSpawnTime < spawnInterval) return;
     lastSpawnTime = now;
-
     createPlumPetal(
       event.clientX + (Math.random() - 0.5) * trailConfig.jitter,
       event.clientY + (Math.random() - 0.5) * trailConfig.jitter,
@@ -920,36 +908,47 @@ function initDomPlumTrail() {
     );
   }
 
-  if (window.PointerEvent) {
-    document.addEventListener('pointermove', handlePlumMove, { passive: true, capture: true });
-    document.addEventListener('pointerdown', handleTouchPlumBurst, { passive: true, capture: true });
-  } else {
-    document.addEventListener('mousemove', handlePlumMove, { passive: true, capture: true });
+  function registerMoveListener() {
+    if (controller.registered) return;
+    if (window.PointerEvent) document.addEventListener('pointermove', handlePlumMove, { passive: true, capture: true });
+    else document.addEventListener('mousemove', handlePlumMove, { passive: true, capture: true });
+    controller.registered = true;
+    controller.listenerCount = 1;
+    window.__plumTrailState.listenerCount = 1;
   }
 
-  function handleTouchPlumBurst(event) {
-    if (!event.pointerType || event.pointerType !== 'touch') return;
-
-    var total = Math.floor(randomBetween(3, 6));
-    for (var i = 0; i < total; i++) {
-      createPlumPetal(
-        event.clientX + (Math.random() - 0.5) * 26,
-        event.clientY + (Math.random() - 0.5) * 20,
-        {
-          size: randomBetween(17, 26),
-          life: randomBetween(2600, 3800),
-          driftX: (Math.random() - 0.5) * 58,
-          driftY: randomBetween(44, 92),
-          rotate: (Math.random() - 0.5) * 80,
-          rotateMid: (Math.random() - 0.5) * 120,
-          rotateEnd: (Math.random() - 0.5) * 180,
-          color: ['rgba(201, 75, 82, 0.9)', 'rgba(184, 62, 70, 0.82)', 'rgba(251, 202, 208, 0.78)'][Math.floor(Math.random() * 3)],
-          opacity: randomBetween(0.78, 0.94),
-          midOpacity: randomBetween(0.58, 0.76)
-        }
-      );
+  function unregisterMoveListener(removePetals) {
+    if (controller.registered) {
+      if (window.PointerEvent) document.removeEventListener('pointermove', handlePlumMove, { capture: true });
+      else document.removeEventListener('mousemove', handlePlumMove, { capture: true });
     }
+    controller.registered = false;
+    controller.listenerCount = 0;
+    window.__plumTrailState.listenerCount = 0;
+    if (removePetals) document.querySelectorAll('.plum-petal').forEach(function (petal) { petal.remove(); });
   }
+
+  function updateEligibility() {
+    if (syncState()) registerMoveListener();
+    else unregisterMoveListener(true);
+  }
+
+  function cleanup() {
+    unregisterMoveListener(true);
+    [reducedMotionQuery, finePointerQuery, coarsePointerQuery, hoverQuery, hoverNoneQuery, mobileViewportQuery].forEach(function (query) {
+      if (typeof query.removeEventListener === 'function') query.removeEventListener('change', updateEligibility);
+    });
+    window.removeEventListener('resize', updateEligibility);
+    window.removeEventListener('pagehide', cleanup);
+    controller.cleaned = true;
+  }
+
+  [reducedMotionQuery, finePointerQuery, coarsePointerQuery, hoverQuery, hoverNoneQuery, mobileViewportQuery].forEach(function (query) {
+    if (typeof query.addEventListener === 'function') query.addEventListener('change', updateEligibility);
+  });
+  window.addEventListener('resize', updateEligibility, { passive: true });
+  window.addEventListener('pagehide', cleanup, { once: true });
+  updateEligibility();
 }
 
 /**

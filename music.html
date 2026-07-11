@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>听雪 | 步青尘</title>
-  <meta name="description" content="步青尘的听雪小筑，古典清音与意境个人主页，播放舒缓的背景曲目。">
+  <meta name="description" content="步青尘的听雪小筑，在月下白雪老梅树间聆听七枝清音。">
   <meta name="author" content="步青尘">
   <meta name="robots" content="index, follow">
-  <meta name="theme-color" content="#11130f">
+  <meta name="theme-color" content="#17130f">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%23faf7ef'/%3E%3Ctext x='32' y='42' font-size='34' text-anchor='middle' fill='%23cc4343' font-family='serif'%3E步%3C/text%3E%3C/svg%3E">
-  <link rel="stylesheet" href="assets/css/style.css?v=2.1.2">
+  <link rel="stylesheet" href="assets/css/style.css?v=2.2.0">
   <link rel="stylesheet" href="assets/css/v2-structure.css?v=2.0.0">
   <script>
     (function() {
@@ -21,14 +21,7 @@
   </script>
 </head>
 <body class="page-music">
-  <!-- 呼吸梅影背景 -->
-  <div class="plum-shadows" aria-hidden="true"></div>
-  <div class="ink-wash-bg" aria-hidden="true">
-    <div class="ink-wash-1"></div>
-    <div class="ink-wash-2"></div>
-  </div>
-
-  <header>
+  <header class="music-site-header">
     <nav class="nav-container" aria-label="主导航">
       <a class="logo" href="index.html" aria-label="步青尘首页">
         <span class="seal">青尘<br>印</span>
@@ -49,116 +42,116 @@
 
   <main class="page-fade">
     <section class="music-world" aria-labelledby="music-page-title">
-      <div class="music-scene-heading scroll-reveal">
-        <p class="music-kicker">月下白雪梅树</p>
-        <h1 class="page-title" id="music-page-title">听雪</h1>
-        <p class="page-subtitle">月下生微灯，雪落听清音。</p>
-        <p class="music-atmosphere" id="music-atmosphere" aria-live="polite">静待清音……</p>
-      </div>
+      <div class="music-stage" id="music-stage">
+        <picture class="music-scene-picture" aria-hidden="true">
+          <source media="(max-width: 820px)" type="image/webp" srcset="assets/visuals/music/plum-moon-mobile.webp">
+          <source media="(max-width: 820px)" srcset="assets/visuals/music/plum-moon-mobile.png">
+          <source type="image/webp" srcset="assets/visuals/music/plum-moon-desktop.webp">
+          <img class="music-scene-image" src="assets/visuals/music/plum-moon-desktop.png" width="1672" height="941" alt="" draggable="false">
+        </picture>
+        <div class="music-scene-shade" aria-hidden="true"></div>
 
-      <section class="playlist-panel scroll-reveal" aria-labelledby="playlist-title">
-        <h2 id="playlist-title" class="sr-only">月下白雪梅树曲目</h2>
-        <div class="plum-tree-scene">
-          <img class="plum-tree-art" src="assets/visuals/music/plum-tree-scene.svg" alt="" aria-hidden="true" draggable="false">
-          <div class="music-snow-field" aria-hidden="true"></div>
-          <div class="track-node-layer">
-            <ol class="track-list" id="playlist-container" aria-label="听雪梅花曲目"></ol>
-          </div>
-
-          <aside class="music-intro-panel" aria-labelledby="music-note-title" aria-live="polite" aria-atomic="true">
-            <h2 class="section-subheading music-panel-title" id="music-note-title">小曲笺</h2>
-            <div class="music-current-card">
-              <span class="music-current-index" id="music-current-index">未启</span>
-              <h3 class="music-current-title" id="music-current-title">静待选曲</h3>
-              <p class="music-current-original" id="music-current-original">选择一朵梅花</p>
-              <p class="music-current-meta" id="music-current-meta">本地音乐 · --:--</p>
-              <span class="music-current-status" id="music-current-status">未开始</span>
-              <p class="music-current-copy" id="music-current-copy">月下微灯未启，先让雪声落满枝头。</p>
-            </div>
-            <p class="music-error-inline" id="music-error-message" role="status" aria-live="polite" hidden></p>
-          </aside>
-
-          <div class="music-index-panel" aria-labelledby="music-index-title">
-            <h3 class="music-index-title" id="music-index-title">清听雅集</h3>
-            <ol class="music-index-list" id="music-track-index" aria-label="曲目索引"></ol>
-          </div>
+        <div class="music-scene-heading">
+          <p class="music-kicker">月下白雪梅树</p>
+          <h1 class="page-title" id="music-page-title">听雪</h1>
+          <p class="page-subtitle">月下生微灯，雪落听清音。</p>
+          <p class="music-atmosphere" id="music-atmosphere" aria-live="polite">静待清音……</p>
         </div>
-      </section>
+
+        <div class="track-node-layer">
+          <h2 class="sr-only" id="playlist-title">七枝梅花曲目</h2>
+          <ol class="track-list" id="playlist-container" aria-labelledby="playlist-title"></ol>
+        </div>
+
+        <aside class="music-note" id="music-note" aria-labelledby="music-note-title" aria-live="polite" aria-atomic="true" aria-hidden="true" hidden>
+          <span class="music-note-thread" aria-hidden="true"></span>
+          <p class="music-note-eyebrow" id="music-current-index">未启</p>
+          <h2 class="music-current-title" id="music-note-title">静待选曲</h2>
+          <p class="music-current-original" id="music-current-original">选择一朵梅花</p>
+          <div class="music-note-meta">
+            <span class="music-current-status" id="music-current-status">未开始</span>
+            <span id="music-current-meta">本地音乐 · --:--</span>
+          </div>
+          <p class="music-current-copy" id="music-current-copy">月下微灯未启，先让雪声落满枝头。</p>
+          <p class="music-error-inline" id="music-error-message" role="status" aria-live="polite" hidden></p>
+        </aside>
+
+        <section class="music-index-drawer" aria-labelledby="music-index-toggle">
+          <button class="music-index-toggle" id="music-index-toggle" type="button" aria-expanded="false" aria-controls="music-index-panel">
+            <span aria-hidden="true">七</span>
+            <span>七枝</span>
+          </button>
+          <div class="music-index-panel" id="music-index-panel" hidden>
+            <div class="music-index-heading">
+              <h2>七枝清音</h2>
+              <span>循花入曲</span>
+            </div>
+            <ol class="music-index-list" id="music-track-index" aria-label="七枝曲目索引"></ol>
+          </div>
+        </section>
+
+        <section class="music-player is-awaiting-selection" id="playbar-container" aria-label="听雪播放器">
+          <div class="music-player-idle" aria-hidden="true">
+            <span>梅下小匣</span>
+            <small>择一枝启音</small>
+          </div>
+          <div class="music-player-shell">
+            <div class="playbar-info-area">
+              <span class="playbar-cover" aria-hidden="true">梅</span>
+              <div class="playbar-text">
+                <span class="playbar-title" id="playbar-title">静待选曲</span>
+                <span class="playbar-artist" id="playbar-artist">本地音乐</span>
+              </div>
+              <span class="music-player-state" id="music-player-state">未开始</span>
+            </div>
+
+            <div class="playbar-control-area">
+              <div class="playbar-buttons">
+                <button class="playbar-btn" id="playbar-prev-btn" type="button" aria-label="上一首">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6h2v12H6zm3.5 6 8.5 6V6z"/></svg>
+                </button>
+                <button class="playbar-btn playbar-btn-play music-play-control" id="playbar-play-btn" type="button" aria-label="播放当前歌曲">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+                </button>
+                <button class="playbar-btn" id="playbar-next-btn" type="button" aria-label="下一首">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18h2V6H6zm3.5-6L18 6v12z"/></svg>
+                </button>
+              </div>
+
+              <div class="playbar-progress-wrapper">
+                <span class="playbar-time" id="playbar-current-time">00:00</span>
+                <input type="range" class="progress-bar-slider" id="playbar-progress" min="0" max="1000" value="0" aria-label="播放进度" aria-valuetext="00:00 / --:--">
+                <span class="playbar-time" id="playbar-total-time">--:--</span>
+              </div>
+            </div>
+
+            <div class="playbar-volume-wrap">
+              <button class="music-volume-toggle" id="music-volume-toggle" type="button" aria-label="展开音量控制" aria-expanded="false" aria-controls="music-volume-panel">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5zm4.5 3.5a5 5 0 0 1 0 7"/></svg>
+              </button>
+              <div class="playbar-volume" id="music-volume-panel" hidden>
+                <input type="range" class="progress-bar-slider" id="playbar-volume" min="0" max="1" step="0.05" value="0.6" aria-label="音量" aria-valuetext="音量 60%">
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
     </section>
   </main>
 
-  <!-- 底部常驻案头清供播放栏 -->
-  <div class="music-playbar-container" id="playbar-container">
-    <!-- 可收起挂载接口：仅切换容器状态，不触碰 music.js 播放逻辑 -->
-    <button class="playbar-dock-toggle" type="button" data-playbar-toggle aria-expanded="true" aria-label="收起播放栏" aria-controls="playbar-container">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <polyline points="6 9 12 15 18 9"></polyline>
-      </svg>
-    </button>
-    <div class="music-playbar-layout">
-      <!-- 左：歌曲详情 -->
-      <div class="playbar-info-area">
-        <div class="playbar-cover">梅</div>
-        <div class="playbar-text">
-          <span class="playbar-title" id="playbar-title">静待选曲</span>
-          <span class="playbar-artist" id="playbar-artist">本地音乐</span>
-        </div>
-      </div>
-
-      <!-- 中：控制按钮与进度条 -->
-      <div class="playbar-control-area">
-        <div class="playbar-buttons">
-          <button class="playbar-btn" id="playbar-prev-btn" type="button" aria-label="上一首">
-            <svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
-          </button>
-          <button class="playbar-btn playbar-btn-play music-play-control" id="playbar-play-btn" type="button" aria-label="播放当前歌曲">
-            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-          </button>
-          <button class="playbar-btn" id="playbar-next-btn" type="button" aria-label="下一首">
-            <svg viewBox="0 0 24 24"><path d="M6 18h2V6H6zm3.5-6L18 6v12z"/></svg>
-          </button>
-        </div>
-        <div class="playbar-progress-wrapper">
-          <span class="playbar-time" id="playbar-current-time">00:00</span>
-          <input type="range" class="progress-bar-slider" id="playbar-progress" min="0" max="1000" value="0" aria-label="播放进度" aria-valuetext="00:00 / --:--">
-          <span class="playbar-time" id="playbar-total-time">--:--</span>
-        </div>
-      </div>
-
-      <!-- 右：音量调节 -->
-      <div class="playbar-func-area">
-        <div class="playbar-volume">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-            <path d="M11 5L6 9H2v6h4l5 4V5z"/>
-            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
-          </svg>
-          <input type="range" class="progress-bar-slider" id="playbar-volume" min="0" max="1" step="0.05" value="0.6" aria-label="音量" aria-valuetext="音量 60%">
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 自定义中式温和提示弹窗 -->
-  <div class="custom-dialog-overlay" id="music-error-dialog" role="dialog" aria-modal="true" aria-labelledby="dialog-title">
+  <div class="custom-dialog-overlay" id="music-error-dialog" role="dialog" aria-modal="true" aria-labelledby="dialog-title" aria-hidden="true">
     <div class="custom-dialog">
-      <h3 class="custom-dialog-title" id="dialog-title">清音未启</h3>
+      <h2 class="custom-dialog-title" id="dialog-title">清音未启</h2>
       <p class="custom-dialog-message">
-        这首曲子暂时无法播放，请检查本地或 GitHub Pages 是否已部署对应文件。<br>
-        当前路径：<br>
-        <code id="dialog-file-path" class="dialog-file-path">assets/audio/ecoute-cherie.mp3</code>
+        这首曲子暂时无法播放，请检查对应文件。<br>
+        当前路径：<code id="dialog-file-path" class="dialog-file-path">assets/audio/ecoute-cherie.mp3</code>
       </p>
       <button class="custom-dialog-btn" id="dialog-close-btn" type="button">晚生知晓</button>
     </div>
   </div>
 
-  <!-- 黑猫陪伴挂载区（Codex 接管视觉资源） -->
-  <div class="companion-zone" aria-hidden="true"></div>
-
-  <!-- 站点数据层（须先于 main.js / music.js 加载） -->
   <script src="assets/data/site-data.js?v=2.0.0"></script>
-  <!-- 载入基础交互与粒子效果 -->
   <script src="assets/js/main.js?v=2.0.0"></script>
-  <!-- 载入本页播放器逻辑 -->
-  <script src="assets/js/music.js?v=1.9.1"></script>
+  <script src="assets/js/music.js?v=2.0.0"></script>
 </body>
 </html>
