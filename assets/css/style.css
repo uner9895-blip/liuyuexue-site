@@ -6260,7 +6260,7 @@ body.page-home .home-world-label {
 
 @media (min-width: 769px) {
   body.page-home {
-    --page-bg-image: url("../visuals/home/dusk-valley-entrance.png");
+    --page-bg-image: url("../visuals/home/dusk-valley-entrance.webp");
     --page-bg-position: center center;
     --page-bg-overlay: rgba(6, 10, 12, 0.18);
     --home-sun-dx: 0px;
@@ -6434,7 +6434,7 @@ body.page-home .home-world-label {
     background:
       linear-gradient(90deg, rgba(4, 8, 10, 0.44) 0%, rgba(5, 9, 11, 0.22) 28%, rgba(5, 9, 11, 0.03) 56%, rgba(5, 9, 11, 0.06) 100%),
       linear-gradient(180deg, rgba(3, 5, 7, 0.12), rgba(3, 5, 7, 0) 40%, rgba(3, 5, 7, 0.16) 100%),
-      url("../visuals/home/dusk-valley-entrance.png") center center / cover no-repeat;
+      url("../visuals/home/dusk-valley-entrance.webp") center center / cover no-repeat;
     filter: saturate(1.03) contrast(1.08) brightness(0.98);
     transform: none;
   }
@@ -6878,7 +6878,7 @@ body.page-home .home-legacy-section {
       radial-gradient(ellipse at 18% 52%, rgba(2, 5, 6, 0.54), rgba(2, 5, 6, 0.22) 34%, transparent 68%),
       linear-gradient(90deg, rgba(3, 7, 8, 0.42) 0%, rgba(3, 7, 8, 0.2) 24%, rgba(3, 7, 8, 0.03) 58%, rgba(3, 7, 8, 0.07) 100%),
       linear-gradient(180deg, rgba(3, 5, 7, 0.1), rgba(3, 5, 7, 0) 44%, rgba(3, 5, 7, 0.18) 100%),
-      url("../visuals/home/dusk-valley-entrance.png") center center / cover no-repeat;
+      url("../visuals/home/dusk-valley-entrance.webp") center center / cover no-repeat;
     filter: saturate(1.04) contrast(1.1) brightness(0.98);
     transform: none;
     transition: filter 420ms ease;
@@ -7208,8 +7208,8 @@ body.page-home .home-intro-actions .btn-ink {
    Home V3 Final · cinematic valley entrance
    ========================================================= */
 body.page-home {
-  --home-day-image: url("../visuals/home/dusk-valley-entrance.png");
-  --home-night-image: url("../visuals/home/night-valley-road-v3.png");
+  --home-day-image: url("../visuals/home/dusk-valley-entrance.webp");
+  --home-night-image: url("../visuals/home/night-valley-road-v3.webp");
   --home-panel-ink: rgba(10, 15, 13, 0.58);
   --home-copy-light: rgba(255, 240, 210, 0.96);
   --home-copy-soft: rgba(247, 228, 195, 0.78);
@@ -8512,8 +8512,8 @@ body.page-home [data-companion-cat] {
    ========================================================================== */
 
 body.page-home {
-  --home-day-image: url("../visuals/home/dusk-valley-entrance.png");
-  --home-night-image: url("../visuals/home/night-valley-road-v3.png");
+  --home-day-image: url("../visuals/home/dusk-valley-entrance.webp");
+  --home-night-image: url("../visuals/home/night-valley-road-v3.webp");
   --home-ink: #130d08;
   --home-ink-deep: #090705;
   --home-panel: rgba(43, 30, 18, 0.72);
@@ -10630,4 +10630,98 @@ body.page-music .custom-dialog-btn:focus-visible {
   body.page-music .music-loading-icon {
     animation: none !important;
   }
+}
+
+/* Mobile performance pass: retain the approved composition while reducing
+   full-viewport paint effects and per-petal filter work. */
+@media (max-width: 820px) {
+  body,
+  [data-theme="dark"] body {
+    background-attachment: scroll;
+  }
+
+  body.page-home::before {
+    background-image: none;
+    filter: none;
+    animation: none;
+  }
+
+  body.page-home .courtyard-scene::before {
+    filter: none;
+  }
+
+  body.page-home .home-gallery-strip img,
+  body.page-home .home-cat-portrait img {
+    filter: none;
+  }
+
+  body.page-music::before {
+    filter: none;
+    animation: none;
+  }
+
+  body.page-music .track-bloom,
+  body.page-music .track-item.is-current .track-bloom,
+  body.page-music .track-select:hover .track-bloom,
+  body.page-music .track-select:focus-visible .track-bloom,
+  body.page-music .bloom-petal-ring i,
+  body.page-music .bloom-core {
+    filter: none;
+  }
+
+  body.page-music .bloom-veil {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  body.page-music .bloom-fall i:nth-child(n + 2) {
+    display: none;
+  }
+
+  body.page-music .track-item.is-blooming .bloom-petal-ring i {
+    animation: musicPetalOpenMobile 480ms cubic-bezier(0.16, 1, 0.3, 1) var(--petal-delay) both;
+  }
+
+  body.page-music .track-item.is-blooming .bloom-core {
+    animation: musicCoreWakeMobile 280ms ease-out 400ms both;
+  }
+
+  body.page-music .track-item.is-blooming .bloom-fall i {
+    animation-duration: 380ms;
+    animation-delay: 460ms;
+  }
+
+  body.page-music .track-item.is-playing .bloom-core {
+    animation: musicCoreBreathMobile 4.2s ease-in-out 0.75s infinite;
+  }
+
+  body.page-music.music-page-hidden .track-item.is-playing .bloom-core {
+    animation-play-state: paused;
+  }
+}
+
+@supports (content-visibility: auto) {
+  body.page-home .home-pathways-section,
+  body.page-home .home-companion-section,
+  body.page-home .home-ledger-section {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 720px;
+  }
+}
+
+@keyframes musicPetalOpenMobile {
+  0% { opacity: 0.56; transform: translate(-50%, -90%) rotate(var(--closed-angle)) scale(0.42, 0.88); }
+  62% { opacity: 0.94; transform: translate(-50%, -92%) rotate(var(--open-angle)) scale(1.03, 0.98); }
+  100% { opacity: 0.98; transform: translate(-50%, -90%) rotate(var(--open-angle)) scale(1); }
+}
+
+@keyframes musicCoreWakeMobile {
+  0% { opacity: 0.18; transform: translate(-50%, -50%) scale(0.45); }
+  72% { opacity: 1; transform: translate(-50%, -50%) scale(1.06); }
+  100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+@keyframes musicCoreBreathMobile {
+  0%, 100% { opacity: 0.82; }
+  50% { opacity: 1; }
 }

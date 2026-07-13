@@ -137,7 +137,7 @@
     bindAudioEvents();
     restoreVolume();
     updateReducedMotionState();
-    ensureTrackSource(false);
+    updatePageVisibilityState();
     renderPlayerState();
   }
 
@@ -382,6 +382,7 @@
     if (typeof reducedMotionQuery.addEventListener === 'function') {
       reducedMotionQuery.addEventListener('change', updateReducedMotionState);
     }
+    document.addEventListener('visibilitychange', updatePageVisibilityState, { passive: true });
   }
 
   function handleRangeKeydown(event) {
@@ -1036,6 +1037,10 @@
 
   function updateReducedMotionState() {
     document.body.dataset.reducedMotion = prefersReducedMotion() ? 'reduce' : 'no-preference';
+  }
+
+  function updatePageVisibilityState() {
+    document.body.classList.toggle('music-page-hidden', document.hidden);
   }
 
   function updateAudioDiagnostics() {

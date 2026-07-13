@@ -3,6 +3,7 @@
  */
 
 function initAll() {
+  initDeferredImages();
   initLivingInkScene();
   initWorldState();
   initMobileMenu();
@@ -27,6 +28,42 @@ function initAll() {
   initHomeSunResponse();
   initCompanionCat();
   initLightParallax();
+}
+
+function initDeferredImages() {
+  var images = Array.prototype.slice.call(document.querySelectorAll('img[data-deferred-src]'));
+  if (!images.length) return;
+
+  var loadImage = function (image) {
+    var source = image.dataset.deferredSrc;
+    if (!source) return;
+    image.src = source;
+    delete image.dataset.deferredSrc;
+  };
+
+  if (!('IntersectionObserver' in window)) {
+    images.forEach(loadImage);
+    return;
+  }
+
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      observer.unobserve(entry.target);
+      loadImage(entry.target);
+    });
+  }, {
+    rootMargin: '160px 0px',
+    threshold: 0.01
+  });
+
+  images.forEach(function (image) {
+    observer.observe(image);
+  });
+
+  window.addEventListener('pagehide', function () {
+    observer.disconnect();
+  }, { once: true });
 }
 
 /**
@@ -1205,6 +1242,7 @@ function initHomeRouteMap() {
   var primaryTrigger = triggers[0];
   var closeBtn = routeMap.querySelector('.route-guide-close');
   var routeScroll = routeMap.querySelector('.mount-map__scroll');
+  var routeVista = routeMap.querySelector('.mount-map__vista');
   var routeStatus = routeMap.querySelector('.mount-map__status');
   var landmarks = Array.prototype.slice.call(routeMap.querySelectorAll('.mount-map__landmark'));
   var visitedStorageKey = 'buqingchen-route-visited';
@@ -1226,6 +1264,9 @@ function initHomeRouteMap() {
   var backgroundState = [];
   var scrollLockState = null;
   var reduceMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var mapAssetVariant = '';
+  var mapAssetStatus = 'idle';
+  var mapAssetRequestId = 0;
 
   document.body.classList.add('route-map-ready');
   routeMap.setAttribute('role', 'dialog');
@@ -1249,6 +1290,59 @@ function initHomeRouteMap() {
 
   var isReducedMotion = function () {
     return reduceMotionQuery.matches;
+  };
+
+  var ensureRouteMapAsset = function () {
+    if (!routeVista) return;
+    var mobile = window.matchMedia('(max-width: 820px)').matches;
+    var variant = mobile ? 'mobile' : 'desktop';
+    var source = mobile ? routeMap.dataset.mapMobile : routeMap.dataset.mapDesktop;
+    if (!source) return;
+    if (mapAssetVariant === variant && (mapAssetStatus === 'loading' || mapAssetStatus === 'loaded')) return;
+
+    mapAssetVariant = variant;
+    mapAssetStatus = 'loading';
+    mapAssetRequestId += 1;
+    var requestId = mapAssetRequestId;
+    routeMap.classList.add('is-map-loading');
+    routeMap.classList.remove('is-map-loaded');
+    setRouteStatus('山路图卷展开中……');
+
+    var image = new Image();
+    image.className = 'mount-map__image';
+    image.alt = '';
+    image.decoding = 'async';
+    image.draggable = false;
+    image.width = Number(mobile ? routeMap.dataset.mapMobileWidth : routeMap.dataset.mapDesktopWidth) || 1;
+    image.height = Number(mobile ? routeMap.dataset.mapMobileHeight : routeMap.dataset.mapDesktopHeight) || 1;
+
+    var revealImage = function () {
+      if (requestId !== mapAssetRequestId) return;
+      routeVista.replaceChildren(image);
+      mapAssetStatus = 'loaded';
+      window.requestAnimationFrame(function () {
+        routeMap.classList.remove('is-map-loading');
+        routeMap.classList.add('is-map-loaded');
+      });
+      if (isOpen) setRouteStatus();
+    };
+
+    image.addEventListener('load', function () {
+      if (typeof image.decode === 'function') {
+        image.decode().catch(function () {}).then(revealImage);
+      } else {
+        revealImage();
+      }
+    }, { once: true });
+
+    image.addEventListener('error', function () {
+      if (requestId !== mapAssetRequestId) return;
+      mapAssetStatus = 'error';
+      routeMap.classList.remove('is-map-loading', 'is-map-loaded');
+      setRouteStatus('山路图卷加载失败，请稍后重试。', true);
+    }, { once: true });
+
+    image.src = source;
   };
 
   var setRouteStatus = function (text, alert) {
@@ -1435,6 +1529,7 @@ function initHomeRouteMap() {
     routeMap.classList.add('is-open');
     routeMap.setAttribute('aria-hidden', 'false');
     setTriggerState(true);
+    ensureRouteMapAsset();
 
     window.requestAnimationFrame(function () {
       positionRouteJourney();
@@ -1453,7 +1548,7 @@ function initHomeRouteMap() {
     routeMap.classList.add('is-closing');
     setTriggerState(false);
 
-    var delay = isReducedMotion() ? 0 : 560;
+    var delay = isReducedMotion() ? 0 : (window.matchMedia('(max-width: 820px)').matches ? 320 : 560);
     restoreTimer = window.setTimeout(function () {
       isClosing = false;
       finishClose(options.returnFocus);
