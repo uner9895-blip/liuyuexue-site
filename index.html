@@ -15,9 +15,9 @@
   <meta property="og:title" content="步青尘 | 中式水墨个人主页">
   <meta property="og:description" content="步青尘的个人主页，一个中式水墨风格的静态个人网站，用于记录前端学习、个人项目和网页设计实践。">
   <meta property="og:url" content="https://uner9895-blip.github.io/liuyuexue-site/">
-  <link rel="stylesheet" href="assets/css/style.css?v=2.0.6">
+  <link rel="stylesheet" href="assets/css/style.css?v=2.0.7">
   <link rel="stylesheet" href="assets/css/v2-structure.css?v=2.0.0">
-  <link rel="stylesheet" href="assets/css/home-route-map.css?v=3.0.1">
+  <link rel="stylesheet" href="assets/css/home-route-map.css?v=3.0.2">
   <script>
     (function() {
       var homeWorld = localStorage.getItem('home-world');
@@ -180,7 +180,7 @@
           </div>
           <p>一卷入山路，沿途设有驿站与停驻点。点击节点，即可前往对应空间。未启的节点仍在路上，卷轴可慢慢展开。</p>
           <div class="home-map-preview" aria-hidden="true">
-            <img src="assets/visuals/home/route-scroll-valley-wide-v3.png" alt="">
+            <img src="assets/visuals/home/route-scroll-valley-preview.webp" width="640" height="360" loading="lazy" decoding="async" alt="">
             <svg class="home-map-preview-route" viewBox="0 0 100 56" preserveAspectRatio="none" focusable="false">
               <path d="M8 47 C18 38 29 43 42 33 C50 26 57 24 64 19 C72 20 78 31 90 22"></path>
             </svg>
@@ -202,15 +202,15 @@
           </div>
           <p>山影 · 微雾<br>有山的时候，愿你慢慢看；<br>一帧风景，也可以是一段故事。</p>
           <a class="home-gallery-strip" href="gallery.html" aria-label="进入影像廊">
-            <img src="assets/images/gallery/3df858748cd0f8375a2a4f2727a2b05b.jpg" alt="远处山谷、河面倒影和被云光照亮的山坡">
-            <img src="assets/images/gallery/1534941e2495b8bc5b1b0722ea1ae57c.jpg" alt="傍晚天空里层叠的蓝灰云与透出的日光">
-            <img src="assets/images/gallery/spring_moss.jpg" alt="雨后林地里带着水汽的青苔与细小新芽">
+            <img data-deferred-src="assets/images/gallery/3df858748cd0f8375a2a4f2727a2b05b.jpg" width="1159" height="689" loading="lazy" decoding="async" alt="远处山谷、河面倒影和被云光照亮的山坡">
+            <img data-deferred-src="assets/images/gallery/1534941e2495b8bc5b1b0722ea1ae57c.jpg" width="1279" height="1704" loading="lazy" decoding="async" alt="傍晚天空里层叠的蓝灰云与透出的日光">
+            <img data-deferred-src="assets/images/gallery/spring_moss.jpg" width="1024" height="1024" loading="lazy" decoding="async" alt="雨后林地里带着水汽的青苔与细小新芽">
           </a>
         </article>
       </aside>
 
       <!-- 空间地图：有 JS 时展开为对话层，无 JS 时保留静态链接。 -->
-      <section class="route-guide mount-map" id="home-route-map" aria-labelledby="route-map-title" aria-describedby="route-map-subtitle">
+      <section class="route-guide mount-map" id="home-route-map" aria-labelledby="route-map-title" aria-describedby="route-map-subtitle" data-map-desktop="assets/visuals/home/route-scroll-valley-wide-v3.webp" data-map-desktop-width="1831" data-map-desktop-height="859" data-map-mobile="assets/visuals/home/route-scroll-valley-mobile-v3.webp" data-map-mobile-width="853" data-map-mobile-height="1844">
         <div class="mount-map__scrim" aria-hidden="true"></div>
         <div class="mount-map__scene">
           <header class="mount-map__header">
@@ -381,7 +381,7 @@
       <div class="home-section-shell home-companion-shell">
         <div class="home-cat-panel">
           <div class="home-cat-portrait" aria-hidden="true">
-            <img src="assets/visuals/cat/cat-idle.png" alt="">
+            <img data-deferred-src="assets/visuals/cat/cat-idle.png" width="867" height="1049" loading="lazy" decoding="async" alt="">
           </div>
           <div>
             <p class="home-section-kicker">同行者</p>
@@ -462,6 +462,6 @@
   <div class="companion-zone" aria-hidden="true"></div>
 
   <script src="assets/data/site-data.js?v=2.0.0"></script>
-  <script src="assets/js/main.js?v=2.1.2"></script>
+  <script src="assets/js/main.js?v=2.1.3"></script>
 </body>
 </html>
