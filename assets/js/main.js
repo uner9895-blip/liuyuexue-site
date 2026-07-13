@@ -1204,6 +1204,10 @@ function initHomeRouteMap() {
 
   var primaryTrigger = triggers[0];
   var closeBtn = routeMap.querySelector('.route-guide-close');
+  var routeScroll = routeMap.querySelector('.mount-map__scroll');
+  var routeStatus = routeMap.querySelector('.mount-map__status');
+  var landmarks = Array.prototype.slice.call(routeMap.querySelectorAll('.mount-map__landmark'));
+  var visitedStorageKey = 'buqingchen-route-visited';
   var focusableSelector = [
     'a[href]',
     'area[href]',
@@ -1245,6 +1249,53 @@ function initHomeRouteMap() {
 
   var isReducedMotion = function () {
     return reduceMotionQuery.matches;
+  };
+
+  var setRouteStatus = function (text, alert) {
+    if (!routeStatus) return;
+    routeStatus.textContent = text || routeStatus.dataset.defaultText || '';
+    routeStatus.classList.toggle('is-alert', Boolean(alert));
+  };
+
+  var getVisitedLandmarks = function () {
+    try {
+      var stored = JSON.parse(window.localStorage.getItem(visitedStorageKey) || '[]');
+      return Array.isArray(stored) ? stored.filter(function (item) { return typeof item === 'string'; }) : [];
+    } catch (error) {
+      return [];
+    }
+  };
+
+  var renderVisitedLandmarks = function () {
+    var visited = getVisitedLandmarks();
+    landmarks.forEach(function (landmark) {
+      landmark.classList.toggle('is-visited', visited.indexOf(landmark.dataset.landmark) !== -1);
+    });
+  };
+
+  var markLandmarkVisited = function (landmark) {
+    var key = landmark && landmark.dataset.landmark;
+    if (!key) return;
+    var visited = getVisitedLandmarks();
+    if (visited.indexOf(key) === -1) visited.push(key);
+    try {
+      window.localStorage.setItem(visitedStorageKey, JSON.stringify(visited));
+    } catch (error) {}
+    renderVisitedLandmarks();
+  };
+
+  var positionRouteJourney = function () {
+    if (!routeScroll) return;
+    var inlineScrollBehavior = routeScroll.style.scrollBehavior;
+    routeScroll.style.scrollBehavior = 'auto';
+    if (window.matchMedia('(max-width: 820px)').matches) {
+      routeScroll.scrollTop = Math.max(0, routeScroll.scrollHeight - routeScroll.clientHeight);
+    } else {
+      routeScroll.scrollTop = 0;
+    }
+    window.requestAnimationFrame(function () {
+      routeScroll.style.scrollBehavior = inlineScrollBehavior;
+    });
   };
 
   var getFocusableItems = function () {
@@ -1362,6 +1413,7 @@ function initHomeRouteMap() {
     routeMap.setAttribute('aria-hidden', 'true');
     restoreRouteMapPosition();
     setBackgroundDisabled(false);
+    setRouteStatus();
 
     if (returnFocus !== false && activeTrigger && typeof activeTrigger.focus === 'function') {
       activeTrigger.focus({ preventScroll: true });
@@ -1385,6 +1437,7 @@ function initHomeRouteMap() {
     setTriggerState(true);
 
     window.requestAnimationFrame(function () {
+      positionRouteJourney();
       var first = getFocusableItems()[0];
       (first || routeMap).focus({ preventScroll: true });
     });
@@ -1431,6 +1484,57 @@ function initHomeRouteMap() {
       setRouteMap(false);
     });
   }
+
+  landmarks.forEach(function (landmark) {
+    var name = landmark.querySelector('.mount-map__label strong');
+    var note = landmark.querySelector('.mount-map__label small');
+    var statusText = (name ? name.textContent : '路线节点') + (note ? ' · ' + note.textContent : '');
+
+    landmark.addEventListener('focus', function () {
+      setRouteStatus(statusText, landmark.dataset.state === 'locked');
+    });
+
+    landmark.addEventListener('mouseenter', function () {
+      setRouteStatus(statusText, landmark.dataset.state === 'locked');
+    });
+
+    landmark.addEventListener('mouseleave', function () {
+      if (document.activeElement !== landmark) setRouteStatus();
+    });
+
+    landmark.addEventListener('blur', function () {
+      setRouteStatus();
+    });
+
+    landmark.addEventListener('click', function (event) {
+      if (landmark.dataset.state === 'locked' || landmark.getAttribute('aria-disabled') === 'true') {
+        event.preventDefault();
+        setRouteStatus('小猫 · 未启程，页面尚未开放。', true);
+        return;
+      }
+
+      markLandmarkVisited(landmark);
+      var href = landmark.getAttribute('href') || '';
+      if (href.charAt(0) !== '#') return;
+
+      event.preventDefault();
+      var target = document.querySelector(href);
+      setRouteMap(false);
+      window.setTimeout(function () {
+        if (!target) return;
+        if (window.history && window.history.pushState) window.history.pushState(null, '', href);
+        target.scrollIntoView({ behavior: isReducedMotion() ? 'auto' : 'smooth', block: 'start' });
+      }, isReducedMotion() ? 100 : 680);
+    });
+
+    landmark.addEventListener('keydown', function (event) {
+      if (event.key !== ' ' || landmark.tagName !== 'A') return;
+      event.preventDefault();
+      landmark.click();
+    });
+  });
+
+  renderVisitedLandmarks();
 
   document.addEventListener('keydown', function (event) {
     if (!isOpen) return;

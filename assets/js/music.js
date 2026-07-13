@@ -7,10 +7,10 @@
   if (window.__liuyuexueMusicInitialized) return;
 
   const plumTrackCopy = {
-    'ecoute-cherie': {
-      title: '一枝雪：月下轻语',
+    'you-wo-ne': {
+      title: '一枝雪：有我呢',
       branch: '一枝雪',
-      note: '月光先落在低枝，像一句很轻的开场。'
+      note: '有我呢，风雪再远，也有人与你并肩。'
     },
     'fallin-out': {
       title: '二枝雪：坠入风外',
@@ -478,7 +478,7 @@
       updateAudioDiagnostics();
       updateProgressBounds();
       const song = getCurrentTrack();
-      if (song && Number.isFinite(siteAudio.duration) && siteAudio.duration > 0) {
+      if (song && (!song.duration || song.duration === '--:--') && Number.isFinite(siteAudio.duration) && siteAudio.duration > 0) {
         song.duration = formatTime(siteAudio.duration);
       }
       if (!intendedToPlay && playerState === 'loading') playerState = 'paused';
@@ -490,7 +490,7 @@
       updateAudioDiagnostics();
       updateProgressBounds();
       const song = getCurrentTrack();
-      if (song && Number.isFinite(siteAudio.duration) && siteAudio.duration > 0) {
+      if (song && (!song.duration || song.duration === '--:--') && Number.isFinite(siteAudio.duration) && siteAudio.duration > 0) {
         song.duration = formatTime(siteAudio.duration);
         renderTrackIndexState();
       }
@@ -928,10 +928,10 @@
     const current = pendingSeekTarget == null ? actualTime : clamp(pendingSeekTarget, 0, duration || pendingSeekTarget);
     if (elements.progress) {
       elements.progress.value = String(current);
-      elements.progress.setAttribute('aria-valuetext', formatTime(current) + ' / ' + (duration ? formatTime(duration) : getDurationText(getCurrentTrack())));
+      elements.progress.setAttribute('aria-valuetext', formatTime(current) + ' / ' + getDurationText(getCurrentTrack()));
     }
     setText(elements.currentTime, formatTime(current));
-    setText(elements.totalTime, duration ? formatTime(duration) : getDurationText(getCurrentTrack()));
+    setText(elements.totalTime, getDurationText(getCurrentTrack()));
   }
 
   function updateProgressPreview(value) {
@@ -939,7 +939,7 @@
     const previewTime = duration > 0 ? clamp(value, 0, duration) : 0;
     setText(elements.currentTime, formatTime(previewTime));
     if (elements.progress) {
-      elements.progress.setAttribute('aria-valuetext', formatTime(previewTime) + ' / ' + (duration ? formatTime(duration) : getDurationText(getCurrentTrack())));
+      elements.progress.setAttribute('aria-valuetext', formatTime(previewTime) + ' / ' + getDurationText(getCurrentTrack()));
     }
   }
 
@@ -979,10 +979,10 @@
     delete document.body.dataset.musicSeekError;
     if (elements.progress) {
       elements.progress.value = String(targetTime);
-      elements.progress.setAttribute('aria-valuetext', formatTime(targetTime) + ' / ' + formatTime(duration));
+      elements.progress.setAttribute('aria-valuetext', formatTime(targetTime) + ' / ' + getDurationText(getCurrentTrack()));
     }
     setText(elements.currentTime, formatTime(targetTime));
-    setText(elements.totalTime, formatTime(duration));
+    setText(elements.totalTime, getDurationText(getCurrentTrack()));
     siteAudio.currentTime = targetTime;
 
     if (shouldResume && siteAudio.paused && !siteAudio.ended) {
