@@ -55,12 +55,12 @@
   /* ---------------------------------------------------------------------- */
   siteData.musicTracks = [
     {
-      id: 'ecoute-cherie',
-      title: 'Ecoute Cherie',
-      artist: 'Vendredi sur mer',
-      src: 'assets/audio/ecoute-cherie.mp3',
+      id: 'you-wo-ne',
+      title: '有我呢',
+      artist: '郭一凡',
+      src: 'assets/audio/you-wo-ne.mp3',
       tag: '雪音',
-      duration: '03:46',
+      duration: '04:35',
       cover: null,
       branchZone: 'low-left',
       branchOrder: 1,
