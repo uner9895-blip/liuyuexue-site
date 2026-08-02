@@ -30,7 +30,7 @@
       "description": "步青尘的个人主页，一个中式水墨风格的静态个人网站，用于记录前端学习、个人项目和网页设计实践。"
     }
   </script>
-  <link rel="stylesheet" href="assets/css/style.css?v=2.0.7">
+  <link rel="stylesheet" href="assets/css/style.css?v=2.0.8">
   <link rel="stylesheet" href="assets/css/v2-structure.css?v=2.0.0">
   <link rel="stylesheet" href="assets/css/home-route-map.css?v=3.0.2">
   <script>
@@ -183,15 +183,45 @@
         <div class="courtyard-actions" aria-label="首页主要入口">
           <a class="courtyard-enter" href="#home-prologue">起 行</a>
           <a class="courtyard-link" href="music.html">听雪</a>
-          <a class="courtyard-link" href="#home-cat-title">小猫</a>
+          <a class="courtyard-link courtyard-link--cat" href="#home-cat-title">小猫</a>
         </div>
       </div>
 
-      <aside class="home-hero-aside" aria-label="路线地图与影像廊预览">
-        <article class="home-preview-card home-map-card">
+      <a class="courtyard-cue" href="#home-prologue" aria-label="向下浏览，起行">
+        <span class="cue-text">入</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </a>
+    </section>
+
+    <!-- 第一屏之后：短序与继续入口 -->
+    <section class="hero-section home-brief-intro home-scroll-section" id="home-prologue" aria-labelledby="home-title">
+      <div class="home-brief-scroll home-section-shell scroll-reveal">
+        <span class="home-brief-mark" aria-hidden="true">序</span>
+        <p class="hero-kicker">小序</p>
+        <h2 id="home-title" class="hero-title">小序</h2>
+        <p class="hero-desc">
+          这里是「步青尘」的山谷。<br>
+          我在纸上走路，也在生活里行走。<br>
+          记录所见、所思、所学、所行，<br>
+          也收藏一些温柔而安定的瞬间。<br>
+          愿你在此，遇见一段属于自己的路。
+        </p>
+        <div class="home-intro-actions" aria-label="继续进入其他空间">
+          <button class="btn-ink home-route-reopen" type="button" aria-controls="home-route-map" aria-expanded="false" data-route-map-trigger>展卷</button>
+          <a href="projects.html" class="btn-ink btn-secondary">去行迹</a>
+          <a href="music.html" class="btn-ink btn-secondary">听雪</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="home-scroll-section home-route-section" aria-labelledby="home-route-overview-title">
+      <div class="home-section-shell home-route-shell">
+        <div class="home-route-overview">
           <div class="home-preview-head">
             <span class="home-preview-kicker">卷轴</span>
-            <h2>路线地图</h2>
+            <h2 id="home-route-overview-title">路线地图</h2>
           </div>
           <p>一卷入山路，沿途设有驿站与停驻点。点击节点，即可前往对应空间。未启的节点仍在路上，卷轴可慢慢展开。</p>
           <div class="home-map-preview" aria-hidden="true">
@@ -208,21 +238,8 @@
             <button class="btn-ink home-route-reopen" type="button" aria-controls="home-route-map" aria-expanded="false" data-route-map-trigger>展开地图</button>
             <a class="btn-ink btn-secondary" href="#home-pathways">看驿站</a>
           </div>
-        </article>
-
-        <article class="home-preview-card home-gallery-preview">
-          <div class="home-preview-head">
-            <span class="home-preview-kicker">展厅</span>
-            <h2>影像廊</h2>
-          </div>
-          <p>山影 · 微雾<br>有山的时候，愿你慢慢看；<br>一帧风景，也可以是一段故事。</p>
-          <a class="home-gallery-strip" href="gallery.html" aria-label="进入影像廊">
-            <img data-deferred-src="assets/images/gallery/3df858748cd0f8375a2a4f2727a2b05b.jpg" width="1159" height="689" loading="lazy" decoding="async" alt="远处山谷、河面倒影和被云光照亮的山坡">
-            <img data-deferred-src="assets/images/gallery/1534941e2495b8bc5b1b0722ea1ae57c.jpg" width="1279" height="1704" loading="lazy" decoding="async" alt="傍晚天空里层叠的蓝灰云与透出的日光">
-            <img data-deferred-src="assets/images/gallery/spring_moss.jpg" width="1024" height="1024" loading="lazy" decoding="async" alt="雨后林地里带着水汽的青苔与细小新芽">
-          </a>
-        </article>
-      </aside>
+        </div>
+      </div>
 
       <!-- 空间地图：有 JS 时展开为对话层，无 JS 时保留静态链接。 -->
       <section class="route-guide mount-map" id="home-route-map" aria-labelledby="route-map-title" aria-describedby="route-map-subtitle" data-map-desktop="assets/visuals/home/route-scroll-valley-wide-v3.webp" data-map-desktop-width="1831" data-map-desktop-height="859" data-map-mobile="assets/visuals/home/route-scroll-valley-mobile-v3.webp" data-map-mobile-width="853" data-map-mobile-height="1844">
@@ -311,33 +328,6 @@
         </nav>
       </section>
 
-      <a class="courtyard-cue" href="#home-prologue" aria-label="向下浏览，起行">
-        <span class="cue-text">入</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <polyline points="6 9 12 15 18 9"></polyline>
-        </svg>
-      </a>
-    </section>
-
-    <!-- 第一屏之后：短序与继续入口 -->
-    <section class="hero-section home-brief-intro home-scroll-section" id="home-prologue" aria-labelledby="home-title">
-      <div class="home-brief-scroll home-section-shell scroll-reveal">
-        <span class="home-brief-mark" aria-hidden="true">序</span>
-        <p class="hero-kicker">小序</p>
-        <h2 id="home-title" class="hero-title">小序</h2>
-        <p class="hero-desc">
-          这里是「步青尘」的山谷。<br>
-          我在纸上走路，也在生活里行走。<br>
-          记录所见、所思、所学、所行，<br>
-          也收藏一些温柔而安定的瞬间。<br>
-          愿你在此，遇见一段属于自己的路。
-        </p>
-        <div class="home-intro-actions" aria-label="继续进入其他空间">
-          <button class="btn-ink home-route-reopen" type="button" aria-controls="home-route-map" aria-expanded="false" data-route-map-trigger>展卷</button>
-          <a href="projects.html" class="btn-ink btn-secondary">去行迹</a>
-          <a href="music.html" class="btn-ink btn-secondary">听雪</a>
-        </div>
-      </div>
     </section>
 
     <section class="home-scroll-section home-pathways-section" id="home-pathways" aria-labelledby="home-pathways-title">
@@ -405,12 +395,34 @@
             <button class="btn-ink" type="button" data-home-cat-action>和小猫打招呼</button>
           </div>
         </div>
+      </div>
+    </section>
+
+    <section class="home-scroll-section home-snow-section" aria-labelledby="home-snow-title">
+      <div class="home-section-shell home-snow-shell">
         <div class="home-snow-panel">
           <p class="home-section-kicker">听雪</p>
-          <h2>听雪入口</h2>
+          <h2 id="home-snow-title">听雪入口</h2>
           <p>月下生微灯，雪落听清音。把背景音乐留给另一个安静房间。</p>
           <a class="btn-ink btn-secondary" href="music.html">进入听雪</a>
         </div>
+      </div>
+    </section>
+
+    <section class="home-scroll-section home-gallery-section" aria-labelledby="home-gallery-title">
+      <div class="home-section-shell">
+        <article class="home-gallery-preview">
+          <div class="home-section-title home-gallery-copy">
+            <p class="home-section-kicker">展厅</p>
+            <h2 id="home-gallery-title">影像廊</h2>
+            <p>山影 · 微雾<br>有山的时候，愿你慢慢看；<br>一帧风景，也可以是一段故事。</p>
+          </div>
+          <a class="home-gallery-strip" href="gallery.html" aria-label="进入影像廊">
+            <img data-deferred-src="assets/images/gallery/3df858748cd0f8375a2a4f2727a2b05b.jpg" width="1159" height="689" loading="lazy" decoding="async" alt="远处山谷、河面倒影和被云光照亮的山坡">
+            <img data-deferred-src="assets/images/gallery/1534941e2495b8bc5b1b0722ea1ae57c.jpg" width="1279" height="1704" loading="lazy" decoding="async" alt="傍晚天空里层叠的蓝灰云与透出的日光">
+            <img data-deferred-src="assets/images/gallery/spring_moss.jpg" width="1024" height="1024" loading="lazy" decoding="async" alt="雨后林地里带着水汽的青苔与细小新芽">
+          </a>
+        </article>
       </div>
     </section>
 

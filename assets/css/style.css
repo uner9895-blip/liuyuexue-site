@@ -10725,3 +10725,220 @@ body.page-music .custom-dialog-btn:focus-visible {
   0%, 100% { opacity: 0.82; }
   50% { opacity: 1; }
 }
+
+/* ===========================================================================
+   Stage C · homepage narrative structure
+   ========================================================================== */
+
+body.page-home .home-scroll-hero {
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+  padding-inline: clamp(2rem, 7vw, 9rem);
+}
+
+body.page-home .home-scroll-hero .courtyard-content {
+  width: min(100%, 640px);
+  margin-left: clamp(0rem, 2.2vw, 2.75rem);
+}
+
+body.page-home .courtyard-link--cat {
+  min-width: auto;
+  min-height: auto;
+  padding: 0.45rem 0.3rem;
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+  color: rgba(246, 223, 178, 0.64);
+  font-size: 0.88rem;
+}
+
+body.page-home .courtyard-link--cat:hover,
+body.page-home .courtyard-link--cat:focus-visible {
+  border-color: transparent;
+  color: var(--home-gold-soft);
+  text-decoration: underline;
+  text-underline-offset: 0.28rem;
+  transform: none;
+}
+
+body.page-home .home-route-section {
+  padding-block: clamp(4.5rem, 8vw, 7rem);
+}
+
+body.page-home .home-route-overview {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.76fr) minmax(0, 1.24fr);
+  grid-template-areas:
+    "heading preview"
+    "copy preview"
+    "actions preview";
+  gap: 1rem clamp(2rem, 5vw, 4.5rem);
+  align-items: center;
+}
+
+body.page-home .home-route-overview .home-preview-head {
+  grid-area: heading;
+  display: block;
+  margin: 0;
+}
+
+body.page-home .home-route-overview .home-preview-head h2 {
+  margin-top: 0.3rem;
+  font-size: 2.35rem;
+  line-height: 1.2;
+}
+
+body.page-home .home-route-overview > p {
+  grid-area: copy;
+  max-width: 31rem;
+  margin: 0;
+  color: var(--home-muted);
+  line-height: 1.8;
+}
+
+body.page-home .home-route-overview .home-map-preview {
+  grid-area: preview;
+  width: 100%;
+  margin: 0;
+}
+
+body.page-home .home-route-overview .home-map-actions {
+  grid-area: actions;
+  margin-top: 0.25rem;
+}
+
+body.page-home .home-route-overview .btn-ink {
+  border-color: rgba(91, 55, 22, 0.44);
+  background:
+    linear-gradient(180deg, rgba(65, 39, 18, 0.94), rgba(29, 18, 10, 0.94));
+  color: #f9e4b5;
+  box-shadow: 0 0.5rem 1rem rgba(64, 39, 18, 0.18);
+}
+
+body.page-home .home-route-overview .btn-secondary {
+  border-color: rgba(231, 180, 93, 0.3);
+  background: rgba(17, 11, 7, 0.42);
+  color: rgba(249, 228, 181, 0.86);
+}
+
+body.page-home .home-companion-shell {
+  display: block;
+  width: min(960px, 100%);
+}
+
+body.page-home .home-cat-panel {
+  width: 100%;
+}
+
+body.page-home .home-snow-shell {
+  width: min(820px, 100%);
+}
+
+body.page-home .home-snow-panel {
+  min-height: 14rem;
+  padding: clamp(1.5rem, 4vw, 2.6rem);
+}
+
+body.page-home .home-gallery-preview {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.68fr) minmax(0, 1.32fr);
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  align-items: center;
+  background: none;
+}
+
+body.page-home .home-gallery-copy {
+  margin: 0;
+}
+
+body.page-home .home-gallery-copy .home-section-kicker {
+  color: var(--home-gold);
+}
+
+body.page-home .home-gallery-section .home-gallery-strip {
+  min-height: clamp(14rem, 24vw, 20rem);
+  margin: 0;
+}
+
+@media (max-width: 1100px) {
+  body.page-home .home-scroll-hero {
+    padding-inline: clamp(1.25rem, 6vw, 4.5rem);
+  }
+
+  body.page-home .home-scroll-hero .courtyard-content {
+    margin-left: 0;
+  }
+
+  body.page-home .home-route-overview {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "heading"
+      "copy"
+      "preview"
+      "actions";
+  }
+
+  body.page-home .home-route-overview .home-map-preview {
+    max-width: 840px;
+  }
+
+  body.page-home .home-gallery-preview {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  body.page-home .home-gallery-copy {
+    max-width: 42rem;
+  }
+}
+
+@media (max-width: 768px) {
+  body.page-home .home-scroll-hero {
+    min-height: 100svh;
+    padding: 5.75rem 1rem 3.5rem;
+    align-content: center;
+  }
+
+  body.page-home .courtyard-actions {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    width: min(100%, 22rem);
+  }
+
+  body.page-home .courtyard-link--cat {
+    grid-column: 1 / -1;
+    width: auto;
+    justify-self: start;
+  }
+
+  body.page-home .home-route-overview {
+    gap: 0.9rem;
+  }
+
+  body.page-home .home-route-overview .home-preview-head h2 {
+    font-size: 2rem;
+  }
+
+  body.page-home .home-gallery-section .home-gallery-strip {
+    min-height: 0;
+    grid-template-rows: repeat(2, 11rem);
+  }
+
+  body.page-home .home-gallery-section .home-gallery-strip img,
+  body.page-home .home-gallery-section .home-gallery-strip img:nth-child(3) {
+    min-height: 0;
+  }
+
+  body.page-home .home-snow-panel {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 420px) {
+  body.page-home .home-gallery-section .home-gallery-strip {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: repeat(3, 8.5rem);
+  }
+
+  body.page-home .home-gallery-section .home-gallery-strip img:nth-child(3) {
+    grid-column: auto;
+  }
+}
