@@ -635,29 +635,6 @@ body.page-home .mount-map__header::after {
 .mount-map__landmark[data-landmark="music"] { left: 83%; top: 50%; }
 .mount-map__landmark[data-landmark="contact"] { left: 91%; top: 30%; }
 
-[data-world="night"] .mount-map__vista {
-  filter: saturate(0.78) contrast(1.13) brightness(0.48) sepia(0.12);
-}
-
-[data-world="night"] .mount-map__vista::before {
-  background:
-    radial-gradient(circle at 25% 23%, rgba(233, 170, 78, 0.12), transparent 26%),
-    linear-gradient(100deg, rgba(9, 13, 14, 0.48), transparent 42% 76%, rgba(14, 10, 7, 0.36));
-  mix-blend-mode: screen;
-}
-
-[data-world="night"] .mount-map__vista::after {
-  background: linear-gradient(180deg, rgba(7, 10, 11, 0.26), transparent 28% 64%, rgba(8, 7, 5, 0.54));
-}
-
-[data-world="night"] .mount-map__route-shadow {
-  stroke: rgba(7, 8, 7, 0.76);
-}
-
-[data-world="night"] .mount-map__route-segment {
-  stroke: rgba(223, 169, 78, 0.72);
-}
-
 @keyframes mountMapRouteReveal {
   to { stroke-dashoffset: 0; }
 }

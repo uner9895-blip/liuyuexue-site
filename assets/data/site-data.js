@@ -34,7 +34,6 @@
     name: '步青尘',
     seal: '青尘印',
     tagline: '见字如面 · 岁在丙午',
-    defaultWorld: 'day', // day | night —— 与 data-theme(light/dark) 镜像
     // 栏目语义 → 真实页面映射（导航与路由的唯一事实来源）
     routes: [
       { key: 'home',     label: '首页',     alias: '起行', href: 'index.html',    sceneZone: 'entrance' },
