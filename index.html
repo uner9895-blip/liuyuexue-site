@@ -15,6 +15,21 @@
   <meta property="og:title" content="步青尘 | 中式水墨个人主页">
   <meta property="og:description" content="步青尘的个人主页，一个中式水墨风格的静态个人网站，用于记录前端学习、个人项目和网页设计实践。">
   <meta property="og:url" content="https://uner9895-blip.github.io/liuyuexue-site/">
+  <meta property="og:image" content="https://uner9895-blip.github.io/liuyuexue-site/assets/images/bg/bg-home.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="步青尘 | 中式水墨个人主页">
+  <meta name="twitter:description" content="步青尘的个人主页，一个中式水墨风格的静态个人网站，用于记录前端学习、个人项目和网页设计实践。">
+  <meta name="twitter:image" content="https://uner9895-blip.github.io/liuyuexue-site/assets/images/bg/bg-home.png">
+  <link rel="canonical" href="https://uner9895-blip.github.io/liuyuexue-site/">
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "步青尘",
+      "url": "https://uner9895-blip.github.io/liuyuexue-site/",
+      "description": "步青尘的个人主页，一个中式水墨风格的静态个人网站，用于记录前端学习、个人项目和网页设计实践。"
+    }
+  </script>
   <link rel="stylesheet" href="assets/css/style.css?v=2.0.7">
   <link rel="stylesheet" href="assets/css/v2-structure.css?v=2.0.0">
   <link rel="stylesheet" href="assets/css/home-route-map.css?v=3.0.2">
@@ -168,7 +183,7 @@
         <div class="courtyard-actions" aria-label="首页主要入口">
           <a class="courtyard-enter" href="#home-prologue">起 行</a>
           <a class="courtyard-link" href="music.html">听雪</a>
-          <a class="courtyard-link" href="cat.html">小猫</a>
+          <a class="courtyard-link" href="#home-cat-title">小猫</a>
         </div>
       </div>
 
@@ -368,7 +383,7 @@
             <h3>留笺</h3>
             <p>写下一句话，或者寄来一封信。</p>
           </a>
-          <a class="home-feature-card home-feature-card--cat" href="cat.html">
+          <a class="home-feature-card home-feature-card--cat" href="#home-cat-title">
             <span class="home-feature-index">08</span>
             <h3>小猫</h3>
             <p>一只同行的小猫，陪我走过山路与雪夜。</p>
@@ -387,7 +402,7 @@
             <p class="home-section-kicker">同行者</p>
             <h2 id="home-cat-title">小猫同行者</h2>
             <p>愿意醒来，愿意可爱，有体温感。它不是装饰，是陪伴入口。</p>
-            <a class="btn-ink" href="cat.html">去见小猫</a>
+            <button class="btn-ink" type="button" data-home-cat-action>和小猫打招呼</button>
           </div>
         </div>
         <div class="home-snow-panel">
@@ -431,7 +446,7 @@
  
   <!-- 听雪小筑音乐挂件 -->
   <div class="music-widget" role="complementary" aria-label="听雪小筑音乐播放器">
-    <button class="music-pendant" aria-label="展开音乐播放器" aria-expanded="false">
+    <button class="music-pendant" type="button" aria-label="展开音乐播放器" aria-expanded="false">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="12" cy="6" r="3" />
         <path d="M12 9v7" />
@@ -444,7 +459,7 @@
         <span class="music-subtitle">春风入梅枝 · 古琴清心调</span>
       </div>
       <div class="music-controls">
-        <button class="music-play-btn" aria-label="播放音乐">
+        <button class="music-play-btn" type="button" aria-label="播放音乐">
           <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
         </button>
         <div class="music-volume">

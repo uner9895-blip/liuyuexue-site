@@ -594,13 +594,12 @@ function initSkillExplanations() {
  * 返回顶部按钮
  */
 function initBackToTop() {
-  const btn = document.createElement('div');
+  const btn = document.createElement('button');
+  btn.type = 'button';
   btn.className = 'back-to-top';
   btn.id = 'back-to-top';
-  btn.setAttribute('role', 'button');
   btn.setAttribute('aria-label', '返回顶部');
-  btn.setAttribute('tabindex', '0');
-  btn.innerHTML = `<svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"></polyline></svg>`;
+  btn.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="18 15 12 9 6 15"></polyline></svg>`;
   document.body.appendChild(btn);
 
   window.addEventListener('scroll', () => {
@@ -614,7 +613,7 @@ function initBackToTop() {
   const scrollBack = () => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth'
+      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
     });
   };
 
@@ -1902,7 +1901,7 @@ function initGalleryPage() {
       ' data-scene-tone="' + escapeHtml(item.sceneTone || 'neutral') + '"',
       ' aria-label="查看影像：' + escapeHtml(item.title || '影像') + '">',
       '  <span class="gallery-frame-media">',
-      '    <img src="' + escapeHtml(item.src) + '" alt="' + escapeHtml(item.alt || item.title || '生活影像') + '" loading="lazy" decoding="async">',
+      '    <img src="' + escapeHtml(item.src) + '" width="' + Number(item.width) + '" height="' + Number(item.height) + '" alt="' + escapeHtml(item.alt || item.title || '生活影像') + '" loading="lazy" decoding="async">',
       '  </span>',
       '  <span class="gallery-frame-caption">',
       '    <span class="gallery-frame-title">' + escapeHtml(item.title || '') + '</span>',
@@ -1930,6 +1929,8 @@ function initGalleryPage() {
     currentIndex = index;
     if (dialogImg) {
       dialogImg.src = item.src;
+      dialogImg.width = Number(item.width);
+      dialogImg.height = Number(item.height);
       dialogImg.alt = item.alt || item.title || '生活影像';
     }
     if (dialogTitle) dialogTitle.textContent = item.title || '';
@@ -2186,6 +2187,15 @@ function initCompanionCat() {
       setState('sit');
     }, 1250);
   };
+
+  document.querySelectorAll('[data-home-cat-action]').forEach(function (trigger) {
+    var activateCat = function () {
+      cat.focus({ preventScroll: true });
+      petCat();
+    };
+
+    trigger.addEventListener('click', activateCat);
+  });
 
   cat.addEventListener('click', petCat);
   cat.addEventListener('keydown', function (event) {

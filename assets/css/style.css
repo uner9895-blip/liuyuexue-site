@@ -1759,7 +1759,7 @@ textarea.form-control {
   opacity: 0;
   visibility: hidden;
   transform: translateY(12px);
-  transition: all var(--transition-smooth);
+  transition: opacity var(--transition-smooth), visibility var(--transition-smooth), transform var(--transition-smooth), border-color var(--transition-smooth), color var(--transition-smooth), background-color var(--transition-smooth), box-shadow var(--transition-smooth);
   box-shadow: 0 4px 12px rgba(72, 57, 41, 0.05);
 }
 

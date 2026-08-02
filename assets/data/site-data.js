@@ -320,6 +320,8 @@
     {
       id: 'rain-corner',
       src: 'assets/images/gallery/spring_moss.jpg',
+      width: 1024,
+      height: 1024,
       alt: '雨后林地里带着水汽的青苔与细小新芽',
       title: '雨后街角',
       caption: '路面还亮着，像刚刚被天空擦过。',
@@ -331,6 +333,8 @@
     {
       id: 'dusk-cloud',
       src: 'assets/images/gallery/1534941e2495b8bc5b1b0722ea1ae57c.jpg',
+      width: 1279,
+      height: 1704,
       alt: '傍晚天空里层叠的蓝灰云与透出的日光',
       title: '傍晚的云',
       caption: '云慢慢散开，今天也算好好结束了。',
@@ -342,6 +346,8 @@
     {
       id: 'campus-tree-shadow',
       src: 'assets/images/gallery/5253bd35c3b206dd7106fe47153b3e5d.jpg',
+      width: 1280,
+      height: 1711,
       alt: '校园里仰望紫花树影、蓝天和交错枝条',
       title: '校园树影',
       caption: '树影落下来，像一页没有写完的笔记。',
@@ -353,6 +359,8 @@
     {
       id: 'hot-tea',
       src: 'assets/images/gallery/desk_life.jpg',
+      width: 1024,
+      height: 1024,
       alt: '木质书案上的茶盏、笔墨、书册与暖色台灯',
       title: '一杯热茶',
       caption: '热气升起来的时候，人会安静一点。',
@@ -364,6 +372,8 @@
     {
       id: 'night-window',
       src: 'assets/images/gallery/e3207ce7198c23a173bfc6dfc9ac7a92.jpg',
+      width: 1279,
+      height: 1706,
       alt: '夜色中被灯光照亮的高塔建筑与红色花树',
       title: '夜色窗边',
       caption: '窗外很暗，屋里还有一点小小的光。',
@@ -375,6 +385,8 @@
     {
       id: 'distant-mountain',
       src: 'assets/images/gallery/3df858748cd0f8375a2a4f2727a2b05b.jpg',
+      width: 1159,
+      height: 689,
       alt: '远处山谷、河面倒影和被云光照亮的山坡',
       title: '远处的山',
       caption: '山在很远的地方，却让人觉得心里稳了一点。',
