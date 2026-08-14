@@ -1567,6 +1567,20 @@ function initHomeRouteMap() {
       window.setTimeout(function () {
         if (!target) return;
         if (window.history && window.history.pushState) window.history.pushState(null, '', href);
+        var v41Progress = target.getAttribute('data-home-v41-progress');
+        var v41Journey = target.closest('.home-v41-journey');
+        var useV41Progress = v41Progress !== null && v41Journey && window.matchMedia('(min-width: 769px)').matches;
+
+        if (useV41Progress) {
+          var progress = Math.min(1, Math.max(0, Number(v41Progress) || 0));
+          var scrollRange = Math.max(0, v41Journey.offsetHeight - window.innerHeight);
+          window.scrollTo({
+            top: v41Journey.offsetTop + scrollRange * progress,
+            behavior: isReducedMotion() ? 'auto' : 'smooth'
+          });
+          return;
+        }
+
         target.scrollIntoView({ behavior: isReducedMotion() ? 'auto' : 'smooth', block: 'start' });
       }, isReducedMotion() ? 100 : 680);
     });

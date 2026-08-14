@@ -37,6 +37,7 @@
   <link rel="stylesheet" href="assets/css/style.css?v=2.3.1">
   <link rel="stylesheet" href="assets/css/v2-structure.css?v=2.0.0">
   <link rel="stylesheet" href="assets/css/home-route-map.css?v=3.0.2">
+  <link rel="stylesheet" href="assets/css/home-v4-1.css?v=4.1.2">
 </head>
 <body class="page-home">
   <div class="plum-shadows" aria-hidden="true"></div>
@@ -61,7 +62,7 @@
   <header>
     <nav class="nav-container" aria-label="主导航">
       <a class="logo" href="index.html" aria-label="步青尘首页">
-        <span class="logo-text">步青尘</span>
+        <span class="seal home-v41-brand-seal" aria-hidden="true">青尘<br>印</span>
       </a>
       <button class="burger-btn" type="button" aria-label="打开导航菜单" aria-expanded="false" aria-controls="site-menu">
         <span class="burger-line"></span>
@@ -82,84 +83,60 @@
   </header>
 
   <main class="page-fade">
-    <!-- 入口：暮光山谷与纸卷世界 -->
-    <section class="courtyard world-shell home-scroll-hero" aria-label="步青尘 · 起行入口">
-      <div class="courtyard-scene world-scene" aria-hidden="true">
-        <div class="scene-layer scene-mountains" style="--px:16px;--py:9px;">
-          <svg class="layer-inner" viewBox="0 0 1440 700" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
-            <path class="ridge ridge-far" d="M0 470 C170 410 280 452 430 392 C560 340 690 392 820 356 C980 312 1110 372 1260 330 C1340 308 1400 320 1440 300 L1440 700 L0 700 Z"/>
-            <path class="ridge ridge-mid" d="M0 532 C150 486 300 510 440 462 C600 408 720 462 870 420 C1010 382 1150 430 1290 396 C1360 380 1410 388 1440 378 L1440 700 L0 700 Z"/>
-            <path class="ridge ridge-near" d="M0 600 C140 560 250 588 400 552 C560 514 700 566 850 536 C1010 504 1150 556 1300 528 C1370 516 1410 522 1440 514 L1440 700 L0 700 Z"/>
-          </svg>
+    <!-- Homepage V4.1：见山 → 启行 → 入谷 → 谷中呼吸 → 卷开 → 小序 -->
+    <section class="home-v41-journey" id="home-journey" aria-label="暮光山谷连续滚动开场：见山、启行、入谷、谷中呼吸、卷开、小序">
+      <div class="home-v41-stage" id="home-v41-stage">
+        <div class="home-v41-world" id="home-v41-world" aria-hidden="true">
+          <div class="home-v41-layer home-v41-layer-base"></div>
+          <div class="home-v41-layer home-v41-layer-road"></div>
+          <div class="home-v41-layer home-v41-layer-cliff"></div>
+          <div class="home-v41-layer home-v41-layer-left"></div>
         </div>
 
-        <div class="scene-layer scene-plum" style="--px:34px;--py:15px;">
-          <svg class="layer-inner" viewBox="0 0 1440 700" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
-            <g class="plum-branch" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M-20 706 C90 612 150 560 196 470 C236 392 250 320 300 250" stroke-width="15"/>
-              <path d="M196 470 C250 452 300 470 360 430" stroke-width="7"/>
-              <path d="M236 392 C190 360 150 356 96 330" stroke-width="6"/>
-              <path d="M268 308 C320 296 360 312 408 286" stroke-width="5.5"/>
-              <path d="M250 320 C214 286 196 262 188 220" stroke-width="5"/>
-            </g>
-            <g class="plum-blossoms">
-              <g class="blossom" transform="translate(300 250)"><circle r="7"/><circle class="b-core" r="2.4"/></g>
-              <g class="blossom" transform="translate(360 430)"><circle r="6"/><circle class="b-core" r="2.1"/></g>
-              <g class="blossom" transform="translate(408 286)"><circle r="6.5"/><circle class="b-core" r="2.2"/></g>
-              <g class="blossom" transform="translate(96 330)"><circle r="5.5"/><circle class="b-core" r="2"/></g>
-              <g class="blossom" transform="translate(188 220)"><circle r="6"/><circle class="b-core" r="2.1"/></g>
-              <g class="blossom" transform="translate(232 420)"><circle r="5"/><circle class="b-core" r="1.8"/></g>
-              <g class="blossom" transform="translate(150 470)"><circle r="6.5"/><circle class="b-core" r="2.2"/></g>
-              <g class="blossom" transform="translate(330 320)"><circle r="5"/><circle class="b-core" r="1.8"/></g>
-            </g>
-          </svg>
-        </div>
-      </div>
+        <div class="home-v41-mist home-v41-mist-a" aria-hidden="true"></div>
+        <div class="home-v41-mist home-v41-mist-b" aria-hidden="true"></div>
+        <div class="home-v41-vignette" aria-hidden="true"></div>
+        <div class="home-v41-dusk-wash" aria-hidden="true"></div>
+        <div class="home-v41-paper-grain" aria-hidden="true"></div>
 
-      <div class="courtyard-content world-content">
-        <div class="courtyard-meta">
-          <span class="seal seal-yinke courtyard-seal" aria-hidden="true">青尘<br>印</span>
-          <p class="courtyard-kicker">暮光山谷</p>
-        </div>
-        <div class="courtyard-heading">
-          <h1 class="courtyard-title">步青尘</h1>
-          <p class="courtyard-subtitle">纸卷初展 · 山路向前</p>
-        </div>
-        <div class="courtyard-entry">
-          <p class="courtyard-atmosphere">暮色沿山谷落下，卷轴在路口慢慢展开。</p>
-          <div class="courtyard-actions" aria-label="首页主要入口">
-            <a class="courtyard-enter" href="#home-prologue">起 行</a>
-            <a class="courtyard-link" href="music.html">听雪</a>
+        <section class="home-v41-hero-copy" aria-labelledby="home-v41-title">
+          <div class="home-v41-hero-eyebrow">
+            <span class="home-v41-kicker-zh">暮光山谷 · 01</span>
           </div>
-        </div>
-      </div>
+          <h1 id="home-v41-title" class="home-v41-hero-title">步青尘</h1>
+          <p class="home-v41-hero-subtitle">所见 · 所思 · 所学 · 所行</p>
+          <div class="home-v41-hero-actions" aria-label="首页主要入口">
+            <a class="home-v41-primary-action" href="#home-prologue" data-home-v41-scroll="0.14">启行<span class="home-v41-arrow">→</span></a>
+          </div>
+        </section>
 
-      <a class="courtyard-cue" href="#home-prologue" aria-label="向下浏览，起行">
-        <span class="cue-text">入</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <polyline points="6 9 12 15 18 9"></polyline>
-        </svg>
-      </a>
-    </section>
+        <section class="home-v41-prologue" id="home-prologue" data-home-v41-progress="0.90" aria-labelledby="home-v41-prologue-title">
+          <div class="home-v41-prologue-rail" aria-hidden="true"></div>
+          <div class="home-v41-prologue-head">
+            <span class="home-v41-prologue-chapter">序 · 01</span>
+            <span class="home-v41-prologue-seal" aria-hidden="true">序</span>
+          </div>
+          <h2 id="home-v41-prologue-title" class="home-v41-prologue-title">小序</h2>
+          <div class="home-v41-prologue-body">
+            <p class="home-v41-prologue-line">这里是「步青尘」的山谷。</p>
+            <p class="home-v41-prologue-line">我在纸上走路，也在生活里行走。</p>
+            <p class="home-v41-prologue-line">记录所见、所思、所学、所行，</p>
+            <p class="home-v41-prologue-line">也收藏一些温柔而安定的瞬间。</p>
+            <p class="home-v41-prologue-line">愿你在此，遇见一段属于自己的路。</p>
+          </div>
+          <div class="home-v41-prologue-actions" aria-label="继续进入其他空间">
+            <button class="home-v41-prologue-primary" type="button" aria-controls="home-route-map" aria-expanded="false" data-route-map-trigger>展卷<span class="home-v41-arrow">→</span></button>
+            <a class="home-v41-prologue-secondary" href="projects.html">去行迹</a>
+            <a class="home-v41-prologue-secondary" href="music.html">听雪</a>
+          </div>
+        </section>
 
-    <!-- 第一屏之后：短序与继续入口 -->
-    <section class="hero-section home-brief-intro home-scroll-section" id="home-prologue" aria-labelledby="home-title">
-      <div class="home-brief-scroll home-section-shell scroll-reveal">
-        <span class="home-brief-mark" aria-hidden="true">序</span>
-        <p class="hero-kicker">小序</p>
-        <h2 id="home-title" class="hero-title">小序</h2>
-        <p class="hero-desc">
-          这里是「步青尘」的山谷。<br>
-          我在纸上走路，也在生活里行走。<br>
-          记录所见、所思、所学、所行，<br>
-          也收藏一些温柔而安定的瞬间。<br>
-          愿你在此，遇见一段属于自己的路。
-        </p>
-        <div class="home-intro-actions" aria-label="继续进入其他空间">
-          <button class="btn-ink home-route-reopen" type="button" aria-controls="home-route-map" aria-expanded="false" data-route-map-trigger>展卷</button>
-          <a href="projects.html" class="btn-ink btn-secondary">去行迹</a>
-          <a href="music.html" class="btn-ink btn-secondary">听雪</a>
-        </div>
+        <a class="home-v41-scroll-cue" href="#home-prologue" data-home-v41-scroll="0.14" aria-label="向下滚动进入山谷">
+          <span>入</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </a>
+
+        <div class="home-v41-progress-rail" aria-hidden="true"><i></i></div>
       </div>
     </section>
 
@@ -436,6 +413,9 @@
   <div class="companion-zone" aria-hidden="true"></div>
 
   <script src="assets/data/site-data.js?v=2.3.0"></script>
+  <script src="assets/vendor/gsap/gsap.min.js?v=3.15.0"></script>
+  <script src="assets/vendor/gsap/ScrollTrigger.min.js?v=3.15.0"></script>
   <script src="assets/js/main.js?v=2.3.0"></script>
+  <script src="assets/js/home-v4-1.js?v=4.1.2"></script>
 </body>
 </html>
