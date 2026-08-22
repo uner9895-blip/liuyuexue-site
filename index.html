@@ -36,7 +36,7 @@
   </script>
   <link rel="stylesheet" href="assets/css/style.css?v=2.3.1">
   <link rel="stylesheet" href="assets/css/v2-structure.css?v=2.0.0">
-  <link rel="stylesheet" href="assets/css/home-route-map.css?v=3.0.2">
+  <link rel="stylesheet" href="assets/css/home-route-map.css?v=4.2.1">
   <link rel="stylesheet" href="assets/css/home-v4-1.css?v=4.1.2">
 </head>
 <body class="page-home">
@@ -125,9 +125,7 @@
             <p class="home-v41-prologue-line">愿你在此，遇见一段属于自己的路。</p>
           </div>
           <div class="home-v41-prologue-actions" aria-label="继续进入其他空间">
-            <button class="home-v41-prologue-primary" type="button" aria-controls="home-route-map" aria-expanded="false" data-route-map-trigger>展卷<span class="home-v41-arrow">→</span></button>
-            <a class="home-v41-prologue-secondary" href="projects.html">去行迹</a>
-            <a class="home-v41-prologue-secondary" href="music.html">听雪</a>
+            <a class="home-v41-prologue-primary" href="#home-route-map">展卷<span class="home-v41-arrow">→</span></a>
           </div>
         </section>
 
@@ -140,168 +138,69 @@
       </div>
     </section>
 
-    <section class="home-scroll-section home-route-section" aria-labelledby="home-route-overview-title">
-      <div class="home-section-shell home-route-shell">
-        <div class="home-route-overview">
-          <div class="home-preview-head">
-            <span class="home-preview-kicker">卷轴</span>
-            <h2 id="home-route-overview-title">路线地图</h2>
-          </div>
-          <p>一卷入山路，沿途设有驿站与停驻点。点击节点，即可前往对应空间。未启的节点仍在路上，卷轴可慢慢展开。</p>
-          <div class="home-map-preview" aria-hidden="true">
-            <img src="assets/visuals/home/route-scroll-valley-preview.webp" width="640" height="360" loading="lazy" decoding="async" alt="">
-            <svg class="home-map-preview-route" viewBox="0 0 100 56" preserveAspectRatio="none" focusable="false">
-              <path d="M8 47 C18 38 29 43 42 33 C50 26 57 24 64 19 C72 20 78 31 90 22"></path>
-            </svg>
-            <span class="home-map-pin home-map-pin-prologue">小序</span>
-            <span class="home-map-pin home-map-pin-gallery">影像</span>
-            <span class="home-map-pin home-map-pin-music">听雪</span>
-            <span class="home-map-pin home-map-pin-cat">小猫</span>
-          </div>
-          <div class="home-map-actions">
-            <button class="btn-ink home-route-reopen" type="button" aria-controls="home-route-map" aria-expanded="false" data-route-map-trigger>展开地图</button>
-            <a class="btn-ink btn-secondary" href="#home-pathways">看驿站</a>
-          </div>
-        </div>
-      </div>
+    <section class="home-scroll-section home-route-section route-guide mount-map" id="home-route-map" aria-labelledby="route-map-title">
+      <div class="mount-map__scene">
+        <header class="mount-map__header">
+          <h2 id="route-map-title" class="mount-map__title">山中有路</h2>
+        </header>
 
-      <!-- 空间地图：有 JS 时展开为对话层，无 JS 时保留静态链接。 -->
-      <section class="route-guide mount-map" id="home-route-map" aria-labelledby="route-map-title" aria-describedby="route-map-subtitle" data-map-desktop="assets/visuals/home/route-scroll-valley-wide-v3.webp" data-map-desktop-width="1831" data-map-desktop-height="859" data-map-mobile="assets/visuals/home/route-scroll-valley-mobile-v3.webp" data-map-mobile-width="853" data-map-mobile-height="1844">
-        <div class="mount-map__scrim" aria-hidden="true"></div>
-        <div class="mount-map__scene">
-          <header class="mount-map__header">
-            <p class="mount-map__eyebrow">起行卷 · 山路向前</p>
-            <h2 id="route-map-title" class="mount-map__title">路线地图</h2>
-            <p id="route-map-subtitle" class="mount-map__subtitle">一卷入山路，沿途设有驿站与停驻点。</p>
-          </header>
-          <button class="route-guide-close mount-map__close" type="button" aria-label="合卷并关闭路线地图">
-            <span aria-hidden="true">合卷</span>
-          </button>
-          <p class="mount-map__status" id="route-map-status" aria-live="polite" data-default-text="当前：小序 · 从谷口读一段自序。">当前：小序 · 从谷口读一段自序。</p>
-          <div class="mount-map__scroll">
-            <div class="mount-map__journey">
-              <div class="mount-map__vista" aria-hidden="true"></div>
-              <svg class="mount-map__route mount-map__route--desktop" viewBox="0 0 1000 600" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-                <path class="mount-map__route-shadow" d="M65 548 C85 525 96 500 120 480 C165 440 225 465 280 408 C330 370 365 466 420 444 C470 423 505 395 550 366 C590 342 610 330 640 318 C670 303 695 270 730 252 C765 260 790 300 830 300 C865 280 885 220 910 180 C924 164 932 151 940 140" pathLength="1"></path>
-                <path class="mount-map__route-segment" data-segment="about" d="M65 548 C85 525 96 500 120 480" pathLength="1"></path>
-                <path class="mount-map__route-segment" data-segment="projects" d="M120 480 C165 440 225 465 280 408" pathLength="1"></path>
-                <path class="mount-map__route-segment" data-segment="articles" d="M280 408 C330 370 365 466 420 444" pathLength="1"></path>
-                <path class="mount-map__route-segment" data-segment="learning" d="M420 444 C470 423 505 395 550 366" pathLength="1"></path>
-                <path class="mount-map__route-segment" data-segment="cat" d="M550 366 C590 342 610 330 640 318" pathLength="1"></path>
-                <path class="mount-map__route-segment" data-segment="gallery" d="M640 318 C670 303 695 270 730 252" pathLength="1"></path>
-                <path class="mount-map__route-segment" data-segment="music" d="M730 252 C765 260 790 300 830 300" pathLength="1"></path>
-                <path class="mount-map__route-segment" data-segment="contact" d="M830 300 C865 280 885 220 910 180 C924 164 932 151 940 140" pathLength="1"></path>
-              </svg>
-              <svg class="mount-map__route mount-map__route--mobile" viewBox="0 0 400 2200" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-                <path class="mount-map__route-shadow" d="M185 2150 C145 2110 125 2070 115 2025 C132 1928 236 1870 285 1775 C255 1685 165 1610 135 1525 C156 1430 252 1358 285 1275 C260 1178 165 1110 135 1025 C166 930 252 860 285 775 C260 680 170 610 135 525 C160 430 245 355 270 285 C266 238 260 208 250 180" pathLength="1"></path>
-                <path class="mount-map__route-segment" data-segment="about" d="M185 2150 C145 2110 125 2070 115 2025" pathLength="1"></path>
-                <path class="mount-map__route-segment" data-segment="projects" d="M115 2025 C132 1928 236 1870 285 1775" pathLength="1"></path>
-                <path class="mount-map__route-segment" data-segment="articles" d="M285 1775 C255 1685 165 1610 135 1525" pathLength="1"></path>
-                <path class="mount-map__route-segment" data-segment="learning" d="M135 1525 C156 1430 252 1358 285 1275" pathLength="1"></path>
-                <path class="mount-map__route-segment" data-segment="cat" d="M285 1275 C260 1178 165 1110 135 1025" pathLength="1"></path>
-                <path class="mount-map__route-segment" data-segment="gallery" d="M135 1025 C166 930 252 860 285 775" pathLength="1"></path>
-                <path class="mount-map__route-segment" data-segment="music" d="M285 775 C260 680 170 610 135 525" pathLength="1"></path>
-                <path class="mount-map__route-segment" data-segment="contact" d="M135 525 C160 430 245 355 270 285 C266 238 260 208 250 180" pathLength="1"></path>
-              </svg>
-              <nav class="mount-map__landmarks" aria-label="沿山路依次前往各页面">
-                <a class="mount-map__landmark" href="#home-prologue" data-landmark="about" data-state="current" aria-current="location" aria-label="第 1 站，小序，当前站，从谷口读一段自序">
-                  <span class="mount-map__marker" aria-hidden="true"><span class="mount-map__marker-seal">序</span></span>
-                  <span class="mount-map__label"><span class="mount-map__step">01</span><strong>小序</strong><small>谷口题签</small></span>
-                </a>
-                <a class="mount-map__landmark" href="projects.html" data-landmark="projects" aria-label="第 2 站，行迹，看看作品与练习">
-                  <span class="mount-map__marker" aria-hidden="true"><span class="mount-map__marker-seal">迹</span></span>
-                  <span class="mount-map__label"><span class="mount-map__step">02</span><strong>行迹</strong><small>旧路留痕</small></span>
-                </a>
-                <a class="mount-map__landmark" href="articles.html" data-landmark="articles" aria-label="第 3 站，雪笺，读落在纸上的短文">
-                  <span class="mount-map__marker" aria-hidden="true"><span class="mount-map__marker-seal">笺</span></span>
-                  <span class="mount-map__label"><span class="mount-map__step">03</span><strong>雪笺</strong><small>临水展笺</small></span>
-                </a>
-                <a class="mount-map__landmark" href="learning.html" data-landmark="learning" aria-label="第 4 站，学习路，查看学习里程">
-                  <span class="mount-map__marker" aria-hidden="true"><span class="mount-map__marker-seal">学</span></span>
-                  <span class="mount-map__label"><span class="mount-map__step">04</span><strong>学习路</strong><small>拾级而上</small></span>
-                </a>
-                <button class="mount-map__landmark" type="button" data-landmark="cat" data-state="locked" aria-disabled="true" aria-label="第 5 站，小猫，未启程，页面尚未开放">
-                  <span class="mount-map__marker" aria-hidden="true"><span class="mount-map__marker-seal">未</span></span>
-                  <span class="mount-map__label"><span class="mount-map__step">05</span><strong>小猫</strong><small>未启程</small></span>
-                </button>
-                <a class="mount-map__landmark" href="gallery.html" data-landmark="gallery" aria-label="第 6 站，影像廊，停驻山腰看风景">
-                  <span class="mount-map__marker" aria-hidden="true"><span class="mount-map__marker-seal">影</span></span>
-                  <span class="mount-map__label"><span class="mount-map__step">06</span><strong>影像廊</strong><small>山腰停驻</small></span>
-                </a>
-                <a class="mount-map__landmark" href="music.html" data-landmark="music" aria-label="第 7 站，听雪，去梅树下听清音">
-                  <span class="mount-map__marker" aria-hidden="true"><span class="mount-map__marker-seal">听</span></span>
-                  <span class="mount-map__label"><span class="mount-map__step">07</span><strong>听雪</strong><small>梅下清音</small></span>
-                </a>
-                <a class="mount-map__landmark" href="contact.html" data-landmark="contact" aria-label="第 8 站，留笺，在远处驿站写一封信">
-                  <span class="mount-map__marker" aria-hidden="true"><span class="mount-map__marker-seal">留</span></span>
-                  <span class="mount-map__label"><span class="mount-map__step">08</span><strong>留笺</strong><small>山门寄语</small></span>
-                </a>
-              </nav>
-            </div>
-          </div>
-        </div>
-        <nav class="mount-map__fallback-links" aria-label="静态入山链接">
-          <a href="#home-prologue">小序</a>
-          <a href="projects.html">行迹</a>
-          <a href="articles.html">雪笺</a>
-          <a href="learning.html">学习路</a>
-          <span aria-disabled="true">小猫（未启程）</span>
-          <a href="gallery.html">影像廊</a>
-          <a href="music.html">听雪</a>
-          <a href="contact.html">留笺</a>
-        </nav>
-      </section>
+        <div class="mount-map__journey">
+          <picture class="mount-map__vista" aria-hidden="true">
+            <source media="(max-width: 820px)" srcset="assets/visuals/home/route-scroll-valley-mobile-v3.webp">
+            <img class="mount-map__image" src="assets/visuals/home/route-scroll-valley-wide-v3.webp" width="1831" height="859" loading="lazy" decoding="async" alt="">
+          </picture>
 
-    </section>
+          <svg class="mount-map__route mount-map__route--desktop" viewBox="0 0 1000 469" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+            <path class="mount-map__route-shadow" d="M70 420 C88 398 101 382 120 375 C168 340 226 360 280 319 C330 290 367 366 420 347 C472 326 512 306 550 286 C610 258 676 220 730 197 C770 204 793 238 830 235 C866 218 890 170 910 141" pathLength="1"></path>
+            <path class="mount-map__route-segment" data-segment="about" d="M70 420 C88 398 101 382 120 375" pathLength="1"></path>
+            <path class="mount-map__route-segment" data-segment="projects" d="M120 375 C168 340 226 360 280 319" pathLength="1"></path>
+            <path class="mount-map__route-segment" data-segment="articles" d="M280 319 C330 290 367 366 420 347" pathLength="1"></path>
+            <path class="mount-map__route-segment" data-segment="learning" d="M420 347 C472 326 512 306 550 286" pathLength="1"></path>
+            <path class="mount-map__route-segment" data-segment="gallery" d="M550 286 C610 258 676 220 730 197" pathLength="1"></path>
+            <path class="mount-map__route-segment" data-segment="music" d="M730 197 C770 204 793 238 830 235" pathLength="1"></path>
+            <path class="mount-map__route-segment" data-segment="contact" d="M830 235 C866 218 890 170 910 141" pathLength="1"></path>
+          </svg>
 
-    <section class="home-scroll-section home-pathways-section" id="home-pathways" aria-labelledby="home-pathways-title">
-      <div class="home-section-shell">
-        <div class="home-section-title">
-          <p class="home-section-kicker">驿站</p>
-          <h2 id="home-pathways-title">功能卡片导航</h2>
-          <p>从卷轴上选择一处停驻，或者继续沿山路向前。</p>
-        </div>
-        <div class="home-feature-grid">
-          <a class="home-feature-card" href="#home-prologue">
-            <span class="home-feature-index">01</span>
-            <h3>小序</h3>
-            <p>在山谷入口读一段简短自述。</p>
-          </a>
-          <a class="home-feature-card" href="projects.html">
-            <span class="home-feature-index">02</span>
-            <h3>行迹</h3>
-            <p>作品、练习与正在走的路。</p>
-          </a>
-          <a class="home-feature-card" href="articles.html">
-            <span class="home-feature-index">03</span>
-            <h3>雪笺</h3>
-            <p>短文、记录和落在纸上的想法。</p>
-          </a>
-          <a class="home-feature-card" href="learning.html">
-            <span class="home-feature-index">04</span>
-            <h3>学习路</h3>
-            <p>把每天学到的东西留成里程石。</p>
-          </a>
-          <a class="home-feature-card" href="gallery.html">
-            <span class="home-feature-index">05</span>
-            <h3>影像廊</h3>
-            <p>山影、微雾与生活里的安静片段。</p>
-          </a>
-          <a class="home-feature-card home-feature-card--music" href="music.html">
-            <span class="home-feature-index">06</span>
-            <h3>听雪</h3>
-            <p>月下生微灯，雪落听清音。</p>
-          </a>
-          <a class="home-feature-card" href="contact.html">
-            <span class="home-feature-index">07</span>
-            <h3>留笺</h3>
-            <p>写下一句话，或者寄来一封信。</p>
-          </a>
-          <a class="home-feature-card home-feature-card--cat" href="#home-cat-title">
-            <span class="home-feature-index">08</span>
-            <h3>小猫</h3>
-            <p>一只同行的小猫，陪我走过山路与雪夜。</p>
-          </a>
+          <svg class="mount-map__route mount-map__route--mobile" viewBox="0 0 400 864" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+            <path class="mount-map__route-shadow" d="M120 778 C164 728 232 700 280 674 C250 626 176 590 132 570 C168 522 238 490 280 467 C246 418 176 380 128 346 C170 302 236 270 280 233 C238 188 170 156 128 121" pathLength="1"></path>
+            <path class="mount-map__route-segment" data-segment="projects" d="M120 778 C164 728 232 700 280 674" pathLength="1"></path>
+            <path class="mount-map__route-segment" data-segment="articles" d="M280 674 C250 626 176 590 132 570" pathLength="1"></path>
+            <path class="mount-map__route-segment" data-segment="learning" d="M132 570 C168 522 238 490 280 467" pathLength="1"></path>
+            <path class="mount-map__route-segment" data-segment="gallery" d="M280 467 C246 418 176 380 128 346" pathLength="1"></path>
+            <path class="mount-map__route-segment" data-segment="music" d="M128 346 C170 302 236 270 280 233" pathLength="1"></path>
+            <path class="mount-map__route-segment" data-segment="contact" d="M280 233 C238 188 170 156 128 121" pathLength="1"></path>
+          </svg>
+
+          <nav class="mount-map__landmarks" aria-label="路线地图导航">
+            <a class="mount-map__landmark" href="#home-prologue" data-landmark="about" aria-label="01 小序，起点">
+              <span class="mount-map__marker" aria-hidden="true"></span>
+              <span class="mount-map__label"><span class="mount-map__step">01</span><strong>小序</strong><small>起点</small></span>
+            </a>
+            <a class="mount-map__landmark" href="projects.html" data-landmark="projects" aria-label="02 行迹，所行">
+              <span class="mount-map__marker" aria-hidden="true"></span>
+              <span class="mount-map__label"><span class="mount-map__step">02</span><strong>行迹</strong><small>所行</small></span>
+            </a>
+            <a class="mount-map__landmark" href="articles.html" data-landmark="articles" aria-label="03 雪笺，所思">
+              <span class="mount-map__marker" aria-hidden="true"></span>
+              <span class="mount-map__label"><span class="mount-map__step">03</span><strong>雪笺</strong><small>所思</small></span>
+            </a>
+            <a class="mount-map__landmark" href="learning.html" data-landmark="learning" aria-label="04 学习路，所学">
+              <span class="mount-map__marker" aria-hidden="true"></span>
+              <span class="mount-map__label"><span class="mount-map__step">04</span><strong>学习路</strong><small>所学</small></span>
+            </a>
+            <a class="mount-map__landmark" href="#home-gallery-title" data-landmark="gallery" aria-label="05 影像廊，所见">
+              <span class="mount-map__marker" aria-hidden="true"></span>
+              <span class="mount-map__label"><span class="mount-map__step">05</span><strong>影像廊</strong><small>所见</small></span>
+            </a>
+            <a class="mount-map__landmark" href="music.html" data-landmark="music" aria-label="06 听雪，所闻">
+              <span class="mount-map__marker" aria-hidden="true"></span>
+              <span class="mount-map__label"><span class="mount-map__step">06</span><strong>听雪</strong><small>所闻</small></span>
+            </a>
+            <a class="mount-map__landmark" href="contact.html" data-landmark="contact" aria-label="07 留笺，留一纸言">
+              <span class="mount-map__marker" aria-hidden="true"></span>
+              <span class="mount-map__label"><span class="mount-map__step">07</span><strong>留笺</strong><small>留一纸言</small></span>
+            </a>
+          </nav>
         </div>
       </div>
     </section>
@@ -417,5 +316,6 @@
   <script src="assets/vendor/gsap/ScrollTrigger.min.js?v=3.15.0"></script>
   <script src="assets/js/main.js?v=2.3.0"></script>
   <script src="assets/js/home-v4-1.js?v=4.1.2"></script>
+  <script src="assets/js/home-route-map-v2.js?v=4.2.1"></script>
 </body>
 </html>
