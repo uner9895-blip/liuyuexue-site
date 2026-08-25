@@ -117,7 +117,7 @@ body.page-projects-v2 main.page-fade::before {
   z-index: -2;
   background:
     linear-gradient(90deg, rgba(9, 9, 8, 0.82) 0%, rgba(14, 12, 10, 0.52) 31%, rgba(13, 12, 11, 0.14) 58%, rgba(7, 11, 15, 0.36) 100%),
-    linear-gradient(180deg, rgba(9, 9, 8, 0.08) 0%, rgba(11, 10, 9, 0.08) 46%, rgba(29, 26, 22, 0.42) 67%, rgba(137, 126, 107, 0.76) 87%, #ded4c0 100%),
+    linear-gradient(180deg, rgba(9, 9, 8, 0.08) 0%, rgba(11, 10, 9, 0.08) 50%, rgba(29, 26, 22, 0.28) 72%, rgba(137, 126, 107, 0.46) 91%, rgba(222, 212, 192, 0.72) 100%),
     radial-gradient(ellipse at 42% 78%, rgba(226, 218, 201, 0.22), transparent 30%),
     url("../visuals/home/v5/a2-dusk-road-world.png") 38% 68% / cover no-repeat;
   transform: scale(1.012);
@@ -130,7 +130,7 @@ body.page-projects-v2 main.page-fade::before {
   inset: 0;
   background:
     radial-gradient(ellipse at 25% 54%, transparent 0 20%, rgba(4, 5, 5, 0.26) 64%, rgba(4, 5, 5, 0.44) 100%),
-    linear-gradient(180deg, transparent 42%, rgba(226, 216, 197, 0.14) 70%, rgba(234, 226, 211, 0.52) 90%, rgba(238, 231, 217, 0.92));
+    linear-gradient(180deg, transparent 54%, rgba(226, 216, 197, 0.08) 74%, rgba(234, 226, 211, 0.28) 92%, rgba(238, 231, 217, 0.62));
 }
 
 .projects-v2-threshold-scene::after {
@@ -138,14 +138,14 @@ body.page-projects-v2 main.page-fade::before {
   position: absolute;
   left: -10%;
   right: -10%;
-  bottom: -7%;
-  height: 34%;
+  bottom: -9%;
+  height: 25%;
   background:
     radial-gradient(ellipse at 24% 56%, rgba(239, 232, 218, 0.72), transparent 52%),
     radial-gradient(ellipse at 68% 48%, rgba(222, 214, 199, 0.62), transparent 58%),
     linear-gradient(180deg, transparent, rgba(232, 224, 209, 0.66));
-  filter: blur(18px);
-  opacity: 0.82;
+  filter: blur(13px);
+  opacity: 0.56;
 }
 
 .projects-v2-threshold-inner {
@@ -211,13 +211,13 @@ body.page-projects-v2 main.page-fade::before {
 
 .projects-v2-paper-transition {
   position: relative;
-  height: clamp(170px, 23svh, 270px);
+  height: clamp(105px, 14svh, 160px);
   margin-top: -2px;
   overflow: hidden;
   background:
-    radial-gradient(ellipse at 20% 4%, rgba(101, 91, 76, 0.16), transparent 34%),
-    radial-gradient(ellipse at 70% 0%, rgba(125, 113, 93, 0.12), transparent 40%),
-    linear-gradient(180deg, #ded4c0 0%, #e6ddcb 38%, var(--projects-v2-paper) 78%, var(--projects-v2-paper-light) 100%);
+    radial-gradient(ellipse at 20% 4%, rgba(101, 91, 76, 0.1), transparent 34%),
+    radial-gradient(ellipse at 70% 0%, rgba(125, 113, 93, 0.07), transparent 40%),
+    linear-gradient(180deg, #c9bfad 0%, #ddd2bf 40%, var(--projects-v2-paper) 82%, var(--projects-v2-paper-light) 100%);
 }
 
 .projects-v2-paper-transition::after {
@@ -234,8 +234,8 @@ body.page-projects-v2 main.page-fade::before {
   position: absolute;
   display: block;
   border-radius: 50%;
-  background: rgba(247, 241, 229, 0.46);
-  filter: blur(32px);
+  background: rgba(247, 241, 229, 0.2);
+  filter: blur(24px);
 }
 
 .projects-v2-mist-one {
@@ -331,7 +331,7 @@ body.page-projects-v2 main.page-fade::before {
 .projects-v2-featured {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
   border-top: 1px solid var(--projects-v2-rule);
   border-bottom: 1px solid var(--projects-v2-rule);
   background: rgba(238, 230, 215, 0.24);
@@ -350,9 +350,9 @@ body.page-projects-v2 main.page-fade::before {
 .projects-v2-featured-visual {
   position: relative;
   min-width: 0;
-  min-height: 380px;
+  min-height: 360px;
   margin: 0;
-  padding: clamp(2rem, 5vw, 4rem) clamp(1.25rem, 4vw, 3rem) 2rem;
+  padding: clamp(1.6rem, 3.2vw, 3rem) clamp(1rem, 2.5vw, 2rem) 1.8rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -384,9 +384,12 @@ body.page-projects-v2 main.page-fade::before {
 .projects-v2-project-art {
   position: relative;
   z-index: 1;
-  width: 100%;
+  width: 116%;
+  max-width: none;
   height: auto;
+  margin-left: -8%;
   display: block;
+  filter: contrast(1.18) saturate(0.9);
 }
 
 .projects-v2-featured-visual figcaption {
@@ -545,7 +548,7 @@ body.page-projects-v2 main.page-fade::before {
 
 .projects-v2-plan-category {
   margin-bottom: 0.55rem;
-  color: var(--projects-v2-ink-faint);
+  color: #625f57;
   font-family: var(--font-title);
   font-size: 0.76rem;
   letter-spacing: 0.13em;
@@ -553,7 +556,7 @@ body.page-projects-v2 main.page-fade::before {
 
 .projects-v2-plan-copy h3 {
   margin-bottom: 0.9rem;
-  color: #45433d;
+  color: #3b3934;
   font-family: var(--font-title);
   font-size: clamp(1.15rem, 2vw, 1.45rem);
   font-weight: 600;
@@ -561,7 +564,7 @@ body.page-projects-v2 main.page-fade::before {
 }
 
 .projects-v2-plan-copy > p:last-child {
-  color: #777267;
+  color: #5f5c55;
   font-size: 0.9rem;
   line-height: 1.9;
 }
@@ -659,9 +662,13 @@ body.page-projects-v2 .back-to-top {
   color: #d8ba83;
 }
 
+body.page-projects-v2 .music-widget {
+  display: none !important;
+}
+
 @media (max-width: 900px) {
   .projects-v2-featured {
-    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
   }
 
   .projects-v2-featured-visual {
@@ -737,7 +744,7 @@ body.page-projects-v2 .back-to-top {
   .projects-v2-threshold-scene {
     background:
       linear-gradient(90deg, rgba(9, 9, 8, 0.74) 0%, rgba(14, 12, 10, 0.42) 52%, rgba(7, 11, 15, 0.28) 100%),
-      linear-gradient(180deg, rgba(9, 9, 8, 0.04) 0%, rgba(13, 12, 11, 0.04) 42%, rgba(35, 31, 26, 0.4) 66%, rgba(146, 135, 116, 0.76) 86%, #ded4c0 100%),
+      linear-gradient(180deg, rgba(9, 9, 8, 0.04) 0%, rgba(13, 12, 11, 0.04) 48%, rgba(35, 31, 26, 0.26) 72%, rgba(146, 135, 116, 0.45) 91%, rgba(222, 212, 192, 0.72) 100%),
       url("../visuals/home/v5/a2-dusk-road-world.png") 30% 66% / cover no-repeat;
     transform-origin: 30% 66%;
   }
@@ -761,7 +768,7 @@ body.page-projects-v2 .back-to-top {
   }
 
   .projects-v2-paper-transition {
-    height: clamp(145px, 20svh, 190px);
+    height: clamp(90px, 12svh, 120px);
   }
 
   .projects-v2-completed,
@@ -790,7 +797,10 @@ body.page-projects-v2 .back-to-top {
   }
 
   .projects-v2-project-art {
-    max-height: 260px;
+    width: 104%;
+    max-width: none;
+    max-height: 270px;
+    margin-left: -2%;
   }
 
   .projects-v2-featured-copy {
