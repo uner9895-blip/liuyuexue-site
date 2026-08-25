@@ -7,7 +7,7 @@
   <meta name="description" content="步青尘的作品集页面。展示了我设计的第一个水墨风静态个人网页作品以及未来的 Canvas 和 CSS 布局规划项目。">
   <meta name="author" content="步青尘">
   <meta name="robots" content="index, follow">
-  <meta name="theme-color" content="#fbf8f1">
+  <meta name="theme-color" content="#17130f">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%23faf7ef'/%3E%3Ctext x='32' y='42' font-size='34' text-anchor='middle' fill='%23cc4343' font-family='serif'%3E步%3C/text%3E%3C/svg%3E">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="website">
@@ -22,26 +22,9 @@
   <meta name="twitter:image" content="https://uner9895-blip.github.io/liuyuexue-site/assets/images/bg/bg-home.png">
   <link rel="canonical" href="https://uner9895-blip.github.io/liuyuexue-site/projects.html">
   <link rel="stylesheet" href="assets/css/style.css?v=2.3.0">
+  <link rel="stylesheet" href="assets/css/projects-v2-continuity.css?v=0.1.0">
 </head>
-<body class="page-projects">
-  <div class="plum-shadows" aria-hidden="true"></div>
-  <div class="ink-wash-bg" aria-hidden="true">
-    <div class="ink-wash-1"></div>
-    <div class="ink-wash-2"></div>
-  </div>
-
-  <svg class="ink-silhouette" viewBox="0 0 120 200" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <path d="M10,200 Q15,130 12,90 Q8,50 15,10 Q14,8 12,8 Q5,50 9,90 Q12,130 7,200 Z" opacity="0.6"/>
-    <path d="M15,110 Q40,90 60,95 Q40,102 15,110 Z" opacity="0.8"/>
-    <path d="M13,105 Q35,80 50,75 Q35,90 13,105 Z" opacity="0.8"/>
-    <path d="M15,50 Q45,45 70,55 Q45,55 15,50 Z" opacity="0.8"/>
-    <path d="M14,45 Q40,30 55,25 Q38,38 14,45 Z" opacity="0.8"/>
-    <path d="M15,10 Q35,15 50,8 Q35,20 15,10 Z" opacity="0.8"/>
-    <path d="M90,200 Q80,140 85,100 Q90,60 82,20 Q80,18 78,18 Q86,60 81,100 Q76,140 86,200 Z" opacity="0.4"/>
-    <path d="M85,120 Q110,110 120,115 Q105,125 85,120 Z" opacity="0.5"/>
-    <path d="M84,115 Q105,100 115,95 Q100,110 84,115 Z" opacity="0.5"/>
-    <path d="M83,60 Q105,65 118,80 Q100,75 83,60 Z" opacity="0.5"/>
-  </svg>
+<body class="page-projects page-projects-v2">
 
   <header>
     <nav class="nav-container" aria-label="主导航">
@@ -68,83 +51,103 @@
   </header>
 
   <main class="page-fade">
-    <section class="page-title-section scroll-reveal">
-      <h1 class="page-title">行迹</h1>
-      <p class="page-subtitle">行止留痕，循迹前行</p>
+    <section class="projects-v2-threshold" aria-labelledby="projects-v2-title">
+      <div class="projects-v2-threshold-scene" aria-hidden="true"></div>
+      <div class="projects-v2-threshold-inner">
+        <p class="projects-v2-chapter">02 / 行迹</p>
+        <h1 id="projects-v2-title" class="projects-v2-title">行迹</h1>
+        <p class="projects-v2-lead">行止留痕，<br>循迹前行。</p>
+      </div>
+      <a class="projects-v2-descend" href="#projects-ledger">循迹而下 <span aria-hidden="true">↓</span></a>
     </section>
 
-    <div class="card-grid">
-      <article class="card scroll-reveal">
-        <svg class="card-plum-branch" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-          <path d="M100,0 C80,20 60,15 40,40 C30,50 15,45 0,60" />
-          <circle cx="40" cy="40" r="3" fill="currentColor" />
-          <circle cx="60" cy="15" r="2" fill="currentColor" />
-          <circle cx="80" cy="20" r="3.5" fill="currentColor" />
-        </svg>
-        <svg class="project-art" viewBox="0 0 350 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="春日东方个人主页缩略图">
-          <circle cx="175" cy="90" r="60" fill="rgba(32,33,31,0.03)" filter="blur(10px)"/>
-          <circle cx="190" cy="80" r="40" fill="rgba(47,85,91,0.03)" filter="blur(8px)"/>
-          <path d="M 20 130 C 80 80, 120 110, 180 90 C 240 70, 290 120, 330 110 L 330 160 L 20 160 Z" fill="rgba(138,114,91,0.06)"/>
-          <path d="M 50 140 C 100 110, 160 130, 220 100 C 280 70, 310 130, 330 120 L 330 160 L 50 160 Z" fill="rgba(32,33,31,0.025)"/>
-          <rect x="290" y="20" width="30" height="30" fill="none" stroke="var(--color-cinnabar)" stroke-width="1.5" rx="1" transform="rotate(2 305 35)"/>
-          <text x="305" y="38" font-family="var(--font-title)" font-size="10" fill="var(--color-cinnabar)" font-weight="bold" text-anchor="middle" transform="rotate(2 305 35)">作品</text>
-          <text x="175" y="100" font-family="var(--font-title)" font-size="13" fill="var(--color-ink-medium)" text-anchor="middle" font-weight="bold">春日东方个人主页</text>
-        </svg>
-        <span class="card-category">实践项目 · 静态主页</span>
-        <h2 class="card-title">春日东方个人主页</h2>
-        <p class="card-desc">使用 HTML、CSS 和 JavaScript 制作的静态个人主页。采用响应式媒体查询、SVG 水墨与梅枝背景、淡雅东方配色和轻量原生交互。重点优化了日夜模式、鼠标生长特效、移动端显示细节以及键盘无障碍焦点，是我的第一个完整的前端项目实践。</p>
-        <div class="card-meta">
-          <span>完成时间：2026年6月</span>
-          <a href="index.html" class="card-link">访问主页 →</a>
-        </div>
-      </article>
+    <div class="projects-v2-paper-transition" aria-hidden="true">
+      <span class="projects-v2-mist projects-v2-mist-one"></span>
+      <span class="projects-v2-mist projects-v2-mist-two"></span>
+    </div>
 
-      <article class="card scroll-reveal" style="transition-delay: 100ms;">
-        <svg class="card-plum-branch" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-          <path d="M100,0 C80,20 60,15 40,40 C30,50 15,45 0,60" />
-          <circle cx="40" cy="40" r="3" fill="currentColor" />
-          <circle cx="60" cy="15" r="2" fill="currentColor" />
-          <circle cx="80" cy="20" r="3.5" fill="currentColor" />
-        </svg>
-        <svg class="project-art" viewBox="0 0 350 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="墨意交互画板缩略图">
-          <circle cx="175" cy="90" r="50" fill="rgba(32,33,31,0.02)" filter="blur(12px)"/>
-          <path d="M 30 140 Q 110 90 180 120 T 320 100" fill="none" stroke="rgba(32,33,31,0.15)" stroke-width="2" stroke-dasharray="5 3"/>
-          <rect x="290" y="20" width="30" height="30" fill="none" stroke="var(--color-ink-light)" stroke-width="1" rx="1" transform="rotate(-3 305 35)"/>
-          <text x="305" y="38" font-family="var(--font-title)" font-size="9" fill="var(--color-ink-light)" text-anchor="middle" transform="rotate(-3 305 35)">规划</text>
-          <text x="175" y="100" font-family="var(--font-title)" font-size="13" fill="var(--color-ink-light)" text-anchor="middle">“墨意”Canvas 交互画板</text>
-        </svg>
-        <span class="card-category">规划中 · 趣味组件</span>
-        <h2 class="card-title">“墨意”Canvas 交互画板</h2>
-        <p class="card-desc">计划使用 HTML5 Canvas 对原生 JavaScript 的鼠标和触摸事件及像素信息进行处理，模拟国画墨汁在宣纸上的浸润、扩散和枯笔效果。支持调节墨色深浅和笔触粗细，用于深入学习 Canvas 图像渲染机制。</p>
-        <div class="card-meta">
-          <span>完成时间：规划中</span>
-          <span class="card-link muted-link">规划中</span>
-        </div>
-      </article>
+    <div id="projects-ledger" class="projects-v2-ledger">
+      <section class="projects-v2-completed" aria-labelledby="projects-v2-completed-title">
+        <header class="projects-v2-section-heading scroll-reveal">
+          <p class="projects-v2-section-index">山中行路档案</p>
+          <h2 id="projects-v2-completed-title">壹 · 已成之迹</h2>
+        </header>
 
-      <article class="card scroll-reveal" style="transition-delay: 200ms;">
-        <svg class="card-plum-branch" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-          <path d="M100,0 C80,20 60,15 40,40 C30,50 15,45 0,60" />
-          <circle cx="40" cy="40" r="3" fill="currentColor" />
-          <circle cx="60" cy="15" r="2" fill="currentColor" />
-          <circle cx="80" cy="20" r="3.5" fill="currentColor" />
-        </svg>
-        <svg class="project-art" viewBox="0 0 350 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="诗词排卷生成器缩略图">
-          <circle cx="175" cy="90" r="50" fill="rgba(47,85,91,0.025)" filter="blur(10px)"/>
-          <rect x="160" y="30" width="30" height="120" fill="rgba(138,114,91,0.04)" stroke="var(--color-border)" stroke-width="1"/>
-          <line x1="175" y1="40" x2="175" y2="140" stroke="rgba(32,33,31,0.2)" stroke-dasharray="2 2"/>
-          <rect x="290" y="20" width="30" height="30" fill="none" stroke="var(--color-ink-light)" stroke-width="1" rx="1" transform="rotate(1 305 35)"/>
-          <text x="305" y="38" font-family="var(--font-title)" font-size="9" fill="var(--color-ink-light)" text-anchor="middle" transform="rotate(1 305 35)">规划</text>
-          <text x="175" y="100" font-family="var(--font-title)" font-size="13" fill="var(--color-ink-light)" text-anchor="middle">诗词卷轴竖排生成器</text>
-        </svg>
-        <span class="card-category">规划中 · 排版工具</span>
-        <h2 class="card-title">诗词卷轴竖排生成器</h2>
-        <p class="card-desc">计划利用 CSS3 竖向文本布局（`writing-mode: vertical-rl`）以及 CSS Grid 网格布局，为经典诗词提供卷轴古籍风格的竖向排版。支持用户自定义诗句一键排版，并支持生成导出静态图片。</p>
-        <div class="card-meta">
-          <span>完成时间：规划中</span>
-          <span class="card-link muted-link">规划中</span>
+        <article class="projects-v2-featured scroll-reveal">
+          <figure class="projects-v2-featured-visual">
+            <span class="projects-v2-record-number" aria-hidden="true">01</span>
+            <svg class="projects-v2-project-art" viewBox="0 0 350 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="春日东方个人主页的水墨山形项目图">
+              <circle cx="175" cy="90" r="60" fill="rgba(32,33,31,0.03)" filter="blur(10px)"/>
+              <circle cx="190" cy="80" r="40" fill="rgba(47,85,91,0.03)" filter="blur(8px)"/>
+              <path d="M 20 130 C 80 80, 120 110, 180 90 C 240 70, 290 120, 330 110 L 330 160 L 20 160 Z" fill="rgba(138,114,91,0.12)"/>
+              <path d="M 50 140 C 100 110, 160 130, 220 100 C 280 70, 310 130, 330 120 L 330 160 L 50 160 Z" fill="rgba(32,33,31,0.07)"/>
+              <rect x="290" y="20" width="30" height="30" fill="none" stroke="var(--color-cinnabar)" stroke-width="1.5" rx="1" transform="rotate(2 305 35)"/>
+              <text x="305" y="38" font-family="var(--font-title)" font-size="10" fill="var(--color-cinnabar)" font-weight="bold" text-anchor="middle" transform="rotate(2 305 35)">作品</text>
+              <text x="175" y="100" font-family="var(--font-title)" font-size="13" fill="var(--color-ink-medium)" text-anchor="middle" font-weight="bold">春日东方个人主页</text>
+            </svg>
+            <figcaption>实践项目 · 静态主页</figcaption>
+          </figure>
+
+          <div class="projects-v2-featured-copy">
+            <p class="projects-v2-status"><span aria-hidden="true"></span>已完成</p>
+            <h3>春日东方个人主页</h3>
+            <dl class="projects-v2-project-facts">
+              <div>
+                <dt>类别</dt>
+                <dd>实践项目 · 静态主页</dd>
+              </div>
+              <div>
+                <dt>时间</dt>
+                <dd>2026年6月</dd>
+              </div>
+            </dl>
+            <p class="projects-v2-description">使用 HTML、CSS 和 JavaScript 制作的静态个人主页。采用响应式媒体查询、SVG 水墨与梅枝背景、淡雅东方配色和轻量原生交互。重点优化了日夜模式、鼠标生长特效、移动端显示细节以及键盘无障碍焦点，是我的第一个完整的前端项目实践。</p>
+            <a class="projects-v2-cta" href="index.html">访问主页 <span aria-hidden="true">→</span></a>
+          </div>
+        </article>
+      </section>
+
+      <section class="projects-v2-planned" aria-labelledby="projects-v2-planned-title">
+        <header class="projects-v2-section-heading scroll-reveal">
+          <p class="projects-v2-section-index">沿途未竟之稿</p>
+          <h2 id="projects-v2-planned-title">贰 · 未成之路</h2>
+        </header>
+
+        <div class="projects-v2-plan-list">
+          <article class="projects-v2-plan-item scroll-reveal">
+            <div class="projects-v2-plan-head">
+              <span class="projects-v2-plan-number" aria-hidden="true">01</span>
+              <p class="projects-v2-plan-status">规划中</p>
+            </div>
+            <div class="projects-v2-plan-copy">
+              <p class="projects-v2-plan-category">趣味组件</p>
+              <h3>“墨意”Canvas 交互画板</h3>
+              <p>计划使用 HTML5 Canvas 对原生 JavaScript 的鼠标和触摸事件及像素信息进行处理，模拟国画墨汁在宣纸上的浸润、扩散和枯笔效果。支持调节墨色深浅和笔触粗细，用于深入学习 Canvas 图像渲染机制。</p>
+            </div>
+          </article>
+
+          <article class="projects-v2-plan-item scroll-reveal">
+            <div class="projects-v2-plan-head">
+              <span class="projects-v2-plan-number" aria-hidden="true">02</span>
+              <p class="projects-v2-plan-status">规划中</p>
+            </div>
+            <div class="projects-v2-plan-copy">
+              <p class="projects-v2-plan-category">排版工具</p>
+              <h3>诗词卷轴竖排生成器</h3>
+              <p>计划利用 CSS3 竖向文本布局（<code>writing-mode: vertical-rl</code>）以及 CSS Grid 网格布局，为经典诗词提供卷轴古籍风格的竖向排版。支持用户自定义诗句一键排版，并支持生成导出静态图片。</p>
+            </div>
+          </article>
         </div>
-      </article>
+      </section>
+
+      <section class="projects-v2-ending scroll-reveal" aria-labelledby="projects-v2-ending-title">
+        <h2 id="projects-v2-ending-title" class="projects-v2-visually-hidden">卷尾</h2>
+        <p>有些路已经留下脚印，<br>有些仍在山中。</p>
+        <nav class="projects-v2-ending-nav" aria-label="行迹卷尾导航">
+          <a href="index.html#home-route-map"><span aria-hidden="true">←</span> 返回山中地图</a>
+          <a href="articles.html">下一处 · 雪笺 <span aria-hidden="true">→</span></a>
+        </nav>
+      </section>
     </div>
   </main>
 
