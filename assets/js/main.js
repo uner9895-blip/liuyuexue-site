@@ -5,7 +5,6 @@
 function initAll() {
   initDeferredImages();
   initLivingInkScene();
-  initWorldState();
   initMobileMenu();
   initContactForm();
   initCopyActions();
@@ -13,7 +12,6 @@ function initAll() {
   initScrollReveal();
   initSkillExplanations();
   initBackToTop();
-  initThemeToggle();
   initMusicWidget();
   initMusicPlaybarDock();
   initMusicPlaybarReveal();
@@ -25,7 +23,6 @@ function initAll() {
   initLearningPage();
   initHomeStage();
   initHomeRouteMap();
-  initHomeSunResponse();
   initCompanionCat();
   initLightParallax();
 }
@@ -594,13 +591,12 @@ function initSkillExplanations() {
  * 返回顶部按钮
  */
 function initBackToTop() {
-  const btn = document.createElement('div');
+  const btn = document.createElement('button');
+  btn.type = 'button';
   btn.className = 'back-to-top';
   btn.id = 'back-to-top';
-  btn.setAttribute('role', 'button');
   btn.setAttribute('aria-label', '返回顶部');
-  btn.setAttribute('tabindex', '0');
-  btn.innerHTML = `<svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"></polyline></svg>`;
+  btn.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="18 15 12 9 6 15"></polyline></svg>`;
   document.body.appendChild(btn);
 
   window.addEventListener('scroll', () => {
@@ -614,42 +610,11 @@ function initBackToTop() {
   const scrollBack = () => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth'
+      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
     });
   };
 
   btn.addEventListener('click', scrollBack);
-}
-
-/**
- * 1. 白天/夜晚模式切换状态控制
- */
-function initThemeToggle() {
-  const toggleBtns = document.querySelectorAll('.theme-toggle-btn');
-  if (toggleBtns.length === 0) return;
-
-  const getTheme = () => {
-    return document.documentElement.getAttribute('data-theme') || document.documentElement.dataset.theme || 'light';
-  };
-
-  const setTheme = (theme) => {
-    document.documentElement.setAttribute('data-theme', theme);
-    document.documentElement.dataset.theme = theme;
-    // 世界状态：data-theme(light/dark) 与 data-world(day/night) 保持镜像，
-    // 现有暗色样式继续生效，[data-world="night"] 留给 Codex 挂接夜行场景。
-    document.documentElement.setAttribute('data-world', theme === 'dark' ? 'night' : 'day');
-    localStorage.setItem('theme', theme);
-    if (document.body.classList.contains('page-home')) {
-      localStorage.setItem('home-world', theme === 'dark' ? 'night' : 'day');
-    }
-  };
-
-  toggleBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const nextTheme = getTheme() === 'dark' ? 'light' : 'dark';
-      setTheme(nextTheme);
-    });
-  });
 }
 
 /**
@@ -993,7 +958,7 @@ function initDomPlumTrail() {
  */
 function initInkRipples() {
   const handleClickRipple = (e) => {
-    const target = e.target.closest('a, button, .btn, .btn-ink, .nav-item a, .card, .snow-letter-card, .snow-filter-btn, .blog-entry-card, .image-note-card, .gallery-card, .song-card, .skill-tag, .social-icon, .contact-value, .music-card, .music-pendant, .music-play-btn, .playbar-btn, .theme-toggle, .theme-toggle-btn');
+    const target = e.target.closest('a, button, .btn, .btn-ink, .nav-item a, .card, .snow-letter-card, .snow-filter-btn, .blog-entry-card, .image-note-card, .gallery-card, .song-card, .skill-tag, .social-icon, .contact-value, .music-card, .music-pendant, .music-play-btn, .playbar-btn');
     if (!target) return;
 
     const ripple = document.createElement('span');
@@ -1184,22 +1149,6 @@ function initHomeLatestSnowLetters() {
     });
     container.appendChild(card);
   });
-}
-
-/**
- * 世界状态初始化（早期 inline 脚本已设置好属性，这里只做兜底与同步）。
- * data-theme(light/dark) 与 data-world(day/night) 互为镜像。
- */
-function initWorldState() {
-  var root = document.documentElement;
-  var theme = root.getAttribute('data-theme');
-  if (!theme) {
-    theme = document.body.classList.contains('page-home')
-      ? (localStorage.getItem('home-world') === 'night' ? 'dark' : 'light')
-      : (localStorage.getItem('theme') || 'light');
-  }
-  root.setAttribute('data-theme', theme);
-  root.setAttribute('data-world', theme === 'dark' ? 'night' : 'day');
 }
 
 /**
@@ -1618,6 +1567,20 @@ function initHomeRouteMap() {
       window.setTimeout(function () {
         if (!target) return;
         if (window.history && window.history.pushState) window.history.pushState(null, '', href);
+        var v41Progress = target.getAttribute('data-home-v41-progress');
+        var v41Journey = target.closest('.home-v41-journey');
+        var useV41Progress = v41Progress !== null && v41Journey && window.matchMedia('(min-width: 769px)').matches;
+
+        if (useV41Progress) {
+          var progress = Math.min(1, Math.max(0, Number(v41Progress) || 0));
+          var scrollRange = Math.max(0, v41Journey.offsetHeight - window.innerHeight);
+          window.scrollTo({
+            top: v41Journey.offsetTop + scrollRange * progress,
+            behavior: isReducedMotion() ? 'auto' : 'smooth'
+          });
+          return;
+        }
+
         target.scrollIntoView({ behavior: isReducedMotion() ? 'auto' : 'smooth', block: 'start' });
       }, isReducedMotion() ? 100 : 680);
     });
@@ -1664,105 +1627,6 @@ function initHomeRouteMap() {
       first.focus({ preventScroll: true });
     }
   });
-}
-
-/**
- * 首页暮光日线：只在桌面精细指针下轻微响应鼠标，不移动背景本体。
- */
-function initHomeSunResponse() {
-  if (!document.body.classList.contains('page-home')) return;
-
-  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-  if (reduceMotion || !canHover) return;
-
-  var themeRoot = document.documentElement;
-  var motionRoot = document.body;
-  var stage = document.querySelector('.courtyard');
-  if (!stage) return;
-
-  var current = { dx: 0, dy: 0, opacity: getBaseOpacity(), cloud: 0 };
-  var target = { dx: 0, dy: 0, opacity: getBaseOpacity(), cloud: 0 };
-  var frame = null;
-  var settleTimer = null;
-  var pauseSelector = '.courtyard-content, .home-orbit-controls, .route-guide, a, button';
-
-  function clamp(value, min, max) {
-    return Math.max(min, Math.min(max, value));
-  }
-
-  function getBaseOpacity() {
-    return themeRoot.getAttribute('data-world') === 'night' ? 0.22 : 0.38;
-  }
-
-  function setNeutral() {
-    target.dx = 0;
-    target.dy = 0;
-    target.opacity = getBaseOpacity();
-    target.cloud = 0;
-    requestTick();
-  }
-
-  function requestTick() {
-    if (frame) return;
-    frame = window.requestAnimationFrame(tick);
-  }
-
-  function tick() {
-    frame = null;
-
-    current.dx += (target.dx - current.dx) * 0.1;
-    current.dy += (target.dy - current.dy) * 0.1;
-    current.opacity += (target.opacity - current.opacity) * 0.08;
-    current.cloud += (target.cloud - current.cloud) * 0.08;
-
-    motionRoot.style.setProperty('--home-sun-dx', current.dx.toFixed(2) + 'px');
-    motionRoot.style.setProperty('--home-sun-dy', current.dy.toFixed(2) + 'px');
-    motionRoot.style.setProperty('--home-sun-opacity', current.opacity.toFixed(3));
-    motionRoot.style.setProperty('--home-cloud-lift', current.cloud.toFixed(3));
-
-    if (
-      Math.abs(target.dx - current.dx) > 0.05 ||
-      Math.abs(target.dy - current.dy) > 0.05 ||
-      Math.abs(target.opacity - current.opacity) > 0.002 ||
-      Math.abs(target.cloud - current.cloud) > 0.001
-    ) {
-      requestTick();
-    }
-  }
-
-  function handlePointerMove(event) {
-    if ((event.pointerType && event.pointerType !== 'mouse') || themeRoot.getAttribute('data-world') !== 'day') {
-      setNeutral();
-      return;
-    }
-
-    if (document.body.classList.contains('route-map-open') || event.target.closest(pauseSelector)) {
-      setNeutral();
-      return;
-    }
-
-    var x = event.clientX / window.innerWidth - 0.5;
-    var y = event.clientY / window.innerHeight - 0.5;
-    var baseOpacity = getBaseOpacity();
-
-    target.dx = clamp(x * 28, -14, 14);
-    target.dy = clamp(y * 20, -10, 10);
-    target.opacity = baseOpacity + clamp(x * 0.028 - y * 0.018, -0.035, 0.04);
-    target.cloud = clamp(x * 0.018 - y * 0.012, -0.012, 0.024);
-
-    window.clearTimeout(settleTimer);
-    settleTimer = window.setTimeout(setNeutral, 850);
-    requestTick();
-  }
-
-  stage.addEventListener('pointermove', handlePointerMove, { passive: true });
-  stage.addEventListener('pointerleave', setNeutral, { passive: true });
-
-  if ('MutationObserver' in window) {
-    var worldObserver = new MutationObserver(setNeutral);
-    worldObserver.observe(themeRoot, { attributes: true, attributeFilter: ['data-world'] });
-  }
 }
 
 /**
@@ -1902,7 +1766,7 @@ function initGalleryPage() {
       ' data-scene-tone="' + escapeHtml(item.sceneTone || 'neutral') + '"',
       ' aria-label="查看影像：' + escapeHtml(item.title || '影像') + '">',
       '  <span class="gallery-frame-media">',
-      '    <img src="' + escapeHtml(item.src) + '" alt="' + escapeHtml(item.alt || item.title || '生活影像') + '" loading="lazy" decoding="async">',
+      '    <img src="' + escapeHtml(item.src) + '" width="' + Number(item.width) + '" height="' + Number(item.height) + '" alt="' + escapeHtml(item.alt || item.title || '生活影像') + '" loading="lazy" decoding="async">',
       '  </span>',
       '  <span class="gallery-frame-caption">',
       '    <span class="gallery-frame-title">' + escapeHtml(item.title || '') + '</span>',
@@ -1930,6 +1794,8 @@ function initGalleryPage() {
     currentIndex = index;
     if (dialogImg) {
       dialogImg.src = item.src;
+      dialogImg.width = Number(item.width);
+      dialogImg.height = Number(item.height);
       dialogImg.alt = item.alt || item.title || '生活影像';
     }
     if (dialogTitle) dialogTitle.textContent = item.title || '';
@@ -2069,17 +1935,16 @@ function initCompanionCat() {
 
   // 在底部安全带内取一个不与交互元素重叠的落点（百分比定位，随视口自适应）。
   var isHome = document.body.classList.contains('page-home');
-  var avoidSelector = 'header, .nav-container, .courtyard-content, .home-orbit-controls, .home-hero-aside, .home-preview-card, .home-scroll-section, .courtyard-cue, .route-guide, a, button, input, textarea, .music-widget, .music-playbar-container, .back-to-top';
+  var avoidSelector = 'header, .nav-container, .courtyard-content, .home-hero-aside, .home-preview-card, .home-scroll-section, .courtyard-cue, .route-guide, a, button, input, textarea, .music-widget, .music-playbar-container, .back-to-top';
 
   var getHomeSafeZones = function () {
     if (window.matchMedia('(max-width: 768px)').matches) {
       return [
-        { minX: 0.58, maxX: 0.82, minBottom: 0.11, maxBottom: 0.18 }
+        { minX: 0.7, maxX: 0.82, minBottom: 0.12, maxBottom: 0.16 }
       ];
     }
     return [
-      { minX: 0.08, maxX: 0.28, minBottom: 0.1, maxBottom: 0.17 },
-      { minX: 0.62, maxX: 0.86, minBottom: 0.08, maxBottom: 0.16 }
+      { minX: 0.58, maxX: 0.64, minBottom: 0.13, maxBottom: 0.17 }
     ];
   };
 
@@ -2129,10 +1994,12 @@ function initCompanionCat() {
   };
 
   var placeStatic = function () {
-    var homeX = window.matchMedia('(max-width: 768px)').matches ? 0.68 : 0.76;
-    var x = isHome ? window.innerWidth * homeX : window.innerWidth * 0.08;
-    var bottom = isHome ? (window.matchMedia('(max-width: 768px)').matches ? 0.14 : 0.12) : 0.08;
-    cat.style.left = Math.max(8, Math.min(window.innerWidth - (cat.offsetWidth || 72) - 8, x)) + 'px';
+    var isMobileHome = isHome && window.matchMedia('(max-width: 768px)').matches;
+    var homeX = isMobileHome ? 0.76 : 0.6;
+    var catWidth = cat.offsetWidth || 72;
+    var x = isHome ? window.innerWidth * homeX - catWidth / 2 : window.innerWidth * 0.08;
+    var bottom = isHome ? 0.14 : 0.08;
+    cat.style.left = Math.max(8, Math.min(window.innerWidth - catWidth - 8, x)) + 'px';
     cat.style.top = (window.innerHeight - (cat.offsetHeight || 62) - window.innerHeight * bottom) + 'px';
   };
 
@@ -2186,6 +2053,15 @@ function initCompanionCat() {
       setState('sit');
     }, 1250);
   };
+
+  document.querySelectorAll('[data-home-cat-action]').forEach(function (trigger) {
+    var activateCat = function () {
+      cat.focus({ preventScroll: true });
+      petCat();
+    };
+
+    trigger.addEventListener('click', activateCat);
+  });
 
   cat.addEventListener('click', petCat);
   cat.addEventListener('keydown', function (event) {

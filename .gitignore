@@ -14,3 +14,9 @@ desktop.ini
 tmp/
 temp/
 node_modules/
+
+# Local browser / visual QA artifacts
+output/
+test-results/
+.playwright-cli/
+.codex-bg-check/

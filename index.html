@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-ambient="dusk">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,20 +15,32 @@
   <meta property="og:title" content="步青尘 | 中式水墨个人主页">
   <meta property="og:description" content="步青尘的个人主页，一个中式水墨风格的静态个人网站，用于记录前端学习、个人项目和网页设计实践。">
   <meta property="og:url" content="https://uner9895-blip.github.io/liuyuexue-site/">
-  <link rel="stylesheet" href="assets/css/style.css?v=2.0.7">
-  <link rel="stylesheet" href="assets/css/v2-structure.css?v=2.0.0">
-  <link rel="stylesheet" href="assets/css/home-route-map.css?v=3.0.2">
-  <script>
-    (function() {
-      var homeWorld = localStorage.getItem('home-world');
-      var theme = homeWorld === 'night' ? 'dark' : 'light';
-      var root = document.documentElement;
-      root.setAttribute('data-theme', theme);
-      root.setAttribute('data-world', theme === 'dark' ? 'night' : 'day');
-    })();
+  <meta property="og:image" content="https://uner9895-blip.github.io/liuyuexue-site/assets/images/bg/bg-home.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="步青尘 | 中式水墨个人主页">
+  <meta name="twitter:description" content="步青尘的个人主页，一个中式水墨风格的静态个人网站，用于记录前端学习、个人项目和网页设计实践。">
+  <meta name="twitter:image" content="https://uner9895-blip.github.io/liuyuexue-site/assets/images/bg/bg-home.png">
+  <link rel="canonical" href="https://uner9895-blip.github.io/liuyuexue-site/">
+  <style>
+    html[data-ambient="dusk"],
+    html[data-ambient="dusk"] body { background: #21150c; }
+  </style>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "步青尘",
+      "url": "https://uner9895-blip.github.io/liuyuexue-site/",
+      "description": "步青尘的个人主页，一个中式水墨风格的静态个人网站，用于记录前端学习、个人项目和网页设计实践。"
+    }
   </script>
+  <link rel="stylesheet" href="assets/css/style.css?v=2.3.1">
+  <link rel="stylesheet" href="assets/css/v2-structure.css?v=2.0.0">
+  <link rel="stylesheet" href="assets/css/home-route-map.css?v=4.2.1">
+  <link rel="stylesheet" href="assets/css/home-v4-1.css?v=4.1.2">
+  <link rel="stylesheet" href="assets/css/home-v5-five-chapter.css?v=5.1.0">
 </head>
-<body class="page-home">
+<body class="page-home page-home-v5">
   <div class="plum-shadows" aria-hidden="true"></div>
   <div class="ink-wash-bg" aria-hidden="true">
     <div class="ink-wash-1"></div>
@@ -51,32 +63,14 @@
   <header>
     <nav class="nav-container" aria-label="主导航">
       <a class="logo" href="index.html" aria-label="步青尘首页">
-        <span class="logo-text">步青尘</span>
+        <span class="seal home-v41-brand-seal" aria-hidden="true">青尘<br>印</span>
+        <span class="home-v5-world-name" aria-hidden="true">山中有路</span>
       </a>
       <button class="burger-btn" type="button" aria-label="打开导航菜单" aria-expanded="false" aria-controls="site-menu">
         <span class="burger-line"></span>
         <span class="burger-line"></span>
         <span class="burger-line"></span>
       </button>
-      <div class="home-orbit-controls" aria-label="首页快捷入口">
-        <button class="theme-toggle-btn home-world-toggle" type="button" aria-label="切换暮光山谷与夜行山路">
-          <svg class="theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="12" cy="12" r="5"></circle>
-            <line x1="12" y1="1" x2="12" y2="3"></line>
-            <line x1="12" y1="21" x2="12" y2="23"></line>
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-            <line x1="1" y1="12" x2="3" y2="12"></line>
-            <line x1="21" y1="12" x2="23" y2="12"></line>
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-          </svg>
-          <svg class="theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-          </svg>
-          <span class="home-world-label">日夜切换</span>
-        </button>
-      </div>
       <ul class="nav-menu" id="site-menu">
         <li class="nav-item active"><a href="index.html" aria-current="page">起行</a></li>
         <li class="nav-item"><a href="about.html">小序</a></li>
@@ -86,344 +80,185 @@
         <li class="nav-item"><a href="gallery.html">影像廊</a></li>
         <li class="nav-item"><a href="music.html">听雪</a></li>
         <li class="nav-item"><a href="contact.html">留笺</a></li>
-        <li class="nav-item">
-          <button class="theme-toggle-btn" type="button" aria-label="切换深色/浅色模式">
-            <!-- 太阳图标 -->
-            <svg class="theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="5"></circle>
-              <line x1="12" y1="1" x2="12" y2="3"></line>
-              <line x1="12" y1="21" x2="12" y2="23"></line>
-              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-              <line x1="1" y1="12" x2="3" y2="12"></line>
-              <line x1="21" y1="12" x2="23" y2="12"></line>
-              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-            </svg>
-            <!-- 月亮图标 -->
-            <svg class="theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-            </svg>
-          </button>
-        </li>
       </ul>
     </nav>
   </header>
 
   <main class="page-fade">
-    <!-- 入口：暮光山谷与纸卷世界 -->
-    <section class="courtyard world-shell home-scroll-hero" aria-label="步青尘 · 起行入口">
-      <div class="courtyard-scene world-scene" aria-hidden="true">
-        <div class="scene-sky"></div>
-
-        <div class="scene-layer scene-stars" style="--px:4px;--py:3px;">
-          <span class="ink-star" style="left:14%; top:20%;"></span>
-          <span class="ink-star" style="left:26%; top:13%; animation-delay:1.4s;"></span>
-          <span class="ink-star" style="left:71%; top:17%; animation-delay:.7s;"></span>
-          <span class="ink-star" style="left:83%; top:26%; animation-delay:2.1s;"></span>
-          <span class="ink-star" style="left:58%; top:11%; animation-delay:1.1s;"></span>
+    <!-- Homepage V4.1：见山 → 启行 → 入谷 → 谷中呼吸 → 卷开 → 小序 -->
+    <section class="home-v41-journey" id="home-journey" aria-label="暮光山谷连续滚动开场：见山、启行、入谷、谷中呼吸、卷开、小序">
+      <div class="home-v41-stage" id="home-v41-stage">
+        <div class="home-v41-world" id="home-v41-world" aria-hidden="true">
+          <div class="home-v41-layer home-v41-layer-base"></div>
+          <div class="home-v41-layer home-v41-layer-road"></div>
+          <div class="home-v41-layer home-v41-layer-cliff"></div>
+          <div class="home-v41-layer home-v41-layer-left"></div>
         </div>
 
-        <div class="scene-layer scene-moon" style="--px:7px;--py:5px;">
-          <span class="moon-disc"></span>
-        </div>
+        <div class="home-v41-mist home-v41-mist-a" aria-hidden="true"></div>
+        <div class="home-v41-mist home-v41-mist-b" aria-hidden="true"></div>
+        <div class="home-v41-vignette" aria-hidden="true"></div>
+        <div class="home-v41-dusk-wash" aria-hidden="true"></div>
+        <div class="home-v41-paper-grain" aria-hidden="true"></div>
 
-        <div class="scene-layer scene-mountains" style="--px:16px;--py:9px;">
-          <svg class="layer-inner" viewBox="0 0 1440 700" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
-            <path class="ridge ridge-far" d="M0 470 C170 410 280 452 430 392 C560 340 690 392 820 356 C980 312 1110 372 1260 330 C1340 308 1400 320 1440 300 L1440 700 L0 700 Z"/>
-            <path class="ridge ridge-mid" d="M0 532 C150 486 300 510 440 462 C600 408 720 462 870 420 C1010 382 1150 430 1290 396 C1360 380 1410 388 1440 378 L1440 700 L0 700 Z"/>
-            <path class="ridge ridge-near" d="M0 600 C140 560 250 588 400 552 C560 514 700 566 850 536 C1010 504 1150 556 1300 528 C1370 516 1410 522 1440 514 L1440 700 L0 700 Z"/>
-          </svg>
-        </div>
+        <section class="home-v41-hero-copy" aria-labelledby="home-v41-title">
+          <div class="home-v41-hero-eyebrow">
+            <span class="home-v41-kicker-zh">暮光山谷 · 01</span>
+          </div>
+          <h1 id="home-v41-title" class="home-v41-hero-title">步青尘</h1>
+          <p class="home-v41-hero-subtitle">所见 · 所思 · 所学 · 所行</p>
+          <div class="home-v41-hero-actions" aria-label="首页主要入口">
+            <a class="home-v41-primary-action" href="#home-prologue" data-home-v41-scroll="0.14">启行<span class="home-v41-arrow">→</span></a>
+          </div>
+        </section>
 
-        <div class="scene-layer scene-plum" style="--px:34px;--py:15px;">
-          <svg class="layer-inner" viewBox="0 0 1440 700" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
-            <g class="plum-branch" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M-20 706 C90 612 150 560 196 470 C236 392 250 320 300 250" stroke-width="15"/>
-              <path d="M196 470 C250 452 300 470 360 430" stroke-width="7"/>
-              <path d="M236 392 C190 360 150 356 96 330" stroke-width="6"/>
-              <path d="M268 308 C320 296 360 312 408 286" stroke-width="5.5"/>
-              <path d="M250 320 C214 286 196 262 188 220" stroke-width="5"/>
-            </g>
-            <g class="plum-blossoms">
-              <g class="blossom" transform="translate(300 250)"><circle r="7"/><circle class="b-core" r="2.4"/></g>
-              <g class="blossom" transform="translate(360 430)"><circle r="6"/><circle class="b-core" r="2.1"/></g>
-              <g class="blossom" transform="translate(408 286)"><circle r="6.5"/><circle class="b-core" r="2.2"/></g>
-              <g class="blossom" transform="translate(96 330)"><circle r="5.5"/><circle class="b-core" r="2"/></g>
-              <g class="blossom" transform="translate(188 220)"><circle r="6"/><circle class="b-core" r="2.1"/></g>
-              <g class="blossom" transform="translate(232 420)"><circle r="5"/><circle class="b-core" r="1.8"/></g>
-              <g class="blossom" transform="translate(150 470)"><circle r="6.5"/><circle class="b-core" r="2.2"/></g>
-              <g class="blossom" transform="translate(330 320)"><circle r="5"/><circle class="b-core" r="1.8"/></g>
-            </g>
-          </svg>
-        </div>
+        <section class="home-v41-prologue" id="home-prologue" data-home-v41-progress="0.90" aria-labelledby="home-v41-prologue-title">
+          <div class="home-v41-prologue-rail" aria-hidden="true"></div>
+          <div class="home-v41-prologue-head">
+            <span class="home-v41-prologue-chapter">序 · 01</span>
+            <span class="home-v41-prologue-seal" aria-hidden="true">序</span>
+          </div>
+          <h2 id="home-v41-prologue-title" class="home-v41-prologue-title">小序</h2>
+          <div class="home-v41-prologue-body">
+            <p class="home-v41-prologue-line">这里是「步青尘」的山谷。</p>
+            <p class="home-v41-prologue-line">我在纸上走路，也在生活里行走。</p>
+            <p class="home-v41-prologue-line">记录所见、所思、所学、所行，</p>
+            <p class="home-v41-prologue-line">也收藏一些温柔而安定的瞬间。</p>
+            <p class="home-v41-prologue-line">愿你在此，遇见一段属于自己的路。</p>
+          </div>
+          <div class="home-v41-prologue-actions" aria-label="继续进入其他空间">
+            <a class="home-v41-prologue-primary" href="#home-route-map">展卷<span class="home-v41-arrow">→</span></a>
+          </div>
+        </section>
+
+        <a class="home-v41-scroll-cue" href="#home-prologue" data-home-v41-scroll="0.14" aria-label="向下滚动进入山谷">
+          <span>入</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </a>
+
+        <div class="home-v41-progress-rail" aria-hidden="true"><i></i></div>
+      </div>
+    </section>
+
+    <div class="home-v5-journey" id="home-v5-journey">
+      <div class="home-v5-world" aria-hidden="true">
+        <figure class="home-v5-world-layer home-v5-world-layer--map">
+          <img src="assets/visuals/home/v5/a1-map-world.png" width="1672" height="941" decoding="async" alt="">
+        </figure>
+        <figure class="home-v5-world-layer home-v5-world-layer--dusk">
+          <img src="assets/visuals/home/v5/a2-dusk-road-world.png" width="1672" height="941" decoding="async" alt="">
+          <img class="home-v5-mobile-road" src="assets/visuals/home/v5/a2-dusk-road-world.png" width="1672" height="941" decoding="async" alt="">
+        </figure>
+        <figure class="home-v5-world-layer home-v5-world-layer--snow">
+          <img src="assets/visuals/home/v5/a3-listen-snow-world.png" width="1536" height="1024" decoding="async" alt="">
+          <img class="home-v5-mobile-snow-detail" src="assets/visuals/home/v5/a3-listen-snow-world.png" width="1536" height="1024" decoding="async" alt="">
+        </figure>
+        <div class="home-v5-world-tone"></div>
+        <div class="home-v5-world-vignette"></div>
       </div>
 
-      <div class="courtyard-content world-content">
-        <span class="seal seal-yinke courtyard-seal" aria-hidden="true">青尘<br>印</span>
-        <p class="courtyard-kicker">青尘印 · 暮光山谷</p>
-        <h1 class="courtyard-title">步青尘</h1>
-        <p class="courtyard-subtitle">纸卷初展 · 山路向前</p>
-        <p class="courtyard-atmosphere">暮色沿山谷落下，卷轴在路口慢慢展开。</p>
-        <div class="courtyard-actions" aria-label="首页主要入口">
-          <a class="courtyard-enter" href="#home-prologue">起 行</a>
-          <a class="courtyard-link" href="music.html">听雪</a>
-          <a class="courtyard-link" href="cat.html">小猫</a>
+      <section class="home-scroll-section home-route-section route-guide mount-map home-v5-chapter home-v5-map" id="home-route-map" aria-labelledby="route-map-title">
+        <div class="home-v5-map-stage">
+          <div class="home-v5-chapter-copy home-v5-map-copy">
+            <p class="home-v5-eyebrow">01 / 地图</p>
+            <h2 id="route-map-title">卷中入境</h2>
+            <p>山中有路 · 七处<br>行至其处，方知其路。</p>
+            <a class="home-v5-cta" href="#home-v5-entry">向下展开旅程 <span aria-hidden="true">↓</span></a>
+          </div>
+
+          <span class="home-v5-map-mobile-route" aria-hidden="true"></span>
+
+          <nav class="mount-map__landmarks home-v5-landmarks" aria-label="路线地图导航">
+            <a class="mount-map__landmark" href="#home-prologue" data-landmark="about" aria-label="01 小序，山门起点">
+              <span class="home-v5-node"><b>01</b><strong>小序</strong></span>
+            </a>
+            <a class="mount-map__landmark" href="projects.html" data-landmark="projects" aria-label="02 行迹，石碑路标">
+              <span class="home-v5-node"><b>02</b><strong>行迹</strong></span>
+            </a>
+            <a class="mount-map__landmark" href="articles.html" data-landmark="articles" aria-label="03 雪笺，山中信亭">
+              <span class="home-v5-node"><b>03</b><strong>雪笺</strong></span>
+            </a>
+            <a class="mount-map__landmark" href="learning.html" data-landmark="learning" aria-label="04 学习路，山中书院">
+              <span class="home-v5-node"><b>04</b><strong>学习路</strong></span>
+            </a>
+            <a class="mount-map__landmark" href="#home-gallery-title" data-landmark="gallery" aria-label="05 影像廊，高台楼阁">
+              <span class="home-v5-node"><b>05</b><strong>影像廊</strong></span>
+            </a>
+            <a class="mount-map__landmark" href="music.html" data-landmark="music" aria-label="06 听雪，雪中灯亭">
+              <span class="home-v5-node"><b>06</b><strong>听雪</strong></span>
+            </a>
+            <a class="mount-map__landmark" href="contact.html" data-landmark="contact" aria-label="07 留笺，峰顶留笺处">
+              <span class="home-v5-node"><b>07</b><strong>留笺</strong></span>
+            </a>
+          </nav>
         </div>
-      </div>
-
-      <aside class="home-hero-aside" aria-label="路线地图与影像廊预览">
-        <article class="home-preview-card home-map-card">
-          <div class="home-preview-head">
-            <span class="home-preview-kicker">卷轴</span>
-            <h2>路线地图</h2>
-          </div>
-          <p>一卷入山路，沿途设有驿站与停驻点。点击节点，即可前往对应空间。未启的节点仍在路上，卷轴可慢慢展开。</p>
-          <div class="home-map-preview" aria-hidden="true">
-            <img src="assets/visuals/home/route-scroll-valley-preview.webp" width="640" height="360" loading="lazy" decoding="async" alt="">
-            <svg class="home-map-preview-route" viewBox="0 0 100 56" preserveAspectRatio="none" focusable="false">
-              <path d="M8 47 C18 38 29 43 42 33 C50 26 57 24 64 19 C72 20 78 31 90 22"></path>
-            </svg>
-            <span class="home-map-pin home-map-pin-prologue">小序</span>
-            <span class="home-map-pin home-map-pin-gallery">影像</span>
-            <span class="home-map-pin home-map-pin-music">听雪</span>
-            <span class="home-map-pin home-map-pin-cat">小猫</span>
-          </div>
-          <div class="home-map-actions">
-            <button class="btn-ink home-route-reopen" type="button" aria-controls="home-route-map" aria-expanded="false" data-route-map-trigger>展开地图</button>
-            <a class="btn-ink btn-secondary" href="#home-pathways">看驿站</a>
-          </div>
-        </article>
-
-        <article class="home-preview-card home-gallery-preview">
-          <div class="home-preview-head">
-            <span class="home-preview-kicker">展厅</span>
-            <h2>影像廊</h2>
-          </div>
-          <p>山影 · 微雾<br>有山的时候，愿你慢慢看；<br>一帧风景，也可以是一段故事。</p>
-          <a class="home-gallery-strip" href="gallery.html" aria-label="进入影像廊">
-            <img data-deferred-src="assets/images/gallery/3df858748cd0f8375a2a4f2727a2b05b.jpg" width="1159" height="689" loading="lazy" decoding="async" alt="远处山谷、河面倒影和被云光照亮的山坡">
-            <img data-deferred-src="assets/images/gallery/1534941e2495b8bc5b1b0722ea1ae57c.jpg" width="1279" height="1704" loading="lazy" decoding="async" alt="傍晚天空里层叠的蓝灰云与透出的日光">
-            <img data-deferred-src="assets/images/gallery/spring_moss.jpg" width="1024" height="1024" loading="lazy" decoding="async" alt="雨后林地里带着水汽的青苔与细小新芽">
-          </a>
-        </article>
-      </aside>
-
-      <!-- 空间地图：有 JS 时展开为对话层，无 JS 时保留静态链接。 -->
-      <section class="route-guide mount-map" id="home-route-map" aria-labelledby="route-map-title" aria-describedby="route-map-subtitle" data-map-desktop="assets/visuals/home/route-scroll-valley-wide-v3.webp" data-map-desktop-width="1831" data-map-desktop-height="859" data-map-mobile="assets/visuals/home/route-scroll-valley-mobile-v3.webp" data-map-mobile-width="853" data-map-mobile-height="1844">
-        <div class="mount-map__scrim" aria-hidden="true"></div>
-        <div class="mount-map__scene">
-          <header class="mount-map__header">
-            <p class="mount-map__eyebrow">起行卷 · 山路向前</p>
-            <h2 id="route-map-title" class="mount-map__title">路线地图</h2>
-            <p id="route-map-subtitle" class="mount-map__subtitle">一卷入山路，沿途设有驿站与停驻点。</p>
-          </header>
-          <button class="route-guide-close mount-map__close" type="button" aria-label="合卷并关闭路线地图">
-            <span aria-hidden="true">合卷</span>
-          </button>
-          <p class="mount-map__status" id="route-map-status" aria-live="polite" data-default-text="当前：小序 · 从谷口读一段自序。">当前：小序 · 从谷口读一段自序。</p>
-          <div class="mount-map__scroll">
-            <div class="mount-map__journey">
-              <div class="mount-map__vista" aria-hidden="true"></div>
-              <svg class="mount-map__route mount-map__route--desktop" viewBox="0 0 1000 600" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-                <path class="mount-map__route-shadow" d="M65 548 C85 525 96 500 120 480 C165 440 225 465 280 408 C330 370 365 466 420 444 C470 423 505 395 550 366 C590 342 610 330 640 318 C670 303 695 270 730 252 C765 260 790 300 830 300 C865 280 885 220 910 180 C924 164 932 151 940 140" pathLength="1"></path>
-                <path class="mount-map__route-segment" data-segment="about" d="M65 548 C85 525 96 500 120 480" pathLength="1"></path>
-                <path class="mount-map__route-segment" data-segment="projects" d="M120 480 C165 440 225 465 280 408" pathLength="1"></path>
-                <path class="mount-map__route-segment" data-segment="articles" d="M280 408 C330 370 365 466 420 444" pathLength="1"></path>
-                <path class="mount-map__route-segment" data-segment="learning" d="M420 444 C470 423 505 395 550 366" pathLength="1"></path>
-                <path class="mount-map__route-segment" data-segment="cat" d="M550 366 C590 342 610 330 640 318" pathLength="1"></path>
-                <path class="mount-map__route-segment" data-segment="gallery" d="M640 318 C670 303 695 270 730 252" pathLength="1"></path>
-                <path class="mount-map__route-segment" data-segment="music" d="M730 252 C765 260 790 300 830 300" pathLength="1"></path>
-                <path class="mount-map__route-segment" data-segment="contact" d="M830 300 C865 280 885 220 910 180 C924 164 932 151 940 140" pathLength="1"></path>
-              </svg>
-              <svg class="mount-map__route mount-map__route--mobile" viewBox="0 0 400 2200" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-                <path class="mount-map__route-shadow" d="M185 2150 C145 2110 125 2070 115 2025 C132 1928 236 1870 285 1775 C255 1685 165 1610 135 1525 C156 1430 252 1358 285 1275 C260 1178 165 1110 135 1025 C166 930 252 860 285 775 C260 680 170 610 135 525 C160 430 245 355 270 285 C266 238 260 208 250 180" pathLength="1"></path>
-                <path class="mount-map__route-segment" data-segment="about" d="M185 2150 C145 2110 125 2070 115 2025" pathLength="1"></path>
-                <path class="mount-map__route-segment" data-segment="projects" d="M115 2025 C132 1928 236 1870 285 1775" pathLength="1"></path>
-                <path class="mount-map__route-segment" data-segment="articles" d="M285 1775 C255 1685 165 1610 135 1525" pathLength="1"></path>
-                <path class="mount-map__route-segment" data-segment="learning" d="M135 1525 C156 1430 252 1358 285 1275" pathLength="1"></path>
-                <path class="mount-map__route-segment" data-segment="cat" d="M285 1275 C260 1178 165 1110 135 1025" pathLength="1"></path>
-                <path class="mount-map__route-segment" data-segment="gallery" d="M135 1025 C166 930 252 860 285 775" pathLength="1"></path>
-                <path class="mount-map__route-segment" data-segment="music" d="M285 775 C260 680 170 610 135 525" pathLength="1"></path>
-                <path class="mount-map__route-segment" data-segment="contact" d="M135 525 C160 430 245 355 270 285 C266 238 260 208 250 180" pathLength="1"></path>
-              </svg>
-              <nav class="mount-map__landmarks" aria-label="沿山路依次前往各页面">
-                <a class="mount-map__landmark" href="#home-prologue" data-landmark="about" data-state="current" aria-current="location" aria-label="第 1 站，小序，当前站，从谷口读一段自序">
-                  <span class="mount-map__marker" aria-hidden="true"><span class="mount-map__marker-seal">序</span></span>
-                  <span class="mount-map__label"><span class="mount-map__step">01</span><strong>小序</strong><small>谷口题签</small></span>
-                </a>
-                <a class="mount-map__landmark" href="projects.html" data-landmark="projects" aria-label="第 2 站，行迹，看看作品与练习">
-                  <span class="mount-map__marker" aria-hidden="true"><span class="mount-map__marker-seal">迹</span></span>
-                  <span class="mount-map__label"><span class="mount-map__step">02</span><strong>行迹</strong><small>旧路留痕</small></span>
-                </a>
-                <a class="mount-map__landmark" href="articles.html" data-landmark="articles" aria-label="第 3 站，雪笺，读落在纸上的短文">
-                  <span class="mount-map__marker" aria-hidden="true"><span class="mount-map__marker-seal">笺</span></span>
-                  <span class="mount-map__label"><span class="mount-map__step">03</span><strong>雪笺</strong><small>临水展笺</small></span>
-                </a>
-                <a class="mount-map__landmark" href="learning.html" data-landmark="learning" aria-label="第 4 站，学习路，查看学习里程">
-                  <span class="mount-map__marker" aria-hidden="true"><span class="mount-map__marker-seal">学</span></span>
-                  <span class="mount-map__label"><span class="mount-map__step">04</span><strong>学习路</strong><small>拾级而上</small></span>
-                </a>
-                <button class="mount-map__landmark" type="button" data-landmark="cat" data-state="locked" aria-disabled="true" aria-label="第 5 站，小猫，未启程，页面尚未开放">
-                  <span class="mount-map__marker" aria-hidden="true"><span class="mount-map__marker-seal">未</span></span>
-                  <span class="mount-map__label"><span class="mount-map__step">05</span><strong>小猫</strong><small>未启程</small></span>
-                </button>
-                <a class="mount-map__landmark" href="gallery.html" data-landmark="gallery" aria-label="第 6 站，影像廊，停驻山腰看风景">
-                  <span class="mount-map__marker" aria-hidden="true"><span class="mount-map__marker-seal">影</span></span>
-                  <span class="mount-map__label"><span class="mount-map__step">06</span><strong>影像廊</strong><small>山腰停驻</small></span>
-                </a>
-                <a class="mount-map__landmark" href="music.html" data-landmark="music" aria-label="第 7 站，听雪，去梅树下听清音">
-                  <span class="mount-map__marker" aria-hidden="true"><span class="mount-map__marker-seal">听</span></span>
-                  <span class="mount-map__label"><span class="mount-map__step">07</span><strong>听雪</strong><small>梅下清音</small></span>
-                </a>
-                <a class="mount-map__landmark" href="contact.html" data-landmark="contact" aria-label="第 8 站，留笺，在远处驿站写一封信">
-                  <span class="mount-map__marker" aria-hidden="true"><span class="mount-map__marker-seal">留</span></span>
-                  <span class="mount-map__label"><span class="mount-map__step">08</span><strong>留笺</strong><small>山门寄语</small></span>
-                </a>
-              </nav>
-            </div>
-          </div>
-        </div>
-        <nav class="mount-map__fallback-links" aria-label="静态入山链接">
-          <a href="#home-prologue">小序</a>
-          <a href="projects.html">行迹</a>
-          <a href="articles.html">雪笺</a>
-          <a href="learning.html">学习路</a>
-          <span aria-disabled="true">小猫（未启程）</span>
-          <a href="gallery.html">影像廊</a>
-          <a href="music.html">听雪</a>
-          <a href="contact.html">留笺</a>
-        </nav>
       </section>
 
-      <a class="courtyard-cue" href="#home-prologue" aria-label="向下浏览，起行">
-        <span class="cue-text">入</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <polyline points="6 9 12 15 18 9"></polyline>
-        </svg>
-      </a>
-    </section>
-
-    <!-- 第一屏之后：短序与继续入口 -->
-    <section class="hero-section home-brief-intro home-scroll-section" id="home-prologue" aria-labelledby="home-title">
-      <div class="home-brief-scroll home-section-shell scroll-reveal">
-        <span class="home-brief-mark" aria-hidden="true">序</span>
-        <p class="hero-kicker">小序</p>
-        <h2 id="home-title" class="hero-title">小序</h2>
-        <p class="hero-desc">
-          这里是「步青尘」的山谷。<br>
-          我在纸上走路，也在生活里行走。<br>
-          记录所见、所思、所学、所行，<br>
-          也收藏一些温柔而安定的瞬间。<br>
-          愿你在此，遇见一段属于自己的路。
-        </p>
-        <div class="home-intro-actions" aria-label="继续进入其他空间">
-          <button class="btn-ink home-route-reopen" type="button" aria-controls="home-route-map" aria-expanded="false" data-route-map-trigger>展卷</button>
-          <a href="projects.html" class="btn-ink btn-secondary">去行迹</a>
-          <a href="music.html" class="btn-ink btn-secondary">听雪</a>
+      <section class="home-scroll-section home-v5-chapter home-v5-entry" id="home-v5-entry" aria-labelledby="home-v5-entry-title">
+        <div class="home-v5-chapter-copy home-v5-entry-copy">
+          <p class="home-v5-eyebrow">02 / 入境</p>
+          <h2 id="home-v5-entry-title">行入山中</h2>
+          <p>远山渐近，尘嚣渐远。<br>脚下的路，开始有了温度。</p>
+          <a class="home-v5-cta" href="#home-cat-title">继续前行 <span aria-hidden="true">→</span></a>
         </div>
-      </div>
-    </section>
+        <div class="home-v5-road-cue" aria-hidden="true"><i></i><span>循石路而行</span></div>
+      </section>
 
-    <section class="home-scroll-section home-pathways-section" id="home-pathways" aria-labelledby="home-pathways-title">
-      <div class="home-section-shell">
-        <div class="home-section-title">
-          <p class="home-section-kicker">驿站</p>
-          <h2 id="home-pathways-title">功能卡片导航</h2>
-          <p>从卷轴上选择一处停驻，或者继续沿山路向前。</p>
+      <section class="home-scroll-section home-companion-section home-v5-chapter home-v5-companion" aria-labelledby="home-cat-title">
+        <div class="home-v5-chapter-copy home-v5-companion-copy">
+          <p class="home-v5-eyebrow">03 / 旅伴</p>
+          <h2 id="home-cat-title">阿尘</h2>
+          <p>愿意醒来，愿意可爱，<br>也愿意陪你再走一程。</p>
+          <button class="home-v5-cta" type="button" data-home-cat-action>与阿尘相逢 <span aria-hidden="true">→</span></button>
         </div>
-        <div class="home-feature-grid">
-          <a class="home-feature-card" href="#home-prologue">
-            <span class="home-feature-index">01</span>
-            <h3>小序</h3>
-            <p>在山谷入口读一段简短自述。</p>
-          </a>
-          <a class="home-feature-card" href="projects.html">
-            <span class="home-feature-index">02</span>
-            <h3>行迹</h3>
-            <p>作品、练习与正在走的路。</p>
-          </a>
-          <a class="home-feature-card" href="articles.html">
-            <span class="home-feature-index">03</span>
-            <h3>雪笺</h3>
-            <p>短文、记录和落在纸上的想法。</p>
-          </a>
-          <a class="home-feature-card" href="learning.html">
-            <span class="home-feature-index">04</span>
-            <h3>学习路</h3>
-            <p>把每天学到的东西留成里程石。</p>
-          </a>
-          <a class="home-feature-card" href="gallery.html">
-            <span class="home-feature-index">05</span>
-            <h3>影像廊</h3>
-            <p>山影、微雾与生活里的安静片段。</p>
-          </a>
-          <a class="home-feature-card home-feature-card--music" href="music.html">
-            <span class="home-feature-index">06</span>
-            <h3>听雪</h3>
-            <p>月下生微灯，雪落听清音。</p>
-          </a>
-          <a class="home-feature-card" href="contact.html">
-            <span class="home-feature-index">07</span>
-            <h3>留笺</h3>
-            <p>写下一句话，或者寄来一封信。</p>
-          </a>
-          <a class="home-feature-card home-feature-card--cat" href="cat.html">
-            <span class="home-feature-index">08</span>
-            <h3>小猫</h3>
-            <p>一只同行的小猫，陪我走过山路与雪夜。</p>
-          </a>
-        </div>
-      </div>
-    </section>
+        <div class="home-v5-companion-ground" aria-hidden="true"><i></i></div>
+      </section>
 
-    <section class="home-scroll-section home-companion-section" aria-labelledby="home-cat-title">
-      <div class="home-section-shell home-companion-shell">
-        <div class="home-cat-panel">
-          <div class="home-cat-portrait" aria-hidden="true">
-            <img data-deferred-src="assets/visuals/cat/cat-idle.png" width="867" height="1049" loading="lazy" decoding="async" alt="">
+      <section class="home-scroll-section home-snow-section home-v5-chapter home-v5-snow" aria-labelledby="home-snow-title">
+        <div class="home-v5-chapter-copy home-v5-snow-copy">
+          <p class="home-v5-eyebrow">04 / 听雪</p>
+          <h2 id="home-snow-title">听雪</h2>
+          <p>月下生微灯，<br>雪落听清音。</p>
+          <a class="home-v5-cta" href="music.html">循声入雪 <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="home-v5-snow-drift" aria-hidden="true"></div>
+      </section>
+
+      <section class="home-scroll-section home-gallery-section home-v5-chapter home-v5-gallery" aria-labelledby="home-gallery-title">
+        <div class="home-v5-gallery-layout">
+          <div class="home-v5-chapter-copy home-v5-gallery-copy">
+            <p class="home-v5-eyebrow">05 / 所见</p>
+            <h2 id="home-gallery-title">影像廊</h2>
+            <p>山影 · 微雾<br>一帧风景，也可以是一段故事。</p>
+            <a class="home-v5-cta" href="gallery.html">进入影像廊 <span aria-hidden="true">→</span></a>
           </div>
-          <div>
-            <p class="home-section-kicker">同行者</p>
-            <h2 id="home-cat-title">小猫同行者</h2>
-            <p>愿意醒来，愿意可爱，有体温感。它不是装饰，是陪伴入口。</p>
-            <a class="btn-ink" href="cat.html">去见小猫</a>
-          </div>
-        </div>
-        <div class="home-snow-panel">
-          <p class="home-section-kicker">听雪</p>
-          <h2>听雪入口</h2>
-          <p>月下生微灯，雪落听清音。把背景音乐留给另一个安静房间。</p>
-          <a class="btn-ink btn-secondary" href="music.html">进入听雪</a>
-        </div>
-      </div>
-    </section>
 
-    <section class="home-scroll-section home-ledger-section" aria-labelledby="home-ledger-title">
-      <div class="home-section-shell">
-        <div class="home-section-title">
-          <p class="home-section-kicker">卷末</p>
-          <h2 id="home-ledger-title">底部三栏</h2>
+          <a class="home-v5-memories" href="gallery.html" aria-label="浏览三帧沿途真实影像并进入影像廊">
+            <figure class="home-v5-memory home-v5-memory--main">
+              <img src="assets/images/gallery/3df858748cd0f8375a2a4f2727a2b05b.jpg" width="1159" height="689" loading="lazy" decoding="async" alt="远处山谷、河面倒影和被云光照亮的山坡">
+            </figure>
+            <figure class="home-v5-memory home-v5-memory--cloud">
+              <img src="assets/images/gallery/1534941e2495b8bc5b1b0722ea1ae57c.jpg" width="1279" height="1704" loading="lazy" decoding="async" alt="傍晚天空里层叠的蓝灰云与透出的日光">
+            </figure>
+            <figure class="home-v5-memory home-v5-memory--moss">
+              <img src="assets/images/gallery/spring_moss.jpg" width="1024" height="1024" loading="lazy" decoding="async" alt="雨后林地里带着水汽的青苔与细小新芽">
+            </figure>
+          </a>
         </div>
-        <div class="home-ledger-grid">
-          <article class="home-ledger-card">
-            <h3>整体气质</h3>
-            <p>暮光山谷、夜行山路、纸卷地图、黑金水墨。</p>
-          </article>
-          <article class="home-ledger-card">
-            <h3>小猫同行者</h3>
-            <p>愿意醒来，愿意可爱，有体温感，不是装饰，是陪伴入口。</p>
-          </article>
-          <article class="home-ledger-card">
-            <h3>技术方向</h3>
-            <p>静态网站（HTML + CSS + JS）、GitHub Pages 部署、响应式设计、支持 reduced-motion、不引入新框架。</p>
-          </article>
+      </section>
+
+      <section class="home-scroll-section home-v5-ending" aria-labelledby="home-v5-ending-title">
+        <div class="home-v5-ending-copy">
+          <p class="home-v5-eyebrow">卷末</p>
+          <h2 id="home-v5-ending-title" class="sr-only">卷末</h2>
+          <p>一段风景，<br>也是一段故事。</p>
+          <a class="home-v5-cta" href="#home-journey">回到卷首 <span aria-hidden="true">↑</span></a>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   </main>
  
-  <footer>
+  <footer class="home-v5-footer">
     <div class="footer-content">
       <p class="footer-text">© 2026 步青尘. All Rights Reserved. 托管于 GitHub Pages</p>
     </div>
@@ -431,7 +266,7 @@
  
   <!-- 听雪小筑音乐挂件 -->
   <div class="music-widget" role="complementary" aria-label="听雪小筑音乐播放器">
-    <button class="music-pendant" aria-label="展开音乐播放器" aria-expanded="false">
+    <button class="music-pendant" type="button" aria-label="展开音乐播放器" aria-expanded="false">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="12" cy="6" r="3" />
         <path d="M12 9v7" />
@@ -444,7 +279,7 @@
         <span class="music-subtitle">春风入梅枝 · 古琴清心调</span>
       </div>
       <div class="music-controls">
-        <button class="music-play-btn" aria-label="播放音乐">
+        <button class="music-play-btn" type="button" aria-label="播放音乐">
           <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
         </button>
         <div class="music-volume">
@@ -459,9 +294,18 @@
   </div>
  
   <!-- 黑猫陪伴挂载区（Codex 接管视觉资源） -->
-  <div class="companion-zone" aria-hidden="true"></div>
+  <div class="companion-zone" aria-hidden="true">
+    <div class="home-v5-lantern">
+      <img src="assets/visuals/home/v5/companion-lantern.png" width="1086" height="1448" decoding="async" alt="">
+    </div>
+  </div>
 
-  <script src="assets/data/site-data.js?v=2.0.0"></script>
-  <script src="assets/js/main.js?v=2.1.3"></script>
+  <script src="assets/data/site-data.js?v=2.3.0"></script>
+  <script src="assets/vendor/gsap/gsap.min.js?v=3.15.0"></script>
+  <script src="assets/vendor/gsap/ScrollTrigger.min.js?v=3.15.0"></script>
+  <script src="assets/js/main.js?v=2.3.0"></script>
+  <script src="assets/js/home-v4-1.js?v=4.1.2"></script>
+  <script src="assets/js/home-route-map-v2.js?v=4.2.1"></script>
+  <script src="assets/js/home-v5-five-chapter.js?v=5.1.0"></script>
 </body>
 </html>

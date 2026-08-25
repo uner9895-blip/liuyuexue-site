@@ -14,15 +14,14 @@
   <meta property="og:site_name" content="步青尘">
   <meta property="og:title" content="学习路 | 步青尘">
   <meta property="og:description" content="步青尘的学习路，记录前端、AI 与游戏开发的学习过程和成长痕迹。">
-  <link rel="stylesheet" href="assets/css/style.css?v=2.0.0">
-  <script>
-    (function() {
-      var theme = localStorage.getItem('theme') || 'light';
-      var root = document.documentElement;
-      root.setAttribute('data-theme', theme);
-      root.setAttribute('data-world', theme === 'dark' ? 'night' : 'day');
-    })();
-  </script>
+  <meta property="og:url" content="https://uner9895-blip.github.io/liuyuexue-site/learning.html">
+  <meta property="og:image" content="https://uner9895-blip.github.io/liuyuexue-site/assets/images/bg/bg-home.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="学习路 | 步青尘">
+  <meta name="twitter:description" content="步青尘的学习路，记录前端、AI 与游戏开发的学习过程和成长痕迹。">
+  <meta name="twitter:image" content="https://uner9895-blip.github.io/liuyuexue-site/assets/images/bg/bg-home.png">
+  <link rel="canonical" href="https://uner9895-blip.github.io/liuyuexue-site/learning.html">
+  <link rel="stylesheet" href="assets/css/style.css?v=2.3.0">
 </head>
 <body class="page-learning">
   <div class="plum-shadows" aria-hidden="true"></div>
@@ -64,24 +63,6 @@
         <li class="nav-item"><a href="gallery.html">影像廊</a></li>
         <li class="nav-item"><a href="music.html">听雪</a></li>
         <li class="nav-item"><a href="contact.html">留笺</a></li>
-        <li class="nav-item">
-          <button class="theme-toggle-btn" type="button" aria-label="切换深色/浅色模式">
-            <svg class="theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="5"></circle>
-              <line x1="12" y1="1" x2="12" y2="3"></line>
-              <line x1="12" y1="21" x2="12" y2="23"></line>
-              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-              <line x1="1" y1="12" x2="3" y2="12"></line>
-              <line x1="21" y1="12" x2="23" y2="12"></line>
-              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-            </svg>
-            <svg class="theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-            </svg>
-          </button>
-        </li>
       </ul>
     </nav>
   </header>
@@ -111,7 +92,7 @@
 
   <!-- 听雪小筑音乐挂件 -->
   <div class="music-widget" role="complementary" aria-label="听雪小筑音乐播放器">
-    <button class="music-pendant" aria-label="展开音乐播放器" aria-expanded="false">
+    <button class="music-pendant" type="button" aria-label="展开音乐播放器" aria-expanded="false">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="12" cy="6" r="3" />
         <path d="M12 9v7" />
@@ -124,7 +105,7 @@
         <span class="music-subtitle">春风入梅枝 · 古琴清心调</span>
       </div>
       <div class="music-controls">
-        <button class="music-play-btn" aria-label="播放音乐">
+        <button class="music-play-btn" type="button" aria-label="播放音乐">
           <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
         </button>
         <div class="music-volume">
@@ -138,7 +119,7 @@
     </div>
   </div>
 
-  <script src="assets/data/site-data.js?v=2.0.0"></script>
-  <script src="assets/js/main.js?v=2.0.0"></script>
+  <script src="assets/data/site-data.js?v=2.3.0"></script>
+  <script src="assets/js/main.js?v=2.3.0"></script>
 </body>
 </html>

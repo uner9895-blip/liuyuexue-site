@@ -14,15 +14,14 @@
   <meta property="og:site_name" content="步青尘">
   <meta property="og:title" content="小序 | 步青尘">
   <meta property="og:description" content="关于步青尘。展示了我的前端求知之路、中式审美设计理念、自学前端技术积累以及个人成长时间轴。">
-  <link rel="stylesheet" href="assets/css/style.css?v=2.0.0">
-  <script>
-    (function() {
-      var theme = localStorage.getItem('theme') || 'light';
-      var root = document.documentElement;
-      root.setAttribute('data-theme', theme);
-      root.setAttribute('data-world', theme === 'dark' ? 'night' : 'day');
-    })();
-  </script>
+  <meta property="og:url" content="https://uner9895-blip.github.io/liuyuexue-site/about.html">
+  <meta property="og:image" content="https://uner9895-blip.github.io/liuyuexue-site/assets/images/bg/bg-home.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="小序 | 步青尘">
+  <meta name="twitter:description" content="关于步青尘。展示了我的前端求知之路、中式审美设计理念、自学前端技术积累以及个人成长时间轴。">
+  <meta name="twitter:image" content="https://uner9895-blip.github.io/liuyuexue-site/assets/images/bg/bg-home.png">
+  <link rel="canonical" href="https://uner9895-blip.github.io/liuyuexue-site/about.html">
+  <link rel="stylesheet" href="assets/css/style.css?v=2.3.0">
 </head>
 <body class="page-about">
   <div class="plum-shadows" aria-hidden="true"></div>
@@ -64,26 +63,6 @@
         <li class="nav-item"><a href="gallery.html">影像廊</a></li>
         <li class="nav-item"><a href="music.html">听雪</a></li>
         <li class="nav-item"><a href="contact.html">留笺</a></li>
-        <li class="nav-item">
-          <button class="theme-toggle-btn" type="button" aria-label="切换深色/浅色模式">
-            <!-- 太阳图标 -->
-            <svg class="theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="5"></circle>
-              <line x1="12" y1="1" x2="12" y2="3"></line>
-              <line x1="12" y1="21" x2="12" y2="23"></line>
-              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-              <line x1="1" y1="12" x2="3" y2="12"></line>
-              <line x1="21" y1="12" x2="23" y2="12"></line>
-              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-            </svg>
-            <!-- 月亮图标 -->
-            <svg class="theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-            </svg>
-          </button>
-        </li>
       </ul>
     </nav>
   </header>
@@ -111,14 +90,14 @@
         </div>
  
         <div class="skills-section">
-          <h2 class="section-subheading">主要技能 (点击可查看详情)</h2>
+          <h2 class="section-subheading">主要技能</h2>
           <ul class="skills-list">
-            <li class="skill-tag" tabindex="0">HTML</li>
-            <li class="skill-tag" tabindex="0">CSS</li>
-            <li class="skill-tag" tabindex="0">JavaScript</li>
-            <li class="skill-tag" tabindex="0">响应式布局</li>
-            <li class="skill-tag" tabindex="0">GitHub Pages</li>
-            <li class="skill-tag" tabindex="0">个人网页设计</li>
+            <li class="skill-tag">HTML</li>
+            <li class="skill-tag">CSS</li>
+            <li class="skill-tag">JavaScript</li>
+            <li class="skill-tag">响应式布局</li>
+            <li class="skill-tag">GitHub Pages</li>
+            <li class="skill-tag">个人网页设计</li>
           </ul>
         </div>
       </section>
@@ -173,7 +152,7 @@
               <div class="gallery-poem" style="font-family: var(--font-title); font-size: 1.05rem; line-height: 1.6; writing-mode: vertical-rl; text-orientation: mixed; margin: 0.5rem 0; height: 90px; color: var(--color-ink-dark); letter-spacing: 0.2em; font-weight: bold;">雨后初晴苔上绿</div>
               <span style="font-size: 0.8rem; color: var(--color-ink-light); margin-top: auto; font-family: var(--font-title);">春日初融</span>
             </div>
-            <img src="assets/images/gallery/spring_moss.jpg" alt="春雨后林地青苔上的新芽" loading="lazy" decoding="async" onerror="this.style.display='none'; this.previousElementSibling.style.display='flex';">
+            <img src="assets/images/gallery/spring_moss.jpg" width="1024" height="1024" alt="春雨后林地青苔上的新芽" loading="lazy" decoding="async" onerror="this.style.display='none'; this.previousElementSibling.style.display='flex';">
           </div>
           <div class="gallery-info">
             <h3 class="gallery-title">春日初融</h3>
@@ -198,7 +177,7 @@
               <div class="gallery-poem" style="font-family: var(--font-title); font-size: 1.05rem; line-height: 1.6; writing-mode: vertical-rl; text-orientation: mixed; margin: 0.5rem 0; height: 90px; color: var(--color-ink-dark); letter-spacing: 0.2em; font-weight: bold;">清风弄竹影摇壁</div>
               <span style="font-size: 0.8rem; color: var(--color-ink-light); margin-top: auto; font-family: var(--font-title);">林间竹影</span>
             </div>
-            <img src="assets/images/gallery/bamboo_light.jpg" alt="宣纸色背景上的竹叶与清浅竹影" loading="lazy" decoding="async" onerror="this.style.display='none'; this.previousElementSibling.style.display='flex';">
+            <img src="assets/images/gallery/bamboo_light.jpg" width="1024" height="1024" alt="宣纸色背景上的竹叶与清浅竹影" loading="lazy" decoding="async" onerror="this.style.display='none'; this.previousElementSibling.style.display='flex';">
           </div>
           <div class="gallery-info">
             <h3 class="gallery-title">林间竹影</h3>
@@ -223,7 +202,7 @@
               <div class="gallery-poem" style="font-family: var(--font-title); font-size: 1.05rem; line-height: 1.6; writing-mode: vertical-rl; text-orientation: mixed; margin: 0.5rem 0; height: 90px; color: var(--color-ink-dark); letter-spacing: 0.2em; font-weight: bold;">梅开一瓣春度山</div>
               <span style="font-size: 0.8rem; color: var(--color-ink-light); margin-top: auto; font-family: var(--font-title);">手绘红梅</span>
             </div>
-            <img src="assets/images/gallery/plum_sketch.jpg" alt="宣纸上的水墨梅枝与粉色梅花" loading="lazy" decoding="async" onerror="this.style.display='none'; this.previousElementSibling.style.display='flex';">
+            <img src="assets/images/gallery/plum_sketch.jpg" width="1024" height="1024" alt="宣纸上的水墨梅枝与粉色梅花" loading="lazy" decoding="async" onerror="this.style.display='none'; this.previousElementSibling.style.display='flex';">
           </div>
           <div class="gallery-info">
             <h3 class="gallery-title">手绘红梅</h3>
@@ -248,7 +227,7 @@
               <div class="gallery-poem" style="font-family: var(--font-title); font-size: 1.05rem; line-height: 1.6; writing-mode: vertical-rl; text-orientation: mixed; margin: 0.5rem 0; height: 90px; color: var(--color-ink-dark); letter-spacing: 0.2em; font-weight: bold;">一案菖蒲静悟禅</div>
               <span style="font-size: 0.8rem; color: var(--color-ink-light); margin-top: auto; font-family: var(--font-title);">案头清供</span>
             </div>
-            <img src="assets/images/gallery/desk_life.jpg" alt="暖灯下的木质书案、茶盏与笔墨书册" loading="lazy" decoding="async" onerror="this.style.display='none'; this.previousElementSibling.style.display='flex';">
+            <img src="assets/images/gallery/desk_life.jpg" width="1024" height="1024" alt="暖灯下的木质书案、茶盏与笔墨书册" loading="lazy" decoding="async" onerror="this.style.display='none'; this.previousElementSibling.style.display='flex';">
           </div>
           <div class="gallery-info">
             <h3 class="gallery-title">案头清供</h3>
@@ -271,7 +250,7 @@
  
   <!-- 听雪小筑音乐挂件 -->
   <div class="music-widget" role="complementary" aria-label="听雪小筑音乐播放器">
-    <button class="music-pendant" aria-label="展开音乐播放器" aria-expanded="false">
+    <button class="music-pendant" type="button" aria-label="展开音乐播放器" aria-expanded="false">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="12" cy="6" r="3" />
         <path d="M12 9v7" />
@@ -284,7 +263,7 @@
         <span class="music-subtitle">春风入梅枝 · 古琴清心调</span>
       </div>
       <div class="music-controls">
-        <button class="music-play-btn" aria-label="播放音乐">
+        <button class="music-play-btn" type="button" aria-label="播放音乐">
           <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
         </button>
         <div class="music-volume">
@@ -298,7 +277,7 @@
     </div>
   </div>
  
-  <script src="assets/data/site-data.js?v=2.0.0"></script>
-  <script src="assets/js/main.js?v=2.0.0"></script>
+  <script src="assets/data/site-data.js?v=2.3.0"></script>
+  <script src="assets/js/main.js?v=2.3.0"></script>
 </body>
 </html>
