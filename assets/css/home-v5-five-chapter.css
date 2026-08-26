@@ -74,7 +74,13 @@ body.page-home.page-home-v5 .home-v5-world-layer {
   will-change: opacity;
 }
 
-body.page-home.page-home-v5 .home-v5-world-layer > img {
+body.page-home.page-home-v5 .home-v5-world-layer > picture,
+body.page-home.page-home-v5 .home-v5-lantern > picture {
+  display: contents;
+}
+
+body.page-home.page-home-v5 .home-v5-world-layer > img,
+body.page-home.page-home-v5 .home-v5-world-layer > picture > img {
   width: 100%;
   height: 100%;
   display: block;
@@ -92,7 +98,8 @@ body.page-home.page-home-v5 .home-v5-world-layer--map {
   background: #a78657;
 }
 
-body.page-home.page-home-v5 .home-v5-world-layer--map > img {
+body.page-home.page-home-v5 .home-v5-world-layer--map > img,
+body.page-home.page-home-v5 .home-v5-world-layer--map > picture > img {
   object-position: center center;
   transform: scale(1.002);
 }
@@ -102,7 +109,8 @@ body.page-home.page-home-v5 .home-v5-world-layer--dusk {
   background: #1b120b;
 }
 
-body.page-home.page-home-v5 .home-v5-world-layer--dusk > img {
+body.page-home.page-home-v5 .home-v5-world-layer--dusk > img,
+body.page-home.page-home-v5 .home-v5-world-layer--dusk > picture > img {
   object-position: 50% 53%;
 }
 
@@ -111,7 +119,8 @@ body.page-home.page-home-v5 .home-v5-world-layer--snow {
   background: #06111a;
 }
 
-body.page-home.page-home-v5 .home-v5-world-layer--snow > img {
+body.page-home.page-home-v5 .home-v5-world-layer--snow > img,
+body.page-home.page-home-v5 .home-v5-world-layer--snow > picture > img {
   object-position: 50% 50%;
 }
 
@@ -765,11 +774,13 @@ body.page-home.page-home-v5 .music-widget {
     letter-spacing: 0.22em;
   }
 
-  body.page-home.page-home-v5 .home-v5-world-layer > img {
+  body.page-home.page-home-v5 .home-v5-world-layer > img,
+  body.page-home.page-home-v5 .home-v5-world-layer > picture > img {
     object-fit: none;
   }
 
-  body.page-home.page-home-v5 .home-v5-world-layer--map > img {
+  body.page-home.page-home-v5 .home-v5-world-layer--map > img,
+  body.page-home.page-home-v5 .home-v5-world-layer--map > picture > img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -777,7 +788,8 @@ body.page-home.page-home-v5 .music-widget {
     transform: scale(1.035);
   }
 
-  body.page-home.page-home-v5 .home-v5-world-layer--dusk > img:first-child {
+  body.page-home.page-home-v5 .home-v5-world-layer--dusk > img:first-child,
+  body.page-home.page-home-v5 .home-v5-world-layer--dusk > picture:first-child > img {
     position: absolute;
     left: 0;
     top: 0;
@@ -807,7 +819,8 @@ body.page-home.page-home-v5 .music-widget {
     mask-image: linear-gradient(180deg, transparent 44%, #000 62% 100%);
   }
 
-  body.page-home.page-home-v5 .home-v5-world-layer--snow > img:first-child {
+  body.page-home.page-home-v5 .home-v5-world-layer--snow > img:first-child,
+  body.page-home.page-home-v5 .home-v5-world-layer--snow > picture:first-child > img {
     position: absolute;
     left: 0;
     top: 0;
@@ -1131,6 +1144,7 @@ body.page-home.page-home-v5 .music-widget {
 
   body.page-home.page-home-v5 .home-v5-world-layer,
   body.page-home.page-home-v5 .home-v5-world-layer > img,
+  body.page-home.page-home-v5 .home-v5-world-layer > picture > img,
   body.page-home.page-home-v5 .home-v5-memory,
   body.page-home.page-home-v5 .home-v5-memory img,
   body.page-home.page-home-v5 [data-companion-cat],
