@@ -1035,7 +1035,7 @@ function createSnowLetterCard(post, options) {
   article.innerHTML = [
     '<div class="snow-letter-card-meta">',
     '<span class="snow-letter-category">' + post.category + '</span>',
-    '<span>' + post.date + '</span>',
+    (post.date ? '<span>' + post.date + '</span>' : ''),
     '<span>' + post.readTime + '</span>',
     '</div>',
     '<h3 class="snow-letter-card-title">' + post.title + '</h3>',
@@ -1053,7 +1053,7 @@ function renderSnowLetterDetail(post) {
   detail.innerHTML = [
     '<div class="snow-letter-detail-meta">',
     '<span class="snow-letter-category">' + post.category + '</span>',
-    '<span>' + post.date + '</span>',
+    (post.date ? '<span>' + post.date + '</span>' : ''),
     '<span>' + post.readTime + '</span>',
     '</div>',
     '<h2>' + post.title + '</h2>',
