@@ -169,6 +169,40 @@ body.page-home main.page-fade {
   background-image: url("../visuals/home/v4-1/layer-left.png");
 }
 
+@supports (background-image: image-set(url("x.avif") type("image/avif") 1x)) {
+  .home-v41-layer-base {
+    background-image: image-set(
+      url("../visuals/home/v4-1/optimized/base-clean.avif") type("image/avif") 1x,
+      url("../visuals/home/v4-1/optimized/base-clean.webp") type("image/webp") 1x,
+      url("../visuals/home/v4-1/base-clean.png") type("image/png") 1x
+    );
+  }
+
+  .home-v41-layer-road {
+    background-image: image-set(
+      url("../visuals/home/v4-1/optimized/layer-road.avif") type("image/avif") 1x,
+      url("../visuals/home/v4-1/optimized/layer-road.webp") type("image/webp") 1x,
+      url("../visuals/home/v4-1/layer-road.png") type("image/png") 1x
+    );
+  }
+
+  .home-v41-layer-cliff {
+    background-image: image-set(
+      url("../visuals/home/v4-1/optimized/layer-cliff.avif") type("image/avif") 1x,
+      url("../visuals/home/v4-1/optimized/layer-cliff.webp") type("image/webp") 1x,
+      url("../visuals/home/v4-1/layer-cliff.png") type("image/png") 1x
+    );
+  }
+
+  .home-v41-layer-left {
+    background-image: image-set(
+      url("../visuals/home/v4-1/optimized/layer-left.avif") type("image/avif") 1x,
+      url("../visuals/home/v4-1/optimized/layer-left.webp") type("image/webp") 1x,
+      url("../visuals/home/v4-1/layer-left.png") type("image/png") 1x
+    );
+  }
+}
+
 .home-v41-mist {
   position: absolute;
   z-index: 6;
